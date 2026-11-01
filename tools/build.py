@@ -550,7 +550,6 @@ def render(lang):
   <ul class="drawer-apts">{menu_apts}</ul>
   <p class="drawer-label">{t['menu_nav']}</p>
   <nav class="drawer-nav" aria-label="{t['nav_label']}">
-    <a href="#imoveis">{nav[0]}</a>
     <a href="#como-funciona">{nav[1]}</a>
     <a href="#avaliacoes">{nav[2]}</a>
     <a href="#duvidas">{nav[3]}</a>
