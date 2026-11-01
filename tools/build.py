@@ -194,7 +194,7 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
@@ -247,7 +247,7 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
@@ -700,6 +700,17 @@ def render(lang):
 </footer>
 
 {DIALOGS}
+<dialog class="share-sheet" id="share" aria-labelledby="share-h">
+  <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
+  <p class="share-h" id="share-h">{t['share_h']}</p>
+  <p class="share-name"></p>
+  <div class="share-opts">
+    <a class="share-opt share-wa" href="#" target="_blank" rel="noopener">{wai(20)}WhatsApp</a>
+    <button type="button" class="share-opt share-copy"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>{t['share_copy']}</button>
+    <a class="share-opt share-mail" href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>{t['share_mail']}</a>
+  </div>
+  <input class="share-url" type="text" readonly aria-label="Link">
+</dialog>
 <dialog class="vid" id="vid" aria-label="{t['l_video']}">
   <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
   <video controls playsinline preload="none"></video>
@@ -738,13 +749,28 @@ document.querySelectorAll('dialog.detail').forEach(function (d) {{
   }});
 }});
 var toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast);
-function showToast(m) {{ toast.textContent = m; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(function () {{ toast.classList.remove('on'); }}, 2200); }}
+function showToast(m) {{ (document.querySelector('dialog[open]') || document.body).appendChild(toast); toast.textContent = m; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(function () {{ toast.classList.remove('on'); }}, 2200); }}
+var sheet = document.getElementById('share'), surl = sheet.querySelector('.share-url');
+var canon = (document.querySelector('link[rel=canonical]') || {{}}).href || location.href.split('#')[0];
+function copyLink() {{
+  var ok = function () {{ showToast('{t['share_ok']}'); }};
+  surl.focus(); surl.select();
+  try {{ if (document.execCommand('copy')) {{ ok(); return; }} }} catch (e) {{}}
+  if (navigator.clipboard) navigator.clipboard.writeText(surl.value).then(ok, function () {{}});
+}}
+sheet.querySelector('.share-copy').addEventListener('click', copyLink);
+function openSheet(url, text, name) {{
+  surl.value = url; sheet.querySelector('.share-name').textContent = name;
+  sheet.querySelector('.share-wa').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
+  sheet.querySelector('.share-mail').href = 'mailto:?subject=' + encodeURIComponent(name) + '&body=' + encodeURIComponent(text + '\\n' + url);
+  sheet.showModal(); document.body.classList.add('modal-open');
+}}
 document.querySelectorAll('.share-btn').forEach(function (b) {{ b.addEventListener('click', function () {{
-  var url = location.href.split('#')[0] + '#' + b.dataset.id, text = b.dataset.text;
-  if (navigator.share) {{ navigator.share({{ title: document.title, text: text, url: url }}).catch(function () {{}}); return; }}
-  var done = function () {{ showToast('{t['share_ok']}'); }};
-  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, function () {{ window.prompt('', url); }});
-  else window.prompt('', url);
+  var url = canon + '#' + b.dataset.id, text = b.dataset.text, name = text.split(' · ')[0];
+  var framed = false; try {{ framed = window.self !== window.top; }} catch (e) {{ framed = true; }}
+  if (navigator.share && !framed && window.matchMedia('(hover: none)').matches) {{
+    navigator.share({{ title: name, text: text, url: url }}).catch(function (e) {{ if (!e || e.name !== 'AbortError') openSheet(url, text, name); }});
+  }} else openSheet(url, text, name);
 }}); }});
 function openFromHash() {{
   var id = location.hash.slice(1), d = id && document.getElementById('d-' + id);
