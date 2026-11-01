@@ -397,7 +397,7 @@ def render(lang):
         </div>
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
-          <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{CAM}{t['l_desc_n'].format(n=len(PHOTOS.get(p['id'], p['gal']['pt'])))}</button>
+          <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{CAM}{t['l_desc']}</button>
           <button type="button" class="btn btn-outline share-btn" data-id="{p['id']}" data-text="{t['share_txt'].format(name=p['name'], tag=p['tag'][lang], rent=money(p['rent'], lang, cents=False))}" aria-label="{t['share']}: {p['name']}">{SHARE}</button>
         </div>
       </div>
