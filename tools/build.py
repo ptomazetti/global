@@ -240,7 +240,7 @@ T = {
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
   brk_p='Cada apartamento já tem fotos, vídeo, descrição e custo mensal prontos. Abra "Fotos e detalhes", toque em "Compartilhar" e envie ao seu cliente. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
-  brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.',
+  brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.', brk_reply='Respondemos no mesmo dia útil.',
   end_h='Seu cliente gostou de um? Agende a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
   foot_tag='Locação de apartamentos mobiliados · Sorocaba e Votorantim', foot_wa='Fale pelo WhatsApp',
   wa_general='Olá! Sou corretor(a) e quero agendar uma visita.\nNome:\nRG:\nCRECI:\nPrimeiro nome do cliente:\nImóvel:\nDia e horário:',
@@ -293,7 +293,7 @@ T = {
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
   brk_p='Every apartment already has photos, video, a description and the monthly cost ready. Open "Photos and details", tap "Share" and send it to your client. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
-  brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.',
+  brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.', brk_reply='We reply on the same business day.',
   end_h='Does your client like one? Book the viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
   foot_tag='Furnished apartment rentals · Sorocaba and Votorantim, Brazil', foot_wa='Chat on WhatsApp',
   wa_general='Hello! I am a real estate agent and would like to book a viewing.\nName:\nID (RG):\nCRECI:\nClient’s first name:\nApartment:\nDay and time:',
@@ -683,6 +683,7 @@ def render(lang):
       <ul class="chips">{chips}</ul>
       <a href="{broker}" class="btn btn-primary btn-block" target="_blank" rel="noopener">{wai()}{t['brk_btn']}</a>
       <p class="small">{t['brk_small']}</p>
+      <p class="brk-reply">{t['brk_reply']}</p>
     </div>
   </div>
 </section>
