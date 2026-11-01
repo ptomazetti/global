@@ -205,7 +205,7 @@ T = {
   nav_label='Principal', nav=['Apartamentos', 'Como funciona', 'Avaliações', 'Dúvidas', 'Corretores'],
   lang_label='Idioma', cta_short='Agendar visita', cta_long='Agendar visita pelo WhatsApp',
   eyebrow='Locação mobiliada em Sorocaba e Votorantim',
-  h1='Apartamento mobiliado. O locatário só traz a mala.',
+  h1='Apartamento totalmente mobiliado. O locatário só traz a mala.',
   lead='Prontos para morar, de studio a 3 dormitórios. Condomínios com lazer e aluguel a partir de {MIN}.',
   see_all='Ver apartamentos',
   proof=['Chaves em até 2 dias após a documentação', 'Aceita animais de estimação', 'Pintado e higienizado a cada locação', '3 opções de garantia'],
