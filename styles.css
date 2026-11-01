@@ -75,8 +75,19 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .listings { padding-top: 80px; padding-bottom: 80px; display: flex; flex-direction: column; gap: 36px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 24px; }
 .card { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column; scroll-margin-top: 96px; }
-.card-media { position: relative; height: 230px; background: var(--placeholder); }
-.card-media img { width: 100%; height: 100%; object-fit: cover; }
+.card-media { position: relative; aspect-ratio: 4 / 3; background: var(--placeholder); }
+.gallery-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-track:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+.slide { flex: 0 0 100%; scroll-snap-align: start; }
+.slide img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-count { position: absolute; right: 12px; bottom: 12px; background: rgba(21,32,27,.72); color: #FFFFFF; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px; pointer-events: none; }
+.gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; box-shadow: 0 4px 14px rgba(21,32,27,.2); display: flex; align-items: center; justify-content: center; padding: 0 0 3px; opacity: 0; transition: opacity .15s; }
+.gallery-btn.prev { left: 10px; }
+.gallery-btn.next { right: 10px; }
+.gallery:hover .gallery-btn, .gallery-btn:focus-visible { opacity: 1; }
+.gallery.single .gallery-btn, .gallery.single .gallery-count { display: none; }
+@media (hover: none) { .gallery-btn { opacity: 1; width: 36px; height: 36px; } }
 .tag { position: absolute; top: 14px; left: 14px; background: #FFFFFF; border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 700; }
 .card-body { padding: 22px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1; }
 .card h3 { font-size: 23px; font-weight: 700; line-height: 1.2; }
@@ -140,20 +151,32 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--line); background: var(--soft); }
-.footer-inner { padding-top: 26px; padding-bottom: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 15px; color: var(--muted); }
+.footer-inner { padding-top: 26px; padding-bottom: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--muted); }
+.footer-id { display: flex; flex-direction: column; gap: 2px; }
+.footer-right { text-align: right; }
+.footer-id a { color: var(--green); font-weight: 700; text-decoration: none; }
 .footer-inner .brand-name { font-size: 17px; }
 
 /* Mobile sticky CTA */
 .mobile-cta { display: none; }
 
+@media (max-width: 1024px) {
+  .hero { gap: 36px; }
+  .hero-text { flex-basis: 420px; }
+  .hero-media { flex-basis: 340px; height: 460px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 860px) {
   .nav { display: none; }
+  .hero { flex-direction: column; align-items: stretch; padding-top: 40px; }
+  .hero-text, .hero-media { flex: none; }
+  .hero-media { height: 380px; order: -1; }
+  .footer-right { text-align: left; }
 }
 @media (max-width: 640px) {
   .brand-name { font-size: 16px; }
   .header-cta { display: none; }
   .hero { padding-top: 28px; padding-bottom: 40px; gap: 28px; }
-  .hero-media { height: 300px; order: -1; }
   .hero-actions .btn { width: 100%; }
   .listings, .steps-section, .faq-section, .brokers { padding-top: 56px; padding-bottom: 56px; }
   .contact { padding-top: 56px; padding-bottom: 96px; }
@@ -162,4 +185,12 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
   .mobile-cta { display: flex; align-items: center; justify-content: center; gap: 8px; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 20; min-height: 54px; border-radius: 999px; background: var(--wa); color: #FFFFFF; font-weight: 700; text-decoration: none; box-shadow: 0 10px 28px rgba(21,32,27,.28); opacity: 0; transform: translateY(120%); pointer-events: none; transition: opacity .2s, transform .2s; }
   .mobile-cta.show { opacity: 1; transform: none; pointer-events: auto; }
   .hero-media { height: 240px; }
+  .grid { grid-template-columns: 1fr; }
+  .hero-badge { left: 12px; bottom: 12px; padding: 10px 14px; gap: 10px; }
+  .hero-count { width: 40px; height: 40px; font-size: 22px; border-radius: 10px; }
+  .hero-badge strong { font-size: 15px; }
+  .hero-badge div span { font-size: 12px; }
+  .card-links a { font-size: 13px; }
+  .compare-col, .steps li { padding: 22px; }
 }
+.footer-id a { display: inline-block; padding: 8px 0; }
