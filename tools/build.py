@@ -532,6 +532,7 @@ def render(lang):
     <a href="#topo" class="brand">
       <img class="brand-logo" src="{R}images/logo.png" alt="Global Estadia" width="900" height="230">
     </a>
+    <nav class="top-nav" aria-label="{t['nav_label']}"><a href="#imoveis">{nav[0]}</a><a href="#avaliacoes">{nav[2]}</a><a href="#duvidas">{nav[3]}</a></nav>
     {lang_switch}
     <a href="{general}" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">{wai()}{t['cta_short']}</a>
     <button type="button" class="menu-btn" aria-haspopup="dialog" aria-controls="menu">{MENU_I}<span>{t['menu']}</span></button>
@@ -673,7 +674,7 @@ def render(lang):
 <section id="contato" class="cta-band">
   <picture class="cta-bg"><source srcset="{R}images/cta-bg.webp" type="image/webp"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
   <div class="wrap contact reveal">
-    <h2>{t['end_h']}</h2>
+    <h2>{lines(t['end_h'])}</h2>
     <p>{t['end_p']}</p>
     <a href="{general}" class="btn btn-primary btn-xl" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
   </div>
@@ -708,11 +709,11 @@ def render(lang):
 document.querySelectorAll('.gallery').forEach(function (g) {{
   var t = g.querySelector('.gallery-track'), c = g.querySelector('.gallery-count'), n = t.children.length;
   if (n < 2) {{ g.classList.add('single'); return; }}
-  function idx() {{ return Math.round(t.scrollLeft / t.clientWidth); }}
+  function idx() {{ var w = t.clientWidth; if (!w) return 0; return Math.min(n - 1, Math.max(0, Math.round(t.scrollLeft / w))); }}
   function go(d) {{ t.scrollTo({{ left: ((idx() + d + n) % n) * t.clientWidth, behavior: 'smooth' }}); }}
   g.querySelector('.prev').addEventListener('click', function () {{ go(-1); }});
   g.querySelector('.next').addEventListener('click', function () {{ go(1); }});
-  t.addEventListener('scroll', function () {{ c.textContent = (idx() + 1) + ' / ' + n; }}, {{ passive: true }});
+  t.addEventListener('scroll', function () {{ if (t.clientWidth) c.textContent = (idx() + 1) + ' / ' + n; }}, {{ passive: true }});
   t.addEventListener('keydown', function (e) {{ if (e.key === 'ArrowRight') {{ e.preventDefault(); go(1); }} if (e.key === 'ArrowLeft') {{ e.preventDefault(); go(-1); }} }});
 }});
 var menu = document.getElementById('menu');

@@ -668,3 +668,17 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 .host-card li svg { color: var(--gold); width: 18px; height: 18px; }
 @media (max-width: 900px) { .quotes { grid-template-columns: 1fr 1fr; } .quote:first-child { grid-column: 1 / -1; } }
 @media (max-width: 640px) { .quotes { grid-template-columns: 1fr; } .quote:first-child blockquote { font-size: 19px; } .host-card ul { flex-direction: column; } }
+
+/* Desktop pass */
+.top-nav { display: none; }
+@media (min-width: 1100px) {
+  .top-nav { display: flex; gap: 26px; margin-right: 8px; }
+  .top-nav a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 0; position: relative; }
+  .top-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 1.5px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
+  .top-nav a:hover::after { transform: scaleX(1); }
+}
+.contact h2 .line { display: block; }
+/* Keep the booking button visible inside the details window */
+dialog.detail .detail-body > .btn-primary { position: sticky; bottom: 16px; z-index: 3; box-shadow: 0 -12px 24px 6px #FFFFFF, 0 14px 28px -12px rgba(11,26,44,.6); }
+dialog.detail .detail-body > .btn-primary { bottom: 0; margin-bottom: 0; box-shadow: 0 0 0 14px #FFFFFF, 0 -26px 22px 6px rgba(255,255,255,.95); }
+dialog.detail .detail-body > .btn-primary + .detail-note { margin-top: 16px; }
