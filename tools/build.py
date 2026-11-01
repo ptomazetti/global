@@ -203,7 +203,7 @@ T = {
        ('O que exatamente vem no apartamento?', 'Cada imóvel tem uma descrição completa com a lista de móveis e eletrodomésticos. Toque em "Descrição" no card do apartamento.'),
        ('O apartamento é limpo antes de eu entrar?', 'Sim. A cada nova locação, o apartamento é pintado e higienizado.'),
        ('Como agendo uma visita?', 'Pelo {WALINK}. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para {MAILLINK}.')],
-  short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb',
+  short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Procurando algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
   brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Use os links dos cards ou peça o material completo.',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Imóvel', 'Dia e horário'],
@@ -259,7 +259,7 @@ T = {
        ('What exactly comes with the apartment?', 'Each apartment has a full description listing the furniture and appliances. Tap "Description" on the apartment card.'),
        ('Is the apartment cleaned before I move in?', 'Yes. Before every new tenant, the apartment is repainted and deep cleaned.'),
        ('How do I book a viewing?', 'On {WALINK}. Tell us which apartment and the best day and time for you. You can also email {MAILLINK}.')],
-  short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb',
+  short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
   brk_p='Every apartment already has photos, video and a description ready to send to your client. Use the links on each card or ask for the full pack.',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Apartment', 'Day and time'],
@@ -424,6 +424,16 @@ def render(lang):
         foto = f'<img src="{R}{ATENDENTE["foto"]}" alt="{ATENDENTE["nome"]}" width="56" height="56">' if ATENDENTE.get('foto') else ''
         att_html = f'<div class="agent">{foto}<span>{t["agent"]} <strong>{ATENDENTE["nome"]}</strong></span></div>'
 
+    ab_logo = f'<svg class="logo airbnb" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>'
+    ab_cta = (f'<a class="btn btn-ab" href="{AIRBNB_URL}" target="_blank" rel="noopener">{t["ab_btn"]}</a>' if AIRBNB_URL
+              else f'<p class="ab-search">{t["ab_search"]}</p>')
+    AB_BAND = f'''<section class="ab-band" aria-label="Airbnb">
+  <div class="wrap ab-inner reveal">
+    <div class="ab-mark">{ab_logo}</div>
+    <div class="ab-text"><h2>{t["ab_h"]}</h2><p>{t["ab_p"]}</p></div>
+    {ab_cta}
+  </div>
+</section>'''
     airbnb = f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">{t["airbnb"]}</a>' if AIRBNB_URL else t['airbnb']
     faq_items = [(q, a.format(WALINK=walink, MAILLINK=maillink)) for q, a in t['faq']]
     faq_items += [(q[lang], a[lang]) for q, a in FAQ_EXTRA]
@@ -643,6 +653,7 @@ def render(lang):
   </div>
 </section>
 
+{AB_BAND}
 <section id="contato" class="cta-band">
   <picture class="cta-bg"><source srcset="{R}images/cta-bg.webp" type="image/webp"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
   <div class="wrap contact reveal">

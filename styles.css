@@ -562,3 +562,18 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 /* Keep logo proportions inside flex columns */
 .brand-logo, .footer-logo { flex: 0 0 auto; align-self: flex-start; width: auto; max-width: 100%; object-fit: contain; }
 .brand .brand-logo, .drawer-head .brand-logo { align-self: center; }
+
+/* Airbnb short-stay strip */
+.ab-band { background: var(--paper); border-top: 1px solid var(--line); }
+.ab-inner { display: flex; align-items: center; gap: 24px; padding-top: 40px; padding-bottom: 40px; }
+.ab-mark { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 20px; background: #FFFFFF; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px -16px rgba(16,36,60,.4); }
+.ab-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.ab-text h2 { font-weight: 500; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; }
+.ab-text p { color: var(--text); font-size: 16px; }
+.btn-ab { flex: 0 0 auto; background: #FFFFFF; color: var(--ink); border: 1px solid rgba(26,36,51,.25); }
+.btn-ab:hover { background: #FF5A5F; border-color: #FF5A5F; color: #FFFFFF; }
+.ab-search { flex: 0 0 auto; font-weight: 700; font-size: 15px; color: var(--ink); }
+@media (max-width: 640px) {
+  .ab-inner { flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 36px; padding-bottom: 36px; }
+  .ab-mark { width: 60px; height: 60px; }
+}
