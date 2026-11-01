@@ -7,7 +7,12 @@ ATUALIZADO = '1 de novembro de 2026'   # mude sempre que um imovel entrar ou sai
 AIRBNB_URL = ''                         # link do perfil Global Flats no Airbnb
 ATENDENTE = {}                          # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
 DEPOIMENTOS = []                        # ex.: [{'texto': '...', 'nome': 'Ana', 'imovel': 'Alpha Club'}]
-FAQ_EXTRA = []                          # ex.: [('Aceita pet?', 'Sim, ...')]
+FAQ_EXTRA = [
+ ('Tem vaga de garagem?', 'O Spettacolo Patriani tem 2 vagas cobertas e depósito de 10 m². O Alpha Club I41 e o Residencial Esplanada têm 1 vaga cada. Para os outros apartamentos, confirme pelo WhatsApp.'),
+ ('Os apartamentos têm ar-condicionado?', 'O Alpha Club J42 tem ar-condicionado de 12.000 BTUs na suíte. O Residencial Esplanada tem ar-condicionado de 12.000 BTUs na sala. O Alpha Club I41 tem ventilador de teto na suíte.'),
+ ('Os condomínios têm área de lazer?', 'Sim. O Spettacolo Patriani tem piscina com raia, SPA com hidromassagem, sauna, academia, espaço Pilates, salão de festas, quadra de tênis e brinquedoteca. O Alpha Club e o Residencial Esplanada são condomínios clube, e o Vida Plena tem lazer completo.'),
+ ('Sou corretor. Posso levar meu cliente para visitar?', 'Sim. Envie em uma única mensagem: nome, RG, CRECI, imóvel, dia e horário pretendido. O botão na seção Corretores já abre o WhatsApp com esses campos.'),
+]                          # ex.: [('Aceita pet?', 'Sim, ...')]
 # ====================================================================
 
 def wa(msg): return f'https://wa.me/{WA}?text={quote(msg)}'
@@ -255,11 +260,11 @@ html=f'''<!doctype html>
         <summary>Como agendo uma visita?</summary>
         <p>Pelo WhatsApp <a href="{general}" target="_blank" rel="noopener">+55 (15) 99747-0301</a>. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       </details>
+      {faq_extra}
       <details>
         <summary>Preciso de uma estadia curta. Vocês têm?</summary>
         <p class="airbnb-line"><svg class="logo airbnb" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>Sim, para estadias curtas procure por {airbnb_txt}.</p>
       </details>
-      {faq_extra}
     </div>
   </div>
 </section>
