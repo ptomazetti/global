@@ -681,7 +681,11 @@ document.querySelectorAll('.detail-open').forEach(function (b) {
 document.querySelectorAll('dialog.detail').forEach(function (d) {
   var t = d.querySelector('.gallery-track'), th = d.querySelectorAll('.thumb');
   th.forEach(function (b) { b.addEventListener('click', function () { t.scrollTo({ left: +b.dataset.i * t.clientWidth, behavior: 'smooth' }); }); });
-  t.addEventListener('scroll', function () { var i = Math.round(t.scrollLeft / t.clientWidth); th.forEach(function (b, k) { b.classList.toggle('on', k === i); }); }, { passive: true });
+  var row = th.length ? th[0].parentElement : null, last = -1;
+  t.addEventListener('scroll', function () { if (!t.clientWidth) return; var i = Math.round(t.scrollLeft / t.clientWidth); if (i === last) return; last = i;
+    th.forEach(function (b, k) { b.classList.toggle('on', k === i); });
+    var b = th[i]; if (row && b) row.scrollTo({ left: b.offsetLeft - row.offsetLeft - (row.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' });
+  }, { passive: true });
   var fs = d.querySelector('.fs-btn'), g = d.querySelector('.detail-gallery');
   fs.addEventListener('click', function () {
     try { if (document.fullscreenElement) document.exitFullscreen(); else if (g.requestFullscreen) g.requestFullscreen().catch(function () { g.classList.toggle('big'); }); else g.classList.toggle('big'); } catch (e) { g.classList.toggle('big'); }
