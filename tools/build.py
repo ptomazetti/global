@@ -4,6 +4,7 @@ Rode a partir da raiz do repositorio:  python3 tools/build.py
 from urllib.parse import quote
 import json, os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
 # ===== CONFIGURACAO: edite aqui =====================================
 SITE = 'https://globalestadia.com.br'
@@ -51,6 +52,16 @@ P = [
   f='https://drive.google.com/drive/folders/1q39K2Jp_P_wErO56gb_jWGZT09iCpRCm?usp=sharing',
   v='https://drive.google.com/drive/folders/1lPg1uhrh6_9gQgG7jaKDxVGTWJAIPtrx?usp=drive_link',
   d='https://drive.google.com/file/d/1akjtOVeacGJNRz2Ihp5uc-KQfwCBWlxQ/view?usp=drive_link'),
+ dict(id='red-1401', beds=0, name='RED Studio', rent=3490, condo=692.30, iptu=68.71,
+  tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
+  meta={'pt': 'Apto. 1401 · 56 m² · 14º andar · Jardim América', 'en': 'Apt. 1401 · 56 m² · 14th floor · Jardim América'},
+  perks={'pt': ['Varanda gourmet envidraçada com vista para o pôr do sol', '2 vagas de garagem cobertas', 'Piscina com raia, academia e lavanderia coletiva'],
+         'en': ['Glazed balcony with sunset views', '2 covered parking spaces', 'Lap pool, gym and shared laundry']},
+  gal={'pt': ['Sala e cozinha integradas com mesa de jantar', 'Varanda envidraçada com vista para o pôr do sol', 'Dormitório com cama Queen', 'Cozinha com cooktop e geladeira duplex'],
+       'en': ['Open-plan living room and kitchen with dining table', 'Glazed balcony with sunset view', 'Bedroom with Queen bed', 'Kitchen with cooktop and double-door fridge']},
+  f='https://drive.google.com/drive/folders/1IaoP91_8A-CrCQQCnj8nSOvl6uHE0SlI?usp=drive_link',
+  v='https://drive.google.com/drive/folders/1M_D4KK7-vwRYynm5OH8WUnm22NixMT_i?usp=sharing',
+  d='https://drive.google.com/file/d/1I3UIwxGQJ1ij7WcLU8AIxy1giDVVRke6/view?usp=sharing'),
  dict(id='alpha-club-j42', beds=2, name='Alpha Club J42', rent=2890, condo=464.19, iptu=158.00,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 42 · Bloco J · Campolim', 'en': 'Apt. 42 · Block J · Campolim'},
@@ -92,6 +103,7 @@ P = [
   v='https://drive.google.com/drive/folders/1PODn9-X7koK7EUwgue70c9oIHWpFSGll?usp=drive_link',
   d='https://drive.google.com/file/d/1J17liUYRHgMADoPXDzAqgiYSOjdORVh1/view?usp=sharing'),
 ]
+PID = {p["id"]: p for p in P}
 
 DET = {
  'spettacolo-42': {
@@ -107,6 +119,21 @@ DET = {
             ('Kitchen', ['Cooktop, range hood and fridge']),
             ('Parking', ['2 covered parking spaces', '10 m² storage room'])],
     amen=['Lap pool', 'Spa with hot tub', 'Sauna', 'Fully equipped gym', 'Pilates studio', 'Party room with dance floor', 'Grill area', 'Games room', 'Beauty care room', 'Tennis court', 'Kids’ playroom'])},
+ 'red-1401': {
+  'pt': dict(head='Studio de 56 m² no 14º andar, com vista para o pôr do sol',
+    intro='No RED Studio, Jardim América, a 5 minutos do Shopping Iguatemi. Último andar, com varanda gourmet envidraçada de 12 m² e 2 vagas cobertas.',
+    groups=[('Ambientes', ['Varanda gourmet envidraçada de 12 m²', 'Smart TV 50" com giro de 360°, sofá, mesa e banquetas', 'Bar espelhado com iluminação especial', 'Bancada de trabalho e armários planejados', 'Teto em gesso, cortinas sob medida e iluminação direcionada']),
+            ('Dormitório', ['Cama Queen box com molas ensacadas']),
+            ('Cozinha', ['Cooktop, forno elétrico e coifa', 'Micro-ondas e geladeira duplex Frost Free']),
+            ('Garagem', ['2 vagas cobertas'])],
+    amen=['Piscina com raia', 'Academia', 'Lavanderia coletiva', '2 salões de festas', 'Espaço grill', 'Espaço home office', 'Espaço beauty', 'Vending machines', 'Portaria 24h', 'Lobby']),
+  'en': dict(head='56 m² studio on the 14th floor, with sunset views',
+    intro='At RED Studio in Jardim América, 5 minutes from Shopping Iguatemi. Top floor, with a 12 m² glazed balcony and 2 covered parking spaces.',
+    groups=[('Living spaces', ['12 m² glazed balcony', '50" Smart TV on a 360° swivel, sofa, table and bar stools', 'Mirrored bar with feature lighting', 'Work desk and built-in cabinets', 'Plaster ceiling, made-to-measure curtains and spot lighting']),
+            ('Bedroom', ['Queen bed with pocket springs']),
+            ('Kitchen', ['Cooktop, electric oven and range hood', 'Microwave and double-door frost-free fridge']),
+            ('Parking', ['2 covered parking spaces'])],
+    amen=['Lap pool', 'Gym', 'Shared laundry', '2 party rooms', 'Grill area', 'Home office space', 'Beauty room', 'Vending machines', '24-hour concierge', 'Lobby'])},
  'alpha-club-j42': {
   'pt': dict(head='2 dormitórios com suíte e ar-condicionado',
     intro='No Alpha Club, no Campolim. Suíte com cama Queen de molas ensacadas e ar-condicionado de 12.000 BTUs.',
@@ -194,7 +221,7 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
@@ -207,7 +234,7 @@ T = {
        ('O que está incluso no valor?', 'O aluguel. Condomínio e IPTU são cobrados à parte, e cada apartamento mostra o total mensal. Luz e internet ficam no nome do inquilino, assim como água e gás quando não estiverem no condomínio.'),
        ('O que vem no apartamento?', 'Móveis, cozinha equipada e eletrodomésticos. A lista de cada um está em "Fotos e detalhes". A cada nova locação, o apartamento é pintado e higienizado.'),
        ('Aceita animais de estimação?', 'Sim.'),
-       ('Tem vaga, ar-condicionado e lazer?', 'Vagas: o Spettacolo Patriani tem 2 cobertas e depósito de 10 m², e o Alpha Club I41 e o Residencial Esplanada têm 1 cada. Nos outros, confirme pelo WhatsApp. Ar-condicionado: Alpha Club J42 na suíte e Residencial Esplanada na sala. O Alpha Club I41 tem ventilador de teto na suíte. Todos os condomínios têm área de lazer.'),
+       ('Tem vaga, ar-condicionado e lazer?', 'Vagas: o Spettacolo Patriani tem 2 cobertas e depósito de 10 m², o RED Studio tem 2 cobertas, e o Alpha Club I41 e o Residencial Esplanada têm 1 cada. Nos outros, confirme pelo WhatsApp. Ar-condicionado: Alpha Club J42 na suíte e Residencial Esplanada na sala. O Alpha Club I41 tem ventilador de teto na suíte. Todos os condomínios têm área de lazer.'),
        ('Como agendo a visita e em quanto tempo recebo as chaves?', 'Pelo {WALINK}: diga o apartamento, o dia e o horário. Se preferir, escreva para {MAILLINK}. Corretores: incluam nome, RG e CRECI na mesma mensagem. As chaves saem em até 2 dias depois da documentação.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Procurando algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
@@ -247,7 +274,7 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
@@ -260,7 +287,7 @@ T = {
        ('What does the price include?', 'The rent. The condo fee and IPTU tax are charged separately, and each apartment shows the monthly total. Electricity and internet go in the tenant’s name, as do water and gas when they are not in the condo fee.'),
        ('What comes with the apartment?', 'Furniture, an equipped kitchen and appliances. The list for each one is under "Photos and details". Before every new tenant, the apartment is repainted and deep cleaned.'),
        ('Are pets allowed?', 'Yes.'),
-       ('Is there parking, air conditioning and leisure?', 'Parking: Spettacolo Patriani has 2 covered spaces and a 10 m² storage room, and Alpha Club I41 and Residencial Esplanada have 1 each. For the others, please confirm on WhatsApp. Air conditioning: Alpha Club J42 in the master bedroom and Residencial Esplanada in the living room. Alpha Club I41 has a ceiling fan in the master bedroom. All buildings have leisure facilities.'),
+       ('Is there parking, air conditioning and leisure?', 'Parking: Spettacolo Patriani has 2 covered spaces and a 10 m² storage room, RED Studio has 2 covered spaces, and Alpha Club I41 and Residencial Esplanada have 1 each. For the others, please confirm on WhatsApp. Air conditioning: Alpha Club J42 in the master bedroom and Residencial Esplanada in the living room. Alpha Club I41 has a ceiling fan in the master bedroom. All buildings have leisure facilities.'),
        ('How do I book a viewing, and how soon do I get the keys?', 'On {WALINK}: tell us the apartment, day and time. You can also email {MAILLINK}. Agents: include your name, ID (RG) and CRECI in the same message. Keys are ready within 2 days of receiving your documents.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
@@ -368,7 +395,7 @@ def render(lang):
         </div>
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
-          <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{DOC}{t['l_desc']}</button>
+          <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{CAM}{t['l_desc_n'].format(n=len(PHOTOS.get(p['id'], p['gal']['pt'])))}</button>
           <button type="button" class="btn btn-outline share-btn" data-id="{p['id']}" data-text="{t['share_txt'].format(name=p['name'], tag=p['tag'][lang], rent=money(p['rent'], lang, cents=False))}" aria-label="{t['share']}: {p['name']}">{SHARE}</button>
         </div>
       </div>
@@ -380,14 +407,24 @@ def render(lang):
         d = DET[p['id']][lang]
         total = p['rent'] + p['condo'] + p['iptu']
         msg = wa(t['wa_unit'].format(name=p['name'], price=money(p['rent'], lang, cents=False)))
-        alts = p['gal'][lang]; n = len(alts)
-        slides = ''.join(
-            f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
-            f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
-            for i, a in enumerate(alts))
+        ph = PHOTOS.get(p['id'])
+        if ph:
+            n = len(ph)
+            alts = [t['photo_n'].format(i=i + 1, n=n) for i in range(n)]
+            slides = ''.join(
+                f'<div class="slide"><img src="{R}images/u/{p["id"]}/{i + 1:02d}.webp" alt="{p["name"]}, {alts[i]}" loading="lazy" decoding="async" width="{w}" height="{h}"></div>'
+                for i, (w, h) in enumerate(ph))
+            thumb_src = lambda i, pid=p['id']: f'{R}images/u/{pid}/t{i + 1:02d}.webp'
+        else:
+            alts = p['gal'][lang]; n = len(alts)
+            slides = ''.join(
+                f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
+                f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
+                for i, a in enumerate(alts))
+            thumb_src = lambda i, pid=p['id']: f'{R}images/g/{pid}-{i + 1}.webp'
         groups = ''.join(f'<div class="dg"><h4>{g}</h4><ul class="checks">' + ''.join(f'<li>{CHECK}{x}</li>' for x in items) + '</ul></div>' for g, items in d['groups'])
         amen = ''.join(f'<li>{x}</li>' for x in d['amen'])
-        thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{R}images/g/{p["id"]}-{i + 1}.webp" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
+        thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{thumb_src(i)}" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
         dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
   <div class="detail-inner">
     <button type="button" class="detail-close" aria-label="{t['d_close']}">×</button>
@@ -580,8 +617,8 @@ def render(lang):
   </div>
   <div class="hero-collage">
     <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
-    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{P[0]['name']}: {P[0]['gal'][lang][2]}" width="760" height="570"></picture>
-    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{P[2]['name']}: {P[2]['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{PID['spettacolo-42']['name']}: {PID['spettacolo-42']['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{PID['esplanada-102']['name']}: {PID['esplanada-102']['gal'][lang][2]}" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>

@@ -701,3 +701,9 @@ dialog.share-sheet .detail-close { position: absolute; top: 12px; right: 12px; }
 .share-opt:hover { border-color: var(--ink); background: #FFFFFF; }
 .share-wa svg { color: #128C4A; }
 .share-url { margin-top: 14px; width: 100%; min-height: 44px; border-radius: 12px; border: 1px solid var(--line); padding: 0 12px; font: inherit; font-size: 13.5px; color: var(--text); background: #FFFFFF; }
+
+/* Full galleries in details: show whole photo, no cropping */
+dialog.detail .detail-gallery { background: #0B1A2C; }
+dialog.detail .slide img { object-fit: contain; background: #0B1A2C; }
+dialog.detail .thumbs { overflow-x: auto; scrollbar-width: thin; }
+dialog.detail .thumb { flex: 0 0 auto; }
