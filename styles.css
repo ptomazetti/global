@@ -640,3 +640,31 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 @media (max-width: 860px) { .hero-text, .hero-collage { flex: none; } .hero-collage { width: 100%; } }
 @media (min-width: 700px) { .steps { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 700px) and (max-width: 900px) { .steps li { padding: 24px 20px; } .steps h3 { font-size: 19px; } }
+
+/* Guest reviews */
+.quotes-band { position: relative; isolation: isolate; background: #FFFFFF; }
+.quotes-section { gap: 32px; }
+.quotes-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.quotes-more { font-weight: 700; font-size: 15px; color: var(--brand); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.quotes-more:hover { text-decoration: underline; }
+.quotes { grid-template-columns: 1.6fr 1fr 1fr; }
+.quote { background: var(--paper); border: 1px solid rgba(16,36,60,.08); border-radius: 22px; padding: 28px; gap: 16px; justify-content: space-between; }
+.quote:first-child { background: linear-gradient(150deg, var(--navy-1), var(--navy-0)); color: #FFFFFF; border: 0; }
+.quote:first-child blockquote { font-family: var(--display); font-size: 21px; line-height: 1.45; }
+.quote:first-child small { color: #A9B7C9; }
+.quote blockquote { font-size: 18px; line-height: 1.5; }
+.stars { display: flex; gap: 3px; color: var(--gold); }
+.stars svg { fill: currentColor; stroke: none; }
+.quote figcaption { display: flex; align-items: center; gap: 12px; color: inherit; }
+.quote figcaption > span:last-child { display: flex; flex-direction: column; line-height: 1.3; }
+.quote figcaption strong { font-size: 15px; }
+.quote figcaption small { font-size: 13px; font-weight: 500; color: var(--muted); }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-soft); color: var(--navy-0); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 600; font-size: 18px; flex: 0 0 auto; }
+.quotes-tr { font-size: 13px; color: var(--muted); margin-top: -16px; }
+.host-card { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding: 20px 24px; border-radius: 18px; border: 1px solid rgba(201,169,110,.45); background: #FBF8F2; }
+.host-h { font-family: var(--display); font-weight: 600; font-size: 18px; }
+.host-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; color: var(--text); }
+.host-card li { display: flex; align-items: center; gap: 8px; }
+.host-card li svg { color: var(--gold); width: 18px; height: 18px; }
+@media (max-width: 900px) { .quotes { grid-template-columns: 1fr 1fr; } .quote:first-child { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .quotes { grid-template-columns: 1fr; } .quote:first-child blockquote { font-size: 19px; } .host-card ul { flex-direction: column; } }

@@ -12,9 +12,18 @@ WA = '5515997470301'
 WA_SHOW = '+55 (15) 99747-0301'
 CNPJ = '50.945.139/0001-86'
 ATUALIZADO = {'pt': '1 de novembro de 2026', 'en': '1 November 2026'}  # mude sempre que um imovel entrar ou sair
-AIRBNB_URL = ''   # link do perfil Global Flats no Airbnb
+AIRBNB_URL = {'pt': 'https://www.airbnb.com.br/users/profile/1779247085187681939', 'en': 'https://www.airbnb.com/users/profile/1779247085187681939'}   # perfil Global Flats no Airbnb
 ATENDENTE = {}    # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
-DEPOIMENTOS = []  # ex.: [{'texto': {'pt': '...', 'en': '...'}, 'nome': 'Ana', 'imovel': 'Alpha Club'}]
+# Avaliações reais do perfil Global Flats no Airbnb (copiadas do perfil público).
+DEPOIMENTOS = [
+    {'texto': {'pt': 'Excelente experiência! O flat é muito confortável, bem equipado, limpo e exatamente como nas fotos. A localização também é ótima e facilita bastante a estadia. Tudo muito organizado e pensado nos detalhes. Recomendo e certamente voltaria!',
+               'en': 'Excellent experience! The flat is very comfortable, well equipped, clean and exactly as in the photos. The location is great too and makes the stay much easier. Everything is well organised and thought through. I recommend it and would definitely come back!'},
+     'nome': 'Raffa', 'cidade': 'São Paulo', 'data': {'pt': 'outubro de 2026', 'en': 'October 2026'}},
+    {'texto': {'pt': 'Ótimo studio para hospedagem.', 'en': 'Great studio for a stay.'},
+     'nome': 'Daniel', 'cidade': 'Espírito Santo do Pinhal', 'data': {'pt': 'outubro de 2026', 'en': 'October 2026'}},
+    {'texto': {'pt': 'Excelente estadia.', 'en': 'Excellent stay.'},
+     'nome': 'João', 'cidade': '', 'data': {'pt': 'outubro de 2026', 'en': 'October 2026'}},
+]
 FAQ_EXTRA = [     # (pergunta, resposta) em cada idioma
     ({'pt': 'Tem vaga de garagem?', 'en': 'Is there parking?'},
      {'pt': 'O Spettacolo Patriani tem 2 vagas cobertas e depósito de 10 m². O Alpha Club I41 e o Residencial Esplanada têm 1 vaga cada. Para os outros apartamentos, confirme pelo WhatsApp.',
@@ -192,7 +201,7 @@ T = {
          ('Entre com a mala', 'As chaves saem em até 2 dias depois da documentação.')],
   cmp_a='Alugar um apartamento vazio', cmp_a_list=['Comprar sofá, cama, mesa e cortinas', 'Comprar geladeira, fogão, micro-ondas e máquina de lavar', 'Pagar frete, montagem e instalação', 'Semanas até a casa ficar pronta'],
   cmp_b='Alugar com a Global', cmp_b_list=['Móveis e armários planejados já instalados', 'Eletrodomésticos funcionando', 'Apartamento pintado e higienizado', 'Você muda sem esperar móveis chegarem'],
-  quotes_h='Quem já mora',
+  quotes_h='Avaliações de hóspedes no Airbnb', host_h='Quem cuida dos apartamentos', host_items=['Gestor imobiliário', 'Atende em português, inglês e espanhol', 'Identidade verificada no Airbnb'], quotes_more='Ver todas no Airbnb', quotes_tr='',
   faq_h='Perguntas antes de visitar',
   faq=[('Qual é o prazo do contrato e quais garantias vocês aceitam?', 'O contrato é de 30 meses, e depois de 12 meses você pode sair sem multa. Aceitamos seguro fiança, caução de 3 aluguéis ou fiador.'),
        ('O que está incluso no valor?', 'O aluguel. Condomínio e IPTU são cobrados à parte, e cada apartamento mostra o total mensal. Luz e internet ficam no nome do inquilino, assim como água e gás quando não estiverem no condomínio.'),
@@ -245,7 +254,7 @@ T = {
          ('Move in with a suitcase', 'You get the keys within 2 days of handing in your documents.')],
   cmp_a='Renting an empty apartment', cmp_a_list=['Buy a sofa, bed, table and curtains', 'Buy a fridge, stove, microwave and washing machine', 'Pay for delivery, assembly and installation', 'Weeks before the place is ready'],
   cmp_b='Renting with Global', cmp_b_list=['Furniture and built-in cabinets already in place', 'Appliances working', 'Apartment repainted and deep cleaned', 'Move in without waiting for furniture'],
-  quotes_h='What our tenants say',
+  quotes_h='Guest reviews on Airbnb', host_h='Who looks after the apartments', host_items=['Property manager', 'Speaks English, Portuguese and Spanish', 'Identity verified on Airbnb'], quotes_more='See all on Airbnb', quotes_tr='Translated from Portuguese.',
   faq_h='Questions before your viewing',
   faq=[('How long is the lease, and which guarantees do you accept?', 'The lease is 30 months, and after 12 months you can leave without a penalty. We accept rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador).'),
        ('What does the price include?', 'The rent. The condo fee and IPTU tax are charged separately, and each apartment shows the monthly total. Electricity and internet go in the tenant’s name, as do water and gas when they are not in the condo fee.'),
@@ -416,15 +425,29 @@ def render(lang):
 
     dep_html = ''
     if DEPOIMENTOS:
-        items = ''.join(f'<figure class="quote"><blockquote>“{d["texto"][lang]}”</blockquote><figcaption>{d["nome"]} · {d["imovel"]}</figcaption></figure>' for d in DEPOIMENTOS)
-        dep_html = f'<section id="depoimentos" class="wrap quotes-section"><div class="section-head"><h2>{t["quotes_h"]}</h2></div><div class="quotes">{items}</div></section>'
+        STAR = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
+        items = ''.join(f'''<figure class="quote reveal">
+        <div class="stars" role="img" aria-label="5/5">{STAR * 5}</div>
+        <blockquote>“{d["texto"][lang]}”</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">{d["nome"][0]}</span><span><strong>{d["nome"]}</strong><small>{(d["cidade"] + " · ") if d["cidade"] else ""}{d["data"][lang]}</small></span></figcaption>
+      </figure>''' for d in DEPOIMENTOS)
+        more = f'<a class="quotes-more" href="{AIRBNB_URL[lang]}" target="_blank" rel="noopener">{t["quotes_more"]} →</a>' if AIRBNB_URL else ''
+        tr = f'<p class="quotes-tr">{t["quotes_tr"]}</p>' if t['quotes_tr'] else ''
+        dep_html = f'''<section id="avaliacoes" class="quotes-band">
+  <div class="wrap quotes-section">
+    <div class="quotes-head"><div class="section-head"><p class="eyebrow eyebrow-gold">Airbnb · Global Flats</p><h2>{t["quotes_h"]}</h2></div>{more}</div>
+    <div class="quotes">{items}</div>
+    {tr}
+    <div class="host-card reveal"><p class="host-h">{t["host_h"]}</p><ul>{''.join(f'<li>{CHECK}{x}</li>' for x in t["host_items"])}</ul></div>
+  </div>
+</section>'''
     att_html = ''
     if ATENDENTE:
         foto = f'<img src="{R}{ATENDENTE["foto"]}" alt="{ATENDENTE["nome"]}" width="56" height="56">' if ATENDENTE.get('foto') else ''
         att_html = f'<div class="agent">{foto}<span>{t["agent"]} <strong>{ATENDENTE["nome"]}</strong></span></div>'
 
     ab_logo = f'<svg class="logo airbnb" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>'
-    ab_cta = (f'<a class="btn btn-ab" href="{AIRBNB_URL}" target="_blank" rel="noopener">{t["ab_btn"]}</a>' if AIRBNB_URL
+    ab_cta = (f'<a class="btn btn-ab" href="{AIRBNB_URL[lang]}" target="_blank" rel="noopener">{t["ab_btn"]}</a>' if AIRBNB_URL
               else f'<p class="ab-search">{t["ab_search"]}</p>')
     AB_BAND = f'''<section class="ab-band" aria-label="Airbnb">
   <div class="wrap ab-inner reveal">
@@ -433,7 +456,7 @@ def render(lang):
     {ab_cta}
   </div>
 </section>'''
-    airbnb = f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">{t["airbnb"]}</a>' if AIRBNB_URL else t['airbnb']
+    airbnb = f'<a href="{AIRBNB_URL[lang]}" target="_blank" rel="noopener">{t["airbnb"]}</a>' if AIRBNB_URL else t['airbnb']
     faq_items = [(q, a.format(WALINK=walink, MAILLINK=maillink)) for q, a in t['faq']]
     faq_html = ''.join(f'''
       <details>
