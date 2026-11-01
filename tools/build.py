@@ -83,6 +83,80 @@ P = [
   d='https://drive.google.com/file/d/1J17liUYRHgMADoPXDzAqgiYSOjdORVh1/view?usp=sharing'),
 ]
 
+DET = {
+ 'spettacolo-42': {
+  'pt': dict(head='Studio alto padrão com varanda panorâmica',
+    intro='76 m² de área total, ampla varanda panorâmica, 2 vagas cobertas e depósito de 10 m².',
+    groups=[('Ambientes', ['Armários planejados em todos os ambientes', 'Cama box Queen, sofá-cama e poltronas', 'Mesa de jantar e bancada para home office', 'Cortinas e decoração completa']),
+            ('Cozinha', ['Cooktop, coifa e geladeira']),
+            ('Garagem', ['2 vagas cobertas', 'Depósito de 10 m²'])],
+    amen=['Piscina com raia', 'SPA com hidromassagem', 'Sauna', 'Academia completa', 'Espaço Pilates', 'Salão de festas com pista de dança', 'Espaço grill', 'Espaço de jogos', 'Espaço beauty care', 'Quadra de tênis', 'Brinquedoteca']),
+  'en': dict(head='Premium studio with a panoramic balcony',
+    intro='76 m² total area, a large panoramic balcony, 2 covered parking spaces and a 10 m² storage room.',
+    groups=[('Living spaces', ['Built-in cabinets throughout', 'Queen bed, sofa bed and armchairs', 'Dining table and home office desk', 'Curtains and full decor']),
+            ('Kitchen', ['Cooktop, range hood and fridge']),
+            ('Parking', ['2 covered parking spaces', '10 m² storage room'])],
+    amen=['Lap pool', 'Spa with hot tub', 'Sauna', 'Fully equipped gym', 'Pilates studio', 'Party room with dance floor', 'Grill area', 'Games room', 'Beauty care room', 'Tennis court', 'Kids’ playroom'])},
+ 'alpha-club-j42': {
+  'pt': dict(head='2 dormitórios com suíte e ar-condicionado',
+    intro='No Alpha Club, no Campolim. Suíte com cama Queen de molas ensacadas e ar-condicionado de 12.000 BTUs.',
+    groups=[('Ambientes', ['Armários planejados em todos os cômodos', 'Sofá, banquetas e mesa de jantar', 'Bancada para home office', 'Cortina blackout', 'Varanda gourmet']),
+            ('Cozinha e serviço', ['Fogão, coifa, micro-ondas e geladeira', 'Máquina de lavar']),
+            ('Tecnologia e estilo', ['Smart TV Samsung', 'Bar iluminado', 'Iluminação 100% LED'])],
+    amen=['Condomínio clube']),
+  'en': dict(head='2 bedrooms with en suite and air conditioning',
+    intro='At Alpha Club in Campolim. The master bedroom has a Queen bed with pocket springs and 12,000 BTU air conditioning.',
+    groups=[('Living spaces', ['Built-in cabinets in every room', 'Sofa, bar stools and dining table', 'Home office desk', 'Blackout curtains', 'Barbecue balcony']),
+            ('Kitchen and laundry', ['Stove, range hood, microwave and fridge', 'Washing machine']),
+            ('Tech and style', ['Samsung Smart TV', 'Lit bar', '100% LED lighting'])],
+    amen=['Club-style complex'])},
+ 'esplanada-102': {
+  'pt': dict(head='3 dormitórios com cozinha completa',
+    intro='No Residencial Esplanada, Bloco 2. O único de 3 dormitórios da lista, com ar-condicionado na sala e lavanderia completa.',
+    groups=[('Ambientes', ['Dormitórios, cozinha e banheiro com móveis planejados', 'Sala com ar-condicionado de 12.000 BTUs', 'Smart TV, sofá e mesa com cadeiras']),
+            ('Cozinha', ['Fogão, cooktop, forno elétrico e coifa', 'Micro-ondas', 'Geladeira Frost Free Duplex de 440 L']),
+            ('Lavanderia', ['Área de serviço completa com máquina lava e seca']),
+            ('Garagem', ['1 vaga'])],
+    amen=['Condomínio clube']),
+  'en': dict(head='3 bedrooms with a fully equipped kitchen',
+    intro='At Residencial Esplanada, Block 2. The only 3-bedroom on our list, with air conditioning in the living room and a full laundry.',
+    groups=[('Living spaces', ['Built-in furniture in the bedrooms, kitchen and bathroom', 'Living room with 12,000 BTU air conditioning', 'Smart TV, sofa, table and chairs']),
+            ('Kitchen', ['Stove, cooktop, electric oven and range hood', 'Microwave', '440 L frost-free double-door fridge']),
+            ('Laundry', ['Full laundry area with washer-dryer']),
+            ('Parking', ['1 parking space'])],
+    amen=['Club-style complex'])},
+ 'alpha-club-i41': {
+  'pt': dict(head='2 dormitórios com suíte e varanda gourmet',
+    intro='No Alpha Club, no Campolim. Dois quartos com cama de casal e uma vaga de garagem.',
+    groups=[('Suíte', ['Cama box de casal', 'Armário e ventilador de teto']),
+            ('Segundo quarto', ['Cama box de casal e armário']),
+            ('Sala e varanda', ['Sofá e TV', 'Mesa de jantar para 4 lugares', 'Varanda gourmet']),
+            ('Cozinha e serviço', ['Armários planejados', 'Fogão, micro-ondas e geladeira', 'Máquina de lavar']),
+            ('Garagem', ['1 vaga'])],
+    amen=['Condomínio clube']),
+  'en': dict(head='2 bedrooms with en suite and a barbecue balcony',
+    intro='At Alpha Club in Campolim. Two bedrooms with double beds and one parking space.',
+    groups=[('Master bedroom', ['Double bed', 'Wardrobe and ceiling fan']),
+            ('Second bedroom', ['Double bed and wardrobe']),
+            ('Living room and balcony', ['Sofa and TV', 'Dining table for 4', 'Barbecue balcony']),
+            ('Kitchen and laundry', ['Built-in cabinets', 'Stove, microwave and fridge', 'Washing machine']),
+            ('Parking', ['1 parking space'])],
+    amen=['Club-style complex'])},
+ 'vida-plena-c65': {
+  'pt': dict(head='2 dormitórios com espaço para home office',
+    intro='No Vida Plena, no Campolim, em condomínio com lazer completo.',
+    groups=[('Ambientes', ['Armários planejados em todos os cômodos', 'Cama box de casal em um quarto e de solteiro no outro', 'Sofá e mesa de jantar', 'Bancada para home office', 'Cortinas']),
+            ('Cozinha e serviço', ['Fogão, micro-ondas e geladeira', 'Máquina de lavar']),
+            ('Tecnologia', ['TV', 'Iluminação 100% LED'])],
+    amen=['Lazer completo']),
+  'en': dict(head='2 bedrooms with a home office corner',
+    intro='At Vida Plena in Campolim, in a building with full leisure facilities.',
+    groups=[('Living spaces', ['Built-in cabinets in every room', 'Double bed in one bedroom, single bed in the other', 'Sofa and dining table', 'Home office desk', 'Curtains']),
+            ('Kitchen and laundry', ['Stove, microwave and fridge', 'Washing machine']),
+            ('Tech', ['TV', '100% LED lighting'])],
+    amen=['Full leisure facilities'])},
+}
+
 T = {
  'pt': dict(
   html_lang='pt-BR', og_locale='pt_BR',
@@ -97,7 +171,7 @@ T = {
   h1='Apartamento mobiliado. Você só traz a mala.',
   lead='{N} apartamentos prontos para morar, de studio a 3 dormitórios, em condomínios com lazer. Aluguel a partir de {MIN}. Visite antes de decidir.',
   see_all='Ver os {N} apartamentos',
-  proof=['Pintado e higienizado a cada locação', '3 opções de garantia', 'Fotos, vídeo e descrição de cada imóvel'],
+  proof=['Chaves em até 2 dias após a documentação', 'Aceita animais de estimação', 'Pintado e higienizado a cada locação', '3 opções de garantia'],
   hero_alt='Sala mobiliada do Spettacolo Patriani com sofá, poltronas e tapete',
   badge='disponíveis hoje', updated='Lista atualizada em {DATE}',
   agent='Quem responde no WhatsApp:',
@@ -105,27 +179,31 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês de aluguel', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Descrição',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Ver detalhes', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
-         ('Entre com a mala', 'Móveis, cozinha equipada e eletrodomésticos já estão lá. O apartamento é pintado e higienizado antes de você chegar.')],
+         ('Entre com a mala', 'As chaves saem em até 2 dias depois da documentação. Móveis, cozinha equipada e eletrodomésticos já estão lá, e o apartamento é pintado e higienizado antes de você chegar.')],
   cmp_a='Alugar um apartamento vazio', cmp_a_list=['Comprar sofá, cama, mesa e cortinas', 'Comprar geladeira, fogão, micro-ondas e máquina de lavar', 'Pagar frete, montagem e instalação', 'Semanas até a casa ficar pronta'],
   cmp_b='Alugar com a Global', cmp_b_list=['Móveis e armários planejados já instalados', 'Eletrodomésticos funcionando', 'Apartamento pintado e higienizado', 'Você muda sem esperar móveis chegarem'],
   quotes_h='Quem já mora',
   faq_h='Perguntas antes de visitar',
   faq=[('Quais garantias vocês aceitam?', 'Seguro fiança, caução de 3 aluguéis ou fiador.'),
+       ('Qual é o prazo do contrato?', 'O contrato é de 30 meses. Depois de 12 meses, você pode sair sem pagar multa.'),
+       ('Água, luz, gás e internet estão inclusos?', 'Não. Luz e internet ficam no nome do inquilino, que paga direto às empresas. Água e gás também, quando não estiverem incluídos no condomínio.'),
+       ('Aceita animais de estimação?', 'Sim, aceitamos animais de estimação.'),
+       ('Em quanto tempo recebo as chaves?', 'Em até 2 dias depois que você entregar a documentação.'),
        ('O valor do aluguel inclui condomínio e IPTU?', 'Não. Condomínio e IPTU são cobrados à parte. Cada apartamento mostra os três valores e o total mensal, para você comparar sem surpresa.'),
        ('O que exatamente vem no apartamento?', 'Cada imóvel tem uma descrição completa com a lista de móveis e eletrodomésticos. Toque em "Descrição" no card do apartamento.'),
        ('O apartamento é limpo antes de eu entrar?', 'Sim. A cada nova locação, o apartamento é pintado e higienizado.'),
-       ('Como agendo uma visita?', 'Pelo WhatsApp {WALINK}. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para {MAILLINK}.')],
+       ('Como agendo uma visita?', 'Pelo {WALINK}. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para {MAILLINK}.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
   brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Use os links dos cards ou peça o material completo.',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.',
   end_h='Gostou de um? Marque a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
-  foot_tag='Locação de apartamentos mobiliados · Sorocaba',
+  foot_tag='Locação de apartamentos mobiliados · Sorocaba', foot_wa='Fale pelo WhatsApp',
   wa_general='Olá! Vi o site da Global e quero agendar uma visita. Meu nome é: ',
   wa_unit='Olá! Vi o site da Global e quero visitar o {name} ({price}). Meu nome é: ',
   wa_broker='Olá! Sou corretor(a) e quero agendar uma visita.\nNome:\nRG:\nCRECI:\nImóvel:\nDia e horário:',
@@ -144,7 +222,7 @@ T = {
   h1='Fully furnished. Just bring your suitcase.',
   lead='{N} apartments ready to move into, from studio to 3 bedrooms, in buildings with leisure facilities. Rent from {MIN} a month. See it before you decide.',
   see_all='See all {N} apartments',
-  proof=['Repainted and deep cleaned before every new tenant', '3 rental guarantee options', 'Photos, video and full description of each apartment'],
+  proof=['Keys within 2 days of your documents', 'Pets welcome', 'Repainted and deep cleaned before every new tenant', '3 rental guarantee options'],
   hero_alt='Furnished living room at Spettacolo Patriani with sofa, armchairs and rug',
   badge='available today', updated='List updated {DATE}',
   agent='Your contact on WhatsApp:',
@@ -152,27 +230,31 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month rent', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Description',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='See details', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
-         ('Move in with a suitcase', 'Furniture, an equipped kitchen and appliances are already there. The apartment is repainted and deep cleaned before you arrive.')],
+         ('Move in with a suitcase', 'You get the keys within 2 days of handing in your documents. Furniture, an equipped kitchen and appliances are already there, and the apartment is repainted and deep cleaned before you arrive.')],
   cmp_a='Renting an empty apartment', cmp_a_list=['Buy a sofa, bed, table and curtains', 'Buy a fridge, stove, microwave and washing machine', 'Pay for delivery, assembly and installation', 'Weeks before the place is ready'],
   cmp_b='Renting with Global', cmp_b_list=['Furniture and built-in cabinets already in place', 'Appliances working', 'Apartment repainted and deep cleaned', 'Move in without waiting for furniture'],
   quotes_h='What our tenants say',
   faq_h='Questions before your viewing',
   faq=[('Which rental guarantees do you accept?', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador).'),
+       ('How long is the lease?', 'The lease is 30 months. After 12 months, you can leave without paying a penalty.'),
+       ('Are water, electricity, gas and internet included?', 'No. Electricity and internet go in the tenant’s name and are paid directly to the providers. The same applies to water and gas when they are not included in the condo fee.'),
+       ('Are pets allowed?', 'Yes, pets are welcome.'),
+       ('How soon can I get the keys?', 'Within 2 days after you hand in your documents.'),
        ('Does the rent include the condo fee and IPTU tax?', 'No. The condo fee and IPTU property tax are charged separately. Each apartment shows all three amounts and the monthly total, so you can compare with no surprises.'),
-       ('What exactly comes with the apartment?', 'Each apartment has a full description listing the furniture and appliances. Tap "Description" on the apartment card. The description is in Portuguese.'),
+       ('What exactly comes with the apartment?', 'Each apartment has a full description listing the furniture and appliances. Tap "Description" on the apartment card.'),
        ('Is the apartment cleaned before I move in?', 'Yes. Before every new tenant, the apartment is repainted and deep cleaned.'),
-       ('How do I book a viewing?', 'On WhatsApp at {WALINK}. Tell us which apartment and the best day and time for you. You can also email {MAILLINK}.')],
+       ('How do I book a viewing?', 'On {WALINK}. Tell us which apartment and the best day and time for you. You can also email {MAILLINK}.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
   brk_p='Every apartment already has photos, video and a description ready to send to your client. Use the links on each card or ask for the full pack.',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.',
   end_h='Like one? Book your viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
-  foot_tag='Furnished apartment rentals · Sorocaba, Brazil',
+  foot_tag='Furnished apartment rentals · Sorocaba, Brazil', foot_wa='Chat on WhatsApp',
   wa_general='Hello! I saw the Global website and would like to book a viewing. My name is: ',
   wa_unit='Hello! I saw the Global website and would like to see {name} ({price}). My name is: ',
   wa_broker='Hello! I am a real estate agent and would like to book a viewing.\nName:\nID (RG):\nCRECI:\nApartment:\nDay and time:',
@@ -195,6 +277,8 @@ def wai(sz=18): return f'<svg class="logo" width="{sz}" height="{sz}" viewBox="0
 CAM = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>'
 PLAY = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>'
 DOC = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>'
+MENU_I = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
+EXPAND = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>'
 CHECK = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>'
 
 # Bandeiras
@@ -220,7 +304,7 @@ def render(lang):
     def tx(key): return t[key].format(**fmt)
     general = wa(t['wa_general'])
     broker = wa(t['wa_broker'])
-    walink = f'<a href="{general}" target="_blank" rel="noopener">{WA_SHOW}</a>'
+    walink = f'<a href="{general}" target="_blank" rel="noopener">WhatsApp</a>'
     maillink = f'<a href="mailto:{EMAIL}">{EMAIL}</a>'
 
     cards = []
@@ -237,6 +321,7 @@ def render(lang):
       <div class="card-media gallery">
         <div class="gallery-track" tabindex="0" aria-label="{t['photos_of'].format(name=p['name'])}">{slides}</div>
         <span class="tag">{p['tag'][lang]}</span>
+        <a class="media-pill" href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
         <span class="gallery-count" aria-hidden="true">1 / {n}</span>
         <button class="gallery-btn prev" type="button" aria-label="{t['prev']}">‹</button>
         <button class="gallery-btn next" type="button" aria-label="{t['next']}">›</button>
@@ -253,14 +338,69 @@ def render(lang):
           <p class="price-total">{t['total']}: {money(total, lang)}</p>
         </div>
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
-        <div class="card-links">
-          <a href="{p['f']}" target="_blank" rel="noopener">{CAM}{t['l_photos']}</a>
-          <a href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['l_video']}</a>
-          <a href="{p['d']}" target="_blank" rel="noopener">{DOC}{t['l_desc']}</a>
+        <div class="card-actions2">
+          <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{DOC}{t['l_desc']}</button>
+          <a class="btn btn-soft" href="{p['f']}" target="_blank" rel="noopener">{CAM}{t['all_photos']}</a>
         </div>
       </div>
     </article>''')
     CARDS = '\n\n'.join(cards)
+
+    dialogs = []
+    for p in P:
+        d = DET[p['id']][lang]
+        total = p['rent'] + p['condo'] + p['iptu']
+        msg = wa(t['wa_unit'].format(name=p['name'], price=money(p['rent'], lang, cents=False)))
+        alts = p['gal'][lang]; n = len(alts)
+        slides = ''.join(
+            f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
+            f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
+            for i, a in enumerate(alts))
+        groups = ''.join(f'<div class="dg"><h4>{g}</h4><ul class="checks">' + ''.join(f'<li>{CHECK}{x}</li>' for x in items) + '</ul></div>' for g, items in d['groups'])
+        amen = ''.join(f'<li>{x}</li>' for x in d['amen'])
+        thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{R}images/g/{p["id"]}-{i + 1}.webp" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
+        dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
+  <div class="detail-inner">
+    <button type="button" class="detail-close" aria-label="{t['d_close']}">×</button>
+    <div class="detail-media">
+    <div class="card-media gallery detail-gallery">
+      <div class="gallery-track" tabindex="0" aria-label="{t['photos_of'].format(name=p['name'])}">{slides}</div>
+      <span class="tag">{p['tag'][lang]}</span>
+      <a class="media-pill" href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
+      <button type="button" class="fs-btn" aria-label="{t['fullscreen']}" title="{t['fullscreen']}">{EXPAND}</button>
+      <span class="gallery-count" aria-hidden="true">1 / {n}</span>
+      <button class="gallery-btn prev" type="button" aria-label="{t['prev']}">‹</button>
+      <button class="gallery-btn next" type="button" aria-label="{t['next']}">›</button>
+    </div>
+    <div class="thumbs">{thumbs}</div>
+    </div>
+    <div class="detail-body">
+      <p class="eyebrow">{p['name']} · {p['meta'][lang]}</p>
+      <h2 id="dt-{p['id']}">{d['head']}</h2>
+      <p class="detail-intro">{d['intro']}</p>
+      <div class="detail-groups">{groups}</div>
+      <div class="dg"><h4>{t['d_amen']}</h4><ul class="amen">{amen}</ul></div>
+      <div class="cost">
+        <h4>{t['d_costs']}</h4>
+        <dl>
+          <dt>{t['d_rent']}</dt><dd>{money(p['rent'], lang)}</dd>
+          <dt>{t['condo']}</dt><dd>{money(p['condo'], lang)}</dd>
+          <dt>{t['iptu']}</dt><dd>{money(p['iptu'], lang)}</dd>
+          <dt class="cost-total">{t['total']}</dt><dd class="cost-total">{money(total, lang)}</dd>
+        </dl>
+      </div>
+      <a class="btn btn-primary btn-block btn-lg" href="{msg}" target="_blank" rel="noopener">{wai(20)}{t['visit_this']}</a>
+      <p class="detail-note">{t['d_note']}</p>
+      <div class="card-links">
+        <a href="{p['f']}" target="_blank" rel="noopener">{CAM}{t['all_photos']}</a>
+        <a href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
+        <a href="{p['d']}" target="_blank" rel="noopener">{DOC}{t['d_full']}</a>
+      </div>
+    </div>
+  </div>
+</dialog>''')
+    DIALOGS = '\n'.join(dialogs)
+    menu_apts = ''.join(f'<li><button type="button" class="drawer-apt detail-open" data-dialog="d-{p["id"]}"><img src="{R}images/g/{p["id"]}-1.webp" alt="" width="64" height="48" loading="lazy"><span><strong>{p["name"]}</strong><small>{p["tag"][lang]} · {money(p["rent"], lang, cents=False)}</small></span></button></li>' for p in P)
 
     dep_html = ''
     if DEPOIMENTOS:
@@ -308,7 +448,7 @@ def render(lang):
     LD = {"@context": "https://schema.org", "@type": "ItemList", "name": t['list_name'], "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "item": {"@type": "Offer", "name": f"{p['name']} · {p['tag'][lang]}", "priceCurrency": "BRL",
          "price": f"{p['rent']:.2f}", "availability": "https://schema.org/InStock",
-         "seller": {"@type": "Organization", "name": "Global Consultancy Partners Ltda", "url": SITE, "email": EMAIL, "taxID": CNPJ, "telephone": "+" + WA}}}
+         "seller": {"@type": "Organization", "name": "Global Consultancy Partners Ltda", "url": SITE, "email": EMAIL, "taxID": CNPJ}}}
         for i, p in enumerate(P)]}
     LDJ = json.dumps(LD, ensure_ascii=False)
 
@@ -349,16 +489,32 @@ def render(lang):
       <span class="brand-mark" aria-hidden="true">G</span>
       <span class="brand-name">Global<span class="brand-rest"> Consultancy Partners</span></span>
     </a>
-    <nav aria-label="{t['nav_label']}" class="nav">
-      <a href="#imoveis">{nav[0]}</a>
-      <a href="#como-funciona">{nav[1]}</a>
-      <a href="#duvidas">{nav[2]}</a>
-      <a href="#corretores">{nav[3]}</a>
-    </nav>
     {lang_switch}
     <a href="{general}" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">{wai()}{t['cta_short']}</a>
+    <button type="button" class="menu-btn" aria-haspopup="dialog" aria-controls="menu">{MENU_I}<span>{t['menu']}</span></button>
   </div>
 </header>
+
+<dialog class="drawer" id="menu" aria-label="{t['menu']}">
+  <div class="drawer-head">
+    <span class="brand-name">Global</span>
+    <button type="button" class="detail-close drawer-close" aria-label="{t['d_close']}">×</button>
+  </div>
+  <p class="drawer-label">{t['menu_apts']}</p>
+  <ul class="drawer-apts">{menu_apts}</ul>
+  <p class="drawer-label">{t['menu_nav']}</p>
+  <nav class="drawer-nav" aria-label="{t['nav_label']}">
+    <a href="#imoveis">{nav[0]}</a>
+    <a href="#como-funciona">{nav[1]}</a>
+    <a href="#duvidas">{nav[2]}</a>
+    <a href="#corretores">{nav[3]}</a>
+  </nav>
+  <div class="drawer-foot">
+    {lang_switch}
+    <a href="{general}" class="btn btn-primary btn-block" target="_blank" rel="noopener">{wai()}{t['cta_long']}</a>
+    <a class="drawer-mail" href="mailto:{EMAIL}">{EMAIL}</a>
+  </div>
+</dialog>
 
 <main>
 
@@ -461,11 +617,13 @@ def render(lang):
     </div>
     <div class="footer-id footer-right">
       <span>{t['foot_tag']}</span>
-      <a class="footer-wa" href="{general}" target="_blank" rel="noopener" aria-label="WhatsApp {WA_SHOW}">{wai(18)}{WA_SHOW}</a>
+      <a class="footer-wa" href="{general}" target="_blank" rel="noopener">{wai(18)}{t['foot_wa']}</a>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
     </div>
   </div>
 </footer>
+
+{DIALOGS}
 
 <a href="{general}" class="mobile-cta" target="_blank" rel="noopener">{wai(20)}{t['cta_short']}</a>
 
@@ -479,6 +637,30 @@ document.querySelectorAll('.gallery').forEach(function (g) {{
   g.querySelector('.next').addEventListener('click', function () {{ go(1); }});
   t.addEventListener('scroll', function () {{ c.textContent = (idx() + 1) + ' / ' + n; }}, {{ passive: true }});
   t.addEventListener('keydown', function (e) {{ if (e.key === 'ArrowRight') {{ e.preventDefault(); go(1); }} if (e.key === 'ArrowLeft') {{ e.preventDefault(); go(-1); }} }});
+}});
+var menu = document.getElementById('menu');
+document.querySelector('.menu-btn').addEventListener('click', function () {{ if (menu.showModal) {{ menu.showModal(); document.body.classList.add('modal-open'); }} }});
+menu.querySelectorAll('.drawer-nav a').forEach(function (a) {{ a.addEventListener('click', function () {{ menu.close(); }}); }});
+document.querySelectorAll('.detail-open').forEach(function (b) {{
+  b.addEventListener('click', function () {{
+    var d = document.getElementById(b.dataset.dialog);
+    if (menu.open) menu.close();
+    if (d && d.showModal) {{ d.showModal(); document.body.classList.add('modal-open'); d.querySelector('.gallery-track').scrollLeft = 0; }}
+  }});
+}});
+document.querySelectorAll('dialog.detail').forEach(function (d) {{
+  var t = d.querySelector('.gallery-track'), th = d.querySelectorAll('.thumb');
+  th.forEach(function (b) {{ b.addEventListener('click', function () {{ t.scrollTo({{ left: +b.dataset.i * t.clientWidth, behavior: 'smooth' }}); }}); }});
+  t.addEventListener('scroll', function () {{ var i = Math.round(t.scrollLeft / t.clientWidth); th.forEach(function (b, k) {{ b.classList.toggle('on', k === i); }}); }}, {{ passive: true }});
+  var fs = d.querySelector('.fs-btn'), g = d.querySelector('.detail-gallery');
+  fs.addEventListener('click', function () {{
+    try {{ if (document.fullscreenElement) document.exitFullscreen(); else if (g.requestFullscreen) g.requestFullscreen().catch(function () {{ g.classList.toggle('big'); }}); else g.classList.toggle('big'); }} catch (e) {{ g.classList.toggle('big'); }}
+  }});
+}});
+document.querySelectorAll('dialog').forEach(function (d) {{
+  var c = d.querySelector('.detail-close'); if (c) c.addEventListener('click', function () {{ d.close(); }});
+  d.addEventListener('click', function (e) {{ if (e.target === d) d.close(); }});
+  d.addEventListener('close', function () {{ if (!document.querySelector('dialog[open]')) document.body.classList.remove('modal-open'); }});
 }});
 (function () {{
   var cta = document.querySelector('.mobile-cta'), hero = document.querySelector('.hero-actions');
