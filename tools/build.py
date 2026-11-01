@@ -223,7 +223,7 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
@@ -276,7 +276,7 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
@@ -757,6 +757,7 @@ def render(lang):
   <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
   <video controls playsinline preload="none"></video>
   <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
+  <a class="vid-alt" href="#" target="_blank" rel="noopener" hidden>{t['vid_alt']}</a>
 </dialog>
 
 <a href="{general}" class="mobile-cta" target="_blank" rel="noopener">{wai(20)}{t['cta_short']}</a>
@@ -838,9 +839,10 @@ document.querySelectorAll('.video-drive').forEach(function (a) {{ a.addEventList
   if (inFrame) return;  /* previews inside other sites cannot embed Drive: open the video in a new tab */
   e.preventDefault(); vv.hidden = true; vf.hidden = false;
   vf.src = 'https://drive.google.com/file/d/' + a.dataset.drive + '/preview';
+  var alt = vd.querySelector('.vid-alt'); alt.href = a.href; alt.hidden = false;
   vd.classList.add('is-frame'); vd.showModal(); document.body.classList.add('modal-open');
 }}); }});
-vd.addEventListener('close', function () {{ vv.pause(); vv.removeAttribute('src'); vv.load(); vf.removeAttribute('src'); vf.hidden = true; vv.hidden = false; vd.classList.remove('is-frame'); }});
+vd.addEventListener('close', function () {{ vv.pause(); vv.removeAttribute('src'); vv.load(); vf.removeAttribute('src'); vf.hidden = true; vv.hidden = false; vd.querySelector('.vid-alt').hidden = true; vd.classList.remove('is-frame'); }});
 document.querySelectorAll('.detail-open[data-fs]').forEach(function (b) {{ b.addEventListener('click', function () {{
   var d = document.getElementById(b.dataset.dialog), g = d && d.querySelector('.detail-gallery'); if (g && window.matchMedia('(min-width: 900px)').matches) g.scrollIntoView({{ block: 'nearest' }});
 }}); }});

@@ -711,3 +711,7 @@ dialog.vid .vid-frame { display: block; width: 100%; aspect-ratio: 16 / 9; borde
 dialog.vid.is-frame { width: min(1000px, 94vw); }
 @media (max-width: 640px) { dialog.vid .vid-frame { aspect-ratio: 9 / 16; max-height: 80dvh; } }
 dialog.vid .vid-frame[hidden], dialog.vid video[hidden] { display: none; }
+dialog.vid.is-frame { background: #0B1A2C; }
+dialog.vid .vid-alt { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; color: #E6D3AE; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+dialog.vid .vid-alt[hidden] { display: none; }
+@media (max-width: 640px) { dialog.vid .vid-frame { max-height: calc(80dvh - 48px); } }
