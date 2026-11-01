@@ -155,3 +155,16 @@ h1, h2, h3 { font-family: var(--display); }
   .contact { padding-top: 64px; padding-bottom: 64px; }
   .notice { padding: 24px; }
 }
+
+.section-head .airbnb-note {
+  align-self: flex-start;
+  font-size: 15px; color: var(--ink);
+  background: var(--soft); border: 1px solid var(--line);
+  border-radius: 999px; padding: 8px 16px;
+}
+.airbnb-note strong { color: var(--green); }
+svg.logo { fill: currentColor; stroke: none; }
+.airbnb-note { display: inline-flex; align-items: center; gap: 8px; }
+svg.airbnb { color: #FF5A5F; }
+.card-actions .btn { gap: 6px; }
+.hero h1 { text-wrap: balance; }
