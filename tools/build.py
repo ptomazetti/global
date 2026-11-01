@@ -184,7 +184,7 @@ T = {
   list_h='Escolha o seu e marque a visita',
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
-  per_month=' /mês de aluguel', condo='Condomínio', iptu='IPTU', total='Total mensal',
+  per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
   visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Ver detalhes', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
@@ -240,7 +240,7 @@ T = {
   list_h='Choose yours and book a viewing',
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
-  per_month=' /month rent', condo='Condo fee', iptu='IPTU tax', total='Total per month',
+  per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
   visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='See details', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
@@ -352,8 +352,7 @@ def render(lang):
         <ul class="perks">{perks}</ul>
         <div class="price">
           <p class="price-value">{money(p['rent'], lang, cents=False)}<span>{t['per_month']}</span></p>
-          <p class="price-extra">{t['condo']} {money(p['condo'], lang)} · {t['iptu']} {money(p['iptu'], lang)}</p>
-          <p class="price-total">{t['total']}: {money(total, lang)}</p>
+          <p class="price-extra">{t['total_with'].format(v=money(total, lang))}</p>
         </div>
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
