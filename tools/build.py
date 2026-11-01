@@ -490,7 +490,8 @@ def render(lang):
 <link rel="alternate" hreflang="pt-BR" href="{SITE}/">
 <link rel="alternate" hreflang="en" href="{SITE}/en/">
 <link rel="alternate" hreflang="x-default" href="{SITE}/">
-<link rel="icon" href="{FAV}">
+<link rel="icon" type="image/png" sizes="48x48" href="{R}images/favicon-48.png">
+<link rel="apple-touch-icon" href="{R}images/apple-touch-icon.png">
 <link rel="preload" as="image" href="{R}images/hero-sala.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -503,8 +504,7 @@ def render(lang):
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="#topo" class="brand">
-      <span class="brand-mark" aria-hidden="true">G</span>
-      <span class="brand-name">Global<span class="brand-rest"> Consultancy Partners</span></span>
+      <img class="brand-logo" src="{R}images/logo.png" alt="Global Estadia" width="900" height="230">
     </a>
     {lang_switch}
     <a href="{general}" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">{wai()}{t['cta_short']}</a>
@@ -514,7 +514,7 @@ def render(lang):
 
 <dialog class="drawer" id="menu" aria-label="{t['menu']}">
   <div class="drawer-head">
-    <span class="brand-name">Global</span>
+    <img class="brand-logo" src="{R}images/logo.png" alt="Global Estadia" width="900" height="230">
     <button type="button" class="detail-close drawer-close" aria-label="{t['d_close']}">×</button>
   </div>
   <p class="drawer-label">{t['menu_apts']}</p>
@@ -657,6 +657,7 @@ def render(lang):
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-id">
+      <img class="footer-logo" src="{R}images/logo-white.png" alt="Global Estadia" width="900" height="230" loading="lazy">
       <span class="brand-name">Global Consultancy Partners Ltda</span>
       <span>CNPJ {CNPJ}</span>
     </div>

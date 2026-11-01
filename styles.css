@@ -549,3 +549,13 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 .dark .notice .btn-primary { background: var(--navy-1); color: #FFFFFF; }
 .dark .notice .btn-primary:hover { background: var(--navy-0); color: #FFFFFF; }
 .dark .notice .btn-primary svg.logo { color: var(--gold-soft); }
+
+/* Logo */
+:root { --brand: #022E61; }
+.brand-logo { display: block; height: 44px; width: auto; }
+.drawer-head .brand-logo { height: 36px; }
+.footer-logo { display: block; height: 40px; width: auto; margin-bottom: 10px; }
+@media (max-width: 640px) { .brand-logo { height: 34px; } }
+.brand-logo { height: 52px; }
+@media (max-width: 640px) { .brand-logo { height: 38px; } }
+@media (min-width: 861px) { .footer-right > a { align-self: flex-end; } }
