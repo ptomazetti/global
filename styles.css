@@ -30,7 +30,7 @@ h1, h2, h3 { font-family: var(--display); }
 .btn-primary { background: var(--wa); color: #FFFFFF; }
 .btn-primary:hover { background: var(--wa-dark); color: #FFFFFF; }
 .btn-outline { background: #FFFFFF; color: var(--ink); border: 1.5px solid var(--ink); }
-.btn-outline:hover { background: var(--ink); color: #FFFFFF; }
+@media (hover: hover) { .btn-outline:hover { background: var(--ink); color: #FFFFFF; } }
 .btn-sm { min-height: 42px; padding: 0 18px; }
 .btn-lg { min-height: 54px; padding: 0 26px; font-size: 16px; }
 .btn-xl { min-height: 58px; padding: 0 32px; font-size: 17px; gap: 10px; }
@@ -352,7 +352,7 @@ h1, h2, h3 { font-family: var(--display); font-optical-sizing: auto; }
 .btn-primary { box-shadow: 0 10px 24px -10px rgba(18,140,74,.65); }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -10px rgba(18,140,74,.75); }
 .btn-outline { border-color: rgba(26,36,51,.25); }
-.btn-outline:hover { background: var(--navy-1); border-color: var(--navy-1); }
+@media (hover: hover) { .btn-outline:hover { background: var(--navy-1); border-color: var(--navy-1); } }
 .btn-soft { background: var(--paper); color: var(--ink); border: 1px solid var(--line); cursor: pointer; font-family: inherit; }
 .btn-soft:hover { background: #E9ECF1; }
 button.btn { font-family: inherit; cursor: pointer; }
@@ -715,3 +715,12 @@ dialog.vid.is-frame { background: #0B1A2C; }
 dialog.vid .vid-alt { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; color: #E6D3AE; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 dialog.vid .vid-alt[hidden] { display: none; }
 @media (max-width: 640px) { dialog.vid .vid-frame { max-height: calc(80dvh - 48px); } }
+
+/* Agent export: download material and copy description */
+.detail-export { margin: 24px 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.detail-export h4 { margin: 0 0 12px; }
+.export-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.export-btns .btn { min-height: 48px; font-size: 15px; padding: 0 12px; text-align: center; }
+@media (max-width: 420px) { .export-btns { grid-template-columns: 1fr; } }
+dialog.detail .detail-body > .cost + .detail-note { margin-top: 16px; }
+.brk-reply { margin: 8px 0 0; font-size: 15px; font-weight: 700; color: var(--ink); text-align: center; }
