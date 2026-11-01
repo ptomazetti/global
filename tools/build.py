@@ -205,10 +205,10 @@ T = {
   nav_label='Principal', nav=['Apartamentos', 'Como funciona', 'Avaliações', 'Dúvidas', 'Corretores'],
   lang_label='Idioma', cta_short='Agendar visita', cta_long='Agendar visita pelo WhatsApp',
   eyebrow='Para corretores e imobiliárias · Sorocaba e Votorantim',
-  h1='Apartamento totalmente mobiliado. O locatário só traz a mala.',
+  h1='Apartamentos totalmente mobiliados para o seu cliente. Ele só traz a mala.',
   lead='Fotos, vídeo e valor total prontos para você enviar ao seu cliente. Aluguel a partir de {MIN}.',
-  see_all='Ver apartamentos',
-  proof=['Chaves em até 2 dias após a documentação', 'Aceita animais de estimação', 'Pintado e higienizado a cada locação', '3 opções de garantia'],
+  see_all='Ver os {N} apartamentos',
+  proof=['Chaves em até 2 dias após a documentação', 'Sem multa para sair após 12 meses', 'Aceita animais de estimação', '3 opções de garantia'],
   hero_alt='Sala mobiliada do Spettacolo Patriani com sofá, poltronas e tapete',
   badge='disponíveis hoje', updated='Lista atualizada em {DATE}',
   agent='Quem responde no WhatsApp:',
@@ -229,7 +229,7 @@ T = {
   cmp_a='Alugar um apartamento vazio', cmp_a_list=['Comprar sofá, cama, mesa e cortinas', 'Comprar geladeira, fogão, micro-ondas e máquina de lavar', 'Pagar frete, montagem e instalação', 'Semanas até a casa ficar pronta'],
   cmp_b='Alugar com a Global', cmp_b_list=['Móveis e armários planejados já instalados', 'Eletrodomésticos funcionando', 'Apartamento pintado e higienizado', 'O cliente muda sem esperar móveis chegarem'],
   quotes_h='Avaliações de hóspedes no Airbnb', host_h='Quem cuida dos apartamentos', host_items=['Gestor imobiliário', 'Atende em português, inglês e espanhol', 'Identidade verificada no Airbnb'], quotes_more='Ver todas no Airbnb', quotes_tr='', quotes_intro='Dispomos também de imóveis para hospedagem pelo Airbnb, caso seja a preferência do seu cliente.',
-  faq_h='Perguntas antes de visitar',
+  faq_h='Perguntas que o seu cliente vai fazer',
   faq=[('Qual é o prazo do contrato e quais garantias vocês aceitam?', 'O contrato é de 30 meses, com dispensa de multa ao locatário caso deseje sair após 12 meses. Aceitamos seguro fiança, caução de 3 aluguéis ou fiador com imóvel e renda.'),
        ('O que está incluso no valor?', 'O total mensal é composto pelo aluguel, condomínio e IPTU, e cada apartamento mostra esse total. Luz e internet ficam a cargo do locatário, assim como água e gás quando não estiverem inclusos no condomínio. Exceção: no RED Studio, a internet de 500 Mega já está incluída no valor do aluguel.'),
        ('O que vem no apartamento?', 'Móveis, cozinha equipada e eletrodomésticos. A lista de cada um está em "Fotos e detalhes". A cada nova locação, o apartamento é pintado e higienizado.'),
@@ -238,7 +238,7 @@ T = {
        ('Como agendo a visita e em quanto tempo as chaves estarão disponíveis?', 'Pelo {WALINK}: informe em uma única mensagem o nome, RG e CRECI do corretor, o primeiro nome do cliente, o imóvel que deseja visitar e o melhor dia e horário. Com isso, liberamos a entrada na portaria e a chave: por empréstimo, código da fechadura eletrônica ou apartamento aberto, dependendo do imóvel. Se preferir, encaminhe a solicitação para {MAILLINK}. As chaves saem em até 2 dias depois da documentação.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Seu cliente procura algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
-  brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Abra "Fotos e detalhes" de qualquer apartamento e envie ao seu cliente agora. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
+  brk_p='Cada apartamento já tem fotos, vídeo, descrição e custo mensal prontos. Abra "Fotos e detalhes", toque em "Compartilhar" e envie ao seu cliente. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.',
   end_h='Seu cliente gostou de um? Agende a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
@@ -258,10 +258,10 @@ T = {
   nav_label='Main', nav=['Apartments', 'How it works', 'Reviews', 'FAQ', 'Agents'],
   lang_label='Language', cta_short='Book a viewing', cta_long='Book a viewing on WhatsApp',
   eyebrow='For agents and agencies · Sorocaba and Votorantim, Brazil',
-  h1='Fully furnished. The tenant just brings a suitcase.',
+  h1='Fully furnished apartments for your client. They just bring a suitcase.',
   lead='Photos, video and the full monthly cost, ready for you to send to your client. Rent from {MIN} a month.',
-  see_all='See the apartments',
-  proof=['Keys within 2 days of your documents', 'Pets welcome', 'Repainted and deep cleaned before every new tenant', '3 rental guarantee options'],
+  see_all='See the {N} apartments',
+  proof=['Keys within 2 days of the documents', 'No penalty to leave after 12 months', 'Pets welcome', '3 rental guarantee options'],
   hero_alt='Furnished living room at Spettacolo Patriani with sofa, armchairs and rug',
   badge='available today', updated='List updated {DATE}',
   agent='Your contact on WhatsApp:',
@@ -282,7 +282,7 @@ T = {
   cmp_a='Renting an empty apartment', cmp_a_list=['Buy a sofa, bed, table and curtains', 'Buy a fridge, stove, microwave and washing machine', 'Pay for delivery, assembly and installation', 'Weeks before the place is ready'],
   cmp_b='Renting with Global', cmp_b_list=['Furniture and built-in cabinets already in place', 'Appliances working', 'Apartment repainted and deep cleaned', 'Your client moves in without waiting for furniture'],
   quotes_h='Guest reviews on Airbnb', host_h='Who looks after the apartments', host_items=['Property manager', 'Speaks English, Portuguese and Spanish', 'Identity verified on Airbnb'], quotes_more='See all on Airbnb', quotes_tr='Translated from Portuguese.', quotes_intro='We also have apartments for short stays on Airbnb, if your client prefers.',
-  faq_h='Questions before your viewing',
+  faq_h='Questions your client will ask',
   faq=[('How long is the lease, and which guarantees do you accept?', 'The lease is 30 months, and the tenant can leave without a penalty after 12 months. We accept rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador) who owns property and has proof of income.'),
        ('What does the price include?', 'The monthly total is the rent plus the condo fee plus IPTU tax, and each apartment shows this total. Electricity and internet are paid by the tenant, as are water and gas when they are not included in the condo fee. Exception: at RED Studio, 500 Mbps internet is already included in the rent.'),
        ('What comes with the apartment?', 'Furniture, an equipped kitchen and appliances. The list for each one is under "Photos and details". Before every new tenant, the apartment is repainted and deep cleaned.'),
@@ -291,7 +291,7 @@ T = {
        ('How do I book a viewing, and when will the keys be available?', 'On {WALINK}: send one message with the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and the best day and time. We then arrange access at the front desk and the key: on loan, an electronic lock code or the apartment left open, depending on the property. You can also send the request to {MAILLINK}. Keys are ready within 2 days of receiving the documents.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Is your client looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
-  brk_p='Every apartment already has photos, video and a description ready to send to your client. Open "Photos and details" on any apartment and send it to your client now. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
+  brk_p='Every apartment already has photos, video, a description and the monthly cost ready. Open "Photos and details", tap "Share" and send it to your client. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.',
   end_h='Does your client like one? Book the viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
@@ -591,7 +591,7 @@ def render(lang):
     <a href="#topo" class="brand">
       <img class="brand-logo" src="{R}images/logo.png" alt="Global Estadia" width="900" height="230">
     </a>
-    <nav class="top-nav" aria-label="{t['nav_label']}"><a href="#imoveis">{nav[0]}</a><a href="#duvidas">{nav[3]}</a><a href="#avaliacoes">{nav[2]}</a></nav>
+    <nav class="top-nav" aria-label="{t['nav_label']}"><a href="#imoveis">{nav[0]}</a><a href="#corretores">{nav[4]}</a><a href="#duvidas">{nav[3]}</a><a href="#avaliacoes">{nav[2]}</a></nav>
     {lang_switch}
     <a href="{general}" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">{wai()}{t['cta_short']}</a>
     <button type="button" class="menu-btn" aria-haspopup="dialog" aria-controls="menu">{MENU_I}<span>{t['menu']}</span></button>
@@ -607,10 +607,10 @@ def render(lang):
   <ul class="drawer-apts">{menu_apts}</ul>
   <p class="drawer-label">{t['menu_nav']}</p>
   <nav class="drawer-nav" aria-label="{t['nav_label']}">
+    <a href="#corretores">{nav[4]}</a>
     <a href="#como-funciona">{nav[1]}</a>
     <a href="#duvidas">{nav[3]}</a>
     <a href="#avaliacoes">{nav[2]}</a>
-    <a href="#corretores">{nav[4]}</a>
   </nav>
   <div class="drawer-foot">
     {lang_switch}
@@ -628,8 +628,8 @@ def render(lang):
     <h1>{lines(t['h1'])}</h1>
     <p class="lead">{lines(tx('lead'))}</p>
     <div class="hero-actions">
-      <a href="{general}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
-      <a href="#imoveis" class="btn btn-ghost btn-lg">{tx('see_all')}</a>
+      <a href="#imoveis" class="btn btn-primary btn-lg">{tx('see_all')}</a>
+      <a href="{general}" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
     </div>
     {att_html}
     <ul class="proof-row">{proof}</ul>
@@ -666,6 +666,23 @@ def render(lang):
     </div>
     <div class="grid" id="grid">
 {CARDS}
+    </div>
+  </div>
+</section>
+
+<section id="corretores" class="dark">
+  <div class="wrap brokers">
+    <div class="brokers-text">
+      <p class="eyebrow eyebrow-gold">{t['brk_eyebrow']}</p>
+      <h2>{t['brk_h']}</h2>
+      <p>{t['brk_p']}</p>
+    </div>
+    <div class="notice">
+      <h3>{t['brk_box']}</h3>
+      <p>{t['brk_send']}</p>
+      <ul class="chips">{chips}</ul>
+      <a href="{broker}" class="btn btn-primary btn-block" target="_blank" rel="noopener">{wai()}{t['brk_btn']}</a>
+      <p class="small">{t['brk_small']}</p>
     </div>
   </div>
 </section>
@@ -710,23 +727,6 @@ def render(lang):
 </section>
 
 {dep_html}
-
-<section id="corretores" class="dark">
-  <div class="wrap brokers">
-    <div class="brokers-text">
-      <p class="eyebrow eyebrow-gold">{t['brk_eyebrow']}</p>
-      <h2>{t['brk_h']}</h2>
-      <p>{t['brk_p']}</p>
-    </div>
-    <div class="notice">
-      <h3>{t['brk_box']}</h3>
-      <p>{t['brk_send']}</p>
-      <ul class="chips">{chips}</ul>
-      <a href="{broker}" class="btn btn-primary btn-block" target="_blank" rel="noopener">{wai()}{t['brk_btn']}</a>
-      <p class="small">{t['brk_small']}</p>
-    </div>
-  </div>
-</section>
 
 {AB_BAND}
 <section id="contato" class="cta-band">
@@ -891,9 +891,11 @@ document.querySelectorAll('dialog').forEach(function (d) {{
   els.forEach(function (e) {{ io.observe(e); }});
 }})();
 (function () {{
-  var cta = document.querySelector('.mobile-cta'), hero = document.querySelector('.hero-actions');
+  var cta = document.querySelector('.mobile-cta'), hero = document.querySelector('.hero-actions'), list = document.getElementById('imoveis');
   if (!cta || !hero || !('IntersectionObserver' in window)) {{ if (cta) cta.classList.add('show'); return; }}
-  new IntersectionObserver(function (e) {{ cta.classList.toggle('show', !e[0].isIntersecting); }}).observe(hero);
+  var vis = new Map();
+  var io = new IntersectionObserver(function (es) {{ es.forEach(function (e) {{ vis.set(e.target, e.isIntersecting); }}); cta.classList.toggle('show', !Array.from(vis.values()).some(Boolean)); }});
+  io.observe(hero); if (list) io.observe(list);
 }})();
 document.querySelectorAll('dialog.detail').forEach(function (d) {{ d.addEventListener('close', function () {{ if (location.hash === '#' + d.id.slice(2) && history.replaceState) history.replaceState(null, '', location.pathname + location.search); }}); }});
 openFromHash();
