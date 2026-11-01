@@ -461,7 +461,7 @@ def render(lang):
     </div>
     <div class="footer-id footer-right">
       <span>{t['foot_tag']}</span>
-      <a href="{general}" target="_blank" rel="noopener">WhatsApp {WA_SHOW}</a>
+      <a class="footer-wa" href="{general}" target="_blank" rel="noopener" aria-label="WhatsApp {WA_SHOW}">{wai(18)}{WA_SHOW}</a>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
     </div>
   </div>
