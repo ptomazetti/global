@@ -682,3 +682,12 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 dialog.detail .detail-body > .btn-primary { position: sticky; bottom: 16px; z-index: 3; box-shadow: 0 -12px 24px 6px #FFFFFF, 0 14px 28px -12px rgba(11,26,44,.6); }
 dialog.detail .detail-body > .btn-primary { bottom: 0; margin-bottom: 0; box-shadow: 0 0 0 14px #FFFFFF, 0 -26px 22px 6px rgba(255,255,255,.95); }
 dialog.detail .detail-body > .btn-primary + .detail-note { margin-top: 16px; }
+
+/* Share */
+.card-actions2 .share-btn { flex: 0 0 48px; padding: 0; }
+.detail-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-right: 48px; }
+.share-inline { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #FFFFFF; color: var(--ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; flex: 0 0 auto; }
+.share-inline:hover { border-color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: 90px; transform: translate(-50%, 20px); background: var(--navy-0); color: #FFFFFF; padding: 12px 20px; border-radius: 999px; font-weight: 700; font-size: 15px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; box-shadow: 0 14px 30px -12px rgba(0,0,0,.5); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+dialog.detail .detail-body > .btn-primary { box-shadow: 0 0 0 14px #FFFFFF, 0 40px 0 24px #FFFFFF, 0 -26px 22px 6px rgba(255,255,255,.95); }

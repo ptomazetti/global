@@ -194,7 +194,7 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
@@ -247,7 +247,7 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
@@ -290,6 +290,7 @@ AB_SVG = open('tools/icons/airbnb.svg').read().split('d="')[1].split('"')[0]
 def wai(sz=18): return f'<svg class="logo" width="{sz}" height="{sz}" viewBox="0 0 24 24" aria-hidden="true"><path d="{WA_SVG}"/></svg>'
 CAM = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>'
 PLAY = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>'
+SHARE = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>'
 DOC = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>'
 MENU_I = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
 EXPAND = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>'
@@ -367,6 +368,7 @@ def render(lang):
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
           <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{DOC}{t['l_desc']}</button>
+          <button type="button" class="btn btn-outline share-btn" data-id="{p['id']}" data-text="{t['share_txt'].format(name=p['name'], tag=p['tag'][lang], rent=money(p['rent'], lang, cents=False))}" aria-label="{t['share']}: {p['name']}">{SHARE}</button>
         </div>
       </div>
     </article>''')
@@ -401,7 +403,7 @@ def render(lang):
     <div class="thumbs">{thumbs}</div>
     </div>
     <div class="detail-body">
-      <p class="eyebrow">{p['name']}</p>
+      <div class="detail-top"><p class="eyebrow">{p['name']}</p><button type="button" class="share-btn share-inline" data-id="{p['id']}" data-text="{t['share_txt'].format(name=p['name'], tag=p['tag'][lang], rent=money(p['rent'], lang, cents=False))}">{SHARE}{t['share']}</button></div>
       <h2 id="dt-{p['id']}">{d['head']}</h2>
       <p class="detail-intro">{d['intro']}</p>
       <div class="detail-groups">{groups}</div>
@@ -735,6 +737,20 @@ document.querySelectorAll('dialog.detail').forEach(function (d) {{
     try {{ if (document.fullscreenElement) document.exitFullscreen(); else if (g.requestFullscreen) g.requestFullscreen().catch(function () {{ g.classList.toggle('big'); }}); else g.classList.toggle('big'); }} catch (e) {{ g.classList.toggle('big'); }}
   }});
 }});
+var toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast);
+function showToast(m) {{ toast.textContent = m; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(function () {{ toast.classList.remove('on'); }}, 2200); }}
+document.querySelectorAll('.share-btn').forEach(function (b) {{ b.addEventListener('click', function () {{
+  var url = location.href.split('#')[0] + '#' + b.dataset.id, text = b.dataset.text;
+  if (navigator.share) {{ navigator.share({{ title: document.title, text: text, url: url }}).catch(function () {{}}); return; }}
+  var done = function () {{ showToast('{t['share_ok']}'); }};
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, function () {{ window.prompt('', url); }});
+  else window.prompt('', url);
+}}); }});
+function openFromHash() {{
+  var id = location.hash.slice(1), d = id && document.getElementById('d-' + id);
+  if (d && d.showModal && !d.open) {{ var c = document.getElementById(id); if (c) c.scrollIntoView(); d.showModal(); document.body.classList.add('modal-open'); }}
+}}
+window.addEventListener('hashchange', openFromHash);
 var vd = document.getElementById('vid');
 document.querySelectorAll('.video-open').forEach(function (b) {{ b.addEventListener('click', function () {{
   var v = vd.querySelector('video'); v.src = b.dataset.video; vd.showModal(); document.body.classList.add('modal-open'); v.play().catch(function () {{}});
@@ -773,6 +789,8 @@ document.querySelectorAll('dialog').forEach(function (d) {{
   if (!cta || !hero || !('IntersectionObserver' in window)) {{ if (cta) cta.classList.add('show'); return; }}
   new IntersectionObserver(function (e) {{ cta.classList.toggle('show', !e[0].isIntersecting); }}).observe(hero);
 }})();
+document.querySelectorAll('dialog.detail').forEach(function (d) {{ d.addEventListener('close', function () {{ if (location.hash === '#' + d.id.slice(2) && history.replaceState) history.replaceState(null, '', location.pathname + location.search); }}); }});
+openFromHash();
 </script>
 </body>
 </html>
