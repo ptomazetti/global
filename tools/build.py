@@ -1,6 +1,7 @@
 from urllib.parse import quote
 WA='5515997470301'
 # ===== CONFIGURACAO: edite aqui e rode `python3 tools/build.py` =====
+SITE = 'https://globalestadia.com.br'
 ATUALIZADO = '1 de novembro de 2026'   # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = ''                         # link do perfil Global Flats no Airbnb
 ATENDENTE = {}                          # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
@@ -94,7 +95,7 @@ if ATENDENTE:
 faq_extra=''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ_EXTRA)
 airbnb_txt=f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">Global Flats no Airbnb</a>' if AIRBNB_URL else 'Global Flats no Airbnb'
 LD={"@context":"https://schema.org","@type":"ItemList","name":"Apartamentos mobiliados para locação","itemListElement":[
- {"@type":"ListItem","position":i+1,"item":{"@type":"Offer","name":f"{p['name']} · {p['tag']}","priceCurrency":"BRL","price":f"{p['rent']:.2f}","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Global Consultancy Partners Ltda","taxID":"50.945.139/0001-86","telephone":"+5515997470301"}}} for i,p in enumerate(P)]}
+ {"@type":"ListItem","position":i+1,"item":{"@type":"Offer","name":f"{p['name']} · {p['tag']}","priceCurrency":"BRL","price":f"{p['rent']:.2f}","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Global Consultancy Partners Ltda","url":SITE,"taxID":"50.945.139/0001-86","telephone":"+5515997470301"}}} for i,p in enumerate(P)]}
 LDJ=json.dumps(LD,ensure_ascii=False)
 html=f'''<!doctype html>
 <html lang="pt-BR">
@@ -107,6 +108,13 @@ html=f'''<!doctype html>
 <meta property="og:title" content="Apartamentos mobiliados em Sorocaba, prontos para morar">
 <meta property="og:description" content="{N} apartamentos disponíveis, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="{SITE}/">
+<meta property="og:image" content="{SITE}/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sala mobiliada de um dos apartamentos da Global">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{SITE}/">
 <link rel="icon" href="{FAV}">
 <link rel="preload" as="image" href="images/hero-sala.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
