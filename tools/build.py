@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import json, os
+import json, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -351,6 +351,9 @@ def vpill(p, t, R=''):
     # Local file in videos/<id>.mp4 plays inside the site; otherwise fall back to the Drive folder.
     if os.path.exists(os.path.join(ROOT, 'videos', p['id'] + '.mp4')):
         return f'<button type="button" class="media-pill video-open" data-video="{R}videos/{p["id"]}.mp4">{PLAY}{t["video_btn"]}</button>'
+    m = re.search(r'/file/d/([^/]+)', p['v'])
+    if m:  # public Drive file: play it in the Drive player inside the site
+        return f'<a class="media-pill video-drive" href="{p["v"]}" data-drive="{m.group(1)}" target="_blank" rel="noopener">{PLAY}{t["video_btn"]}</a>'
     return f'<a class="media-pill" href="{p["v"]}" target="_blank" rel="noopener">{PLAY}{t["video_btn"]}</a>'
 
 
@@ -753,6 +756,7 @@ def render(lang):
 <dialog class="vid" id="vid" aria-label="{t['l_video']}">
   <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
   <video controls playsinline preload="none"></video>
+  <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
 </dialog>
 
 <a href="{general}" class="mobile-cta" target="_blank" rel="noopener">{wai(20)}{t['cta_short']}</a>
@@ -828,7 +832,15 @@ var vd = document.getElementById('vid');
 document.querySelectorAll('.video-open').forEach(function (b) {{ b.addEventListener('click', function () {{
   var v = vd.querySelector('video'); v.src = b.dataset.video; vd.showModal(); document.body.classList.add('modal-open'); v.play().catch(function () {{}});
 }}); }});
-vd.addEventListener('close', function () {{ var v = vd.querySelector('video'); v.pause(); v.removeAttribute('src'); v.load(); }});
+var vf = vd.querySelector('.vid-frame'), vv = vd.querySelector('video');
+var inFrame = false; try {{ inFrame = window.self !== window.top; }} catch (e) {{ inFrame = true; }}
+document.querySelectorAll('.video-drive').forEach(function (a) {{ a.addEventListener('click', function (e) {{
+  if (inFrame) return;  /* previews inside other sites cannot embed Drive: open the video in a new tab */
+  e.preventDefault(); vv.hidden = true; vf.hidden = false;
+  vf.src = 'https://drive.google.com/file/d/' + a.dataset.drive + '/preview';
+  vd.classList.add('is-frame'); vd.showModal(); document.body.classList.add('modal-open');
+}}); }});
+vd.addEventListener('close', function () {{ vv.pause(); vv.removeAttribute('src'); vv.load(); vf.removeAttribute('src'); vf.hidden = true; vv.hidden = false; vd.classList.remove('is-frame'); }});
 document.querySelectorAll('.detail-open[data-fs]').forEach(function (b) {{ b.addEventListener('click', function () {{
   var d = document.getElementById(b.dataset.dialog), g = d && d.querySelector('.detail-gallery'); if (g && window.matchMedia('(min-width: 900px)').matches) g.scrollIntoView({{ block: 'nearest' }});
 }}); }});

@@ -707,3 +707,7 @@ dialog.detail .detail-gallery { background: #0B1A2C; }
 dialog.detail .slide img { object-fit: contain; background: #0B1A2C; }
 dialog.detail .thumbs { overflow-x: auto; scrollbar-width: thin; }
 dialog.detail .thumb { flex: 0 0 auto; }
+dialog.vid .vid-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+dialog.vid.is-frame { width: min(1000px, 94vw); }
+@media (max-width: 640px) { dialog.vid .vid-frame { aspect-ratio: 9 / 16; max-height: 80dvh; } }
+dialog.vid .vid-frame[hidden], dialog.vid video[hidden] { display: none; }
