@@ -194,7 +194,7 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', share='Compartilhar', share_ok='Link copiado', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
@@ -247,7 +247,7 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', share='Share', share_ok='Link copied', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
@@ -334,7 +334,8 @@ def render(lang):
     general = wa(t['wa_general'])
     broker = wa(t['wa_broker'])
     walink = f'<a href="{general}" target="_blank" rel="noopener">WhatsApp</a>'
-    maillink = f'<a href="mailto:{EMAIL}">{EMAIL}</a>'
+    mailhref = f'mailto:{EMAIL}?subject=' + quote(t['mail_subj'])
+    maillink = f'<a href="{mailhref}" target="_blank" rel="noopener">{EMAIL}</a>'
 
     cards = []
     for p in P:
@@ -558,7 +559,7 @@ def render(lang):
   <div class="drawer-foot">
     {lang_switch}
     <a href="{general}" class="btn btn-primary btn-block" target="_blank" rel="noopener">{wai()}{t['cta_long']}</a>
-    <a class="drawer-mail" href="mailto:{EMAIL}">{EMAIL}</a>
+    <a class="drawer-mail" href="{mailhref}" target="_blank" rel="noopener">{EMAIL}</a>
   </div>
 </dialog>
 
@@ -693,7 +694,7 @@ def render(lang):
     <div class="footer-id footer-right">
       <span>{t['foot_tag']}</span>
       <a class="footer-wa" href="{general}" target="_blank" rel="noopener">{wai(18)}{t['foot_wa']}</a>
-      <a href="mailto:{EMAIL}">{EMAIL}</a>
+      <a href="{mailhref}" target="_blank" rel="noopener">{EMAIL}</a>
     </div>
   </div>
 </footer>
@@ -706,7 +707,7 @@ def render(lang):
   <div class="share-opts">
     <a class="share-opt share-wa" href="#" target="_blank" rel="noopener">{wai(20)}WhatsApp</a>
     <button type="button" class="share-opt share-copy"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>{t['share_copy']}</button>
-    <a class="share-opt share-mail" href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>{t['share_mail']}</a>
+    <a class="share-opt share-mail" href="#" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>{t['share_mail']}</a>
   </div>
   <input class="share-url" type="text" readonly aria-label="Link">
 </dialog>
@@ -749,6 +750,10 @@ document.querySelectorAll('dialog.detail').forEach(function (d) {{
 }});
 var toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast);
 function showToast(m) {{ (document.querySelector('dialog[open]') || document.body).appendChild(toast); toast.textContent = m; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(function () {{ toast.classList.remove('on'); }}, 2200); }}
+document.querySelectorAll('a[href^="mailto:{EMAIL}"]').forEach(function (a) {{ a.addEventListener('click', function () {{
+  var done = function () {{ showToast('{t['mail_ok']}{EMAIL}'); }};
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText('{EMAIL}').then(done, function () {{}});
+}}); }});
 var sheet = document.getElementById('share'), surl = sheet.querySelector('.share-url');
 var canon = (document.querySelector('link[rel=canonical]') || {{}}).href || location.href.split('#')[0];
 function copyLink() {{
