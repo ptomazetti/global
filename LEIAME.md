@@ -20,3 +20,8 @@ Copie um bloco da lista `P`, troque nome, valores e links do Drive, e coloque as
 
 ## Textos em dois idiomas
 Cada texto tem a versão `pt` e `en`. Ao trocar um texto ou adicionar um apartamento, preencha os dois idiomas. A data em `ATUALIZADO` também tem as duas versões.
+
+## Vídeos dentro do site
+Coloque o arquivo em `videos/<id>.mp4` (ex.: `videos/vida-plena-c65.mp4`) e rode `python3 -I tools/build.py`.
+O botão "Ver vídeo" passa a tocar o vídeo no próprio site, sem abrir o Google Drive.
+Use MP4 (H.264), até uns 20 MB por vídeo.

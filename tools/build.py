@@ -3,6 +3,7 @@ Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
 import json, os
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ===== CONFIGURACAO: edite aqui =====================================
 SITE = 'https://globalestadia.com.br'
@@ -31,7 +32,7 @@ FAQ_EXTRA = [     # (pergunta, resposta) em cada idioma
 # ====================================================================
 
 P = [
- dict(id='spettacolo-42', name='Spettacolo Patriani', rent=3490, condo=615.09, iptu=56.30,
+ dict(id='spettacolo-42', beds=0, name='Spettacolo Patriani', rent=3490, condo=615.09, iptu=56.30,
   tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
   meta={'pt': 'Apto. 42 · 76 m² de área total', 'en': 'Apt. 42 · 76 m² total area'},
   perks={'pt': ['2 garagens cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
@@ -41,7 +42,7 @@ P = [
   f='https://drive.google.com/drive/folders/1q39K2Jp_P_wErO56gb_jWGZT09iCpRCm?usp=sharing',
   v='https://drive.google.com/drive/folders/1lPg1uhrh6_9gQgG7jaKDxVGTWJAIPtrx?usp=drive_link',
   d='https://drive.google.com/file/d/1akjtOVeacGJNRz2Ihp5uc-KQfwCBWlxQ/view?usp=drive_link'),
- dict(id='alpha-club-j42', name='Alpha Club J42', rent=2890, condo=464.19, iptu=158.00,
+ dict(id='alpha-club-j42', beds=2, name='Alpha Club J42', rent=2890, condo=464.19, iptu=158.00,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 42 · Bloco J · Campolim', 'en': 'Apt. 42 · Block J · Campolim'},
   perks={'pt': ['Ar-condicionado 12.000 BTUs na suíte', 'Cama box Queen, Smart TV, cortina blackout', 'Varanda gourmet, condomínio clube'],
@@ -51,7 +52,7 @@ P = [
   f='https://drive.google.com/drive/folders/1bPidYHmKlhAE6bBfmmKMkpROLZA144Wz?usp=drive_link',
   v='https://drive.google.com/drive/folders/1Aj7hwWm6NFKFlbf-Cg_wN6XHlmL7M8kM?usp=drive_link',
   d='https://drive.google.com/file/d/1W3QlSmMlkzd-SnY9_mjDsCZN_WANdPRY/view?usp=sharing'),
- dict(id='esplanada-102', name='Residencial Esplanada', rent=2890, condo=500.00, iptu=105.33,
+ dict(id='esplanada-102', beds=3, name='Residencial Esplanada', rent=2890, condo=500.00, iptu=105.33,
   tag={'pt': '3 dormitórios', 'en': '3 bedrooms'},
   meta={'pt': 'Apto. 102 · Bloco 2', 'en': 'Apt. 102 · Block 2'},
   perks={'pt': ['Cozinha equipada, geladeira 440 L, cooktop e forno', 'Máquina lava e seca, ar-condicionado na sala', '1 vaga, condomínio clube'],
@@ -61,7 +62,7 @@ P = [
   f='https://drive.google.com/drive/folders/1A19Eb5ZPVLWmBcxqc6R4a2GPwvbjgVFB?usp=drive_link',
   v='https://drive.google.com/drive/folders/19i1YFcf9KCxrye3UG8FQDM-IXv_1g_qE?usp=drive_link',
   d='https://drive.google.com/file/d/19NxWZqBZ20AZ7AQVyDnz_o85rwfdnqPo/view?usp=sharing'),
- dict(id='alpha-club-i41', name='Alpha Club I41', rent=2790, condo=497.77, iptu=158.12,
+ dict(id='alpha-club-i41', beds=2, name='Alpha Club I41', rent=2790, condo=497.77, iptu=158.12,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 41 · Bloco I · Campolim', 'en': 'Apt. 41 · Block I · Campolim'},
   perks={'pt': ['Dois quartos com cama box de casal', 'Mesa de jantar para 4 lugares', 'Varanda gourmet, 1 vaga, condomínio clube'],
@@ -71,7 +72,7 @@ P = [
   f='https://drive.google.com/drive/folders/1UxoTaZttGauF5RwCaPovwjylUFDpiMxK?usp=drive_link',
   v='https://drive.google.com/drive/folders/1ZqcbXnrIE4xuA2ob8gaRtECV8nynp88b?usp=drive_link',
   d='https://drive.google.com/file/d/1PBosWcqSD6zJ6Efxw_TIPX-IsAMZ3zzL/view?usp=drive_link'),
- dict(id='vida-plena-c65', name='Vida Plena C65', rent=2790, condo=406.42, iptu=61.84,
+ dict(id='vida-plena-c65', beds=2, name='Vida Plena C65', rent=2790, condo=406.42, iptu=61.84,
   tag={'pt': '2 dormitórios', 'en': '2 bedrooms'},
   meta={'pt': 'Apto. 65 · Bloco C · Campolim', 'en': 'Apt. 65 · Block C · Campolim'},
   perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', 'Condomínio com lazer completo'],
@@ -175,6 +176,11 @@ T = {
   hero_alt='Sala mobiliada do Spettacolo Patriani com sofá, poltronas e tapete',
   badge='disponíveis hoje', updated='Lista atualizada em {DATE}',
   agent='Quem responde no WhatsApp:',
+  stats=[('{N}', 'apartamentos disponíveis'), ('{MIN}', 'aluguel a partir de'), ('2 dias', 'para pegar as chaves'), ('Pets', 'são bem-vindos')],
+  filters=['Todos', 'Studio', '2 dormitórios', '3 dormitórios'], sort_label='Ordenar', sort_opts=['Maior preço', 'Menor preço'],
+  amen_eyebrow='Lazer', amen_h='Mais do que um apartamento', amen_p='Piscina, academia, SPA e áreas de convivência nos condomínios. Tudo a poucos passos da sua porta.',
+  amen_tiles=[('alpha-club-i41-4', 'Piscina', 'Alpha Club'), ('alpha-club-i41-3', 'Academia', 'Alpha Club'), ('spettacolo-42-4', 'SPA com hidromassagem', 'Spettacolo Patriani')],
+  list_eyebrow='Disponíveis agora',
   list_h='Escolha o seu e marque a visita',
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
@@ -226,6 +232,11 @@ T = {
   hero_alt='Furnished living room at Spettacolo Patriani with sofa, armchairs and rug',
   badge='available today', updated='List updated {DATE}',
   agent='Your contact on WhatsApp:',
+  stats=[('{N}', 'apartments available'), ('{MIN}', 'rent from'), ('2 days', 'to get your keys'), ('Pets', 'are welcome')],
+  filters=['All', 'Studio', '2 bedrooms', '3 bedrooms'], sort_label='Sort', sort_opts=['Highest price', 'Lowest price'],
+  amen_eyebrow='Leisure', amen_h='More than an apartment', amen_p='Pools, gyms, spa and shared spaces in the buildings. All just steps from your door.',
+  amen_tiles=[('alpha-club-i41-4', 'Pool', 'Alpha Club'), ('alpha-club-i41-3', 'Gym', 'Alpha Club'), ('spettacolo-42-4', 'Spa with hot tub', 'Spettacolo Patriani')],
+  list_eyebrow='Available now',
   list_h='Choose yours and book a viewing',
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
@@ -296,6 +307,13 @@ FAV = "data:image/svg+xml," + quote('<svg xmlns="http://www.w3.org/2000/svg" vie
 
 N = len(P)
 
+def vpill(p, t, R=''):
+    # Local file in videos/<id>.mp4 plays inside the site; otherwise fall back to the Drive folder.
+    if os.path.exists(os.path.join(ROOT, 'videos', p['id'] + '.mp4')):
+        return f'<button type="button" class="media-pill video-open" data-video="{R}videos/{p["id"]}.mp4">{PLAY}{t["video_btn"]}</button>'
+    return f'<a class="media-pill" href="{p["v"]}" target="_blank" rel="noopener">{PLAY}{t["video_btn"]}</a>'
+
+
 def render(lang):
     t = T[lang]
     R = '' if lang == 'pt' else '../'   # prefixo para arquivos
@@ -317,11 +335,11 @@ def render(lang):
             f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
             f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
             for i, a in enumerate(alts))
-        cards.append(f'''    <article class="card" id="{p['id']}">
+        cards.append(f'''    <article class="card reveal" id="{p['id']}" data-beds="{p['beds']}" data-rent="{p['rent']}">
       <div class="card-media gallery">
         <div class="gallery-track" tabindex="0" aria-label="{t['photos_of'].format(name=p['name'])}">{slides}</div>
         <span class="tag">{p['tag'][lang]}</span>
-        <a class="media-pill" href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
+        {vpill(p, t, R)}
         <span class="gallery-count" aria-hidden="true">1 / {n}</span>
         <button class="gallery-btn prev" type="button" aria-label="{t['prev']}">‹</button>
         <button class="gallery-btn next" type="button" aria-label="{t['next']}">›</button>
@@ -340,7 +358,7 @@ def render(lang):
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
           <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{DOC}{t['l_desc']}</button>
-          <a class="btn btn-soft" href="{p['f']}" target="_blank" rel="noopener">{CAM}{t['all_photos']}</a>
+          <button type="button" class="btn btn-soft detail-open" data-dialog="d-{p['id']}" data-fs="1">{CAM}{t['all_photos']}</button>
         </div>
       </div>
     </article>''')
@@ -366,7 +384,7 @@ def render(lang):
     <div class="card-media gallery detail-gallery">
       <div class="gallery-track" tabindex="0" aria-label="{t['photos_of'].format(name=p['name'])}">{slides}</div>
       <span class="tag">{p['tag'][lang]}</span>
-      <a class="media-pill" href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
+      {vpill(p, t, R)}
       <button type="button" class="fs-btn" aria-label="{t['fullscreen']}" title="{t['fullscreen']}">{EXPAND}</button>
       <span class="gallery-count" aria-hidden="true">1 / {n}</span>
       <button class="gallery-btn prev" type="button" aria-label="{t['prev']}">‹</button>
@@ -391,11 +409,6 @@ def render(lang):
       </div>
       <a class="btn btn-primary btn-block btn-lg" href="{msg}" target="_blank" rel="noopener">{wai(20)}{t['visit_this']}</a>
       <p class="detail-note">{t['d_note']}</p>
-      <div class="card-links">
-        <a href="{p['f']}" target="_blank" rel="noopener">{CAM}{t['all_photos']}</a>
-        <a href="{p['v']}" target="_blank" rel="noopener">{PLAY}{t['video_btn']}</a>
-        <a href="{p['d']}" target="_blank" rel="noopener">{DOC}{t['d_full']}</a>
-      </div>
     </div>
   </div>
 </dialog>''')
@@ -436,6 +449,10 @@ def render(lang):
     cmp_b = ''.join(f'<li>{x}</li>' for x in t['cmp_b_list'])
     chips = ''.join(f'<li>{x}</li>' for x in t['brk_chips'])
     nav = t['nav']
+    stats = ''.join(f'<div class="stat"><strong>{a.format(**fmt)}</strong><span>{b}</span></div>' for a, b in t['stats'])
+    fvals = ['all', '0', '2', '3']
+    filters = ''.join(f'<button type="button" class="chip{" on" if v == "all" else ""}" data-f="{v}" aria-pressed="{"true" if v == "all" else "false"}">{lab}</button>' for v, lab in zip(fvals, t['filters']) if v == 'all' or any(str(p['beds']) == v for p in P))
+    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/g/{im}.webp" type="image/webp"><img src="{R}images/g/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in t['amen_tiles'])
 
     url = SITE + ('/' if lang == 'pt' else '/en/')
     pt_href = R + 'index.html' if lang == 'en' else '#topo'
@@ -477,7 +494,7 @@ def render(lang):
 <link rel="preload" as="image" href="{R}images/hero-sala.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="{R}styles.css">
 <script type="application/ld+json">{LDJ}</script>
 </head>
@@ -518,20 +535,23 @@ def render(lang):
 
 <main>
 
-<section id="topo" class="wrap hero">
+<section id="topo" class="hero-wrap">
+  <div class="wrap hero">
   <div class="hero-text">
-    <p class="eyebrow">{t['eyebrow']}</p>
+    <p class="eyebrow eyebrow-gold">{t['eyebrow']}</p>
     <h1>{t['h1']}</h1>
     <p class="lead">{tx('lead')}</p>
     <div class="hero-actions">
       <a href="{general}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
-      <a href="#imoveis" class="btn btn-outline btn-lg">{tx('see_all')}</a>
+      <a href="#imoveis" class="btn btn-ghost btn-lg">{tx('see_all')}</a>
     </div>
     {att_html}
     <ul class="proof-row">{proof}</ul>
   </div>
-  <div class="hero-media">
-    <picture><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
+  <div class="hero-collage">
+    <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
+    <picture class="hc-a"><source srcset="{R}images/g/alpha-club-i41-4.webp" type="image/webp"><img src="{R}images/g/alpha-club-i41-4.jpg" alt="{t['amen_tiles'][0][1]} · Alpha Club" width="760" height="570"></picture>
+    <picture class="hc-b"><source srcset="{R}images/g/spettacolo-42-4.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-4.jpg" alt="{t['amen_tiles'][2][1]} · Spettacolo Patriani" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>
@@ -540,17 +560,39 @@ def render(lang):
       </div>
     </div>
   </div>
+  </div>
+  <div class="wrap stats">{stats}</div>
 </section>
 
 <section id="imoveis" class="band">
   <div class="wrap listings">
-    <div class="section-head">
-      <h2>{t['list_h']}</h2>
-      <p>{t['list_p']}</p>
+    <div class="list-top">
+      <div class="section-head">
+        <p class="eyebrow">{t['list_eyebrow']}</p>
+        <h2>{t['list_h']}</h2>
+        <p>{t['list_p']}</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtro">
+        <div class="chipset">{filters}</div>
+        <label class="sort">{t['sort_label']}
+          <select id="sort"><option value="desc">{t['sort_opts'][0]}</option><option value="asc">{t['sort_opts'][1]}</option></select>
+        </label>
+      </div>
     </div>
-    <div class="grid">
+    <div class="grid" id="grid">
 {CARDS}
     </div>
+  </div>
+</section>
+
+<section id="lazer" class="amen-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow-gold">{t['amen_eyebrow']}</p>
+      <h2>{t['amen_h']}</h2>
+      <p>{t['amen_p']}</p>
+    </div>
+    <div class="amen-grid">{amen_tiles}</div>
   </div>
 </section>
 
@@ -558,7 +600,7 @@ def render(lang):
   <div class="section-head">
     <h2>{t['steps_h']}</h2>
   </div>
-  <ol class="steps">{steps}
+  <ol class="steps reveal">{steps}
   </ol>
   <div class="compare">
     <div class="compare-col">
@@ -601,10 +643,13 @@ def render(lang):
   </div>
 </section>
 
-<section id="contato" class="wrap contact">
-  <h2>{t['end_h']}</h2>
-  <p>{t['end_p']}</p>
-  <a href="{general}" class="btn btn-primary btn-xl" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
+<section id="contato" class="cta-band">
+  <picture class="cta-bg"><source srcset="{R}images/cta-bg.webp" type="image/webp"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
+  <div class="wrap contact reveal">
+    <h2>{t['end_h']}</h2>
+    <p>{t['end_p']}</p>
+    <a href="{general}" class="btn btn-primary btn-xl" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
+  </div>
 </section>
 
 </main>
@@ -624,6 +669,10 @@ def render(lang):
 </footer>
 
 {DIALOGS}
+<dialog class="vid" id="vid" aria-label="{t['l_video']}">
+  <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
+  <video controls playsinline preload="none"></video>
+</dialog>
 
 <a href="{general}" class="mobile-cta" target="_blank" rel="noopener">{wai(20)}{t['cta_short']}</a>
 
@@ -657,11 +706,39 @@ document.querySelectorAll('dialog.detail').forEach(function (d) {{
     try {{ if (document.fullscreenElement) document.exitFullscreen(); else if (g.requestFullscreen) g.requestFullscreen().catch(function () {{ g.classList.toggle('big'); }}); else g.classList.toggle('big'); }} catch (e) {{ g.classList.toggle('big'); }}
   }});
 }});
+var vd = document.getElementById('vid');
+document.querySelectorAll('.video-open').forEach(function (b) {{ b.addEventListener('click', function () {{
+  var v = vd.querySelector('video'); v.src = b.dataset.video; vd.showModal(); document.body.classList.add('modal-open'); v.play().catch(function () {{}});
+}}); }});
+vd.addEventListener('close', function () {{ var v = vd.querySelector('video'); v.pause(); v.removeAttribute('src'); v.load(); }});
+document.querySelectorAll('.detail-open[data-fs]').forEach(function (b) {{ b.addEventListener('click', function () {{
+  var d = document.getElementById(b.dataset.dialog), g = d && d.querySelector('.detail-gallery'); if (g && window.matchMedia('(min-width: 900px)').matches) g.scrollIntoView({{ block: 'nearest' }});
+}}); }});
 document.querySelectorAll('dialog').forEach(function (d) {{
   var c = d.querySelector('.detail-close'); if (c) c.addEventListener('click', function () {{ d.close(); }});
   d.addEventListener('click', function (e) {{ if (e.target === d) d.close(); }});
   d.addEventListener('close', function () {{ if (!document.querySelector('dialog[open]')) document.body.classList.remove('modal-open'); }});
 }});
+(function () {{
+  var grid = document.getElementById('grid'); if (!grid) return;
+  var chips = document.querySelectorAll('.chip'), sel = document.getElementById('sort');
+  chips.forEach(function (c) {{ c.addEventListener('click', function () {{
+    chips.forEach(function (x) {{ x.classList.toggle('on', x === c); x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); }});
+    grid.querySelectorAll('.card').forEach(function (card) {{ card.hidden = !(c.dataset.f === 'all' || card.dataset.beds === c.dataset.f); }});
+  }}); }});
+  sel.addEventListener('change', function () {{
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.card'));
+    cards.sort(function (a, b) {{ return sel.value === 'asc' ? a.dataset.rent - b.dataset.rent : b.dataset.rent - a.dataset.rent; }});
+    cards.forEach(function (c) {{ grid.appendChild(c); }});
+  }});
+}})();
+(function () {{
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {{ els.forEach(function (e) {{ e.classList.add('in'); }}); return; }}
+  document.documentElement.classList.add('js-reveal');
+  var io = new IntersectionObserver(function (es) {{ es.forEach(function (e) {{ if (e.isIntersecting) {{ e.target.classList.add('in'); io.unobserve(e.target); }} }}); }}, {{ rootMargin: '0px 0px -8% 0px' }});
+  els.forEach(function (e) {{ io.observe(e); }});
+}})();
 (function () {{
   var cta = document.querySelector('.mobile-cta'), hero = document.querySelector('.hero-actions');
   if (!cta || !hero || !('IntersectionObserver' in window)) {{ if (cta) cta.classList.add('show'); return; }}
