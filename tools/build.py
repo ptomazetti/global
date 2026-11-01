@@ -2,6 +2,7 @@ from urllib.parse import quote
 WA='5515997470301'
 # ===== CONFIGURACAO: edite aqui e rode `python3 tools/build.py` =====
 SITE = 'https://globalestadia.com.br'
+EMAIL = 'contato@globalestadia.com.br'
 ATUALIZADO = '1 de novembro de 2026'   # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = ''                         # link do perfil Global Flats no Airbnb
 ATENDENTE = {}                          # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
@@ -95,7 +96,7 @@ if ATENDENTE:
 faq_extra=''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ_EXTRA)
 airbnb_txt=f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">Global Flats no Airbnb</a>' if AIRBNB_URL else 'Global Flats no Airbnb'
 LD={"@context":"https://schema.org","@type":"ItemList","name":"Apartamentos mobiliados para locação","itemListElement":[
- {"@type":"ListItem","position":i+1,"item":{"@type":"Offer","name":f"{p['name']} · {p['tag']}","priceCurrency":"BRL","price":f"{p['rent']:.2f}","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Global Consultancy Partners Ltda","url":SITE,"taxID":"50.945.139/0001-86","telephone":"+5515997470301"}}} for i,p in enumerate(P)]}
+ {"@type":"ListItem","position":i+1,"item":{"@type":"Offer","name":f"{p['name']} · {p['tag']}","priceCurrency":"BRL","price":f"{p['rent']:.2f}","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Global Consultancy Partners Ltda","url":SITE,"email":EMAIL,"taxID":"50.945.139/0001-86","telephone":"+5515997470301"}}} for i,p in enumerate(P)]}
 LDJ=json.dumps(LD,ensure_ascii=False)
 html=f'''<!doctype html>
 <html lang="pt-BR">
@@ -252,7 +253,7 @@ html=f'''<!doctype html>
       </details>
       <details>
         <summary>Como agendo uma visita?</summary>
-        <p>Pelo WhatsApp <a href="{general}" target="_blank" rel="noopener">+55 (15) 99747-0301</a>. Diga qual apartamento e o melhor dia e horário para você.</p>
+        <p>Pelo WhatsApp <a href="{general}" target="_blank" rel="noopener">+55 (15) 99747-0301</a>. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       </details>
       <details>
         <summary>Preciso de uma estadia curta. Vocês têm?</summary>
@@ -300,6 +301,7 @@ html=f'''<!doctype html>
     <div class="footer-id footer-right">
       <span>Locação de apartamentos mobiliados · Sorocaba</span>
       <a href="{general}" target="_blank" rel="noopener">WhatsApp +55 (15) 99747-0301</a>
+      <a href="mailto:{EMAIL}">{EMAIL}</a>
     </div>
   </div>
 </footer>
