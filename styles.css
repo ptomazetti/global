@@ -538,3 +538,14 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
   .stat span { font-size: 11.5px; letter-spacing: .06em; }
 }
 .site-footer .footer-wa, .site-footer a[href^="mailto"] { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* CTAs: navy, not green. WhatsApp shown only as a minimal line icon */
+.btn-primary, .mobile-cta { background: var(--navy-1); color: #FFFFFF; box-shadow: 0 12px 26px -14px rgba(11,26,44,.7); }
+.btn-primary:hover { background: var(--navy-0); color: #FFFFFF; box-shadow: 0 16px 30px -14px rgba(11,26,44,.8); }
+.btn-primary svg.logo, .mobile-cta svg.logo { color: var(--gold-soft); }
+.hero-wrap .btn-primary, .dark .btn-primary, .cta-band .btn-primary, .amen-section .btn-primary { background: #FFFFFF; color: var(--navy-0); box-shadow: 0 14px 30px -14px rgba(0,0,0,.6); }
+.hero-wrap .btn-primary:hover, .dark .btn-primary:hover, .cta-band .btn-primary:hover { background: var(--gold-soft); color: var(--navy-0); }
+.hero-wrap .btn-primary svg.logo, .dark .btn-primary svg.logo, .cta-band .btn-primary svg.logo { color: var(--navy-0); }
+.dark .notice .btn-primary { background: var(--navy-1); color: #FFFFFF; }
+.dark .notice .btn-primary:hover { background: var(--navy-0); color: #FFFFFF; }
+.dark .notice .btn-primary svg.logo { color: var(--gold-soft); }
