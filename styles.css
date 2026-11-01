@@ -194,3 +194,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
   .compare-col, .steps li { padding: 22px; }
 }
 .footer-id a { display: inline-block; padding: 8px 0; }
+.agent { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--text); }
+.agent img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.quotes-section { padding-top: 80px; padding-bottom: 80px; display: flex; flex-direction: column; gap: 28px; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.quote { margin: 0; border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.quote blockquote { margin: 0; font-size: 17px; }
+.quote figcaption { font-size: 14px; font-weight: 700; color: var(--muted); }

@@ -1,5 +1,13 @@
 from urllib.parse import quote
 WA='5515997470301'
+# ===== CONFIGURACAO: edite aqui e rode `python3 tools/build.py` =====
+ATUALIZADO = '1 de novembro de 2026'   # mude sempre que um imovel entrar ou sair
+AIRBNB_URL = ''                         # link do perfil Global Flats no Airbnb
+ATENDENTE = {}                          # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
+DEPOIMENTOS = []                        # ex.: [{'texto': '...', 'nome': 'Ana', 'imovel': 'Alpha Club'}]
+FAQ_EXTRA = []                          # ex.: [('Aceita pet?', 'Sim, ...')]
+# ====================================================================
+
 def wa(msg): return f'https://wa.me/{WA}?text={quote(msg)}'
 def brl(v):
     s=f'{v:,.2f}'.replace(',','X').replace('.',',').replace('X','.')
@@ -74,6 +82,17 @@ for p in P:
 CARDS='\n\n'.join(cards)
 FAV="data:image/svg+xml,"+quote('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#1D5C46"/><text x="16" y="22" font-family="Arial" font-weight="700" font-size="17" fill="#fff" text-anchor="middle">G</text></svg>')
 import json
+N=len(P); MIN=brl(min(p['rent'] for p in P)).replace(',00','')
+dep_html=''
+if DEPOIMENTOS:
+    items=''.join(f'<figure class="quote"><blockquote>“{d["texto"]}”</blockquote><figcaption>{d["nome"]} · {d["imovel"]}</figcaption></figure>' for d in DEPOIMENTOS)
+    dep_html=f'<section id="depoimentos" class="wrap quotes-section"><div class="section-head"><h2>Quem já mora</h2></div><div class="quotes">{items}</div></section>'
+att_html=''
+if ATENDENTE:
+    foto=f'<img src="{ATENDENTE["foto"]}" alt="{ATENDENTE["nome"]}" width="56" height="56">' if ATENDENTE.get('foto') else ''
+    att_html=f'<div class="agent">{foto}<span>Quem responde no WhatsApp: <strong>{ATENDENTE["nome"]}</strong></span></div>'
+faq_extra=''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ_EXTRA)
+airbnb_txt=f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">Global Flats no Airbnb</a>' if AIRBNB_URL else 'Global Flats no Airbnb'
 LD={"@context":"https://schema.org","@type":"ItemList","name":"Apartamentos mobiliados para locação","itemListElement":[
  {"@type":"ListItem","position":i+1,"item":{"@type":"Offer","name":f"{p['name']} · {p['tag']}","priceCurrency":"BRL","price":f"{p['rent']:.2f}","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Global Consultancy Partners Ltda","taxID":"50.945.139/0001-86","telephone":"+5515997470301"}}} for i,p in enumerate(P)]}
 LDJ=json.dumps(LD,ensure_ascii=False)
@@ -82,11 +101,11 @@ html=f'''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Apartamentos mobiliados em Sorocaba a partir de R$ 2.790 | Global</title>
-<meta name="description" content="5 apartamentos mobiliados prontos para morar em Sorocaba, de studio a 3 dormitórios. Aluguel a partir de R$ 2.790. Agende sua visita pelo WhatsApp.">
+<title>Apartamentos mobiliados em Sorocaba a partir de {MIN} | Global</title>
+<meta name="description" content="{N} apartamentos mobiliados prontos para morar em Sorocaba, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Apartamentos mobiliados em Sorocaba, prontos para morar">
-<meta property="og:description" content="5 apartamentos disponíveis, de studio a 3 dormitórios. Aluguel a partir de R$ 2.790. Agende sua visita pelo WhatsApp.">
+<meta property="og:description" content="{N} apartamentos disponíveis, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" href="{FAV}">
 <link rel="preload" as="image" href="images/hero-sala.webp" type="image/webp">
@@ -120,11 +139,12 @@ html=f'''<!doctype html>
   <div class="hero-text">
     <p class="eyebrow">Locação mobiliada em Sorocaba</p>
     <h1>Apartamento mobiliado. Você só traz a mala.</h1>
-    <p class="lead">5 apartamentos prontos para morar, de studio a 3 dormitórios, em condomínios com lazer. Aluguel a partir de R$ 2.790. Visite antes de decidir.</p>
+    <p class="lead">{N} apartamentos prontos para morar, de studio a 3 dormitórios, em condomínios com lazer. Aluguel a partir de {MIN}. Visite antes de decidir.</p>
     <div class="hero-actions">
       <a href="{general}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">{wai(20)}Agendar visita pelo WhatsApp</a>
-      <a href="#imoveis" class="btn btn-outline btn-lg">Ver os 5 apartamentos</a>
+      <a href="#imoveis" class="btn btn-outline btn-lg">Ver os {N} apartamentos</a>
     </div>
+    {att_html}
     <ul class="proof-row">
       <li>{CHECK}Pintado e higienizado a cada locação</li>
       <li>{CHECK}3 opções de garantia</li>
@@ -134,10 +154,10 @@ html=f'''<!doctype html>
   <div class="hero-media">
     <picture><source srcset="images/hero-sala.webp" type="image/webp"><img src="images/hero-sala.jpg" alt="Sala mobiliada do Spettacolo Patriani com sofá, poltronas e tapete" width="908" height="1210" fetchpriority="high"></picture>
     <div class="hero-badge">
-      <span class="hero-count">5</span>
+      <span class="hero-count">{N}</span>
       <div>
         <strong>disponíveis hoje</strong>
-        <span>Lista atualizada em 1 de novembro de 2026</span>
+        <span>Lista atualizada em {ATUALIZADO}</span>
       </div>
     </div>
   </div>
@@ -198,6 +218,8 @@ html=f'''<!doctype html>
   </div>
 </section>
 
+{dep_html}
+
 <section id="duvidas" class="band">
   <div class="wrap faq-section">
     <div class="section-head">
@@ -226,8 +248,9 @@ html=f'''<!doctype html>
       </details>
       <details>
         <summary>Preciso de uma estadia curta. Vocês têm?</summary>
-        <p class="airbnb-line"><svg class="logo airbnb" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>Sim, para estadias curtas procure por Global Flats no Airbnb.</p>
+        <p class="airbnb-line"><svg class="logo airbnb" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>Sim, para estadias curtas procure por {airbnb_txt}.</p>
       </details>
+      {faq_extra}
     </div>
   </div>
 </section>
