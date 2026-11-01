@@ -175,7 +175,7 @@ T = {
   og_title='Apartamentos mobiliados em Sorocaba, prontos para morar',
   og_desc='{N} apartamentos disponíveis, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.',
   og_alt='Sala mobiliada de um dos apartamentos da Global',
-  nav_label='Principal', nav=['Apartamentos', 'Como funciona', 'Dúvidas', 'Corretores'],
+  nav_label='Principal', nav=['Apartamentos', 'Como funciona', 'Avaliações', 'Dúvidas', 'Corretores'],
   lang_label='Idioma', cta_short='Agendar visita', cta_long='Agendar visita pelo WhatsApp',
   eyebrow='Locação mobiliada em Sorocaba',
   h1='Apartamento mobiliado. Você só traz a mala.',
@@ -228,7 +228,7 @@ T = {
   og_title='Furnished apartments in Sorocaba, ready to move in',
   og_desc='{N} apartments available, from studio to 3 bedrooms. Rent from {MIN} a month. Book a viewing on WhatsApp.',
   og_alt='Furnished living room in one of the Global apartments',
-  nav_label='Main', nav=['Apartments', 'How it works', 'FAQ', 'Agents'],
+  nav_label='Main', nav=['Apartments', 'How it works', 'Reviews', 'FAQ', 'Agents'],
   lang_label='Language', cta_short='Book a viewing', cta_long='Book a viewing on WhatsApp',
   eyebrow='Furnished rentals in Sorocaba, Brazil',
   h1='Fully furnished. Just bring your suitcase.',
@@ -401,7 +401,7 @@ def render(lang):
     <div class="thumbs">{thumbs}</div>
     </div>
     <div class="detail-body">
-      <p class="eyebrow">{p['name']} · {p['meta'][lang]}</p>
+      <p class="eyebrow">{p['name']}</p>
       <h2 id="dt-{p['id']}">{d['head']}</h2>
       <p class="detail-intro">{d['intro']}</p>
       <div class="detail-groups">{groups}</div>
@@ -549,8 +549,9 @@ def render(lang):
   <nav class="drawer-nav" aria-label="{t['nav_label']}">
     <a href="#imoveis">{nav[0]}</a>
     <a href="#como-funciona">{nav[1]}</a>
-    <a href="#duvidas">{nav[2]}</a>
-    <a href="#corretores">{nav[3]}</a>
+    <a href="#avaliacoes">{nav[2]}</a>
+    <a href="#duvidas">{nav[3]}</a>
+    <a href="#corretores">{nav[4]}</a>
   </nav>
   <div class="drawer-foot">
     {lang_switch}
