@@ -633,3 +633,10 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
   .chipset { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 28px; }
 }
 @media (max-width: 360px) { .btn-xl { font-size: 14.5px; padding: 0 16px; gap: 8px; } }
+@media (max-width: 860px) and (min-width: 641px) {
+  .hero { flex-direction: column; padding-top: 48px; gap: 40px; }
+  .hero-collage { height: 380px; }
+}
+@media (max-width: 860px) { .hero-text, .hero-collage { flex: none; } .hero-collage { width: 100%; } }
+@media (min-width: 700px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 700px) and (max-width: 900px) { .steps li { padding: 24px 20px; } .steps h3 { font-size: 19px; } }

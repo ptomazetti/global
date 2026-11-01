@@ -161,7 +161,7 @@ DET = {
 T = {
  'pt': dict(
   html_lang='pt-BR', og_locale='pt_BR',
-  title='Apartamentos mobiliados em Sorocaba a partir de {MIN} | Global',
+  title='Apartamentos mobiliados em Sorocaba a partir de {MIN} | Global Estadia',
   desc='{N} apartamentos mobiliados prontos para morar em Sorocaba, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.',
   og_title='Apartamentos mobiliados em Sorocaba, prontos para morar',
   og_desc='{N} apartamentos disponíveis, de studio a 3 dormitórios. Aluguel a partir de {MIN}. Agende sua visita pelo WhatsApp.',
@@ -217,7 +217,7 @@ T = {
  ),
  'en': dict(
   html_lang='en', og_locale='en_US',
-  title='Furnished apartments for rent in Sorocaba, Brazil, from {MIN} | Global',
+  title='Furnished apartments for rent in Sorocaba, Brazil, from {MIN} | Global Estadia',
   desc='{N} fully furnished apartments ready to move into in Sorocaba, Brazil, from studio to 3 bedrooms. Rent from {MIN} a month. Book a viewing on WhatsApp.',
   og_title='Furnished apartments in Sorocaba, ready to move in',
   og_desc='{N} apartments available, from studio to 3 bedrooms. Rent from {MIN} a month. Book a viewing on WhatsApp.',
