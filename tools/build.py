@@ -194,15 +194,12 @@ T = {
   cmp_b='Alugar com a Global', cmp_b_list=['Móveis e armários planejados já instalados', 'Eletrodomésticos funcionando', 'Apartamento pintado e higienizado', 'Você muda sem esperar móveis chegarem'],
   quotes_h='Quem já mora',
   faq_h='Perguntas antes de visitar',
-  faq=[('Quais garantias vocês aceitam?', 'Seguro fiança, caução de 3 aluguéis ou fiador.'),
-       ('Qual é o prazo do contrato?', 'O contrato é de 30 meses. Depois de 12 meses, você pode sair sem pagar multa.'),
-       ('Água, luz, gás e internet estão inclusos?', 'Não. Luz e internet ficam no nome do inquilino, que paga direto às empresas. Água e gás também, quando não estiverem incluídos no condomínio.'),
-       ('Aceita animais de estimação?', 'Sim, aceitamos animais de estimação.'),
-       ('Em quanto tempo recebo as chaves?', 'Em até 2 dias depois que você entregar a documentação.'),
-       ('O valor do aluguel inclui condomínio e IPTU?', 'Não. Condomínio e IPTU são cobrados à parte. Cada apartamento mostra os três valores e o total mensal, para você comparar sem surpresa.'),
-       ('O que exatamente vem no apartamento?', 'Cada imóvel tem uma descrição completa com a lista de móveis e eletrodomésticos. Toque em "Descrição" no card do apartamento.'),
-       ('O apartamento é limpo antes de eu entrar?', 'Sim. A cada nova locação, o apartamento é pintado e higienizado.'),
-       ('Como agendo uma visita?', 'Pelo {WALINK}. Diga qual apartamento e o melhor dia e horário para você. Se preferir, escreva para {MAILLINK}.')],
+  faq=[('Qual é o prazo do contrato e quais garantias vocês aceitam?', 'O contrato é de 30 meses, e depois de 12 meses você pode sair sem multa. Aceitamos seguro fiança, caução de 3 aluguéis ou fiador.'),
+       ('O que está incluso no valor?', 'O aluguel. Condomínio e IPTU são cobrados à parte, e cada apartamento mostra o total mensal. Luz e internet ficam no nome do inquilino, assim como água e gás quando não estiverem no condomínio.'),
+       ('O que vem no apartamento?', 'Móveis, cozinha equipada e eletrodomésticos. A lista de cada um está em "Fotos e detalhes". A cada nova locação, o apartamento é pintado e higienizado.'),
+       ('Aceita animais de estimação?', 'Sim.'),
+       ('Tem vaga, ar-condicionado e lazer?', 'Vagas: o Spettacolo Patriani tem 2 cobertas e depósito de 10 m², e o Alpha Club I41 e o Residencial Esplanada têm 1 cada. Nos outros, confirme pelo WhatsApp. Ar-condicionado: Alpha Club J42 na suíte e Residencial Esplanada na sala. O Alpha Club I41 tem ventilador de teto na suíte. Todos os condomínios têm área de lazer.'),
+       ('Como agendo a visita e em quanto tempo recebo as chaves?', 'Pelo {WALINK}: diga o apartamento, o dia e o horário. Se preferir, escreva para {MAILLINK}. Corretores: incluam nome, RG e CRECI na mesma mensagem. As chaves saem em até 2 dias depois da documentação.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Procurando algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
   brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Abra "Fotos e detalhes" em cada apartamento ou peça o material completo.',
@@ -250,15 +247,12 @@ T = {
   cmp_b='Renting with Global', cmp_b_list=['Furniture and built-in cabinets already in place', 'Appliances working', 'Apartment repainted and deep cleaned', 'Move in without waiting for furniture'],
   quotes_h='What our tenants say',
   faq_h='Questions before your viewing',
-  faq=[('Which rental guarantees do you accept?', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador).'),
-       ('How long is the lease?', 'The lease is 30 months. After 12 months, you can leave without paying a penalty.'),
-       ('Are water, electricity, gas and internet included?', 'No. Electricity and internet go in the tenant’s name and are paid directly to the providers. The same applies to water and gas when they are not included in the condo fee.'),
-       ('Are pets allowed?', 'Yes, pets are welcome.'),
-       ('How soon can I get the keys?', 'Within 2 days after you hand in your documents.'),
-       ('Does the rent include the condo fee and IPTU tax?', 'No. The condo fee and IPTU property tax are charged separately. Each apartment shows all three amounts and the monthly total, so you can compare with no surprises.'),
-       ('What exactly comes with the apartment?', 'Each apartment has a full description listing the furniture and appliances. Tap "Description" on the apartment card.'),
-       ('Is the apartment cleaned before I move in?', 'Yes. Before every new tenant, the apartment is repainted and deep cleaned.'),
-       ('How do I book a viewing?', 'On {WALINK}. Tell us which apartment and the best day and time for you. You can also email {MAILLINK}.')],
+  faq=[('How long is the lease, and which guarantees do you accept?', 'The lease is 30 months, and after 12 months you can leave without a penalty. We accept rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador).'),
+       ('What does the price include?', 'The rent. The condo fee and IPTU tax are charged separately, and each apartment shows the monthly total. Electricity and internet go in the tenant’s name, as do water and gas when they are not in the condo fee.'),
+       ('What comes with the apartment?', 'Furniture, an equipped kitchen and appliances. The list for each one is under "Photos and details". Before every new tenant, the apartment is repainted and deep cleaned.'),
+       ('Are pets allowed?', 'Yes.'),
+       ('Is there parking, air conditioning and leisure?', 'Parking: Spettacolo Patriani has 2 covered spaces and a 10 m² storage room, and Alpha Club I41 and Residencial Esplanada have 1 each. For the others, please confirm on WhatsApp. Air conditioning: Alpha Club J42 in the master bedroom and Residencial Esplanada in the living room. Alpha Club I41 has a ceiling fan in the master bedroom. All buildings have leisure facilities.'),
+       ('How do I book a viewing, and how soon do I get the keys?', 'On {WALINK}: tell us the apartment, day and time. You can also email {MAILLINK}. Agents: include your name, ID (RG) and CRECI in the same message. Keys are ready within 2 days of receiving your documents.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
   brk_p='Every apartment already has photos, video and a description ready to send to your client. Open "Photos and details" on each apartment or ask for the full pack.',
@@ -441,17 +435,11 @@ def render(lang):
 </section>'''
     airbnb = f'<a href="{AIRBNB_URL}" target="_blank" rel="noopener">{t["airbnb"]}</a>' if AIRBNB_URL else t['airbnb']
     faq_items = [(q, a.format(WALINK=walink, MAILLINK=maillink)) for q, a in t['faq']]
-    faq_items += [(q[lang], a[lang]) for q, a in FAQ_EXTRA]
     faq_html = ''.join(f'''
       <details>
         <summary>{q}</summary>
         <p>{a}</p>
       </details>''' for q, a in faq_items)
-    faq_html += f'''
-      <details>
-        <summary>{t['short_q']}</summary>
-        <p class="airbnb-line"><svg class="logo airbnb" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{AB_SVG}"/></svg>{t['short_a'].format(AIRBNB=airbnb)}</p>
-      </details>'''
 
     steps = ''.join(f'''
     <li>
