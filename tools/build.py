@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import json, os, re
+import json, os, re, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -221,7 +221,7 @@ T = {
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero agendar visita para esse', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
+  visit_this='Quero agendar visita para esse', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos e vídeo', exp_copy='Copiar descrição', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero agendar visita para esse" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Disponibilize a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Veja a que mais se encaixa para o seu cliente.'),
@@ -238,13 +238,13 @@ T = {
        ('Como agendo a visita e em quanto tempo as chaves estarão disponíveis?', 'Pelo {WALINK}: informe em uma única mensagem o nome, RG e CRECI do corretor, o primeiro nome do cliente, o imóvel que deseja visitar e o melhor dia e horário. Com isso, liberamos a entrada na portaria e a chave: por empréstimo, código da fechadura eletrônica ou apartamento aberto, dependendo do imóvel. Se preferir, encaminhe a solicitação para {MAILLINK}. As chaves saem em até 2 dias depois da documentação.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Procurando algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
-  brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Abra "Fotos e detalhes" de qualquer apartamento e envie ao seu cliente agora. Leva um minuto. Se preferir, peça o material completo.',
+  brk_p='Cada apartamento já tem fotos, vídeo e descrição prontos para você enviar ao cliente. Abra "Fotos e detalhes" de qualquer apartamento e envie ao seu cliente agora. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.',
   end_h='Gostou de um? Marque a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
   foot_tag='Locação de apartamentos mobiliados · Sorocaba', foot_wa='Fale pelo WhatsApp',
   wa_general='Olá! Vi o site da Global e quero agendar uma visita. Meu nome é: ',
-  wa_unit='Olá! Vi o site da Global e quero visitar o {name} ({price}). Meu nome é: ',
+  wa_unit='Olá! Sou corretor(a) e quero agendar uma visita ao {name} ({price}).\nNome:\nRG:\nCRECI:\nPrimeiro nome do cliente:\nDia e horário:',
   wa_broker='Olá! Sou corretor(a) e quero agendar uma visita.\nNome:\nRG:\nCRECI:\nPrimeiro nome do cliente:\nImóvel:\nDia e horário:',
   list_name='Apartamentos mobiliados para locação',
  ),
@@ -274,7 +274,7 @@ T = {
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='Book a viewing of this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
+  visit_this='Book a viewing of this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos and video', exp_copy='Copy description', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "Book a viewing of this one" on the apartment. WhatsApp opens with the message ready, including the apartment name.'),
          ('Provide the guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). See which one suits your client best.'),
@@ -291,13 +291,13 @@ T = {
        ('How do I book a viewing, and when will the keys be available?', 'On {WALINK}: send one message with the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and the best day and time. We then arrange access at the front desk and the key: on loan, an electronic lock code or the apartment left open, depending on the property. You can also send the request to {MAILLINK}. Keys are ready within 2 days of receiving the documents.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
-  brk_p='Every apartment already has photos, video and a description ready to send to your client. Open "Photos and details" on any apartment and send it to your client now. It takes a minute. You can also ask for the full pack.',
+  brk_p='Every apartment already has photos, video and a description ready to send to your client. Open "Photos and details" on any apartment and send it to your client now. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.',
   end_h='Like one? Book your viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
   foot_tag='Furnished apartment rentals · Sorocaba, Brazil', foot_wa='Chat on WhatsApp',
   wa_general='Hello! I saw the Global website and would like to book a viewing. My name is: ',
-  wa_unit='Hello! I saw the Global website and would like to see {name} ({price}). My name is: ',
+  wa_unit='Hello! I am a real estate agent and would like to book a viewing of {name} ({price}).\nName:\nID (RG):\nCRECI:\nClient’s first name:\nDay and time:',
   wa_broker='Hello! I am a real estate agent and would like to book a viewing.\nName:\nID (RG):\nCRECI:\nClient’s first name:\nApartment:\nDay and time:',
   list_name='Furnished apartments for rent',
  ),
@@ -427,6 +427,13 @@ def render(lang):
             thumb_src = lambda i, pid=p['id']: f'{R}images/g/{pid}-{i + 1}.webp'
         groups = ''.join(f'<div class="dg"><h4>{g}</h4><ul class="checks">' + ''.join(f'<li>{CHECK}{x}</li>' for x in items) + '</ul></div>' for g, items in d['groups'])
         amen = ''.join(f'<li>{x}</li>' for x in d['amen'])
+        exp_lines = [f"{p['name']} · {p['tag'][lang]}", d['head'], '', d['intro'], '']
+        for g, items in d['groups']:
+            exp_lines += [g] + [f'- {x}' for x in items] + ['']
+        exp_lines += [t['d_amen'], ', '.join(d['amen']), '', t['d_costs'],
+                      f"{t['d_rent']}: {money(p['rent'], lang)}", f"{t['condo']}: {money(p['condo'], lang)}",
+                      f"{t['iptu']}: {money(p['iptu'], lang)}", f"{t['total']}: {money(total, lang)}", '', t['exp_note']]
+        exp_txt = html.escape('\n'.join(exp_lines))
         thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{thumb_src(i)}" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
         dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
   <div class="detail-inner">
@@ -458,8 +465,17 @@ def render(lang):
           <dt class="cost-total">{t['total']}</dt><dd class="cost-total">{money(total, lang)}</dd>
         </dl>
       </div>
-      <a class="btn btn-primary btn-block btn-lg" href="{msg}" target="_blank" rel="noopener">{wai(20)}{t['visit_this']}</a>
       <p class="detail-note">{t['d_note']}</p>
+      <div class="detail-export">
+        <h4>{t['exp_h']}</h4>
+        <div class="export-btns">
+          <a class="btn btn-outline" href="{p['f']}" target="_blank" rel="noopener">{t['exp_dl']}</a>
+          <button type="button" class="btn btn-outline copy-desc" data-ok="{t['exp_ok']}">{t['exp_copy']}</button>
+        </div>
+        <textarea class="export-txt" hidden readonly>{exp_txt}</textarea>
+        <p class="detail-note">{t['exp_note']}</p>
+      </div>
+      <a class="btn btn-primary btn-block btn-lg" href="{msg}" target="_blank" rel="noopener">{wai(20)}{t['visit_this']}</a>
     </div>
   </div>
 </dialog>''')
@@ -799,6 +815,11 @@ function showToast(m) {{ (document.querySelector('dialog[open]') || document.bod
 document.querySelectorAll('a[href^="mailto:{EMAIL}"]').forEach(function (a) {{ a.addEventListener('click', function () {{
   var done = function () {{ showToast('{t['mail_ok']}{EMAIL}'); }};
   if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText('{EMAIL}').then(done, function () {{}});
+}}); }});
+document.querySelectorAll('.copy-desc').forEach(function (b) {{ b.addEventListener('click', function () {{
+  var ta = b.closest('.detail-export').querySelector('.export-txt'), txt = ta.value, ok = function () {{ showToast(b.dataset.ok); }};
+  var fallback = function () {{ ta.hidden = false; ta.style.cssText = 'position:fixed;left:-9999px;top:0'; ta.select(); try {{ if (document.execCommand('copy')) ok(); }} catch (e) {{}} ta.hidden = true; ta.style.cssText = ''; }};
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(ok, fallback); else fallback();
 }}); }});
 var sheet = document.getElementById('share'), surl = sheet.querySelector('.share-url');
 var canon = (document.querySelector('link[rel=canonical]') || {{}}).href || location.href.split('#')[0];
