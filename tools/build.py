@@ -108,6 +108,11 @@ P = [
 PID_ALL = {p['id']: p for p in P}
 _ST = os.path.join(ROOT, 'tools', 'status.json')
 STATUS = json.load(open(_ST, encoding='utf-8')).get('units', {}) if os.path.exists(_ST) else {}
+_PR = json.load(open(_ST, encoding='utf-8')).get('prices', {}) if os.path.exists(_ST) else {}
+for _p in P:
+    for _k in ('rent', 'condo', 'iptu'):
+        if _PR.get(_p['id'], {}).get(_k) is not None:
+            _p[_k] = _PR[_p['id']][_k]
 P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
 PID = {p["id"]: p for p in P}
 

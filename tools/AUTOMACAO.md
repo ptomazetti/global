@@ -5,9 +5,10 @@ Roda uma vez por dia. Lê duas fontes e tira do site (ou devolve) as unidades.
 ## Fontes
 
 1. **Planilha** no Google Drive: "Global Estadia - Status dos apartamentos"
-   (id `1QhKQkI4XGhyKbdMaPn2pnyQSvWaHSE9wtCZjkwhGpDA`). Coluna A = ID, coluna C = Status
-   ("Disponível" ou "Alugado").
-2. **E-mails** recebidos em contato@globalestadia.com.br com assunto começando por
+   (id `1wOiK030eGdrXZLcPJNKQjzh5Y56CluJegQNUPh5FU1k`). Coluna A = ID, C = Status
+   ("Disponível" ou "Alugado"), D = Aluguel, E = Condomínio, F = IPTU (em reais, formato brasileiro).
+   Os preços vêm sempre da planilha.
+2. **E-mails** recebidos em contato@globalestadia.com.br, de qualquer remetente, com assunto começando por
    `ALUGADO` ou `DISPONÍVEL` (também aceitar `DISPONIVEL`) seguido do nome da unidade.
    Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d`
 
@@ -33,7 +34,9 @@ senão vale a planilha.
 ## Aplicar
 
 ```bash
-python3 -I tools/sync_status.py '<json {id: "Alugado"|"Disponível"} com as 6 unidades>' "<fonte: planilha/e-mail e datas>"
+python3 -I tools/sync_status.py '<json>' "<fonte: planilha/e-mail e datas>"
+# <json> = {"<id>": {"status": "Disponível"|"Alugado", "rent": "3.490,00", "condo": "615,09", "iptu": "56,30"}, ...}
+# com as 6 unidades. status pela regra de prioridade; rent/condo/iptu sempre da planilha.
 ```
 
 - Se imprimir `UNCHANGED`: não faça commit nem push.
