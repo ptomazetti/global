@@ -449,7 +449,6 @@ def render(lang):
   <h2>{t['end_h']}</h2>
   <p>{t['end_p']}</p>
   <a href="{general}" class="btn btn-primary btn-xl" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
-  <p class="phone">{WA_SHOW}</p>
 </section>
 
 </main>
