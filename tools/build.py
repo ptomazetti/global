@@ -170,8 +170,8 @@ T = {
   lang_label='Idioma', cta_short='Agendar visita', cta_long='Agendar visita pelo WhatsApp',
   eyebrow='Locação mobiliada em Sorocaba',
   h1='Apartamento mobiliado. Você só traz a mala.',
-  lead='{N} apartamentos prontos para morar, de studio a 3 dormitórios, em condomínios com lazer. Aluguel a partir de {MIN}. Visite antes de decidir.',
-  see_all='Ver os {N} apartamentos',
+  lead='Prontos para morar, de studio a 3 dormitórios. Condomínios com lazer e aluguel a partir de {MIN}. Visite antes de decidir.',
+  see_all='Ver apartamentos',
   proof=['Chaves em até 2 dias após a documentação', 'Aceita animais de estimação', 'Pintado e higienizado a cada locação', '3 opções de garantia'],
   hero_alt='Sala mobiliada do Spettacolo Patriani com sofá, poltronas e tapete',
   badge='disponíveis hoje', updated='Lista atualizada em {DATE}',
@@ -185,11 +185,11 @@ T = {
   list_p='Valores completos à vista: aluguel, condomínio e IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Ver detalhes', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
+  visit_this='Quero visitar este', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', d_note='Para agendar, envie em uma única mensagem: nome, apartamento, dia e horário. Corretores: incluam RG e CRECI.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Quero visitar este" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Escolha a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Você usa a que for mais simples para você.'),
-         ('Entre com a mala', 'As chaves saem em até 2 dias depois da documentação. Móveis, cozinha equipada e eletrodomésticos já estão lá, e o apartamento é pintado e higienizado antes de você chegar.')],
+         ('Entre com a mala', 'As chaves saem em até 2 dias depois da documentação.')],
   cmp_a='Alugar um apartamento vazio', cmp_a_list=['Comprar sofá, cama, mesa e cortinas', 'Comprar geladeira, fogão, micro-ondas e máquina de lavar', 'Pagar frete, montagem e instalação', 'Semanas até a casa ficar pronta'],
   cmp_b='Alugar com a Global', cmp_b_list=['Móveis e armários planejados já instalados', 'Eletrodomésticos funcionando', 'Apartamento pintado e higienizado', 'Você muda sem esperar móveis chegarem'],
   quotes_h='Quem já mora',
@@ -226,8 +226,8 @@ T = {
   lang_label='Language', cta_short='Book a viewing', cta_long='Book a viewing on WhatsApp',
   eyebrow='Furnished rentals in Sorocaba, Brazil',
   h1='Fully furnished. Just bring your suitcase.',
-  lead='{N} apartments ready to move into, from studio to 3 bedrooms, in buildings with leisure facilities. Rent from {MIN} a month. See it before you decide.',
-  see_all='See all {N} apartments',
+  lead='Ready to move into, from studio to 3 bedrooms. Buildings with leisure facilities, rent from {MIN} a month. See it before you decide.',
+  see_all='See the apartments',
   proof=['Keys within 2 days of your documents', 'Pets welcome', 'Repainted and deep cleaned before every new tenant', '3 rental guarantee options'],
   hero_alt='Furnished living room at Spettacolo Patriani with sofa, armchairs and rug',
   badge='available today', updated='List updated {DATE}',
@@ -241,11 +241,11 @@ T = {
   list_p='Full costs shown upfront: rent, condo fee and property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='See details', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
+  visit_this='I want to see this one', l_photos='Photos', l_video='Video', l_desc='Photos and details', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', d_note='To book, send in one message: your name, the apartment, and day and time. Agents: please include your ID (RG) and CRECI.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "I want to see this one" on the apartment. WhatsApp opens with your message ready, including the apartment name.'),
          ('Pick your guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). Use whichever is easiest for you.'),
-         ('Move in with a suitcase', 'You get the keys within 2 days of handing in your documents. Furniture, an equipped kitchen and appliances are already there, and the apartment is repainted and deep cleaned before you arrive.')],
+         ('Move in with a suitcase', 'You get the keys within 2 days of handing in your documents.')],
   cmp_a='Renting an empty apartment', cmp_a_list=['Buy a sofa, bed, table and curtains', 'Buy a fridge, stove, microwave and washing machine', 'Pay for delivery, assembly and installation', 'Weeks before the place is ready'],
   cmp_b='Renting with Global', cmp_b_list=['Furniture and built-in cabinets already in place', 'Appliances working', 'Apartment repainted and deep cleaned', 'Move in without waiting for furniture'],
   quotes_h='What our tenants say',
@@ -307,6 +307,13 @@ FAV = "data:image/svg+xml," + quote('<svg xmlns="http://www.w3.org/2000/svg" vie
 
 N = len(P)
 
+def lines(text):
+    # One sentence per line: split after '. ' and wrap each sentence in a block span.
+    import re
+    parts = [x for x in re.split(r'(?<=[.!?])\s+', text) if x]
+    return ''.join(f'<span class="line">{x}</span>' for x in parts)
+
+
 def vpill(p, t, R=''):
     # Local file in videos/<id>.mp4 plays inside the site; otherwise fall back to the Drive folder.
     if os.path.exists(os.path.join(ROOT, 'videos', p['id'] + '.mp4')):
@@ -357,7 +364,6 @@ def render(lang):
         <a class="btn btn-primary btn-block" href="{msg}" target="_blank" rel="noopener">{wai()}{t['visit_this']}</a>
         <div class="card-actions2">
           <button type="button" class="btn btn-outline detail-open" data-dialog="d-{p['id']}">{DOC}{t['l_desc']}</button>
-          <button type="button" class="btn btn-soft detail-open" data-dialog="d-{p['id']}" data-fs="1">{CAM}{t['all_photos']}</button>
         </div>
       </div>
     </article>''')
@@ -548,8 +554,8 @@ def render(lang):
   <div class="wrap hero">
   <div class="hero-text">
     <p class="eyebrow eyebrow-gold">{t['eyebrow']}</p>
-    <h1>{t['h1']}</h1>
-    <p class="lead">{tx('lead')}</p>
+    <h1>{lines(t['h1'])}</h1>
+    <p class="lead">{lines(tx('lead'))}</p>
     <div class="hero-actions">
       <a href="{general}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">{wai(20)}{t['cta_long']}</a>
       <a href="#imoveis" class="btn btn-ghost btn-lg">{tx('see_all')}</a>
@@ -559,8 +565,8 @@ def render(lang):
   </div>
   <div class="hero-collage">
     <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
-    <picture class="hc-a"><source srcset="{R}images/g/alpha-club-i41-4.webp" type="image/webp"><img src="{R}images/g/alpha-club-i41-4.jpg" alt="{t['amen_tiles'][0][1]} · Alpha Club" width="760" height="570"></picture>
-    <picture class="hc-b"><source srcset="{R}images/g/spettacolo-42-4.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-4.jpg" alt="{t['amen_tiles'][2][1]} · Spettacolo Patriani" width="760" height="570"></picture>
+    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{P[0]['name']}: {P[0]['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{P[2]['name']}: {P[2]['gal'][lang][2]}" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>
@@ -570,7 +576,6 @@ def render(lang):
     </div>
   </div>
   </div>
-  <div class="wrap stats">{stats}</div>
 </section>
 
 <section id="imoveis" class="band">
