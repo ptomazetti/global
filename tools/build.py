@@ -103,6 +103,12 @@ P = [
   v='https://drive.google.com/file/d/1GGAoURs9YMaWWMq_5RUFMra8ltsm5l6Y/view',
   d='https://drive.google.com/file/d/1J17liUYRHgMADoPXDzAqgiYSOjdORVh1/view?usp=sharing'),
 ]
+# Status synced from the Google Sheet and the ALUGADO/DISPONIVEL emails into tools/status.json
+# (see tools/AUTOMACAO.md). Units marked "Alugado" are left off the site.
+PID_ALL = {p['id']: p for p in P}
+_ST = os.path.join(ROOT, 'tools', 'status.json')
+STATUS = json.load(open(_ST, encoding='utf-8')).get('units', {}) if os.path.exists(_ST) else {}
+P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
 PID = {p["id"]: p for p in P}
 
 DET = {
@@ -622,8 +628,8 @@ def render(lang):
   </div>
   <div class="hero-collage">
     <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
-    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{PID['spettacolo-42']['name']}: {PID['spettacolo-42']['gal'][lang][2]}" width="760" height="570"></picture>
-    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{PID['esplanada-102']['name']}: {PID['esplanada-102']['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{PID_ALL['spettacolo-42']['name']}: {PID_ALL['spettacolo-42']['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{PID_ALL['esplanada-102']['name']}: {PID_ALL['esplanada-102']['gal'][lang][2]}" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>
