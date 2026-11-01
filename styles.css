@@ -201,3 +201,12 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .quote { margin: 0; border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
 .quote blockquote { margin: 0; font-size: 17px; }
 .quote figcaption { font-size: 14px; font-weight: 700; color: var(--muted); }
+
+/* Language switcher (flags) */
+.lang { display: flex; align-items: center; gap: 6px; }
+.lang a { display: flex; padding: 4px; border-radius: 8px; border: 2px solid transparent; opacity: .55; transition: opacity .15s, border-color .15s; }
+.lang a:hover { opacity: 1; }
+.lang a[aria-current="true"] { opacity: 1; border-color: var(--green); }
+svg.flag { stroke: none; display: block; border-radius: 3px; box-shadow: 0 0 0 1px rgba(21,32,27,.15); }
+.brand-name { white-space: nowrap; }
+@media (max-width: 480px) { .brand-rest { display: none; } .site-header .brand-name { font-size: 20px; } }

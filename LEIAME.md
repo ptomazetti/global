@@ -1,6 +1,6 @@
 # Página de imóveis mobiliados · Global Consultancy Partners
 
-A página é gerada pelo arquivo `tools/build.py`. Edite o bloco CONFIGURACAO no topo e rode:
+O site tem duas versões: português (`index.html`) e inglês (`en/index.html`). As duas são geradas pelo arquivo `tools/build.py`, a partir dos mesmos dados. Edite o bloco CONFIGURACAO no topo e rode:
 
     python3 tools/build.py
 
@@ -17,3 +17,6 @@ Copie um bloco da lista `P`, troque nome, valores e links do Drive, e coloque as
 - `ATENDENTE`: aparece "Quem responde no WhatsApp" com nome e foto.
 - `FAQ_EXTRA`: novas perguntas no FAQ.
 - `AIRBNB_URL`: transforma "Global Flats no Airbnb" em link.
+
+## Textos em dois idiomas
+Cada texto tem a versão `pt` e `en`. Ao trocar um texto ou adicionar um apartamento, preencha os dois idiomas. A data em `ATUALIZADO` também tem as duas versões.
