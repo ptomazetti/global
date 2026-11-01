@@ -559,3 +559,6 @@ dialog.vid .detail-close { position: absolute; top: 10px; right: 10px; z-index: 
 .brand-logo { height: 52px; }
 @media (max-width: 640px) { .brand-logo { height: 38px; } }
 @media (min-width: 861px) { .footer-right > a { align-self: flex-end; } }
+/* Keep logo proportions inside flex columns */
+.brand-logo, .footer-logo { flex: 0 0 auto; align-self: flex-start; width: auto; max-width: 100%; object-fit: contain; }
+.brand .brand-logo, .drawer-head .brand-logo { align-self: center; }
