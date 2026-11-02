@@ -36,7 +36,7 @@ P = [
  dict(id='spettacolo-42', beds=0, name='Spettacolo Patriani', rent=3490, condo=615.09, iptu=56.30,
   tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
   meta={'pt': 'Apto. 42 · 76 m² de área total', 'en': 'Apt. 42 · 76 m² total area'},
-  perks={'pt': ['2 garagens cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
+  perks={'pt': ['2 vagas cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
          'en': ['2 covered parking spaces and 10 m² storage', 'Panoramic balcony, Queen bed', 'Lap pool, spa, sauna and gym']},
   gal={'pt': ['Sala com vista pela varanda panorâmica', 'Sala de estar com sofá e poltronas', 'Cozinha com armários planejados e cooktop', 'SPA com hidromassagem do condomínio', 'Fachada do Spettacolo Patriani'],
        'en': ['Living room with panoramic balcony view', 'Living room with sofa and armchairs', 'Kitchen with built-in cabinets and cooktop', 'Building spa with hot tub', 'Spettacolo Patriani entrance']},
@@ -46,7 +46,7 @@ P = [
  dict(id='red-1401', beds=0, name='RED Studio', rent=3490, condo=692.30, iptu=68.71,
   tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
   meta={'pt': 'Apto. 1401 · 56 m² · 14º andar · Jardim América', 'en': 'Apt. 1401 · 56 m² · 14th floor · Jardim América'},
-  perks={'pt': ['Varanda gourmet envidraçada com vista para o pôr do sol', '2 vagas de garagem cobertas', 'Internet de 500 Mega, utensílios e enxoval inclusos'],
+  perks={'pt': ['Varanda gourmet envidraçada com vista para o pôr do sol', '2 vagas cobertas', 'Internet de 500 Mega, utensílios e enxoval inclusos'],
          'en': ['Glazed balcony with sunset views', '2 covered parking spaces', '500 Mbps internet, kitchenware and linens included']},
   gal={'pt': ['Sala e cozinha integradas com mesa de jantar', 'Piscina do condomínio ao pôr do sol', 'Varanda envidraçada com vista para o pôr do sol', 'Área da cama Queen', 'Cozinha com cooktop e geladeira duplex'],
        'en': ['Open-plan living room and kitchen with dining table', 'Building pool at sunset', 'Glazed balcony with sunset view', 'Queen bed area', 'Kitchen with cooktop and double-door fridge']},
@@ -56,8 +56,8 @@ P = [
  dict(id='alpha-club-j42', beds=2, name='Alpha Club J42', rent=2890, condo=464.19, iptu=158.00,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 42 · Bloco J · Campolim', 'en': 'Apt. 42 · Block J · Campolim'},
-  perks={'pt': ['Ar-condicionado 12.000 BTUs na suíte', 'Cama box Queen, Smart TV, cortina blackout', 'Varanda gourmet, condomínio clube'],
-         'en': ['12,000 BTU air conditioning in the master bedroom', 'Queen bed, Smart TV, blackout curtains', 'Barbecue balcony, club-style complex']},
+  perks={'pt': ['Ar-condicionado 12.000 BTUs na suíte', 'Cama box Queen, Smart TV, cortina blackout', 'Varanda gourmet, 1 vaga descoberta, condomínio clube'],
+         'en': ['12,000 BTU air conditioning in the master bedroom', 'Queen bed, Smart TV, blackout curtains', 'Barbecue balcony, 1 uncovered parking space, club-style complex']},
   gal={'pt': ['Sala com bar iluminado e bancada', 'Cozinha com geladeira, fogão e micro-ondas'],
        'en': ['Living room with lit bar and counter', 'Kitchen with fridge, stove and microwave']},
   f='https://drive.google.com/drive/folders/1bPidYHmKlhAE6bBfmmKMkpROLZA144Wz?usp=drive_link',
@@ -86,8 +86,8 @@ P = [
  dict(id='vida-plena-c65', beds=2, name='Vida Plena C65', rent=2790, condo=406.42, iptu=61.84,
   tag={'pt': '2 dormitórios', 'en': '2 bedrooms'},
   meta={'pt': 'Apto. 65 · Bloco C · Campolim', 'en': 'Apt. 65 · Block C · Campolim'},
-  perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', 'Condomínio com lazer completo'],
-         'en': ['Built-in cabinets in every room', 'Home office desk, LED lighting', 'Full leisure facilities']},
+  perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', '1 vaga descoberta, condomínio com lazer completo'],
+         'en': ['Built-in cabinets in every room', 'Home office desk, LED lighting', '1 uncovered parking space, full leisure facilities']},
   gal={'pt': ['Sala com mesa de jantar', 'Cozinha com geladeira, fogão e micro-ondas', 'Dormitório com cama box e armário'],
        'en': ['Living room with dining table', 'Kitchen with fridge, stove and microwave', 'Bedroom with bed and wardrobe']},
   f='https://drive.google.com/drive/folders/1qV2qAFvA47z2pMG8QX_9GhA8e6oTtLZb?usp=drive_link',
@@ -509,7 +509,7 @@ def render(lang):
         tr = f'<p class="quotes-tr">{t["quotes_tr"]}</p>' if t['quotes_tr'] else ''
         dep_html = f'''<section id="avaliacoes" class="quotes-band">
   <div class="wrap quotes-section">
-    <div class="quotes-head"><div class="section-head"><p class="eyebrow eyebrow-gold">Airbnb · Global Flats</p><h2>{t["quotes_h"]}</h2><p>{t["quotes_intro"]}</p></div>{more}</div>
+    <div class="quotes-head"><div class="section-head"><p class="eyebrow eyebrow-gold">Airbnb · Global Flats</p><h2>{t["quotes_h"]}</h2></div>{more}</div>
     <div class="quotes">{items}</div>
     {tr}
     <div class="host-card reveal"><p class="host-h">{t["host_h"]}</p><ul>{''.join(f'<li>{CHECK}{x}</li>' for x in t["host_items"])}</ul></div>
