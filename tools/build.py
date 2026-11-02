@@ -12,6 +12,10 @@ EMAIL = 'contato@globalestadia.com.br'
 WA = '5515997470301'
 WA_SHOW = '+55 (15) 99747-0301'
 CNPJ = '50.945.139/0001-86'
+# Cadastro de corretores (Supabase, projeto global-estadia). A chave publicável é pública por natureza:
+# ela só permite chamar inscrever_corretor e cancelar_inscricao; a tabela não pode ser lida pelo site.
+SUPA_URL = 'https://bvwrnddfujpkukzwmioz.supabase.co'
+SUPA_KEY = 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF'
 ATUALIZADO = {'pt': '1 de novembro de 2026', 'en': '1 November 2026'}  # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = {'pt': 'https://www.airbnb.com.br/users/profile/1779247085187681939', 'en': 'https://www.airbnb.com/users/profile/1779247085187681939'}   # perfil Global Flats no Airbnb
 ATENDENTE = {}    # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
@@ -243,6 +247,10 @@ T = {
   brk_p='Cada apartamento já tem fotos, vídeo, descrição e custo mensal prontos. Abra "Fotos e detalhes", toque em "Compartilhar" e envie ao seu cliente. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.', brk_reply='Respondemos no mesmo dia útil.',
+  sub_h='Receba os apartamentos em primeira mão', sub_p='Cadastre-se e receba um e-mail quando um apartamento ficar disponível, for alugado ou mudar de preço.',
+  sub_nome='Nome', sub_imob='Imobiliária', sub_creci='CRECI', sub_email='E-mail', sub_wa='WhatsApp (opcional)',
+  sub_aceite='Aceito receber e-mails da Global Estadia sobre os apartamentos. Posso cancelar quando quiser pelo link em cada e-mail.',
+  sub_btn='Quero receber', sub_wait='Enviando...', sub_ok='Pronto! Você vai receber as novidades no seu e-mail.', sub_err='Não foi possível cadastrar agora. Tente de novo ou fale pelo WhatsApp.',
   end_h='Seu cliente gostou de um? Agende a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
   foot_tag='Locação de apartamentos mobiliados · Sorocaba e Votorantim', foot_wa='Fale pelo WhatsApp',
   wa_general='Olá! Sou corretor(a) e quero agendar uma visita.\nNome:\nRG:\nCRECI:\nPrimeiro nome do cliente:\nImóvel:\nDia e horário:',
@@ -296,6 +304,10 @@ T = {
   brk_p='Every apartment already has photos, video, a description and the monthly cost ready. Open "Photos and details", tap "Share" and send it to your client. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.', brk_reply='We reply on the same business day.',
+  sub_h='Get new apartments first', sub_p='Sign up for an email when an apartment becomes available, is rented or changes price.',
+  sub_nome='Name', sub_imob='Agency', sub_creci='CRECI', sub_email='Email', sub_wa='WhatsApp (optional)',
+  sub_aceite='I agree to receive emails from Global Estadia about the apartments. I can unsubscribe at any time through the link in each email.',
+  sub_btn='Sign me up', sub_wait='Sending...', sub_ok='Done! You will receive the updates by email.', sub_err='We could not sign you up right now. Please try again or contact us on WhatsApp.',
   end_h='Does your client like one? Book the viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
   foot_tag='Furnished apartment rentals · Sorocaba and Votorantim, Brazil', foot_wa='Chat on WhatsApp',
   wa_general='Hello! I am a real estate agent and would like to book a viewing.\nName:\nID (RG):\nCRECI:\nClient’s first name:\nApartment:\nDay and time:',
@@ -688,6 +700,25 @@ def render(lang):
       <p class="brk-reply">{t['brk_reply']}</p>
     </div>
   </div>
+  <div class="wrap subscribe-wrap">
+    <form class="subscribe" id="inscricao" novalidate>
+      <div class="subscribe-head">
+        <h3>{t['sub_h']}</h3>
+        <p>{t['sub_p']}</p>
+      </div>
+      <div class="subscribe-grid">
+        <label>{t['sub_nome']}<input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label>{t['sub_imob']}<input name="imobiliaria" autocomplete="organization" maxlength="120"></label>
+        <label>{t['sub_creci']}<input name="creci" maxlength="30"></label>
+        <label>{t['sub_email']}<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+        <label>{t['sub_wa']}<input name="whatsapp" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label class="hp" aria-hidden="true">Site<input name="site" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label class="subscribe-ok"><input type="checkbox" name="aceite" required><span>{t['sub_aceite']}</span></label>
+      <button type="submit" class="btn btn-primary">{t['sub_btn']}</button>
+      <p class="subscribe-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </section>
 
 <section id="lazer" class="amen-section">
@@ -898,16 +929,78 @@ document.querySelectorAll('dialog').forEach(function (d) {{
   if (!cta || !hero || !('IntersectionObserver' in window)) {{ if (cta) cta.classList.add('show'); return; }}
   var vis = new Map();
   var io = new IntersectionObserver(function (es) {{ es.forEach(function (e) {{ vis.set(e.target, e.isIntersecting); }}); cta.classList.toggle('show', !Array.from(vis.values()).some(Boolean)); }});
-  io.observe(hero); if (list) io.observe(list);
+  io.observe(hero); if (list) io.observe(list); var brk = document.getElementById('corretores'); if (brk) io.observe(brk);
 }})();
 document.querySelectorAll('dialog.detail').forEach(function (d) {{ d.addEventListener('close', function () {{ if (location.hash === '#' + d.id.slice(2) && history.replaceState) history.replaceState(null, '', location.pathname + location.search); }}); }});
 openFromHash();
+(function () {{
+  var f = document.getElementById('inscricao'); if (!f) return;
+  var msg = f.querySelector('.subscribe-msg'), btn = f.querySelector('button[type=submit]');
+  f.addEventListener('submit', function (e) {{
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    if (f.site.value) {{ f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok'; return; }}
+    btn.disabled = true; msg.textContent = '{t['sub_wait']}'; msg.className = 'subscribe-msg';
+    fetch('{SUPA_URL}/rest/v1/rpc/inscrever_corretor', {{
+      method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }},
+      body: JSON.stringify({{ p_nome: f.nome.value, p_imobiliaria: f.imobiliaria.value, p_creci: f.creci.value, p_email: f.email.value,
+        p_whatsapp: f.whatsapp.value, p_aceite: f.aceite.checked, p_idioma: '{lang}' }})
+    }}).then(function (r) {{
+      if (!r.ok) throw new Error(r.status);
+      f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok';
+    }}).catch(function () {{ msg.textContent = '{t['sub_err']}'; msg.className = 'subscribe-msg err'; }})
+      .then(function () {{ btn.disabled = false; }});
+  }});
+}})();
+</script>
+</body>
+</html>
+'''
+
+SAIR = '''<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cancelar e-mails | Global Estadia</title>
+<link rel="icon" href="images/favicon-48.png">
+<style>
+  body {{ margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F4F1EA; color: #1A2433; font: 17px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }}
+  main {{ max-width: 440px; margin: 16px; padding: 32px; background: #FFFFFF; border-radius: 20px; box-shadow: 0 14px 40px -24px rgba(11,26,44,.5); text-align: center; }}
+  img {{ width: 150px; height: auto; }}
+  h1 {{ font-size: 22px; margin: 18px 0 8px; }}
+  p {{ margin: 0 0 10px; color: #3A4556; }}
+  a {{ color: #10243C; font-weight: 700; }}
+</style>
+</head>
+<body>
+<main>
+  <img src="images/logo.png" alt="Global Estadia">
+  <h1 id="h">Cancelando...</h1>
+  <p id="p"></p>
+  <p><a href="./">globalestadia.com.br</a></p>
+</main>
+<script>
+(function () {{
+  var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
+  var T = en ? {{ ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }}
+             : {{ ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' }};
+  if (en) document.documentElement.lang = 'en';
+  function show(h, p) {{ document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }}
+  if (!/^[0-9a-f]{{8}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{12}}$/i.test(t)) {{ show(T.no, T.nop); return; }}
+  fetch('{SUPA_URL}/rest/v1/rpc/cancelar_inscricao', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
+    .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
+    .then(function (ok) {{ ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
+    .catch(function () {{ show(T.err, T.errp); }});
+}})();
 </script>
 </body>
 </html>
 '''
 
 if __name__ == '__main__':
+    open('sair.html', 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY))
     open('index.html', 'w', encoding='utf-8').write(render('pt'))
     os.makedirs('en', exist_ok=True)
     open('en/index.html', 'w', encoding='utf-8').write(render('en'))

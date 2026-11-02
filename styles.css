@@ -724,3 +724,22 @@ dialog.vid .vid-alt[hidden] { display: none; }
 @media (max-width: 420px) { .export-btns { grid-template-columns: 1fr; } }
 dialog.detail .detail-body > .cost + .detail-note { margin-top: 16px; }
 .brk-reply { margin: 8px 0 0; font-size: 15px; font-weight: 700; color: var(--ink); text-align: center; }
+
+/* Agent sign-up for apartment updates */
+.subscribe-wrap { padding-bottom: 80px; }
+.subscribe { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 24px; padding: 30px; display: flex; flex-direction: column; gap: 18px; }
+.subscribe-head h3 { font-size: 24px; margin: 0 0 6px; color: #FFFFFF; }
+.subscribe-head p { margin: 0; color: #D3DCE8; font-size: 17px; }
+.subscribe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.subscribe-grid label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; color: #D3DCE8; }
+.subscribe-grid input { min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.28); background: #FFFFFF; color: var(--ink); font: inherit; font-size: 16px; font-weight: 400; }
+.subscribe-grid input:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+.subscribe .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.subscribe-ok { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: #D3DCE8; }
+.subscribe-ok input { width: 20px; height: 20px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--gold); }
+.subscribe .btn { align-self: flex-start; min-width: 200px; }
+.subscribe .btn[disabled] { opacity: .6; cursor: wait; }
+.subscribe-msg { margin: 0; min-height: 1.5em; font-weight: 700; color: #D3DCE8; }
+.subscribe-msg.ok { color: #9FE3B4; }
+.subscribe-msg.err { color: #FFC2B8; }
+@media (max-width: 600px) { .subscribe { padding: 22px; } .subscribe .btn { align-self: stretch; } .subscribe-wrap { padding-bottom: 56px; } }
