@@ -296,6 +296,25 @@
       <p class="brk-reply">Respondemos no mesmo dia útil.</p>
     </div>
   </div>
+  <div class="wrap subscribe-wrap">
+    <form class="subscribe" id="inscricao" novalidate>
+      <div class="subscribe-head">
+        <h3>Receba os apartamentos em primeira mão</h3>
+        <p>Cadastre-se e receba um e-mail quando um apartamento ficar disponível, for alugado ou mudar de preço.</p>
+      </div>
+      <div class="subscribe-grid">
+        <label class="w3">Nome<input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label class="w3">E-mail<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+        <label class="w2">WhatsApp (opcional)<input name="whatsapp" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label class="w2">Imobiliária (opcional)<input name="imobiliaria" autocomplete="organization" maxlength="120"></label>
+        <label class="w2">CRECI (opcional)<input name="creci" maxlength="30"></label>
+        <label class="hp" aria-hidden="true">Site<input name="site" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label class="subscribe-ok"><input type="checkbox" name="aceite" required><span>Aceito receber e-mails da Global Estadia sobre os apartamentos. Posso cancelar quando quiser pelo link em cada e-mail.</span></label>
+      <button type="submit" class="btn btn-primary">Quero receber</button>
+      <p class="subscribe-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </section>
 
 <section id="lazer" class="amen-section">
@@ -1029,10 +1048,29 @@ document.querySelectorAll('dialog').forEach(function (d) {
   if (!cta || !hero || !('IntersectionObserver' in window)) { if (cta) cta.classList.add('show'); return; }
   var vis = new Map();
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { vis.set(e.target, e.isIntersecting); }); cta.classList.toggle('show', !Array.from(vis.values()).some(Boolean)); });
-  io.observe(hero); if (list) io.observe(list);
+  io.observe(hero); if (list) io.observe(list); var brk = document.getElementById('corretores'); if (brk) io.observe(brk);
 })();
 document.querySelectorAll('dialog.detail').forEach(function (d) { d.addEventListener('close', function () { if (location.hash === '#' + d.id.slice(2) && history.replaceState) history.replaceState(null, '', location.pathname + location.search); }); });
 openFromHash();
+(function () {
+  var f = document.getElementById('inscricao'); if (!f) return;
+  var msg = f.querySelector('.subscribe-msg'), btn = f.querySelector('button[type=submit]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    if (f.site.value) { f.reset(); msg.textContent = 'Pronto! Você vai receber as novidades no seu e-mail.'; msg.className = 'subscribe-msg ok'; return; }
+    btn.disabled = true; msg.textContent = 'Enviando...'; msg.className = 'subscribe-msg';
+    fetch('https://bvwrnddfujpkukzwmioz.supabase.co/rest/v1/rpc/inscrever_corretor', {
+      method: 'POST', headers: { 'apikey': 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_nome: f.nome.value, p_imobiliaria: f.imobiliaria.value, p_creci: f.creci.value, p_email: f.email.value,
+        p_whatsapp: f.whatsapp.value, p_aceite: f.aceite.checked, p_idioma: 'pt' })
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      f.reset(); msg.textContent = 'Pronto! Você vai receber as novidades no seu e-mail.'; msg.className = 'subscribe-msg ok';
+    }).catch(function () { msg.textContent = 'Não foi possível cadastrar agora. Tente de novo ou fale pelo WhatsApp.'; msg.className = 'subscribe-msg err'; })
+      .then(function () { btn.disabled = false; });
+  });
+})();
 </script>
 </body>
 </html>

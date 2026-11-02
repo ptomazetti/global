@@ -44,3 +44,17 @@ python3 -I tools/sync_status.py '<json>' "<fonte: planilha/e-mail e datas>"
   unidades mudaram) e `git push origin main`. O GitHub Pages publica sozinho.
 
 Não altere mais nada no site. Não responda nem apague e-mails. Não edite a planilha.
+
+## Cadastro de corretores (e-mails de novidades)
+
+O formulário "Receba os apartamentos em primeira mão" (seção Corretores do site) grava no Supabase,
+projeto `global-estadia` (ref `bvwrnddfujpkukzwmioz`), tabela `public.corretores_inscritos`.
+O site só chama duas funções: `inscrever_corretor` e `cancelar_inscricao`. A tabela não pode ser lida pelo site.
+O link de descadastro é `https://globalestadia.com.br/sair.html?t=<token_saida>` (inglês: `&l=en`).
+
+Envio dos e-mails (AINDA NÃO ATIVO: depende de a tarefa diária ter os conectores Gmail e Supabase):
+- só quando `sync_status.py` imprimir CHANGED;
+- destinatários: `select nome, email, idioma, token_saida from public.corretores_inscritos where ativo`;
+- remetente: contato@globalestadia.com.br, um e-mail por pessoa (nunca todos em cópia);
+- conteúdo: o que mudou (disponível, alugado, preço), valores com total mensal e o link do apartamento
+  (`https://globalestadia.com.br/#<id>`), e no fim o link de descadastro da própria pessoa.

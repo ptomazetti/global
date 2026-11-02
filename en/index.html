@@ -296,6 +296,25 @@
       <p class="brk-reply">We reply on the same business day.</p>
     </div>
   </div>
+  <div class="wrap subscribe-wrap">
+    <form class="subscribe" id="inscricao" novalidate>
+      <div class="subscribe-head">
+        <h3>Get new apartments first</h3>
+        <p>Sign up for an email when an apartment becomes available, is rented or changes price.</p>
+      </div>
+      <div class="subscribe-grid">
+        <label class="w3">Name<input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label class="w3">Email<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+        <label class="w2">WhatsApp (optional)<input name="whatsapp" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label class="w2">Agency (optional)<input name="imobiliaria" autocomplete="organization" maxlength="120"></label>
+        <label class="w2">CRECI (optional)<input name="creci" maxlength="30"></label>
+        <label class="hp" aria-hidden="true">Site<input name="site" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label class="subscribe-ok"><input type="checkbox" name="aceite" required><span>I agree to receive emails from Global Estadia about the apartments. I can unsubscribe at any time through the link in each email.</span></label>
+      <button type="submit" class="btn btn-primary">Sign me up</button>
+      <p class="subscribe-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </section>
 
 <section id="lazer" class="amen-section">
@@ -1029,10 +1048,29 @@ document.querySelectorAll('dialog').forEach(function (d) {
   if (!cta || !hero || !('IntersectionObserver' in window)) { if (cta) cta.classList.add('show'); return; }
   var vis = new Map();
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { vis.set(e.target, e.isIntersecting); }); cta.classList.toggle('show', !Array.from(vis.values()).some(Boolean)); });
-  io.observe(hero); if (list) io.observe(list);
+  io.observe(hero); if (list) io.observe(list); var brk = document.getElementById('corretores'); if (brk) io.observe(brk);
 })();
 document.querySelectorAll('dialog.detail').forEach(function (d) { d.addEventListener('close', function () { if (location.hash === '#' + d.id.slice(2) && history.replaceState) history.replaceState(null, '', location.pathname + location.search); }); });
 openFromHash();
+(function () {
+  var f = document.getElementById('inscricao'); if (!f) return;
+  var msg = f.querySelector('.subscribe-msg'), btn = f.querySelector('button[type=submit]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    if (f.site.value) { f.reset(); msg.textContent = 'Done! You will receive the updates by email.'; msg.className = 'subscribe-msg ok'; return; }
+    btn.disabled = true; msg.textContent = 'Sending...'; msg.className = 'subscribe-msg';
+    fetch('https://bvwrnddfujpkukzwmioz.supabase.co/rest/v1/rpc/inscrever_corretor', {
+      method: 'POST', headers: { 'apikey': 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_nome: f.nome.value, p_imobiliaria: f.imobiliaria.value, p_creci: f.creci.value, p_email: f.email.value,
+        p_whatsapp: f.whatsapp.value, p_aceite: f.aceite.checked, p_idioma: 'en' })
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      f.reset(); msg.textContent = 'Done! You will receive the updates by email.'; msg.className = 'subscribe-msg ok';
+    }).catch(function () { msg.textContent = 'We could not sign you up right now. Please try again or contact us on WhatsApp.'; msg.className = 'subscribe-msg err'; })
+      .then(function () { btn.disabled = false; });
+  });
+})();
 </script>
 </body>
 </html>
