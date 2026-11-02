@@ -16,7 +16,7 @@ CNPJ = '50.945.139/0001-86'
 # ela só permite chamar inscrever_corretor e cancelar_inscricao; a tabela não pode ser lida pelo site.
 SUPA_URL = 'https://bvwrnddfujpkukzwmioz.supabase.co'
 SUPA_KEY = 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF'
-ATUALIZADO = {'pt': '1 de novembro de 2026', 'en': '1 November 2026'}  # mude sempre que um imovel entrar ou sair
+ATUALIZADO = {'pt': '2 de novembro de 2026', 'en': '2 November 2026'}  # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = {'pt': 'https://www.airbnb.com.br/users/profile/1779247085187681939', 'en': 'https://www.airbnb.com/users/profile/1779247085187681939'}   # perfil Global Flats no Airbnb
 ATENDENTE = {}    # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
 # Avaliações reais do perfil Global Flats no Airbnb (copiadas do perfil público).
@@ -210,7 +210,7 @@ T = {
   og_alt='Sala mobiliada de um dos apartamentos da Global',
   nav_label='Principal', nav=['Apartamentos', 'Como funciona', 'Avaliações', 'Dúvidas', 'Corretores'],
   lang_label='Idioma', cta_short='Agendar visita', cta_long='Agendar visita pelo WhatsApp',
-  eyebrow='Para corretores e imobiliárias · Sorocaba e Votorantim',
+  eyebrow='Imóveis para Locação · Sorocaba e Votorantim',
   h1='Apartamentos totalmente mobiliados para o seu cliente. Ele só traz a mala.',
   lead='Fotos, vídeo e valor total prontos para você enviar ao seu cliente. Aluguel a partir de {MIN}.',
   see_all='Ver os {N} apartamentos',
@@ -221,7 +221,7 @@ T = {
   stats=[('{N}', 'apartamentos disponíveis'), ('{MIN}', 'aluguel a partir de'), ('2 dias', 'para pegar as chaves'), ('Pets', 'são bem-vindos')],
   filters=['Todos', 'Studio', '2 dormitórios', '3 dormitórios'], sort_label='Ordenar', sort_opts=['Maior preço', 'Menor preço'],
   amen_eyebrow='Lazer', amen_h='Lazer completo nos condomínios', amen_p='Piscina, academia, SPA e áreas de convivência. Tudo a poucos passos da porta do seu cliente.',
-  amen_tiles=[('alpha-club-i41-4', 'Piscina', 'Alpha Club'), ('alpha-club-i41-3', 'Academia', 'Alpha Club'), ('spettacolo-42-4', 'SPA com hidromassagem', 'Spettacolo Patriani')],
+  amen_tiles=[('red-1401-2', 'Piscina', 'RED Studio'), ('alpha-club-i41-3', 'Academia', 'Alpha Club'), ('spettacolo-42-4', 'SPA com hidromassagem', 'Spettacolo Patriani')],
   list_eyebrow='Disponíveis agora',
   list_h='Selecione a opção que atende ao seu cliente.',
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
@@ -267,7 +267,7 @@ T = {
   og_alt='Furnished living room in one of the Global apartments',
   nav_label='Main', nav=['Apartments', 'How it works', 'Reviews', 'FAQ', 'Agents'],
   lang_label='Language', cta_short='Book a viewing', cta_long='Book a viewing on WhatsApp',
-  eyebrow='For agents and agencies · Sorocaba and Votorantim, Brazil',
+  eyebrow='Homes for Rent · Sorocaba and Votorantim, Brazil',
   h1='Fully furnished apartments for your client. They just bring a suitcase.',
   lead='Photos, video and the full monthly cost, ready for you to send to your client. Rent from {MIN} a month.',
   see_all='See the {N} apartments',
@@ -278,7 +278,7 @@ T = {
   stats=[('{N}', 'apartments available'), ('{MIN}', 'rent from'), ('2 days', 'to get your keys'), ('Pets', 'are welcome')],
   filters=['All', 'Studio', '2 bedrooms', '3 bedrooms'], sort_label='Sort', sort_opts=['Highest price', 'Lowest price'],
   amen_eyebrow='Leisure', amen_h='Full leisure facilities in the buildings', amen_p='Pools, gyms, spa and shared spaces. All just steps from your client’s door.',
-  amen_tiles=[('alpha-club-i41-4', 'Pool', 'Alpha Club'), ('alpha-club-i41-3', 'Gym', 'Alpha Club'), ('spettacolo-42-4', 'Spa with hot tub', 'Spettacolo Patriani')],
+  amen_tiles=[('red-1401-2', 'Pool', 'RED Studio'), ('alpha-club-i41-3', 'Gym', 'Alpha Club'), ('spettacolo-42-4', 'Spa with hot tub', 'Spettacolo Patriani')],
   list_eyebrow='Available now',
   list_h='Select the option that suits your client.',
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
@@ -446,7 +446,7 @@ def render(lang):
             exp_lines += [g] + [f'- {x}' for x in items] + ['']
         exp_lines += [t['d_amen'], ', '.join(d['amen']), '', t['d_costs'],
                       f"{t['d_rent']}: {money(p['rent'], lang)}", f"{t['condo']}: {money(p['condo'], lang)}",
-                      f"{t['iptu']}: {money(p['iptu'], lang)}", f"{t['total']}: {money(total, lang)}", '', t['exp_note']]
+                      f"{t['iptu']}: {money(p['iptu'], lang)}", f"{t['total']}: {money(total, lang)}"]
         exp_txt = html.escape('\n'.join(exp_lines))
         thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{thumb_src(i)}" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
         dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
@@ -484,11 +484,10 @@ def render(lang):
         <h4>{t['exp_h']}</h4>
         <div class="export-btns">
           <a class="btn btn-outline" href="{p['f']}" target="_blank" rel="noopener">{t['exp_dl']}</a>
-          <a class="btn btn-outline" href="https://drive.google.com/uc?export=download&amp;id={p['v'].split('/d/')[1].split('/')[0]}" target="_blank" rel="noopener">{t['exp_vid']}</a>
+          <a class="btn btn-outline" href="https://drive.usercontent.google.com/download?id={p['v'].split('/d/')[1].split('/')[0]}&amp;export=download&amp;confirm=t" target="_blank" rel="noopener">{t['exp_vid']}</a>
           <button type="button" class="btn btn-outline copy-desc" data-ok="{t['exp_ok']}">{t['exp_copy']}</button>
         </div>
         <textarea class="export-txt" hidden readonly>{exp_txt}</textarea>
-        <p class="detail-note">{t['exp_note']}</p>
       </div>
       <a class="btn btn-primary btn-block btn-lg" href="{msg}" target="_blank" rel="noopener">{wai(20)}{t['visit_this']}</a>
     </div>
@@ -805,7 +804,7 @@ def render(lang):
 <dialog class="vid" id="vid" aria-label="{t['l_video']}">
   <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
   <video controls playsinline preload="none"></video>
-  <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
+  <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" hidden></iframe>
   <a class="vid-alt" href="#" target="_blank" rel="noopener" hidden>{t['vid_alt']}</a>
 </dialog>
 

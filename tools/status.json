@@ -7,6 +7,38 @@
   "alpha-club-i41": "Disponível",
   "vida-plena-c65": "Disponível"
  },
- "updated": "2026-11-01",
- "source": "inicial"
+ "prices": {
+  "spettacolo-42": {
+   "rent": 3490.0,
+   "condo": 650.64,
+   "iptu": 56.3
+  },
+  "red-1401": {
+   "rent": 3490.0,
+   "condo": 692.2,
+   "iptu": 68.71
+  },
+  "alpha-club-j42": {
+   "rent": 2890.0,
+   "condo": 494.24,
+   "iptu": 158.32
+  },
+  "esplanada-102": {
+   "rent": 2890.0,
+   "condo": 500.0,
+   "iptu": 105.33
+  },
+  "alpha-club-i41": {
+   "rent": 2790.0,
+   "condo": 494.24,
+   "iptu": 158.32
+  },
+  "vida-plena-c65": {
+   "rent": 2790.0,
+   "condo": 456.66,
+   "iptu": 61.84
+  }
+ },
+ "updated": "2026-11-02",
+ "source": "planilha, 2 nov 2026 (manual)"
 }
