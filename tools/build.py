@@ -804,7 +804,7 @@ def render(lang):
 <dialog class="vid" id="vid" aria-label="{t['l_video']}">
   <button class="detail-close" type="button" aria-label="{t['d_close']}">✕</button>
   <video controls playsinline preload="none"></video>
-  <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
+  <iframe class="vid-frame" title="{t['l_video']}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" hidden></iframe>
   <a class="vid-alt" href="#" target="_blank" rel="noopener" hidden>{t['vid_alt']}</a>
 </dialog>
 
