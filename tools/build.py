@@ -248,7 +248,7 @@ T = {
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.', brk_reply='Respondemos no mesmo dia útil.',
   sub_h='Receba os apartamentos em primeira mão', sub_p='Cadastre-se e receba um e-mail quando um apartamento ficar disponível, for alugado ou mudar de preço.',
-  sub_nome='Nome', sub_imob='Imobiliária', sub_creci='CRECI', sub_email='E-mail', sub_wa='WhatsApp (opcional)',
+  sub_nome='Nome', sub_imob='Imobiliária (opcional)', sub_creci='CRECI (opcional)', sub_email='E-mail', sub_wa='WhatsApp (opcional)',
   sub_aceite='Aceito receber e-mails da Global Estadia sobre os apartamentos. Posso cancelar quando quiser pelo link em cada e-mail.',
   sub_btn='Quero receber', sub_wait='Enviando...', sub_ok='Pronto! Você vai receber as novidades no seu e-mail.', sub_err='Não foi possível cadastrar agora. Tente de novo ou fale pelo WhatsApp.',
   end_h='Seu cliente gostou de um? Agende a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
@@ -305,7 +305,7 @@ T = {
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.', brk_reply='We reply on the same business day.',
   sub_h='Get new apartments first', sub_p='Sign up for an email when an apartment becomes available, is rented or changes price.',
-  sub_nome='Name', sub_imob='Agency', sub_creci='CRECI', sub_email='Email', sub_wa='WhatsApp (optional)',
+  sub_nome='Name', sub_imob='Agency (optional)', sub_creci='CRECI (optional)', sub_email='Email', sub_wa='WhatsApp (optional)',
   sub_aceite='I agree to receive emails from Global Estadia about the apartments. I can unsubscribe at any time through the link in each email.',
   sub_btn='Sign me up', sub_wait='Sending...', sub_ok='Done! You will receive the updates by email.', sub_err='We could not sign you up right now. Please try again or contact us on WhatsApp.',
   end_h='Does your client like one? Book the viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
@@ -707,11 +707,11 @@ def render(lang):
         <p>{t['sub_p']}</p>
       </div>
       <div class="subscribe-grid">
-        <label>{t['sub_nome']}<input name="nome" autocomplete="name" required maxlength="120"></label>
-        <label>{t['sub_imob']}<input name="imobiliaria" autocomplete="organization" maxlength="120"></label>
-        <label>{t['sub_creci']}<input name="creci" maxlength="30"></label>
-        <label>{t['sub_email']}<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
-        <label>{t['sub_wa']}<input name="whatsapp" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label class="w3">{t['sub_nome']}<input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label class="w3">{t['sub_email']}<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+        <label class="w2">{t['sub_wa']}<input name="whatsapp" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label class="w2">{t['sub_imob']}<input name="imobiliaria" autocomplete="organization" maxlength="120"></label>
+        <label class="w2">{t['sub_creci']}<input name="creci" maxlength="30"></label>
         <label class="hp" aria-hidden="true">Site<input name="site" tabindex="-1" autocomplete="off"></label>
       </div>
       <label class="subscribe-ok"><input type="checkbox" name="aceite" required><span>{t['sub_aceite']}</span></label>

@@ -730,7 +730,10 @@ dialog.detail .detail-body > .cost + .detail-note { margin-top: 16px; }
 .subscribe { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 24px; padding: 30px; display: flex; flex-direction: column; gap: 18px; }
 .subscribe-head h3 { font-size: 24px; margin: 0 0 6px; color: #FFFFFF; }
 .subscribe-head p { margin: 0; color: #D3DCE8; font-size: 17px; }
-.subscribe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.subscribe-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.subscribe-grid .w3 { grid-column: span 3; }
+.subscribe-grid .w2 { grid-column: span 2; }
+@media (max-width: 760px) { .subscribe-grid { grid-template-columns: 1fr; } .subscribe-grid .w3, .subscribe-grid .w2 { grid-column: auto; } }
 .subscribe-grid label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; color: #D3DCE8; }
 .subscribe-grid input { min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.28); background: #FFFFFF; color: var(--ink); font: inherit; font-size: 16px; font-weight: 400; }
 .subscribe-grid input:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
