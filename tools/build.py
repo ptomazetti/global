@@ -36,7 +36,7 @@ P = [
  dict(id='spettacolo-42', beds=0, name='Spettacolo Patriani', rent=3490, condo=615.09, iptu=56.30,
   tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
   meta={'pt': 'Apto. 42 · 76 m² de área total', 'en': 'Apt. 42 · 76 m² total area'},
-  perks={'pt': ['2 garagens cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
+  perks={'pt': ['2 vagas cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
          'en': ['2 covered parking spaces and 10 m² storage', 'Panoramic balcony, Queen bed', 'Lap pool, spa, sauna and gym']},
   gal={'pt': ['Sala com vista pela varanda panorâmica', 'Sala de estar com sofá e poltronas', 'Cozinha com armários planejados e cooktop', 'SPA com hidromassagem do condomínio', 'Fachada do Spettacolo Patriani'],
        'en': ['Living room with panoramic balcony view', 'Living room with sofa and armchairs', 'Kitchen with built-in cabinets and cooktop', 'Building spa with hot tub', 'Spettacolo Patriani entrance']},
@@ -46,7 +46,7 @@ P = [
  dict(id='red-1401', beds=0, name='RED Studio', rent=3490, condo=692.30, iptu=68.71,
   tag={'pt': 'Studio alto padrão', 'en': 'Premium studio'},
   meta={'pt': 'Apto. 1401 · 56 m² · 14º andar · Jardim América', 'en': 'Apt. 1401 · 56 m² · 14th floor · Jardim América'},
-  perks={'pt': ['Varanda gourmet envidraçada com vista para o pôr do sol', '2 vagas de garagem cobertas', 'Internet de 500 Mega, utensílios e enxoval inclusos'],
+  perks={'pt': ['Varanda gourmet envidraçada com vista para o pôr do sol', '2 vagas cobertas', 'Internet de 500 Mega, utensílios e enxoval inclusos'],
          'en': ['Glazed balcony with sunset views', '2 covered parking spaces', '500 Mbps internet, kitchenware and linens included']},
   gal={'pt': ['Sala e cozinha integradas com mesa de jantar', 'Piscina do condomínio ao pôr do sol', 'Varanda envidraçada com vista para o pôr do sol', 'Área da cama Queen', 'Cozinha com cooktop e geladeira duplex'],
        'en': ['Open-plan living room and kitchen with dining table', 'Building pool at sunset', 'Glazed balcony with sunset view', 'Queen bed area', 'Kitchen with cooktop and double-door fridge']},
@@ -56,8 +56,8 @@ P = [
  dict(id='alpha-club-j42', beds=2, name='Alpha Club J42', rent=2890, condo=464.19, iptu=158.00,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 42 · Bloco J · Campolim', 'en': 'Apt. 42 · Block J · Campolim'},
-  perks={'pt': ['Ar-condicionado 12.000 BTUs na suíte', 'Cama box Queen, Smart TV, cortina blackout', 'Varanda gourmet, condomínio clube'],
-         'en': ['12,000 BTU air conditioning in the master bedroom', 'Queen bed, Smart TV, blackout curtains', 'Barbecue balcony, club-style complex']},
+  perks={'pt': ['Ar-condicionado 12.000 BTUs na suíte', 'Cama box Queen, Smart TV, cortina blackout', 'Varanda gourmet, 1 vaga descoberta, condomínio clube'],
+         'en': ['12,000 BTU air conditioning in the master bedroom', 'Queen bed, Smart TV, blackout curtains', 'Barbecue balcony, 1 uncovered parking space, club-style complex']},
   gal={'pt': ['Sala com bar iluminado e bancada', 'Cozinha com geladeira, fogão e micro-ondas'],
        'en': ['Living room with lit bar and counter', 'Kitchen with fridge, stove and microwave']},
   f='https://drive.google.com/drive/folders/1bPidYHmKlhAE6bBfmmKMkpROLZA144Wz?usp=drive_link',
@@ -66,8 +66,8 @@ P = [
  dict(id='esplanada-102', beds=3, name='Residencial Esplanada', rent=2890, condo=500.00, iptu=105.33,
   tag={'pt': '3 dormitórios', 'en': '3 bedrooms'},
   meta={'pt': 'Apto. 102 · Bloco 2', 'en': 'Apt. 102 · Block 2'},
-  perks={'pt': ['Cozinha equipada, geladeira 440 L, cooktop e forno', 'Máquina lava e seca, ar-condicionado na sala', '1 vaga, condomínio clube'],
-         'en': ['Equipped kitchen, 440 L fridge, cooktop and oven', 'Washer-dryer, air conditioning in the living room', '1 parking space, club-style complex']},
+  perks={'pt': ['Cozinha equipada, geladeira 440 L, cooktop e forno', 'Máquina lava e seca, ar-condicionado na sala', '1 vaga descoberta, condomínio clube'],
+         'en': ['Equipped kitchen, 440 L fridge, cooktop and oven', 'Washer-dryer, air conditioning in the living room', '1 uncovered parking space, club-style complex']},
   gal={'pt': ['Sala integrada com mesa de jantar', 'Cozinha com geladeira e micro-ondas', 'Dormitório com armário planejado'],
        'en': ['Open-plan living and dining room', 'Kitchen with fridge and microwave', 'Bedroom with built-in wardrobe']},
   f='https://drive.google.com/drive/folders/1A19Eb5ZPVLWmBcxqc6R4a2GPwvbjgVFB?usp=drive_link',
@@ -76,8 +76,8 @@ P = [
  dict(id='alpha-club-i41', beds=2, name='Alpha Club I41', rent=2790, condo=497.77, iptu=158.12,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
   meta={'pt': 'Apto. 41 · Bloco I · Campolim', 'en': 'Apt. 41 · Block I · Campolim'},
-  perks={'pt': ['Dois quartos com cama box de casal', 'Mesa de jantar para 4 lugares', 'Varanda gourmet, 1 vaga, condomínio clube'],
-         'en': ['Two bedrooms with double beds', 'Dining table for 4', 'Barbecue balcony, 1 parking space, club-style complex']},
+  perks={'pt': ['Dois quartos com cama box de casal', 'Mesa de jantar para 4 lugares', 'Varanda gourmet, 1 vaga descoberta, condomínio clube'],
+         'en': ['Two bedrooms with double beds', 'Dining table for 4', 'Barbecue balcony, 1 uncovered parking space, club-style complex']},
   gal={'pt': ['Sala com sofá e Smart TV', 'Cozinha equipada com máquina de lavar', 'Academia do condomínio', 'Piscina do condomínio'],
        'en': ['Living room with sofa and Smart TV', 'Equipped kitchen with washing machine', 'Building gym', 'Building pool']},
   f='https://drive.google.com/drive/folders/1UxoTaZttGauF5RwCaPovwjylUFDpiMxK?usp=drive_link',
@@ -86,8 +86,8 @@ P = [
  dict(id='vida-plena-c65', beds=2, name='Vida Plena C65', rent=2790, condo=406.42, iptu=61.84,
   tag={'pt': '2 dormitórios', 'en': '2 bedrooms'},
   meta={'pt': 'Apto. 65 · Bloco C · Campolim', 'en': 'Apt. 65 · Block C · Campolim'},
-  perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', 'Condomínio com lazer completo'],
-         'en': ['Built-in cabinets in every room', 'Home office desk, LED lighting', 'Full leisure facilities']},
+  perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', '1 vaga descoberta, condomínio com lazer completo'],
+         'en': ['Built-in cabinets in every room', 'Home office desk, LED lighting', '1 uncovered parking space, full leisure facilities']},
   gal={'pt': ['Sala com mesa de jantar', 'Cozinha com geladeira, fogão e micro-ondas', 'Dormitório com cama box e armário'],
        'en': ['Living room with dining table', 'Kitchen with fridge, stove and microwave', 'Bedroom with bed and wardrobe']},
   f='https://drive.google.com/drive/folders/1qV2qAFvA47z2pMG8QX_9GhA8e6oTtLZb?usp=drive_link',
@@ -157,43 +157,43 @@ DET = {
     groups=[('Ambientes', ['Dormitórios, cozinha e banheiro com móveis planejados', 'Sala com ar-condicionado de 12.000 BTUs', 'Smart TV, sofá e mesa com cadeiras']),
             ('Cozinha', ['Fogão, cooktop, forno elétrico e coifa', 'Micro-ondas', 'Geladeira Frost Free Duplex de 440 L']),
             ('Lavanderia', ['Área de serviço completa com máquina lava e seca']),
-            ('Garagem', ['1 vaga'])],
+            ('Garagem', ['1 vaga descoberta'])],
     amen=['Condomínio clube']),
   'en': dict(head='3 bedrooms with a fully equipped kitchen',
     intro='At Residencial Esplanada, Block 2. The only 3-bedroom on our list, with air conditioning in the living room and a full laundry.',
     groups=[('Living spaces', ['Built-in furniture in the bedrooms, kitchen and bathroom', 'Living room with 12,000 BTU air conditioning', 'Smart TV, sofa, table and chairs']),
             ('Kitchen', ['Stove, cooktop, electric oven and range hood', 'Microwave', '440 L frost-free double-door fridge']),
             ('Laundry', ['Full laundry area with washer-dryer']),
-            ('Parking', ['1 parking space'])],
+            ('Parking', ['1 uncovered parking space'])],
     amen=['Club-style complex'])},
  'alpha-club-i41': {
   'pt': dict(head='2 dormitórios com suíte e varanda gourmet',
-    intro='No Alpha Club, no Campolim. Dois quartos com cama de casal e uma vaga de garagem.',
+    intro='No Alpha Club, no Campolim. Dois quartos com cama de casal e ventilador de teto. Não tem ar-condicionado. Uma vaga de garagem descoberta.',
     groups=[('Suíte', ['Cama box de casal', 'Armário e ventilador de teto']),
-            ('Segundo quarto', ['Cama box de casal e armário']),
+            ('Segundo quarto', ['Cama box de casal e armário', 'Ventilador de teto']),
             ('Sala e varanda', ['Sofá e TV', 'Mesa de jantar para 4 lugares', 'Varanda gourmet']),
             ('Cozinha e serviço', ['Armários planejados', 'Fogão, micro-ondas e geladeira', 'Máquina de lavar']),
-            ('Garagem', ['1 vaga'])],
+            ('Garagem', ['1 vaga descoberta'])],
     amen=['Condomínio clube']),
   'en': dict(head='2 bedrooms with en suite and a barbecue balcony',
-    intro='At Alpha Club in Campolim. Two bedrooms with double beds and one parking space.',
+    intro='At Alpha Club in Campolim. Two bedrooms with double beds and ceiling fans. No air conditioning. One uncovered parking space.',
     groups=[('Master bedroom', ['Double bed', 'Wardrobe and ceiling fan']),
-            ('Second bedroom', ['Double bed and wardrobe']),
+            ('Second bedroom', ['Double bed and wardrobe', 'Ceiling fan']),
             ('Living room and balcony', ['Sofa and TV', 'Dining table for 4', 'Barbecue balcony']),
             ('Kitchen and laundry', ['Built-in cabinets', 'Stove, microwave and fridge', 'Washing machine']),
-            ('Parking', ['1 parking space'])],
+            ('Parking', ['1 uncovered parking space'])],
     amen=['Club-style complex'])},
  'vida-plena-c65': {
   'pt': dict(head='2 dormitórios com espaço para home office',
-    intro='No Vida Plena, no Campolim, em condomínio com lazer completo.',
-    groups=[('Ambientes', ['Armários planejados em todos os cômodos', 'Cama box de casal em um quarto e de solteiro no outro', 'Sofá e mesa de jantar', 'Bancada para home office', 'Cortinas']),
+    intro='No Vida Plena, no Campolim, em condomínio com lazer completo. Tem ventilador de teto. Não tem ar-condicionado. Uma vaga de garagem descoberta.',
+    groups=[('Ambientes', ['Armários planejados em todos os cômodos', 'Cama box de casal em um quarto e de solteiro no outro', 'Sofá e mesa de jantar', 'Bancada para home office', 'Cortinas', 'Ventilador de teto']),
             ('Cozinha e serviço', ['Fogão, micro-ondas e geladeira', 'Máquina de lavar']),
             ('Tecnologia', ['TV', 'Iluminação 100% LED']),
             ('Garagem', ['1 vaga descoberta'])],
     amen=['Lazer completo']),
   'en': dict(head='2 bedrooms with a home office corner',
-    intro='At Vida Plena in Campolim, in a building with full leisure facilities.',
-    groups=[('Living spaces', ['Built-in cabinets in every room', 'Double bed in one bedroom, single bed in the other', 'Sofa and dining table', 'Home office desk', 'Curtains']),
+    intro='At Vida Plena in Campolim, in a building with full leisure facilities. Ceiling fan. No air conditioning. One uncovered parking space.',
+    groups=[('Living spaces', ['Built-in cabinets in every room', 'Double bed in one bedroom, single bed in the other', 'Sofa and dining table', 'Home office desk', 'Curtains', 'Ceiling fan']),
             ('Kitchen and laundry', ['Stove, microwave and fridge', 'Washing machine']),
             ('Tech', ['TV', '100% LED lighting']),
             ('Parking', ['1 uncovered parking space'])],
@@ -227,7 +227,7 @@ T = {
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos e vídeo', exp_copy='Copiar descrição', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
+  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_copy='Copiar descrição', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Agendar visita" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Disponibilize a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Veja a que mais se encaixa para o seu cliente.'),
@@ -244,7 +244,7 @@ T = {
        ('Como agendo a visita e em quanto tempo as chaves estarão disponíveis?', 'Pelo {WALINK}: informe em uma única mensagem o nome, RG e CRECI do corretor, o primeiro nome do cliente, o imóvel que deseja visitar e o melhor dia e horário. Com isso, liberamos a entrada na portaria e a chave: por empréstimo, código da fechadura eletrônica ou apartamento aberto, dependendo do imóvel. Se preferir, encaminhe a solicitação para {MAILLINK}. As chaves saem em até 2 dias depois da documentação.')],
   short_q='Preciso de uma estadia curta. Vocês têm?', short_a='Sim, para estadias curtas procure por {AIRBNB}.', airbnb='Global Flats no Airbnb', ab_h='Seu cliente procura algo por poucos dias?', ab_p='Para estadias curtas, os apartamentos também estão no Airbnb como Global Flats.', ab_btn='Ver no Airbnb', ab_search='Procure por "Global Flats" no Airbnb',
   brk_eyebrow='Para corretores parceiros', brk_h='Feche locação sem montar material.',
-  brk_p='Cada apartamento já tem fotos, vídeo, descrição e custo mensal prontos. Abra "Fotos e detalhes", toque em "Compartilhar" e envie ao seu cliente. Leva um minuto. Para anunciar no seu site, use "Baixar fotos e vídeo" e "Copiar descrição".',
+  brk_p='Cada apartamento já tem fotos, vídeo, descrição e custo mensal prontos. Abra "Fotos e detalhes", toque em "Compartilhar" e envie ao seu cliente. Leva um minuto. Para anunciar no seu site, use "Baixar fotos", "Baixar vídeo" e "Copiar descrição".',
   brk_box='Para agendar uma visita', brk_send='Envie em uma única mensagem:', brk_chips=['Nome', 'RG', 'CRECI', 'Primeiro nome do cliente', 'Imóvel', 'Dia e horário'],
   brk_btn='Enviar pedido de visita', brk_small='O botão abre o WhatsApp com esses campos já preenchidos.', brk_reply='Respondemos no mesmo dia útil.',
   sub_h='Receba os apartamentos em primeira mão', sub_p='Cadastre-se e receba um e-mail quando um apartamento ficar disponível, for alugado ou mudar de preço.',
@@ -284,7 +284,7 @@ T = {
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos and video', exp_copy='Copy description', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
+  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_copy='Copy description', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "Book a viewing" on the apartment. WhatsApp opens with the message ready, including the apartment name.'),
          ('Provide the guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). See which one suits your client best.'),
@@ -301,7 +301,7 @@ T = {
        ('How do I book a viewing, and when will the keys be available?', 'On {WALINK}: send one message with the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and the best day and time. We then arrange access at the front desk and the key: on loan, an electronic lock code or the apartment left open, depending on the property. You can also send the request to {MAILLINK}. Keys are ready within 2 days of receiving the documents.')],
   short_q='I need a short stay. Do you offer that?', short_a='Yes. For short stays, look for {AIRBNB}.', airbnb='Global Flats on Airbnb', ab_h='Is your client looking for just a few days?', ab_p='For short stays, the apartments are also on Airbnb as Global Flats.', ab_btn='View on Airbnb', ab_search='Search "Global Flats" on Airbnb',
   brk_eyebrow='For partner real estate agents', brk_h='Close rentals without building your own material.',
-  brk_p='Every apartment already has photos, video, a description and the monthly cost ready. Open "Photos and details", tap "Share" and send it to your client. It takes a minute. To list it on your website, use "Download photos and video" and "Copy description".',
+  brk_p='Every apartment already has photos, video, a description and the monthly cost ready. Open "Photos and details", tap "Share" and send it to your client. It takes a minute. To list it on your website, use "Download photos", "Download video" and "Copy description".',
   brk_box='To book a viewing', brk_send='Send in one message:', brk_chips=['Name', 'ID (RG)', 'CRECI', 'Client’s first name', 'Apartment', 'Day and time'],
   brk_btn='Send viewing request', brk_small='The button opens WhatsApp with these fields ready to fill in.', brk_reply='We reply on the same business day.',
   sub_h='Get new apartments first', sub_p='Sign up for an email when an apartment becomes available, is rented or changes price.',
@@ -484,6 +484,7 @@ def render(lang):
         <h4>{t['exp_h']}</h4>
         <div class="export-btns">
           <a class="btn btn-outline" href="{p['f']}" target="_blank" rel="noopener">{t['exp_dl']}</a>
+          <a class="btn btn-outline" href="https://drive.google.com/uc?export=download&amp;id={p['v'].split('/d/')[1].split('/')[0]}" target="_blank" rel="noopener">{t['exp_vid']}</a>
           <button type="button" class="btn btn-outline copy-desc" data-ok="{t['exp_ok']}">{t['exp_copy']}</button>
         </div>
         <textarea class="export-txt" hidden readonly>{exp_txt}</textarea>
@@ -508,7 +509,7 @@ def render(lang):
         tr = f'<p class="quotes-tr">{t["quotes_tr"]}</p>' if t['quotes_tr'] else ''
         dep_html = f'''<section id="avaliacoes" class="quotes-band">
   <div class="wrap quotes-section">
-    <div class="quotes-head"><div class="section-head"><p class="eyebrow eyebrow-gold">Airbnb · Global Flats</p><h2>{t["quotes_h"]}</h2><p>{t["quotes_intro"]}</p></div>{more}</div>
+    <div class="quotes-head"><div class="section-head"><p class="eyebrow eyebrow-gold">Airbnb · Global Flats</p><h2>{t["quotes_h"]}</h2></div>{more}</div>
     <div class="quotes">{items}</div>
     {tr}
     <div class="host-card reveal"><p class="host-h">{t["host_h"]}</p><ul>{''.join(f'<li>{CHECK}{x}</li>' for x in t["host_items"])}</ul></div>
@@ -760,9 +761,9 @@ def render(lang):
   </div>
 </section>
 
+{AB_BAND}
 {dep_html}
 
-{AB_BAND}
 <section id="contato" class="cta-band">
   <picture class="cta-bg"><source srcset="{R}images/cta-bg.webp" type="image/webp"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
   <div class="wrap contact reveal">

@@ -721,6 +721,7 @@ dialog.vid .vid-alt[hidden] { display: none; }
 .detail-export h4 { margin: 0 0 12px; }
 .export-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .export-btns .btn { min-height: 48px; font-size: 15px; padding: 0 12px; text-align: center; }
+.export-btns .copy-desc { grid-column: 1 / -1; }
 @media (max-width: 420px) { .export-btns { grid-template-columns: 1fr; } }
 dialog.detail .detail-body > .cost + .detail-note { margin-top: 16px; }
 .brk-reply { margin: 8px 0 0; font-size: 15px; font-weight: 700; color: var(--ink); text-align: center; }
