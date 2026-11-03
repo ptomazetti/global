@@ -72,6 +72,7 @@ P = [
        'en': ['Open-plan living and dining room', 'Kitchen with fridge and microwave', 'Bedroom with built-in wardrobe']},
   f='https://drive.google.com/drive/folders/1A19Eb5ZPVLWmBcxqc6R4a2GPwvbjgVFB?usp=drive_link',
   v='https://drive.google.com/file/d/1fnlMgA-zpWuqXb1aKqtkJaMqdwAT2hpM/view',
+  vdl=True,  # small MP4: Drive downloads it without the virus-scan warning
   d='https://drive.google.com/file/d/19NxWZqBZ20AZ7AQVyDnz_o85rwfdnqPo/view?usp=sharing'),
  dict(id='alpha-club-i41', beds=2, name='Alpha Club I41', rent=2790, condo=497.77, iptu=158.12,
   tag={'pt': '2 dormitórios c/ suíte', 'en': '2 bedrooms, 1 en suite'},
@@ -227,7 +228,7 @@ T = {
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
-  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_copy='Copiar descrição', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
+  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_vid_drive='Abrir vídeo no Drive', exp_copy='Copiar descrição', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Agendar visita" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Disponibilize a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Veja a que mais se encaixa para o seu cliente.'),
@@ -284,7 +285,7 @@ T = {
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
-  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_copy='Copy description', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
+  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_vid_drive='Open video in Drive', exp_copy='Copy description', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "Book a viewing" on the apartment. WhatsApp opens with the message ready, including the apartment name.'),
          ('Provide the guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). See which one suits your client best.'),
@@ -448,6 +449,12 @@ def render(lang):
                       f"{t['d_rent']}: {money(p['rent'], lang)}", f"{t['condo']}: {money(p['condo'], lang)}",
                       f"{t['iptu']}: {money(p['iptu'], lang)}", f"{t['total']}: {money(total, lang)}"]
         exp_txt = html.escape('\n'.join(exp_lines))
+        # Large Drive videos trigger Google's "can't scan for viruses" page, so only small ones get a direct download.
+        if p.get('vdl'):
+            vid_id = p['v'].split('/d/')[1].split('/')[0]
+            vid_btn = f'<a class="btn btn-outline" href="https://drive.usercontent.google.com/download?id={vid_id}&amp;export=download&amp;confirm=t" target="_blank" rel="noopener">{t["exp_vid"]}</a>'
+        else:
+            vid_btn = f'<a class="btn btn-outline" href="{p["v"]}" target="_blank" rel="noopener">{t["exp_vid_drive"]}</a>'
         thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{thumb_src(i)}" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
         dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
   <div class="detail-inner">
@@ -484,7 +491,7 @@ def render(lang):
         <h4>{t['exp_h']}</h4>
         <div class="export-btns">
           <a class="btn btn-outline" href="{p['f']}" target="_blank" rel="noopener">{t['exp_dl']}</a>
-          <a class="btn btn-outline" href="https://drive.usercontent.google.com/download?id={p['v'].split('/d/')[1].split('/')[0]}&amp;export=download&amp;confirm=t" target="_blank" rel="noopener">{t['exp_vid']}</a>
+          {vid_btn}
           <button type="button" class="btn btn-outline copy-desc" data-ok="{t['exp_ok']}">{t['exp_copy']}</button>
         </div>
         <textarea class="export-txt" hidden readonly>{exp_txt}</textarea>
