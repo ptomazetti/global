@@ -1048,7 +1048,7 @@ openFromHash();
   f.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!f.reportValidity()) return;
-    if (f.site.value) { f.reset(); msg.textContent = 'Done! You will receive the updates by email.'; msg.className = 'subscribe-msg ok'; return; }
+    if (f.site.value) { f.reset(); msg.textContent = 'Done! Your confirmation will arrive by email by tomorrow morning. If you cannot find it, check your junk folder.'; msg.className = 'subscribe-msg ok'; f.classList.add('done'); return; }
     btn.disabled = true; msg.textContent = 'Sending...'; msg.className = 'subscribe-msg';
     fetch('https://bvwrnddfujpkukzwmioz.supabase.co/rest/v1/rpc/inscrever_corretor', {
       method: 'POST', headers: { 'apikey': 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF', 'Content-Type': 'application/json' },
@@ -1056,7 +1056,7 @@ openFromHash();
         p_whatsapp: f.whatsapp.value, p_aceite: f.aceite.checked, p_idioma: 'en' })
     }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
-      f.reset(); msg.textContent = 'Done! You will receive the updates by email.'; msg.className = 'subscribe-msg ok';
+      f.reset(); msg.textContent = 'Done! Your confirmation will arrive by email by tomorrow morning. If you cannot find it, check your junk folder.'; msg.className = 'subscribe-msg ok'; f.classList.add('done');
     }).catch(function () { msg.textContent = 'We could not sign you up right now. Please try again or contact us on WhatsApp.'; msg.className = 'subscribe-msg err'; })
       .then(function () { btn.disabled = false; });
   });

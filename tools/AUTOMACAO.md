@@ -52,9 +52,13 @@ projeto `global-estadia` (ref `bvwrnddfujpkukzwmioz`), tabela `public.corretores
 O site só chama duas funções: `inscrever_corretor` e `cancelar_inscricao`. A tabela não pode ser lida pelo site.
 O link de descadastro é `https://globalestadia.com.br/sair.html?t=<token_saida>` (inglês: `&l=en`).
 
-Envio dos e-mails (AINDA NÃO ATIVO: depende de a tarefa diária ter os conectores Gmail e Supabase):
-- só quando `sync_status.py` imprimir CHANGED;
-- destinatários: `select nome, email, idioma, token_saida from public.corretores_inscritos where ativo`;
-- remetente: contato@globalestadia.com.br, um e-mail por pessoa (nunca todos em cópia);
-- conteúdo: o que mudou (disponível, alugado, preço), valores com total mensal e o link do apartamento
+Envio dos e-mails (ATIVO desde 3/11/2026). Roda na mesma rotina diária, pelo Gmail de contato@globalestadia.com.br:
+- boas-vindas: todo dia, para quem tem `ativo` e `boas_vindas_em` vazio. Traz os apartamentos disponíveis com
+  valores e total mensal, pede para adicionar contato@ aos contatos e tem o link de descadastro. Depois de enviar,
+  preenche `boas_vindas_em`. Quem sai da lista e se cadastra de novo recebe as boas-vindas outra vez
+  (`inscrever_corretor` limpa `boas_vindas_em` quando reativa o cadastro);
+- aviso de mudanças: só quando `sync_status.py` imprimir CHANGED, para os ativos que não receberam as
+  boas-vindas na última hora;
+- um e-mail por pessoa (nunca todos em cópia);
+- conteúdo do aviso: o que mudou (disponível, alugado, preço), valores com total mensal e o link do apartamento
   (`https://globalestadia.com.br/#<id>`), e no fim o link de descadastro da própria pessoa.

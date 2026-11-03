@@ -250,7 +250,7 @@ T = {
   sub_h='Receba os apartamentos em primeira mão', sub_p='Cadastre-se e receba um e-mail quando um apartamento ficar disponível, for alugado ou mudar de preço.',
   sub_nome='Nome', sub_imob='Imobiliária (opcional)', sub_creci='CRECI (opcional)', sub_email='E-mail', sub_wa='WhatsApp (opcional)',
   sub_aceite='Aceito receber e-mails da Global Estadia sobre os apartamentos. Posso cancelar quando quiser pelo link em cada e-mail.',
-  sub_btn='Quero receber', sub_wait='Enviando...', sub_ok='Pronto! Você vai receber as novidades no seu e-mail.', sub_err='Não foi possível cadastrar agora. Tente de novo ou fale pelo WhatsApp.',
+  sub_btn='Quero receber', sub_wait='Enviando...', sub_ok='Pronto! A confirmação chega no seu e-mail até amanhã de manhã. Se não aparecer, olhe o lixo eletrônico.', sub_err='Não foi possível cadastrar agora. Tente de novo ou fale pelo WhatsApp.',
   end_h='Seu cliente gostou de um? Agende a visita hoje.', end_p='Cada apartamento é único. Quando ele é alugado, sai da lista.',
   foot_tag='Locação de apartamentos mobiliados · Sorocaba e Votorantim', foot_wa='Fale pelo WhatsApp',
   wa_general='Olá! Sou corretor(a) e quero agendar uma visita.\nNome:\nRG:\nCRECI:\nPrimeiro nome do cliente:\nImóvel:\nDia e horário:',
@@ -307,7 +307,7 @@ T = {
   sub_h='Get new apartments first', sub_p='Sign up for an email when an apartment becomes available, is rented or changes price.',
   sub_nome='Name', sub_imob='Agency (optional)', sub_creci='CRECI (optional)', sub_email='Email', sub_wa='WhatsApp (optional)',
   sub_aceite='I agree to receive emails from Global Estadia about the apartments. I can unsubscribe at any time through the link in each email.',
-  sub_btn='Sign me up', sub_wait='Sending...', sub_ok='Done! You will receive the updates by email.', sub_err='We could not sign you up right now. Please try again or contact us on WhatsApp.',
+  sub_btn='Sign me up', sub_wait='Sending...', sub_ok='Done! Your confirmation will arrive by email by tomorrow morning. If you cannot find it, check your junk folder.', sub_err='We could not sign you up right now. Please try again or contact us on WhatsApp.',
   end_h='Does your client like one? Book the viewing today.', end_p='Every apartment is one of a kind. Once it is rented, it comes off the list.',
   foot_tag='Furnished apartment rentals · Sorocaba and Votorantim, Brazil', foot_wa='Chat on WhatsApp',
   wa_general='Hello! I am a real estate agent and would like to book a viewing.\nName:\nID (RG):\nCRECI:\nClient’s first name:\nApartment:\nDay and time:',
@@ -939,7 +939,7 @@ openFromHash();
   f.addEventListener('submit', function (e) {{
     e.preventDefault();
     if (!f.reportValidity()) return;
-    if (f.site.value) {{ f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok'; return; }}
+    if (f.site.value) {{ f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok'; f.classList.add('done'); return; }}
     btn.disabled = true; msg.textContent = '{t['sub_wait']}'; msg.className = 'subscribe-msg';
     fetch('{SUPA_URL}/rest/v1/rpc/inscrever_corretor', {{
       method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }},
@@ -947,7 +947,7 @@ openFromHash();
         p_whatsapp: f.whatsapp.value, p_aceite: f.aceite.checked, p_idioma: '{lang}' }})
     }}).then(function (r) {{
       if (!r.ok) throw new Error(r.status);
-      f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok';
+      f.reset(); msg.textContent = '{t['sub_ok']}'; msg.className = 'subscribe-msg ok'; f.classList.add('done');
     }}).catch(function () {{ msg.textContent = '{t['sub_err']}'; msg.className = 'subscribe-msg err'; }})
       .then(function () {{ btn.disabled = false; }});
   }});
