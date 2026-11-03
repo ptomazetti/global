@@ -746,6 +746,8 @@ dialog.detail .detail-body > .cost + .detail-note { margin-top: 16px; }
 .subscribe-msg { margin: 0; min-height: 1.5em; font-weight: 700; color: #D3DCE8; }
 .subscribe-msg.ok { color: #9FE3B4; }
 .subscribe-msg.err { color: #FFC2B8; }
+.subscribe.done .subscribe-grid, .subscribe.done .subscribe-ok, .subscribe.done .btn { display: none; }
+.subscribe.done .subscribe-msg { font-size: 18px; }
 @media (max-width: 600px) { .subscribe { padding: 22px; } .subscribe .btn { align-self: stretch; } .subscribe-wrap { padding-bottom: 56px; } }
 /* Card video button sits bottom-left so it never collides with the type tag (top-left) */
 .card .media-pill { top: auto; right: auto; bottom: 12px; left: 12px; }
