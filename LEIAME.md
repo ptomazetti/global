@@ -10,7 +10,9 @@ O site tem duas versões: português (`index.html`) e inglês (`en/index.html`).
 3. Rode o comando acima. A contagem ("5 apartamentos") e o "a partir de" se ajustam sozinhos.
 
 ## Quando entrar um apartamento novo
-Copie um bloco da lista `P`, troque nome, valores e links do Drive, inclua as pastas do apartamento em `tools/drive_folders.json`, e coloque as fotos em `images/g/` com o nome `<id>-1.jpg`, `<id>-2.jpg`... (e as versões `.webp`).
+Coloque uma linha "Disponível" na planilha e, no Drive, uma pasta do apartamento com o PDF de descrição,
+a pasta de fotos e a pasta de vídeo. A rotina diária cadastra o apartamento no site sozinha.
+O passo a passo que ela segue (e que serve para fazer à mão) está em `tools/AUTOMACAO.md`, seção "Apartamento novo".
 
 ## Itens prontos para ativar
 - `DEPOIMENTOS`: aparece a seção "Quem já mora".
