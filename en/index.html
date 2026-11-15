@@ -1059,10 +1059,14 @@ document.querySelectorAll('.gallery').forEach(function (g) {
   var t = g.querySelector('.gallery-track'), c = g.querySelector('.gallery-count'), n = t.children.length;
   if (n < 2) { g.classList.add('single'); return; }
   function idx() { var w = t.clientWidth; if (!w) return 0; return Math.min(n - 1, Math.max(0, Math.round(t.scrollLeft / w))); }
-  function go(d) { t.scrollTo({ left: ((idx() + d + n) % n) * t.clientWidth, behavior: 'smooth' }); }
+  /* aim: photo the arrows are moving to, so quick taps count from it and not from the half-scrolled position */
+  var aim = null;
+  function go(d) { aim = ((aim === null ? idx() : aim) + d + n) % n; t.scrollTo({ left: aim * t.clientWidth, behavior: 'smooth' }); }
   g.querySelector('.prev').addEventListener('click', function () { go(-1); });
   g.querySelector('.next').addEventListener('click', function () { go(1); });
-  t.addEventListener('scroll', function () { if (t.clientWidth) c.textContent = (idx() + 1) + ' / ' + n; }, { passive: true });
+  ['pointerdown', 'wheel', 'scrollend'].forEach(function (ev) { t.addEventListener(ev, function () { aim = null; }, { passive: true }); });
+  t.addEventListener('scroll', function () { if (!t.clientWidth) return; c.textContent = (idx() + 1) + ' / ' + n;
+    if (aim !== null && Math.abs(t.scrollLeft - aim * t.clientWidth) < 2) aim = null; }, { passive: true });
   t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
 });
 var menu = document.getElementById('menu');
