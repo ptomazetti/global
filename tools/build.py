@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import json, os, re, html, subprocess
+import datetime, json, os, re, html, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -1023,27 +1023,36 @@ SAIR = '''<!doctype html>
   h1 {{ font-size: 22px; margin: 18px 0 8px; }}
   p {{ margin: 0 0 10px; color: #3A4556; }}
   a {{ color: #10243C; font-weight: 700; }}
+  button {{ margin: 8px 0 14px; padding: 12px 22px; border: 0; border-radius: 999px; background: #10243C; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer; }}
+  button:disabled {{ opacity: .6; cursor: default; }}
 </style>
 </head>
 <body>
 <main>
   <img src="images/logo.png" alt="Global Estadia">
-  <h1 id="h">Cancelando...</h1>
+  <h1 id="h"></h1>
   <p id="p"></p>
+  <button id="b" type="button" hidden></button>
   <p><a href="./">globalestadia.com.br</a></p>
 </main>
 <script>
 (function () {{
   var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
-  var T = en ? {{ ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }}
-             : {{ ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' }};
+  /* The link only asks: email security scanners open links on their own, so nothing is cancelled until the person clicks. */
+  var T = en ? {{ ask: 'Stop apartment emails?', askp: 'Click below to stop receiving the apartment updates.', btn: 'Confirm', wait: 'Cancelling...', ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }}
+             : {{ ask: 'Cancelar os e-mails?', askp: 'Clique abaixo para não receber mais as novidades dos apartamentos.', btn: 'Confirmar', wait: 'Cancelando...', ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' }};
   if (en) document.documentElement.lang = 'en';
   function show(h, p) {{ document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }}
   if (!/^[0-9a-f]{{8}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{12}}$/i.test(t)) {{ show(T.no, T.nop); return; }}
-  fetch('{SUPA_URL}/rest/v1/rpc/cancelar_inscricao', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
-    .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
-    .then(function (ok) {{ ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
-    .catch(function () {{ show(T.err, T.errp); }});
+  var b = document.getElementById('b');
+  show(T.ask, T.askp); b.textContent = T.btn; b.hidden = false;
+  b.addEventListener('click', function () {{
+    b.disabled = true; b.textContent = T.wait;
+    fetch('{SUPA_URL}/rest/v1/rpc/cancelar_inscricao', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
+      .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
+      .then(function (ok) {{ b.hidden = true; ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
+      .catch(function () {{ show(T.err, T.errp); b.disabled = false; b.textContent = T.btn; }});
+  }});
 }})();
 </script>
 </body>
@@ -1158,8 +1167,13 @@ def make_pdfs():
 if __name__ == '__main__':
     make_pdfs()
     open('sair.html', 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY))
-    open('index.html', 'w', encoding='utf-8').write(render('pt'))
+    pages = {'index.html': render('pt'), 'en/index.html': render('en')}
+    changed = any(not os.path.exists(f) or open(f, encoding='utf-8').read() != html_ for f, html_ in pages.items())
     os.makedirs('en', exist_ok=True)
-    open('en/index.html', 'w', encoding='utf-8').write(render('en'))
+    for f, html_ in pages.items():
+        open(f, 'w', encoding='utf-8').write(html_)
+    if changed and os.path.exists('sitemap.xml'):   # tell search engines the date the pages last changed
+        sm = open('sitemap.xml', encoding='utf-8').read()
+        open('sitemap.xml', 'w', encoding='utf-8').write(re.sub(r'<lastmod>[^<]*</lastmod>', '<lastmod>' + datetime.date.today().isoformat() + '</lastmod>', sm))
     for p in P:
         print(p['name'], money(p['rent'] + p['condo'] + p['iptu'], 'pt'))
