@@ -28,9 +28,9 @@
 <script>
 (function () {
   var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
-  /* The link only asks: email security scanners open links on their own, so nothing is cancelled until the person clicks. */
-  var T = en ? { ask: 'Stop apartment emails?', askp: 'Click below to stop receiving the apartment updates.', btn: 'Confirm', wait: 'Cancelling...', ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }
-             : { ask: 'Cancelar os e-mails?', askp: 'Clique abaixo para não receber mais as novidades dos apartamentos.', btn: 'Confirmar', wait: 'Cancelando...', ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' };
+  /* The link only asks: email security scanners open links on their own, so nothing changes until the person clicks. */
+  var T = en ? {"ask": "Stop apartment emails?", "askp": "Click below to stop receiving the apartment updates.", "btn": "Confirm", "wait": "Cancelling...", "ok": "You will no longer receive emails", "okp": "Your email was removed from the apartment updates.", "no": "Link not valid", "nop": "This link was already used or is incomplete. If you still receive emails, reply to one of them.", "err": "Something went wrong", "errp": "Please try again in a few minutes."}
+             : {"ask": "Cancelar os e-mails?", "askp": "Clique abaixo para não receber mais as novidades dos apartamentos.", "btn": "Confirmar", "wait": "Cancelando...", "ok": "Pronto, você não vai mais receber e-mails", "okp": "Seu e-mail foi retirado da lista de novidades dos apartamentos.", "no": "Link inválido", "nop": "Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.", "err": "Algo deu errado", "errp": "Tente de novo em alguns minutos."};
   if (en) document.documentElement.lang = 'en';
   function show(h, p) { document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t)) { show(T.no, T.nop); return; }

@@ -1014,7 +1014,7 @@ SAIR = '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Cancelar e-mails | Global Estadia</title>
+<title>{TITLE} | Global Estadia</title>
 <link rel="icon" href="images/favicon-48.png">
 <style>
   body {{ margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F4F1EA; color: #1A2433; font: 17px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }}
@@ -1038,9 +1038,9 @@ SAIR = '''<!doctype html>
 <script>
 (function () {{
   var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
-  /* The link only asks: email security scanners open links on their own, so nothing is cancelled until the person clicks. */
-  var T = en ? {{ ask: 'Stop apartment emails?', askp: 'Click below to stop receiving the apartment updates.', btn: 'Confirm', wait: 'Cancelling...', ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }}
-             : {{ ask: 'Cancelar os e-mails?', askp: 'Clique abaixo para não receber mais as novidades dos apartamentos.', btn: 'Confirmar', wait: 'Cancelando...', ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' }};
+  /* The link only asks: email security scanners open links on their own, so nothing changes until the person clicks. */
+  var T = en ? {T_EN}
+             : {T_PT};
   if (en) document.documentElement.lang = 'en';
   function show(h, p) {{ document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }}
   if (!/^[0-9a-f]{{8}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{12}}$/i.test(t)) {{ show(T.no, T.nop); return; }}
@@ -1048,7 +1048,7 @@ SAIR = '''<!doctype html>
   show(T.ask, T.askp); b.textContent = T.btn; b.hidden = false;
   b.addEventListener('click', function () {{
     b.disabled = true; b.textContent = T.wait;
-    fetch('{SUPA_URL}/rest/v1/rpc/cancelar_inscricao', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
+    fetch('{SUPA_URL}/rest/v1/rpc/{RPC}', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
       .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
       .then(function (ok) {{ b.hidden = true; ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
       .catch(function () {{ show(T.err, T.errp); b.disabled = false; b.textContent = T.btn; }});
@@ -1058,6 +1058,30 @@ SAIR = '''<!doctype html>
 </body>
 </html>
 '''
+
+# Pages opened from links in the emails. Both only act after the person clicks the button.
+# sair.html: leave the agent list. confirmar.html: confirm a sign-up sent with an email already on the list
+# (new details or coming back after leaving), so nobody can change or reactivate someone else's record.
+TOKEN_PAGES = [
+ ('sair.html', 'Cancelar e-mails', 'cancelar_inscricao',
+  {'ask': 'Cancelar os e-mails?', 'askp': 'Clique abaixo para não receber mais as novidades dos apartamentos.', 'btn': 'Confirmar', 'wait': 'Cancelando...',
+   'ok': 'Pronto, você não vai mais receber e-mails', 'okp': 'Seu e-mail foi retirado da lista de novidades dos apartamentos.',
+   'no': 'Link inválido', 'nop': 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.',
+   'err': 'Algo deu errado', 'errp': 'Tente de novo em alguns minutos.'},
+  {'ask': 'Stop apartment emails?', 'askp': 'Click below to stop receiving the apartment updates.', 'btn': 'Confirm', 'wait': 'Cancelling...',
+   'ok': 'You will no longer receive emails', 'okp': 'Your email was removed from the apartment updates.',
+   'no': 'Link not valid', 'nop': 'This link was already used or is incomplete. If you still receive emails, reply to one of them.',
+   'err': 'Something went wrong', 'errp': 'Please try again in a few minutes.'}),
+ ('confirmar.html', 'Confirmar cadastro', 'confirmar_cadastro',
+  {'ask': 'Confirmar seu cadastro?', 'askp': 'Clique abaixo para confirmar os dados que você enviou na lista de corretores.', 'btn': 'Confirmar', 'wait': 'Confirmando...',
+   'ok': 'Cadastro confirmado', 'okp': 'Você vai receber os e-mails com os apartamentos disponíveis.',
+   'no': 'Link inválido', 'nop': 'Este link já foi usado, venceu (vale 7 dias) ou está incompleto. Se precisar, cadastre-se de novo no site.',
+   'err': 'Algo deu errado', 'errp': 'Tente de novo em alguns minutos.'},
+  {'ask': 'Confirm your sign-up?', 'askp': 'Click below to confirm the details you sent to the agent list.', 'btn': 'Confirm', 'wait': 'Confirming...',
+   'ok': 'Sign-up confirmed', 'okp': 'You will receive the emails with the available apartments.',
+   'no': 'Link not valid', 'nop': 'This link was already used, expired (it lasts 7 days) or is incomplete. If needed, sign up again on the website.',
+   'err': 'Something went wrong', 'errp': 'Please try again in a few minutes.'}),
+]
 
 PDF_PAGE = """<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>{name} | Global Estadia</title>
@@ -1166,7 +1190,9 @@ def make_pdfs():
 
 if __name__ == '__main__':
     make_pdfs()
-    open('sair.html', 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY))
+    for fname, title, rpc, t_pt, t_en in TOKEN_PAGES:
+        open(fname, 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY, TITLE=title, RPC=rpc,
+                                                             T_PT=json.dumps(t_pt, ensure_ascii=False), T_EN=json.dumps(t_en, ensure_ascii=False)))
     pages = {'index.html': render('pt'), 'en/index.html': render('en')}
     changed = any(not os.path.exists(f) or open(f, encoding='utf-8').read() != html_ for f, html_ in pages.items())
     os.makedirs('en', exist_ok=True)
