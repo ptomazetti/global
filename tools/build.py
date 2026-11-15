@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import json, os, re, html, subprocess
+import datetime, json, os, re, html, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -38,8 +38,8 @@ P = [
   meta={'pt': 'Apto. 42 · 76 m² de área total', 'en': 'Apt. 42 · 76 m² total area'},
   perks={'pt': ['2 vagas cobertas e depósito de 10 m²', 'Varanda panorâmica, cama box Queen', 'Piscina com raia, SPA, sauna e academia'],
          'en': ['2 covered parking spaces and 10 m² storage', 'Panoramic balcony, Queen bed', 'Lap pool, spa, sauna and gym']},
-  gal={'pt': ['Sala com vista pela varanda panorâmica', 'Sala de estar com sofá e poltronas', 'Cozinha com armários planejados e cooktop', 'SPA com hidromassagem do condomínio', 'Fachada do Spettacolo Patriani'],
-       'en': ['Living room with panoramic balcony view', 'Living room with sofa and armchairs', 'Kitchen with built-in cabinets and cooktop', 'Building spa with hot tub', 'Spettacolo Patriani entrance']},
+  gal={'pt': ['Studio com cama Queen e vista pela varanda', 'Sala de estar com sofá e poltronas', 'Cozinha com armários planejados e cooktop', 'SPA com hidromassagem do condomínio', 'Fachada do Spettacolo Patriani'],
+       'en': ['Studio with Queen bed and balcony view', 'Living room with sofa and armchairs', 'Kitchen with built-in cabinets and cooktop', 'Building spa with hot tub', 'Spettacolo Patriani entrance']},
   f='https://drive.google.com/drive/folders/1q39K2Jp_P_wErO56gb_jWGZT09iCpRCm?usp=sharing',
   v='https://drive.google.com/file/d/1kIOwgRGXJtbiDFe1ojhOEfEv-8Zx6k-m/view',
   d='https://drive.google.com/file/d/1akjtOVeacGJNRz2Ihp5uc-KQfwCBWlxQ/view?usp=drive_link'),
@@ -85,11 +85,11 @@ P = [
   d='https://drive.google.com/file/d/1PBosWcqSD6zJ6Efxw_TIPX-IsAMZ3zzL/view?usp=drive_link'),
  dict(id='vida-plena-c65', beds=2, name='Vida Plena C65', rent=2790, condo=406.42, iptu=61.84,
   tag={'pt': '2 dormitórios', 'en': '2 bedrooms'},
-  meta={'pt': 'Apto. 65 · Bloco C · Campolim', 'en': 'Apt. 65 · Block C · Campolim'},
-  perks={'pt': ['Armários planejados em todos os cômodos', 'Bancada para home office, iluminação LED', '1 vaga descoberta, condomínio com lazer completo'],
-         'en': ['Built-in cabinets in every room', 'Home office desk, LED lighting', '1 uncovered parking space, full leisure facilities']},
-  gal={'pt': ['Sala com mesa de jantar', 'Cozinha com geladeira, fogão e micro-ondas', 'Dormitório com cama box e armário'],
-       'en': ['Living room with dining table', 'Kitchen with fridge, stove and microwave', 'Bedroom with bed and wardrobe']},
+  meta={'pt': 'Apto. 65 · Bloco C · 6º andar · 48 m² · Campolim', 'en': 'Apt. 65 · Block C · 6th floor · 48 m² · Campolim'},
+  perks={'pt': ['A 200 m do Shopping Iguatemi Esplanada', 'Duas camas de casal, escrivaninha e internet de 500 Mega', '1 vaga, condomínio com piscina e academia'],
+         'en': ['200 m from Shopping Iguatemi Esplanada', 'Two double beds, desk and 500 Mbps internet', '1 parking space, building with pool and gym']},
+  gal={'pt': ['Sala com sofá e mesa de jantar', 'Cozinha com geladeira, fogão e micro-ondas', 'Dormitório com cama de casal e armários planejados', 'Piscina do condomínio', 'Quadra do condomínio'],
+       'en': ['Living room with sofa and dining table', 'Kitchen with fridge, stove and microwave', 'Bedroom with double bed and built-in wardrobes', 'Building pool', 'Building sports court']},
   f='https://drive.google.com/drive/folders/1qV2qAFvA47z2pMG8QX_9GhA8e6oTtLZb?usp=drive_link',
   v='https://drive.google.com/file/d/1GGAoURs9YMaWWMq_5RUFMra8ltsm5l6Y/view',
   d='https://drive.google.com/file/d/1J17liUYRHgMADoPXDzAqgiYSOjdORVh1/view?usp=sharing'),
@@ -98,8 +98,8 @@ P = [
   meta={'pt': 'Apto. 98 · Bloco D · 9º andar · 48 m² · Campolim', 'en': 'Apt. 98 · Block D · 9th floor · 48 m² · Campolim'},
   perks={'pt': ['A 200 m do Shopping Iguatemi Esplanada', 'Cama box Queen, escrivaninha e internet de 500 Mega', '1 vaga, condomínio com piscina e academia'],
          'en': ['200 m from Shopping Iguatemi Esplanada', 'Queen bed, desk and 500 Mbps internet', '1 parking space, building with pool and gym']},
-  gal={'pt': ['Sala com mesa de jantar e sofá', 'Sala com sofá e TV', 'Piscina do condomínio', 'Academia do condomínio', 'Quadra poliesportiva do condomínio'],
-       'en': ['Living room with dining table and sofa', 'Living room with sofa and TV', 'Building pool', 'Building gym', 'Building sports court']},
+  gal={'pt': ['Sala com sofá e TV', 'Banheiro com box de vidro', 'Piscina do condomínio', 'Academia do condomínio', 'Playground do condomínio'],
+       'en': ['Living room with sofa and TV', 'Bathroom with glass shower', 'Building pool', 'Building gym', 'Building playground']},
   f='https://drive.google.com/drive/folders/1iatiSdF9i_GEFyXLOhr50CrI3OlCEix9?usp=drive_link',
   v='https://drive.google.com/file/d/11mE3VLDxvX2zVcmtB9G44B_O_qFWQleX/view',
   d='https://drive.google.com/file/d/1mwVvRqo3Z9xNs-Kqhs4I59LtzqniRNpr/view?usp=sharing'),
@@ -202,20 +202,26 @@ DET = {
             ('Parking', ['1 uncovered parking space'])],
     amen=['Club-style complex'])},
  'vida-plena-c65': {
-  'pt': dict(head='2 dormitórios com espaço para home office',
-    intro='No Vida Plena, no Campolim, em condomínio com lazer completo. Tem ventilador de teto. Não tem ar-condicionado. Uma vaga de garagem descoberta.',
-    groups=[('Ambientes', ['Armários planejados em todos os cômodos', 'Cama box de casal em um quarto e de solteiro no outro', 'Sofá e mesa de jantar', 'Bancada para home office', 'Cortinas', 'Ventilador de teto']),
-            ('Cozinha e serviço', ['Fogão, micro-ondas e geladeira', 'Máquina de lavar']),
-            ('Tecnologia', ['TV', 'Iluminação 100% LED']),
+  'pt': dict(head='2 dormitórios no 6º andar, ao lado do Shopping Iguatemi',
+    intro='No Vida Plena Campolim, a 200 metros do Shopping Iguatemi Esplanada e perto do Supermercado Tauste. 48 m², totalmente mobiliado e equipado. Água e gás já estão inclusos no condomínio. Tem ventilador de teto. Não tem ar-condicionado.',
+    groups=[('Dormitório principal', ['Cama box de casal', 'Armários planejados', 'Ventilador de teto retrátil']),
+            ('Segundo dormitório', ['Cama box de casal', 'Escrivaninha para trabalho ou estudo']),
+            ('Sala', ['Sofá, mesa de jantar e TV', 'Cortina']),
+            ('Cozinha e serviço', ['Geladeira, fogão e micro-ondas', 'Armários planejados', 'Panelas, panela de pressão, liquidificador e torradeira', 'Pratos, copos, talheres e tigelas', 'Máquina de lavar e ferro de passar']),
+            ('Banheiro', ['Armário', 'Secador de cabelo']),
+            ('Incluso', ['Internet de 500 Mega', 'Travesseiros e capas protetoras de colchão e travesseiro', 'Iluminação 100% LED']),
             ('Garagem', ['1 vaga descoberta'])],
-    amen=['Lazer completo']),
-  'en': dict(head='2 bedrooms with a home office corner',
-    intro='At Vida Plena in Campolim, in a building with full leisure facilities. Ceiling fan. No air conditioning. One uncovered parking space.',
-    groups=[('Living spaces', ['Built-in cabinets in every room', 'Double bed in one bedroom, single bed in the other', 'Sofa and dining table', 'Home office desk', 'Curtains', 'Ceiling fan']),
-            ('Kitchen and laundry', ['Stove, microwave and fridge', 'Washing machine']),
-            ('Tech', ['TV', '100% LED lighting']),
+    amen=['Portaria 24h', 'Piscina', 'Academia', 'Quadra poliesportiva', 'Salão de festas', 'Playground', 'Quiosque com churrasqueira', 'Brinquedoteca', 'Lan house', 'Espaço Mulher', 'Espaço home office', 'Espaço pet']),
+  'en': dict(head='2 bedrooms on the 6th floor, next to Shopping Iguatemi',
+    intro='At Vida Plena Campolim, 200 metres from Shopping Iguatemi Esplanada and close to the Tauste supermarket. 48 m², fully furnished and equipped. Water and gas are included in the condo fee. Ceiling fan. No air conditioning.',
+    groups=[('Master bedroom', ['Double bed', 'Built-in wardrobes', 'Retractable ceiling fan']),
+            ('Second bedroom', ['Double bed', 'Desk for work or study']),
+            ('Living room', ['Sofa, dining table and TV', 'Curtain']),
+            ('Kitchen and laundry', ['Fridge, stove and microwave', 'Built-in cabinets', 'Pans, pressure cooker, blender and toaster', 'Plates, glasses, cutlery and bowls', 'Washing machine and iron']),
+            ('Bathroom', ['Cabinet', 'Hair dryer']),
+            ('Included', ['500 Mbps internet', 'Pillows and mattress and pillow protectors', '100% LED lighting']),
             ('Parking', ['1 uncovered parking space'])],
-    amen=['Full leisure facilities'])},
+    amen=['24-hour concierge', 'Pool', 'Gym', 'Sports court', 'Party room', 'Playground', 'Barbecue kiosk', 'Kids’ playroom', 'LAN house', 'Women’s lounge', 'Home office space', 'Pet area'])},
  'vida-plena-d98': {
   'pt': dict(head='2 dormitórios no 9º andar, ao lado do Shopping Iguatemi',
     intro='No Vida Plena Campolim, a 200 metros do Shopping Iguatemi Esplanada e perto do Supermercado Tauste. 48 m², totalmente mobiliado e equipado. Água e gás já estão inclusos no condomínio.',
@@ -856,10 +862,14 @@ document.querySelectorAll('.gallery').forEach(function (g) {{
   var t = g.querySelector('.gallery-track'), c = g.querySelector('.gallery-count'), n = t.children.length;
   if (n < 2) {{ g.classList.add('single'); return; }}
   function idx() {{ var w = t.clientWidth; if (!w) return 0; return Math.min(n - 1, Math.max(0, Math.round(t.scrollLeft / w))); }}
-  function go(d) {{ t.scrollTo({{ left: ((idx() + d + n) % n) * t.clientWidth, behavior: 'smooth' }}); }}
+  /* aim: photo the arrows are moving to, so quick taps count from it and not from the half-scrolled position */
+  var aim = null;
+  function go(d) {{ aim = ((aim === null ? idx() : aim) + d + n) % n; t.scrollTo({{ left: aim * t.clientWidth, behavior: 'smooth' }}); }}
   g.querySelector('.prev').addEventListener('click', function () {{ go(-1); }});
   g.querySelector('.next').addEventListener('click', function () {{ go(1); }});
-  t.addEventListener('scroll', function () {{ if (t.clientWidth) c.textContent = (idx() + 1) + ' / ' + n; }}, {{ passive: true }});
+  ['pointerdown', 'wheel', 'scrollend'].forEach(function (ev) {{ t.addEventListener(ev, function () {{ aim = null; }}, {{ passive: true }}); }});
+  t.addEventListener('scroll', function () {{ if (!t.clientWidth) return; c.textContent = (idx() + 1) + ' / ' + n;
+    if (aim !== null && Math.abs(t.scrollLeft - aim * t.clientWidth) < 2) aim = null; }}, {{ passive: true }});
   t.addEventListener('keydown', function (e) {{ if (e.key === 'ArrowRight') {{ e.preventDefault(); go(1); }} if (e.key === 'ArrowLeft') {{ e.preventDefault(); go(-1); }} }});
 }});
 var menu = document.getElementById('menu');
@@ -1004,7 +1014,7 @@ SAIR = '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Cancelar e-mails | Global Estadia</title>
+<title>{TITLE} | Global Estadia</title>
 <link rel="icon" href="images/favicon-48.png">
 <style>
   body {{ margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F4F1EA; color: #1A2433; font: 17px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }}
@@ -1013,32 +1023,65 @@ SAIR = '''<!doctype html>
   h1 {{ font-size: 22px; margin: 18px 0 8px; }}
   p {{ margin: 0 0 10px; color: #3A4556; }}
   a {{ color: #10243C; font-weight: 700; }}
+  button {{ margin: 8px 0 14px; padding: 12px 22px; border: 0; border-radius: 999px; background: #10243C; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer; }}
+  button:disabled {{ opacity: .6; cursor: default; }}
 </style>
 </head>
 <body>
 <main>
   <img src="images/logo.png" alt="Global Estadia">
-  <h1 id="h">Cancelando...</h1>
+  <h1 id="h"></h1>
   <p id="p"></p>
+  <button id="b" type="button" hidden></button>
   <p><a href="./">globalestadia.com.br</a></p>
 </main>
 <script>
 (function () {{
   var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
-  var T = en ? {{ ok: 'You will no longer receive emails', okp: 'Your email was removed from the apartment updates.', no: 'Link not valid', nop: 'This link was already used or is incomplete. If you still receive emails, reply to one of them.', err: 'Something went wrong', errp: 'Please try again in a few minutes.' }}
-             : {{ ok: 'Pronto, você não vai mais receber e-mails', okp: 'Seu e-mail foi retirado da lista de novidades dos apartamentos.', no: 'Link inválido', nop: 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.', err: 'Algo deu errado', errp: 'Tente de novo em alguns minutos.' }};
+  /* The link only asks: email security scanners open links on their own, so nothing changes until the person clicks. */
+  var T = en ? {T_EN}
+             : {T_PT};
   if (en) document.documentElement.lang = 'en';
   function show(h, p) {{ document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }}
   if (!/^[0-9a-f]{{8}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{4}}-[0-9a-f]{{12}}$/i.test(t)) {{ show(T.no, T.nop); return; }}
-  fetch('{SUPA_URL}/rest/v1/rpc/cancelar_inscricao', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
-    .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
-    .then(function (ok) {{ ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
-    .catch(function () {{ show(T.err, T.errp); }});
+  var b = document.getElementById('b');
+  show(T.ask, T.askp); b.textContent = T.btn; b.hidden = false;
+  b.addEventListener('click', function () {{
+    b.disabled = true; b.textContent = T.wait;
+    fetch('{SUPA_URL}/rest/v1/rpc/{RPC}', {{ method: 'POST', headers: {{ 'apikey': '{SUPA_KEY}', 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_token: t }}) }})
+      .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
+      .then(function (ok) {{ b.hidden = true; ok ? show(T.ok, T.okp) : show(T.no, T.nop); }})
+      .catch(function () {{ show(T.err, T.errp); b.disabled = false; b.textContent = T.btn; }});
+  }});
 }})();
 </script>
 </body>
 </html>
 '''
+
+# Pages opened from links in the emails. Both only act after the person clicks the button.
+# sair.html: leave the agent list. confirmar.html: confirm a sign-up sent with an email already on the list
+# (new details or coming back after leaving), so nobody can change or reactivate someone else's record.
+TOKEN_PAGES = [
+ ('sair.html', 'Cancelar e-mails', 'cancelar_inscricao',
+  {'ask': 'Cancelar os e-mails?', 'askp': 'Clique abaixo para não receber mais as novidades dos apartamentos.', 'btn': 'Confirmar', 'wait': 'Cancelando...',
+   'ok': 'Pronto, você não vai mais receber e-mails', 'okp': 'Seu e-mail foi retirado da lista de novidades dos apartamentos.',
+   'no': 'Link inválido', 'nop': 'Este link já foi usado ou está incompleto. Se ainda receber e-mails, responda a qualquer um deles.',
+   'err': 'Algo deu errado', 'errp': 'Tente de novo em alguns minutos.'},
+  {'ask': 'Stop apartment emails?', 'askp': 'Click below to stop receiving the apartment updates.', 'btn': 'Confirm', 'wait': 'Cancelling...',
+   'ok': 'You will no longer receive emails', 'okp': 'Your email was removed from the apartment updates.',
+   'no': 'Link not valid', 'nop': 'This link was already used or is incomplete. If you still receive emails, reply to one of them.',
+   'err': 'Something went wrong', 'errp': 'Please try again in a few minutes.'}),
+ ('confirmar.html', 'Confirmar cadastro', 'confirmar_cadastro',
+  {'ask': 'Confirmar seu cadastro?', 'askp': 'Clique abaixo para confirmar os dados que você enviou na lista de corretores.', 'btn': 'Confirmar', 'wait': 'Confirmando...',
+   'ok': 'Cadastro confirmado', 'okp': 'Você vai receber os e-mails com os apartamentos disponíveis.',
+   'no': 'Link inválido', 'nop': 'Este link já foi usado, venceu (vale 7 dias) ou está incompleto. Se precisar, cadastre-se de novo no site.',
+   'err': 'Algo deu errado', 'errp': 'Tente de novo em alguns minutos.'},
+  {'ask': 'Confirm your sign-up?', 'askp': 'Click below to confirm the details you sent to the agent list.', 'btn': 'Confirm', 'wait': 'Confirming...',
+   'ok': 'Sign-up confirmed', 'okp': 'You will receive the emails with the available apartments.',
+   'no': 'Link not valid', 'nop': 'This link was already used, expired (it lasts 7 days) or is incomplete. If needed, sign up again on the website.',
+   'err': 'Something went wrong', 'errp': 'Please try again in a few minutes.'}),
+]
 
 PDF_PAGE = """<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>{name} | Global Estadia</title>
@@ -1147,9 +1190,16 @@ def make_pdfs():
 
 if __name__ == '__main__':
     make_pdfs()
-    open('sair.html', 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY))
-    open('index.html', 'w', encoding='utf-8').write(render('pt'))
+    for fname, title, rpc, t_pt, t_en in TOKEN_PAGES:
+        open(fname, 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY, TITLE=title, RPC=rpc,
+                                                             T_PT=json.dumps(t_pt, ensure_ascii=False), T_EN=json.dumps(t_en, ensure_ascii=False)))
+    pages = {'index.html': render('pt'), 'en/index.html': render('en')}
+    changed = any(not os.path.exists(f) or open(f, encoding='utf-8').read() != html_ for f, html_ in pages.items())
     os.makedirs('en', exist_ok=True)
-    open('en/index.html', 'w', encoding='utf-8').write(render('en'))
+    for f, html_ in pages.items():
+        open(f, 'w', encoding='utf-8').write(html_)
+    if changed and os.path.exists('sitemap.xml'):   # tell search engines the date the pages last changed
+        sm = open('sitemap.xml', encoding='utf-8').read()
+        open('sitemap.xml', 'w', encoding='utf-8').write(re.sub(r'<lastmod>[^<]*</lastmod>', '<lastmod>' + datetime.date.today().isoformat() + '</lastmod>', sm))
     for p in P:
         print(p['name'], money(p['rent'] + p['condo'] + p['iptu'], 'pt'))

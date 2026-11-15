@@ -108,8 +108,14 @@ Fora o que está descrito aqui, não altere mais nada no site. Não responda nem
 
 O formulário "Receba os apartamentos em primeira mão" (seção Corretores do site) grava no Supabase,
 projeto `global-estadia` (ref `bvwrnddfujpkukzwmioz`), tabela `public.corretores_inscritos`.
-O site só chama duas funções: `inscrever_corretor` e `cancelar_inscricao`. A tabela não pode ser lida pelo site.
+O site só chama três funções: `inscrever_corretor`, `cancelar_inscricao` e `confirmar_cadastro`. A tabela não pode ser lida pelo site.
 O link de descadastro é `https://globalestadia.com.br/sair.html?t=<token_saida>` (inglês: `&l=en`).
+
+Cadastro com e-mail que já está na lista (desde 15/11/2026): o formulário não muda mais o cadastro existente nem reativa
+quem saiu. Os dados novos ficam guardados em `pend_dados` com um `pend_token`, e a pessoa dona do e-mail precisa clicar no
+link `https://globalestadia.com.br/confirmar.html?t=<pend_token>` (inglês: `&l=en`). O link vale 7 dias. Ao confirmar,
+os dados novos entram, o cadastro fica ativo e, se a pessoa tinha saído da lista, recebe as boas-vindas de novo.
+No máximo um e-mail de confirmação por dia para o mesmo endereço.
 
 Envio dos e-mails (ATIVO desde 3/11/2026). Roda na mesma rotina diária, pelo Gmail de contato@globalestadia.com.br:
 - boas-vindas: todo dia, para quem tem `ativo` e `boas_vindas_em` vazio. Traz os apartamentos disponíveis com
@@ -118,6 +124,9 @@ Envio dos e-mails (ATIVO desde 3/11/2026). Roda na mesma rotina diária, pelo Gm
   (`inscrever_corretor` limpa `boas_vindas_em` quando reativa o cadastro);
 - aviso de mudanças: só quando `sync_status.py` imprimir CHANGED, para os ativos que não receberam as
   boas-vindas na última hora;
+- confirmação de cadastro: todo dia, para quem tem `pend_token` preenchido, `pend_enviado_em` vazio e `pend_em` de até 7 dias.
+  Vai para o e-mail que já está na lista, com o nome que já estava no cadastro (nunca o nome novo enviado no formulário).
+  Depois de enviar, preenche `pend_enviado_em`;
 - um e-mail por pessoa (nunca todos em cópia);
 - conteúdo do aviso: o que mudou (disponível, alugado, preço), valores com total mensal e o link do apartamento
   (`https://globalestadia.com.br/#<id>`), e no fim o link de descadastro da própria pessoa.

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Confirmar cadastro | Global Estadia</title>
+<link rel="icon" href="images/favicon-48.png">
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F4F1EA; color: #1A2433; font: 17px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  main { max-width: 440px; margin: 16px; padding: 32px; background: #FFFFFF; border-radius: 20px; box-shadow: 0 14px 40px -24px rgba(11,26,44,.5); text-align: center; }
+  img { width: 150px; height: auto; }
+  h1 { font-size: 22px; margin: 18px 0 8px; }
+  p { margin: 0 0 10px; color: #3A4556; }
+  a { color: #10243C; font-weight: 700; }
+  button { margin: 8px 0 14px; padding: 12px 22px; border: 0; border-radius: 999px; background: #10243C; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: default; }
+</style>
+</head>
+<body>
+<main>
+  <img src="images/logo.png" alt="Global Estadia">
+  <h1 id="h"></h1>
+  <p id="p"></p>
+  <button id="b" type="button" hidden></button>
+  <p><a href="./">globalestadia.com.br</a></p>
+</main>
+<script>
+(function () {
+  var t = new URLSearchParams(location.search).get('t') || '', en = /(^|&)l=en/.test(location.search.slice(1));
+  /* The link only asks: email security scanners open links on their own, so nothing changes until the person clicks. */
+  var T = en ? {"ask": "Confirm your sign-up?", "askp": "Click below to confirm the details you sent to the agent list.", "btn": "Confirm", "wait": "Confirming...", "ok": "Sign-up confirmed", "okp": "You will receive the emails with the available apartments.", "no": "Link not valid", "nop": "This link was already used, expired (it lasts 7 days) or is incomplete. If needed, sign up again on the website.", "err": "Something went wrong", "errp": "Please try again in a few minutes."}
+             : {"ask": "Confirmar seu cadastro?", "askp": "Clique abaixo para confirmar os dados que você enviou na lista de corretores.", "btn": "Confirmar", "wait": "Confirmando...", "ok": "Cadastro confirmado", "okp": "Você vai receber os e-mails com os apartamentos disponíveis.", "no": "Link inválido", "nop": "Este link já foi usado, venceu (vale 7 dias) ou está incompleto. Se precisar, cadastre-se de novo no site.", "err": "Algo deu errado", "errp": "Tente de novo em alguns minutos."};
+  if (en) document.documentElement.lang = 'en';
+  function show(h, p) { document.getElementById('h').textContent = h; document.getElementById('p').textContent = p; }
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t)) { show(T.no, T.nop); return; }
+  var b = document.getElementById('b');
+  show(T.ask, T.askp); b.textContent = T.btn; b.hidden = false;
+  b.addEventListener('click', function () {
+    b.disabled = true; b.textContent = T.wait;
+    fetch('https://bvwrnddfujpkukzwmioz.supabase.co/rest/v1/rpc/confirmar_cadastro', { method: 'POST', headers: { 'apikey': 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF', 'Content-Type': 'application/json' }, body: JSON.stringify({ p_token: t }) })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (ok) { b.hidden = true; ok ? show(T.ok, T.okp) : show(T.no, T.nop); })
+      .catch(function () { show(T.err, T.errp); b.disabled = false; b.textContent = T.btn; });
+  });
+})();
+</script>
+</body>
+</html>
