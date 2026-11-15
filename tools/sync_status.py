@@ -15,7 +15,9 @@ For each apartment it picks the video and the description PDF:
 - a file added to the folder after the last check wins (the most recently added one);
 - otherwise the current file stays while it is still in the folder;
 - if the current file is gone, the most recently added file left in the folder is used.
-A folder with no files in the listing is left alone (the link is never blanked).
+A video folder with no files in the listing is left alone (the link is never blanked).
+A description folder with no PDF (when the listing has PDFs from other folders) is marked
+"gerado": tools/build.py then makes the description PDF itself (descricao/<id>.pdf).
 
 - Writes tools/status.json ("units", "prices", "media").
 - If anything changed, runs tools/build.py. Status or price changes also update ATUALIZADO
@@ -124,11 +126,18 @@ def main():
         fp = os.path.join(ROOT, 'tools', 'drive_folders.json')
         folders = json.load(open(fp, encoding='utf-8')) if os.path.exists(fp) else {}
         base = current_links()
+        has_pdfs = any(f.get('mimeType') == 'application/pdf' for f in files)
         for i in IDS:
             for kind, is_kind in (('video', lambda m: m.startswith('video/')), ('desc', lambda m: m == 'application/pdf')):
                 folder = folders.get(i, {}).get(kind)
                 found = {f['id']: f for f in files if f['parentId'] == folder and is_kind(str(f.get('mimeType', '')))}
-                if not folder or not found:
+                if not folder:
+                    continue
+                if not found:
+                    # Description folder with no PDF, in a listing that did find PDFs elsewhere (so the
+                    # PDF search worked): the site makes its own description PDF.
+                    if kind == 'desc' and has_pdfs and media[i].get('desc') != 'gerado':
+                        media[i]['desc'] = 'gerado'
                     continue
                 cur = media[i].get(kind) or base.get(i, {}).get(kind)
                 chosen, seen = pick(list(found.values()), cur, media[i].get(kind + '_seen'))
