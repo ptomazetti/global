@@ -10,7 +10,8 @@ Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
    e "IPTU (R$)" (em reais, formato brasileiro). Os preços vêm sempre da planilha.
    Use todas as linhas da planilha. Uma linha cujo ID ainda não existe na lista `P` de `tools/build.py`
    não entra no site: o script avisa na linha `FORA_DO_SITE`. Se uma dessas estiver "Disponível",
-   diga no resumo que há um apartamento novo esperando cadastro no site (fotos e textos).
+   cadastre o apartamento seguindo "Apartamento novo" antes de rodar o script. Linha nova "Alugado"
+   ou "Locado" fica fora do site e não precisa de nada.
 2. **E-mails** recebidos em contato@globalestadia.com.br, de qualquer remetente, com assunto começando por
    `ALUGADO` ou `DISPONÍVEL` (também aceitar `DISPONIVEL`) seguido do nome da unidade.
    Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d`
@@ -27,6 +28,7 @@ Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
 | Esplanada, 102 | esplanada-102 |
 | I41 | alpha-club-i41 |
 | Vida Plena C65, C65 | vida-plena-c65 |
+| Vida Plena D98, D98 | vida-plena-d98 |
 
 Para unidades que não estão nesta tabela, use a coluna "Identificação" da planilha (ex.: D98).
 Se o assunto não identificar uma única unidade com certeza, ignore esse e-mail e cite-o no resumo.
@@ -56,6 +58,31 @@ ganha; senão o atual continua enquanto existir; se o atual foi apagado, entra o
 Pasta sem nenhum arquivo na lista não muda nada. Se a busca do Drive falhar, rode o script sem o
 terceiro argumento: status e preços são atualizados e os vídeos ficam como estão.
 
+## Apartamento novo
+
+Vale para uma linha "Disponível" da planilha cujo ID não está na lista `P` de `tools/build.py`.
+
+1. No Drive, ache a pasta do apartamento (busque pela "Identificação" da planilha, ex.: "D98"). Ela precisa ter
+   o PDF de descrição, a pasta de fotos e a pasta de vídeo com pelo menos um vídeo. Se faltar o PDF ou as
+   fotos, não cadastre: diga no resumo o que falta e siga com o resto da rotina.
+2. Leia o PDF de descrição. Use só o que está nele e na planilha. Não invente itens, metragem, vaga coberta
+   ou ar-condicionado. Preços sempre da planilha, mesmo que o PDF traga outro valor.
+3. Baixe as fotos (as pastas são públicas, não precisa de login) para uma pasta vazia fora do repositório,
+   com nomes `01.jpg`, `02.jpg`... na ordem da galeria: sala, cozinha, dormitórios, banheiro, depois o condomínio.
+   `curl -sSL -o 01.jpg "https://drive.google.com/thumbnail?id=<id do arquivo>&sz=w1600"`
+   Abra as fotos para conferir o que cada uma mostra. Deixe de fora fotos repetidas, de cama sem roupa
+   de cama ou ilegíveis.
+4. `python3 -I tools/photos.py <id> <pasta> <cartão>`, onde `<cartão>` são de 3 a 5 fotos boas e nítidas
+   (largura original de 1000 px ou mais), pela posição na ordem, ex.: `1,2,14,18,16`.
+5. Em `tools/build.py`, copie o último bloco da lista `P` e o último de `DET` e preencha com os dados do
+   apartamento novo, em português e em inglês, no mesmo estilo dos outros. `gal` tem uma legenda para cada
+   foto do cartão, na mesma ordem. `f` = link da pasta de fotos, `v` = link do vídeo, `d` = link do PDF.
+6. Inclua o ID em `tools/drive_folders.json` (pasta do vídeo e pasta onde fica o PDF) e na tabela
+   "Nomes aceitos no assunto" deste arquivo.
+7. Rode `python3 -I tools/build.py`. Se der erro, desfaça tudo com `git checkout -- . && git clean -fd images tools`
+   e diga no resumo. Se passar, siga para "Aplicar": o script vai imprimir `CHANGED` por causa do preço novo,
+   e o apartamento entra no commit e no aviso aos corretores.
+
 ## Aplicar
 
 ```bash
@@ -72,7 +99,7 @@ Vale a última linha que o script imprimir:
 - `MEDIA` (só trocou vídeo ou descrição): commit e push do mesmo jeito, com mensagem dizendo de quais
   unidades. Não avise os corretores.
 
-Não altere mais nada no site. Não responda nem apague e-mails. Não edite a planilha nem o Drive.
+Fora o que está descrito aqui, não altere mais nada no site. Não responda nem apague e-mails. Não edite a planilha nem o Drive.
 
 ## Cadastro de corretores (e-mails de novidades)
 

@@ -16,7 +16,7 @@ CNPJ = '50.945.139/0001-86'
 # ela só permite chamar inscrever_corretor e cancelar_inscricao; a tabela não pode ser lida pelo site.
 SUPA_URL = 'https://bvwrnddfujpkukzwmioz.supabase.co'
 SUPA_KEY = 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF'
-ATUALIZADO = {'pt': '2 de novembro de 2026', 'en': '2 November 2026'}  # mude sempre que um imovel entrar ou sair
+ATUALIZADO = {'pt': '15 de novembro de 2026', 'en': '15 November 2026'}  # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = {'pt': 'https://www.airbnb.com.br/users/profile/1779247085187681939', 'en': 'https://www.airbnb.com/users/profile/1779247085187681939'}   # perfil Global Flats no Airbnb
 ATENDENTE = {}    # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
 # Avaliações reais do perfil Global Flats no Airbnb (copiadas do perfil público).
@@ -93,6 +93,16 @@ P = [
   f='https://drive.google.com/drive/folders/1qV2qAFvA47z2pMG8QX_9GhA8e6oTtLZb?usp=drive_link',
   v='https://drive.google.com/file/d/1GGAoURs9YMaWWMq_5RUFMra8ltsm5l6Y/view',
   d='https://drive.google.com/file/d/1J17liUYRHgMADoPXDzAqgiYSOjdORVh1/view?usp=sharing'),
+ dict(id='vida-plena-d98', beds=2, name='Vida Plena D98', rent=2990, condo=476.22, iptu=64.77,
+  tag={'pt': '2 dormitórios', 'en': '2 bedrooms'},
+  meta={'pt': 'Apto. 98 · Bloco D · 9º andar · 48 m² · Campolim', 'en': 'Apt. 98 · Block D · 9th floor · 48 m² · Campolim'},
+  perks={'pt': ['A 200 m do Shopping Iguatemi Esplanada', 'Cama box Queen, escrivaninha e internet de 500 Mega', '1 vaga, condomínio com piscina e academia'],
+         'en': ['200 m from Shopping Iguatemi Esplanada', 'Queen bed, desk and 500 Mbps internet', '1 parking space, building with pool and gym']},
+  gal={'pt': ['Sala com mesa de jantar e sofá', 'Sala com sofá e TV', 'Piscina do condomínio', 'Academia do condomínio', 'Quadra poliesportiva do condomínio'],
+       'en': ['Living room with dining table and sofa', 'Living room with sofa and TV', 'Building pool', 'Building gym', 'Building sports court']},
+  f='https://drive.google.com/drive/folders/1iatiSdF9i_GEFyXLOhr50CrI3OlCEix9?usp=drive_link',
+  v='https://drive.google.com/file/d/11mE3VLDxvX2zVcmtB9G44B_O_qFWQleX/view',
+  d='https://drive.google.com/file/d/1mwVvRqo3Z9xNs-Kqhs4I59LtzqniRNpr/view?usp=sharing'),
 ]
 # Status synced from the Google Sheet and the ALUGADO/DISPONIVEL emails into tools/status.json
 # (see tools/AUTOMACAO.md). Units marked "Alugado" are left off the site.
@@ -204,6 +214,27 @@ DET = {
             ('Tech', ['TV', '100% LED lighting']),
             ('Parking', ['1 uncovered parking space'])],
     amen=['Full leisure facilities'])},
+ 'vida-plena-d98': {
+  'pt': dict(head='2 dormitórios no 9º andar, ao lado do Shopping Iguatemi',
+    intro='No Vida Plena Campolim, a 200 metros do Shopping Iguatemi Esplanada e perto do Supermercado Tauste. 48 m², totalmente mobiliado e equipado. Água e gás já estão inclusos no condomínio.',
+    groups=[('Dormitório principal', ['Cama box Queen com cabeceira', 'Armários planejados', 'Ventilador de teto']),
+            ('Segundo dormitório', ['Cama box de solteiro', 'Escrivaninha com cadeira para trabalho ou estudo']),
+            ('Sala', ['Sofá, mesa de jantar e TV', 'Cortina']),
+            ('Cozinha e serviço', ['Geladeira, fogão e micro-ondas', 'Armários planejados', 'Panelas, panela de pressão, liquidificador e torradeira', 'Pratos, copos, talheres e tigelas', 'Máquina de lavar e ferro de passar']),
+            ('Banheiro', ['Armário', 'Secador de cabelo']),
+            ('Incluso', ['Internet de 500 Mega', 'Travesseiros e capas protetoras de colchão e travesseiro', 'Iluminação 100% LED']),
+            ('Garagem', ['1 vaga'])],
+    amen=['Portaria 24h', 'Piscina', 'Academia', 'Quadra poliesportiva', 'Salão de festas', 'Playground', 'Quiosque com churrasqueira', 'Brinquedoteca', 'Lan house', 'Espaço Mulher', 'Espaço home office', 'Espaço pet']),
+  'en': dict(head='2 bedrooms on the 9th floor, next to Shopping Iguatemi',
+    intro='At Vida Plena Campolim, 200 metres from Shopping Iguatemi Esplanada and close to the Tauste supermarket. 48 m², fully furnished and equipped. Water and gas are included in the condo fee.',
+    groups=[('Master bedroom', ['Queen bed with headboard', 'Built-in wardrobes', 'Ceiling fan']),
+            ('Second bedroom', ['Single bed', 'Desk and chair for work or study']),
+            ('Living room', ['Sofa, dining table and TV', 'Curtain']),
+            ('Kitchen and laundry', ['Fridge, stove and microwave', 'Built-in cabinets', 'Pans, pressure cooker, blender and toaster', 'Plates, glasses, cutlery and bowls', 'Washing machine and iron']),
+            ('Bathroom', ['Cabinet', 'Hair dryer']),
+            ('Included', ['500 Mbps internet', 'Pillows and mattress and pillow protectors', '100% LED lighting']),
+            ('Parking', ['1 parking space'])],
+    amen=['24-hour concierge', 'Pool', 'Gym', 'Sports court', 'Party room', 'Playground', 'Barbecue kiosk', 'Kids’ playroom', 'LAN house', 'Women’s lounge', 'Home office space', 'Pet area'])},
 }
 
 T = {
