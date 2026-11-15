@@ -118,12 +118,8 @@ for _p in P:
             _p[_k] = _PR[_p['id']][_k]
     if _MD.get(_p['id'], {}).get('video'):
         _p['v'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['video']}/view"
-    if _MD.get(_p['id'], {}).get('desc') == 'gerado':
-        _p['d'] = None   # no PDF in the Drive folder: the site makes one (see make_pdfs below)
-    elif _MD.get(_p['id'], {}).get('desc'):
-        _p['d'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['desc']}/view?usp=sharing"
-    if not _p.get('d'):
-        _p['d'] = f"descricao/{_p['id']}.pdf"
+    # Description PDF: the site makes a standard one for every apartment (see make_pdfs below).
+    _p['d'] = f"descricao/{_p['id']}.pdf"
 P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
 # Cards open in the order the sort menu shows first: highest rent first (ties keep the list order).
 P.sort(key=lambda p: -p['rent'])
@@ -1047,70 +1043,98 @@ SAIR = '''<!doctype html>
 PDF_PAGE = """<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>{name} | Global Estadia</title>
 <style>
-  @page {{ size: A4; margin: 12mm 14mm; }}
-  body {{ margin: 0; font: 10pt/1.45 Helvetica, Arial, sans-serif; color: #1A2433; }}
-  header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #C9A46A; padding-bottom: 8px; margin-bottom: 14px; }}
-  header img {{ height: 34px; }}
-  header span {{ font-size: 9pt; color: #5A6575; }}
-  h1 {{ font-size: 20pt; margin: 0 0 2px; }}
-  .tag {{ color: #8A6A2F; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 9pt; margin: 0 0 10px; }}
-  h2 {{ font-size: 13pt; margin: 0 0 6px; }}
-  .photos {{ display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 12px 0; }}
-  .photos img {{ width: 100%; height: 36mm; object-fit: cover; border-radius: 4px; }}
-  .cols {{ columns: 2; column-gap: 10mm; }}
-  .g {{ break-inside: avoid; margin-bottom: 8px; }}
-  h3 {{ font-size: 10.5pt; margin: 8px 0 2px; color: #10243C; }}
-  ul, .g p {{ margin: 0; padding-left: 16px; }}
-  .g p {{ padding: 0; }}
-  table {{ border-collapse: collapse; margin: 4px 0 8px; min-width: 90mm; }}
-  td {{ padding: 3px 12px 3px 0; }}
-  .keep {{ break-inside: avoid; }}
-  tr.total td {{ font-weight: 700; border-top: 1px solid #1A2433; }}
-  footer {{ margin-top: 12px; font-size: 9.5pt; color: #3A4556; border-top: 1px solid #DDD; padding-top: 8px; }}
+  @page {{ size: A4; margin: 0; }}
+  * {{ box-sizing: border-box; }}
+  body {{ margin: 0; font: 9.5pt/1.45 Helvetica, Arial, sans-serif; color: #1A2433; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
+  .band {{ background: #10243C; color: #FFFFFF; padding: 9mm 14mm 8mm; display: flex; justify-content: space-between; align-items: center; }}
+  .band img {{ height: 30px; }}
+  .band span {{ font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: #C9A46A; text-align: right; line-height: 1.5; }}
+  main {{ padding: 8mm 14mm 0; }}
+  .top {{ display: grid; grid-template-columns: 1fr 64mm; gap: 8mm; align-items: start; }}
+  .tag {{ color: #8A6A2F; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 8.5pt; margin: 0 0 2px; }}
+  h1 {{ font-size: 21pt; margin: 0 0 3px; line-height: 1.15; }}
+  .meta {{ color: #5A6575; margin: 0 0 8px; }}
+  h2 {{ font-size: 12pt; margin: 0 0 4px; }}
+  .intro {{ margin: 0; }}
+  .price {{ background: #F4F1EA; border-radius: 6px; padding: 5mm; }}
+  .price table {{ width: 100%; border-collapse: collapse; }}
+  .price td {{ padding: 2px 0; }}
+  .price td + td {{ text-align: right; }}
+  .price tr.total td {{ font-weight: 700; font-size: 11pt; border-top: 1px solid #C9A46A; padding-top: 5px; }}
+  .price .big {{ font-size: 19pt; font-weight: 700; color: #10243C; margin: 0; }}
+  .price .big small {{ font-size: 9pt; font-weight: 400; color: #5A6575; }}
+  .price p {{ margin: 0 0 6px; }}
+  .photos {{ display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 30mm 30mm; gap: 2mm; margin: 6mm 0; }}
+  .photos.n3 {{ grid-template-columns: 2fr 1fr; }}
+  .photos.n2 {{ grid-template-columns: 1fr 1fr; grid-template-rows: 50mm; }}
+  .photos.n1 {{ grid-template-columns: 1fr; grid-template-rows: 70mm; }}
+  .photos.n2 img:first-child, .photos.n1 img:first-child {{ grid-row: auto; }}
+  .photos img {{ width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }}
+  .photos img:first-child {{ grid-row: span 2; }}
+  .cols {{ columns: 2; column-gap: 9mm; }}
+  .g {{ break-inside: avoid; margin-bottom: 4mm; }}
+  h3 {{ font-size: 9pt; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 3px; color: #10243C; border-bottom: 1px solid #E3DED3; padding-bottom: 2px; }}
+  ul {{ margin: 0; padding-left: 14px; }}
+  .g p {{ margin: 0; }}
+  footer {{ margin: 3mm 14mm 0; padding: 4mm 0 8mm; border-top: 2px solid #C9A46A; display: flex; justify-content: space-between; gap: 8mm; font-size: 8.5pt; color: #3A4556; break-inside: avoid; }}
+  footer b {{ color: #10243C; }}
+  footer div:last-child {{ flex: 0 0 74mm; }}
 </style></head><body>
-<header><img src="../images/logo.png" alt="Global Estadia"><span>globalestadia.com.br</span></header>
-<h1>{name}</h1>
-<p class="tag">{tag}</p>
-<h2>{head}</h2>
-<p>{intro}</p>
-<div class="photos">{photos}</div>
+<div class="band"><img src="../images/logo-white.png" alt="Global Estadia"><span>Ficha do apartamento<br>globalestadia.com.br</span></div>
+<main>
+<div class="top">
+  <div>
+    <p class="tag">{tag}</p>
+    <h1>{name}</h1>
+    <p class="meta">{meta}</p>
+    <h2>{head}</h2>
+    <p class="intro">{intro}</p>
+  </div>
+  <div class="price">
+    <p class="big">{rent} <small>/mês</small></p>
+    <table>{costs}</table>
+  </div>
+</div>
+<div class="photos n{nphotos}">{photos}</div>
 <div class="cols">{groups}<div class="g"><h3>{amen_h}</h3><p>{amen}</p></div></div>
-<div class="keep"><h3>{costs_h}</h3>
-<table>{costs}</table>
-<footer>{note}<br>Fotos, vídeo e detalhes: {link}<br>Agende pelo WhatsApp {wa}. Sujeito a disponibilidade.</footer></div>
+</main>
+<footer>
+  <div><b>Para agendar uma visita</b><br>WhatsApp {wa}<br>{note}</div>
+  <div><b>Fotos e vídeo</b><br>{link}<br>Sujeito a disponibilidade. Valores de {date}.</div>
+</footer>
 </body></html>
 """
 
 
 def make_pdfs():
-    """Description PDF for apartments whose Drive folder has none: descricao/<id>.html,
-    converted to descricao/<id>.pdf with tools/pdf.js (Playwright). Only rebuilt when the text changes."""
+    """Standard description PDF for every apartment: descricao/<id>.html, turned into
+    descricao/<id>.pdf with tools/pdf.js (Playwright). Only rebuilt when the page changes."""
     t, e = T['pt'], html.escape
     out_dir = os.path.join(ROOT, 'descricao')
-    want = {p['id'] for p in P if not p['d'].startswith('http')}
+    want = {p['id'] for p in P}
     if os.path.isdir(out_dir):
         for f in os.listdir(out_dir):
             if f.rsplit('.', 1)[0] not in want:
                 os.remove(os.path.join(out_dir, f))
     for p in P:
-        if p['id'] not in want:
-            continue
         d = DET[p['id']]['pt']
         total = p['rent'] + p['condo'] + p['iptu']
-        imgs = [f'images/u/{p["id"]}/{i:02d}.webp' for i in range(1, len(PHOTOS.get(p['id'], [])) + 1)]
-        imgs += [f'images/g/{p["id"]}-{i}.jpg' for i in range(1, 6)]
-        imgs = [x for x in imgs if os.path.exists(os.path.join(ROOT, x))][:4]
-        imgs = imgs[:len(imgs) // 2 * 2] or imgs   # even count, so the grid has no gap
+        # JPEG card photos: they go into the PDF as they are, which keeps the file small.
+        imgs = [f'images/g/{p["id"]}-{i}.jpg' for i in range(1, 6)]
+        imgs = [x for x in imgs if os.path.exists(os.path.join(ROOT, x))][:5]
+        if len(imgs) == 4:
+            imgs = imgs[:3]   # the grid takes 1, 2, 3 or 5 photos
         photos = ''.join(f'<img src="../{x}" alt="">' for x in imgs)
         groups = ''.join(f'<div class="g"><h3>{e(g)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul></div>'
                          for g, items in d['groups'])
         costs = ''.join(f'<tr><td>{a}</td><td>{money(v, "pt")}</td></tr>' for a, v in
                         ((t['d_rent'], p['rent']), (t['condo'], p['condo']), (t['iptu'], p['iptu'])))
         costs += f'<tr class="total"><td>{t["total"]}</td><td>{money(total, "pt")}</td></tr>'
-        page = PDF_PAGE.format(name=e(p['name']), tag=e(p['tag']['pt']), head=e(d['head']), intro=e(d['intro']),
-                               photos=photos, groups=groups, amen_h=e(t['d_amen']), amen=e(', '.join(d['amen'])),
-                               costs_h=e(t['d_costs']), costs=costs, note=e(t['d_note']),
-                               link=f'{SITE}/#{p["id"]}', wa=WA_SHOW)
+        page = PDF_PAGE.format(name=e(p['name']), tag=e(p['tag']['pt']), meta=e(p.get('meta', {}).get('pt', '')),
+                               head=e(d['head']), intro=e(d['intro']), rent=money(p['rent'], 'pt', cents=False),
+                               photos=photos, nphotos=len(imgs), groups=groups, amen_h=e(t['d_amen']), amen=e(', '.join(d['amen'])),
+                               costs=costs, note=e(t['d_note']), link=f'{SITE}/#{p["id"]}', wa=WA_SHOW,
+                               date=ATUALIZADO['pt'])
         os.makedirs(out_dir, exist_ok=True)
         hp, pp = os.path.join(out_dir, p['id'] + '.html'), os.path.join(out_dir, p['id'] + '.pdf')
         if os.path.exists(hp) and open(hp, encoding='utf-8').read() == page and os.path.exists(pp):
