@@ -5,7 +5,8 @@
   "alpha-club-j42": "Disponível",
   "esplanada-102": "Disponível",
   "alpha-club-i41": "Disponível",
-  "vida-plena-c65": "Disponível"
+  "vida-plena-c65": "Disponível",
+  "vida-plena-d98": "Disponível"
  },
  "prices": {
   "spettacolo-42": {
@@ -34,9 +35,14 @@
    "iptu": 158.32
   },
   "vida-plena-c65": {
-   "rent": 2790.0,
+   "rent": 2990.0,
    "condo": 456.66,
    "iptu": 61.84
+  },
+  "vida-plena-d98": {
+   "rent": 2990.0,
+   "condo": 476.22,
+   "iptu": 64.77
   }
  },
  "media": {
@@ -75,8 +81,14 @@
    "video_seen": "2026-11-15T01:31:04.594Z",
    "desc": "1pNV9TKeWj2BKmLnro5xTWWEaO2rMHV6E",
    "desc_seen": "2026-11-15T01:31:53.618Z"
+  },
+  "vida-plena-d98": {
+   "video": "11mE3VLDxvX2zVcmtB9G44B_O_qFWQleX",
+   "video_seen": "2026-11-14T23:25:53.440Z",
+   "desc": "1mwVvRqo3Z9xNs-Kqhs4I59LtzqniRNpr",
+   "desc_seen": "2026-11-15T01:27:48.659Z"
   }
  },
- "updated": "2026-11-02",
- "source": "planilha, 2 nov 2026 (manual)"
+ "updated": "2026-11-15",
+ "source": "planilha 15 nov 2026 (Gmail indisponível)"
 }
