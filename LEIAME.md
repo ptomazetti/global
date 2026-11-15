@@ -10,7 +10,7 @@ O site tem duas versões: português (`index.html`) e inglês (`en/index.html`).
 3. Rode o comando acima. A contagem ("5 apartamentos") e o "a partir de" se ajustam sozinhos.
 
 ## Quando entrar um apartamento novo
-Copie um bloco da lista `P`, troque nome, valores e links do Drive, e coloque as fotos em `images/g/` com o nome `<id>-1.jpg`, `<id>-2.jpg`... (e as versões `.webp`).
+Copie um bloco da lista `P`, troque nome, valores e links do Drive, inclua as pastas do apartamento em `tools/drive_folders.json`, e coloque as fotos em `images/g/` com o nome `<id>-1.jpg`, `<id>-2.jpg`... (e as versões `.webp`).
 
 ## Itens prontos para ativar
 - `DEPOIMENTOS`: aparece a seção "Quem já mora".
@@ -20,6 +20,11 @@ Copie um bloco da lista `P`, troque nome, valores e links do Drive, e coloque as
 
 ## Textos em dois idiomas
 Cada texto tem a versão `pt` e `en`. Ao trocar um texto ou adicionar um apartamento, preencha os dois idiomas. A data em `ATUALIZADO` também tem as duas versões.
+
+## Trocar o vídeo ou o PDF de descrição
+Coloque o arquivo novo na mesma pasta do Drive do apartamento (pode apagar o antigo ou deixar).
+A rotina diária acha o arquivo novo e atualiza o site sozinha. As pastas de cada apartamento estão
+em `tools/drive_folders.json`. Detalhes em `tools/AUTOMACAO.md`.
 
 ## Vídeos dentro do site
 Coloque o arquivo em `videos/<id>.mp4` (ex.: `videos/vida-plena-c65.mp4`) e rode `python3 -I tools/build.py`.
