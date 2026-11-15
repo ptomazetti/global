@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import json, os, re, html
+import json, os, re, html, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -118,8 +118,12 @@ for _p in P:
             _p[_k] = _PR[_p['id']][_k]
     if _MD.get(_p['id'], {}).get('video'):
         _p['v'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['video']}/view"
-    if _MD.get(_p['id'], {}).get('desc'):
+    if _MD.get(_p['id'], {}).get('desc') == 'gerado':
+        _p['d'] = None   # no PDF in the Drive folder: the site makes one (see make_pdfs below)
+    elif _MD.get(_p['id'], {}).get('desc'):
         _p['d'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['desc']}/view?usp=sharing"
+    if not _p.get('d'):
+        _p['d'] = f"descricao/{_p['id']}.pdf"
 P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
 # Cards open in the order the sort menu shows first: highest rent first (ties keep the list order).
 P.sort(key=lambda p: -p['rent'])
@@ -486,7 +490,8 @@ def render(lang):
         exp_lines += [t['d_amen'], ', '.join(d['amen']), '', t['d_costs'],
                       f"{t['d_rent']}: {money(p['rent'], lang)}", f"{t['condo']}: {money(p['condo'], lang)}",
                       f"{t['iptu']}: {money(p['iptu'], lang)}", f"{t['total']}: {money(total, lang)}"]
-        pdf_btn = f'<a class="btn btn-outline" href="{p["d"]}" target="_blank" rel="noopener">{t["exp_pdf"]}</a>\n          ' if p.get('d') else ''
+        pdf_href = p['d'] if p['d'].startswith('http') else R + p['d']
+        pdf_btn = f'<a class="btn btn-outline" href="{pdf_href}" target="_blank" rel="noopener">{t["exp_pdf"]}</a>\n          '
         exp_txt = html.escape('\n'.join(exp_lines))
         thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-i="{i}" aria-label="{a}"><img src="{thumb_src(i)}" alt="" loading="lazy" width="96" height="72"></button>' for i, a in enumerate(alts))
         dialogs.append(f'''<dialog class="detail" id="d-{p['id']}" aria-labelledby="dt-{p['id']}">
@@ -1039,7 +1044,85 @@ SAIR = '''<!doctype html>
 </html>
 '''
 
+PDF_PAGE = """<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>{name} | Global Estadia</title>
+<style>
+  @page {{ size: A4; margin: 12mm 14mm; }}
+  body {{ margin: 0; font: 10pt/1.45 Helvetica, Arial, sans-serif; color: #1A2433; }}
+  header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #C9A46A; padding-bottom: 8px; margin-bottom: 14px; }}
+  header img {{ height: 34px; }}
+  header span {{ font-size: 9pt; color: #5A6575; }}
+  h1 {{ font-size: 20pt; margin: 0 0 2px; }}
+  .tag {{ color: #8A6A2F; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 9pt; margin: 0 0 10px; }}
+  h2 {{ font-size: 13pt; margin: 0 0 6px; }}
+  .photos {{ display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 12px 0; }}
+  .photos img {{ width: 100%; height: 36mm; object-fit: cover; border-radius: 4px; }}
+  .cols {{ columns: 2; column-gap: 10mm; }}
+  .g {{ break-inside: avoid; margin-bottom: 8px; }}
+  h3 {{ font-size: 10.5pt; margin: 8px 0 2px; color: #10243C; }}
+  ul, .g p {{ margin: 0; padding-left: 16px; }}
+  .g p {{ padding: 0; }}
+  table {{ border-collapse: collapse; margin: 4px 0 8px; min-width: 90mm; }}
+  td {{ padding: 3px 12px 3px 0; }}
+  .keep {{ break-inside: avoid; }}
+  tr.total td {{ font-weight: 700; border-top: 1px solid #1A2433; }}
+  footer {{ margin-top: 12px; font-size: 9.5pt; color: #3A4556; border-top: 1px solid #DDD; padding-top: 8px; }}
+</style></head><body>
+<header><img src="../images/logo.png" alt="Global Estadia"><span>globalestadia.com.br</span></header>
+<h1>{name}</h1>
+<p class="tag">{tag}</p>
+<h2>{head}</h2>
+<p>{intro}</p>
+<div class="photos">{photos}</div>
+<div class="cols">{groups}<div class="g"><h3>{amen_h}</h3><p>{amen}</p></div></div>
+<div class="keep"><h3>{costs_h}</h3>
+<table>{costs}</table>
+<footer>{note}<br>Fotos, vídeo e detalhes: {link}<br>Agende pelo WhatsApp {wa}. Sujeito a disponibilidade.</footer></div>
+</body></html>
+"""
+
+
+def make_pdfs():
+    """Description PDF for apartments whose Drive folder has none: descricao/<id>.html,
+    converted to descricao/<id>.pdf with tools/pdf.js (Playwright). Only rebuilt when the text changes."""
+    t, e = T['pt'], html.escape
+    out_dir = os.path.join(ROOT, 'descricao')
+    want = {p['id'] for p in P if not p['d'].startswith('http')}
+    if os.path.isdir(out_dir):
+        for f in os.listdir(out_dir):
+            if f.rsplit('.', 1)[0] not in want:
+                os.remove(os.path.join(out_dir, f))
+    for p in P:
+        if p['id'] not in want:
+            continue
+        d = DET[p['id']]['pt']
+        total = p['rent'] + p['condo'] + p['iptu']
+        imgs = [f'images/u/{p["id"]}/{i:02d}.webp' for i in range(1, len(PHOTOS.get(p['id'], [])) + 1)]
+        imgs += [f'images/g/{p["id"]}-{i}.jpg' for i in range(1, 6)]
+        imgs = [x for x in imgs if os.path.exists(os.path.join(ROOT, x))][:4]
+        imgs = imgs[:len(imgs) // 2 * 2] or imgs   # even count, so the grid has no gap
+        photos = ''.join(f'<img src="../{x}" alt="">' for x in imgs)
+        groups = ''.join(f'<div class="g"><h3>{e(g)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul></div>'
+                         for g, items in d['groups'])
+        costs = ''.join(f'<tr><td>{a}</td><td>{money(v, "pt")}</td></tr>' for a, v in
+                        ((t['d_rent'], p['rent']), (t['condo'], p['condo']), (t['iptu'], p['iptu'])))
+        costs += f'<tr class="total"><td>{t["total"]}</td><td>{money(total, "pt")}</td></tr>'
+        page = PDF_PAGE.format(name=e(p['name']), tag=e(p['tag']['pt']), head=e(d['head']), intro=e(d['intro']),
+                               photos=photos, groups=groups, amen_h=e(t['d_amen']), amen=e(', '.join(d['amen'])),
+                               costs_h=e(t['d_costs']), costs=costs, note=e(t['d_note']),
+                               link=f'{SITE}/#{p["id"]}', wa=WA_SHOW)
+        os.makedirs(out_dir, exist_ok=True)
+        hp, pp = os.path.join(out_dir, p['id'] + '.html'), os.path.join(out_dir, p['id'] + '.pdf')
+        if os.path.exists(hp) and open(hp, encoding='utf-8').read() == page and os.path.exists(pp):
+            continue
+        open(hp, 'w', encoding='utf-8').write(page)
+        r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'pdf.js'), hp, pp], capture_output=True, text=True)
+        if r.returncode != 0 or not os.path.exists(pp):
+            print('PDF_FALHOU', p['id'], (r.stderr or r.stdout).strip()[-200:])
+
+
 if __name__ == '__main__':
+    make_pdfs()
     open('sair.html', 'w', encoding='utf-8').write(SAIR.format(SUPA_URL=SUPA_URL, SUPA_KEY=SUPA_KEY))
     open('index.html', 'w', encoding='utf-8').write(render('pt'))
     os.makedirs('en', exist_ok=True)

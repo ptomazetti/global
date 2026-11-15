@@ -55,7 +55,10 @@ o arquivo novo tem outro ID, então a rotina procura o arquivo atual de cada pas
 
 O script decide sozinho qual arquivo usar: um arquivo colocado na pasta depois da última conferência
 ganha; senão o atual continua enquanto existir; se o atual foi apagado, entra o mais recente da pasta.
-Pasta sem nenhum arquivo na lista não muda nada. Se a busca do Drive falhar, rode o script sem o
+Pasta de vídeo sem nenhum arquivo na lista não muda nada. Pasta de descrição sem PDF (com a busca de PDFs
+tendo achado PDFs em outras pastas) faz o site gerar o próprio PDF do apartamento em `descricao/<id>.pdf`,
+com os textos, fotos e custos do site. Quando um PDF volta para a pasta, o site volta a usar o do Drive
+e apaga o gerado. O script cuida disso sozinho; o commit leva a pasta `descricao/` junto. Se a busca do Drive falhar, rode o script sem o
 terceiro argumento: status e preços são atualizados e os vídeos ficam como estão.
 
 ## Apartamento novo
