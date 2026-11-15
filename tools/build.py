@@ -121,6 +121,8 @@ for _p in P:
     if _MD.get(_p['id'], {}).get('desc'):
         _p['d'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['desc']}/view?usp=sharing"
 P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
+# Cards open in the order the sort menu shows first: highest rent first (ties keep the list order).
+P.sort(key=lambda p: -p['rent'])
 PID = {p["id"]: p for p in P}
 
 DET = {
