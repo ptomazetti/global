@@ -39,6 +39,44 @@
    "iptu": 61.84
   }
  },
+ "media": {
+  "spettacolo-42": {
+   "video": "1RabfNbLMBNixf0eHwGduoPRpdtXDZHPE",
+   "video_seen": "2026-11-14T02:56:09.141Z",
+   "desc": "1akjtOVeacGJNRz2Ihp5uc-KQfwCBWlxQ",
+   "desc_seen": "2026-09-17T20:10:13.883Z"
+  },
+  "red-1401": {
+   "video": "1hH0mENGtc03eREHB4j0y6fiUj6KcpUKx",
+   "video_seen": "2026-09-30T19:06:06.186Z",
+   "desc": "1I3UIwxGQJ1ij7WcLU8AIxy1giDVVRke6",
+   "desc_seen": "2026-09-30T19:36:26.096Z"
+  },
+  "alpha-club-j42": {
+   "video": "1hPaG3fANuAu8tYZfaidFGuLrdw7M8XMh",
+   "video_seen": "2025-09-05T16:20:36.200Z",
+   "desc": "1W3QlSmMlkzd-SnY9_mjDsCZN_WANdPRY",
+   "desc_seen": "2026-06-19T23:50:34.740Z"
+  },
+  "esplanada-102": {
+   "video": "1fnlMgA-zpWuqXb1aKqtkJaMqdwAT2hpM",
+   "video_seen": "2026-09-19T22:06:08.091Z",
+   "desc": "13Bl4moHnpd-XpkqmgUMYrVdsl6ZoeNtj",
+   "desc_seen": "2026-11-14T16:12:44.223Z"
+  },
+  "alpha-club-i41": {
+   "video": "1BU5odrV48fFY614L7pn84adMBT3lnjbk",
+   "video_seen": "2026-08-08T21:56:42.689Z",
+   "desc": "1PBosWcqSD6zJ6Efxw_TIPX-IsAMZ3zzL",
+   "desc_seen": "2026-08-08T22:00:43.817Z"
+  },
+  "vida-plena-c65": {
+   "video": "1lcclyp_vkRjaBEFRKNmfE9kw2JixzVN6",
+   "video_seen": "2026-11-15T01:31:04.594Z",
+   "desc": "1pNV9TKeWj2BKmLnro5xTWWEaO2rMHV6E",
+   "desc_seen": "2026-11-15T01:31:53.618Z"
+  }
+ },
  "updated": "2026-11-02",
  "source": "planilha, 2 nov 2026 (manual)"
 }
