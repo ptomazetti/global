@@ -41,25 +41,25 @@ senão vale a planilha.
 
 ## Vídeos e descrições
 
-O site aponta para um arquivo específico do Drive. Quando alguém troca o vídeo ou o PDF na pasta,
-o arquivo novo tem outro ID, então a rotina procura o arquivo atual de cada pasta todo dia.
+O site aponta para um arquivo específico do Drive. Quando alguém troca o vídeo na pasta,
+o arquivo novo tem outro ID, então a rotina procura o vídeo atual de cada pasta todo dia.
 
 1. Com o conector do Google Drive, liste os vídeos de todas as pastas `video` de `tools/drive_folders.json`
    numa busca só: `mimeType contains 'video/' and (parentId = '<pasta 1>' or parentId = '<pasta 2>' ...)`.
-2. Liste os PDFs de todas as pastas `desc` do mesmo jeito, com `mimeType = 'application/pdf'`.
-3. Se alguma busca devolver `nextPageToken`, busque as outras páginas também.
-4. Grave em `/tmp/drive.json` uma lista JSON com um objeto por arquivo encontrado, com os campos
+2. Se a busca devolver `nextPageToken`, busque as outras páginas também.
+3. Grave em `/tmp/drive.json` uma lista JSON com um objeto por arquivo encontrado, com os campos
    `id`, `parentId`, `createdTime` e `mimeType` copiados exatamente como vieram (um caractere errado
    no `id` quebra o vídeo no site). Não inclua arquivos com `trashed: true`.
-5. Passe `/tmp/drive.json` como terceiro argumento do script (ver "Aplicar").
+4. Passe `/tmp/drive.json` como terceiro argumento do script (ver "Aplicar").
 
-O script decide sozinho qual arquivo usar: um arquivo colocado na pasta depois da última conferência
+O script decide sozinho qual vídeo usar: um arquivo colocado na pasta depois da última conferência
 ganha; senão o atual continua enquanto existir; se o atual foi apagado, entra o mais recente da pasta.
-Pasta de vídeo sem nenhum arquivo na lista não muda nada. Pasta de descrição sem PDF (com a busca de PDFs
-tendo achado PDFs em outras pastas) faz o site gerar o próprio PDF do apartamento em `descricao/<id>.pdf`,
-com os textos, fotos e custos do site. Quando um PDF volta para a pasta, o site volta a usar o do Drive
-e apaga o gerado. O script cuida disso sozinho; o commit leva a pasta `descricao/` junto. Se a busca do Drive falhar, rode o script sem o
+Pasta sem nenhum vídeo na lista não muda nada. Se a busca do Drive falhar, rode o script sem o
 terceiro argumento: status e preços são atualizados e os vídeos ficam como estão.
+
+O PDF de descrição não vem mais do Drive: o site gera um PDF padrão para cada apartamento em
+`descricao/<id>.pdf` (textos, fotos e custos do site), refeito sozinho quando preço ou texto mudam.
+O commit leva a pasta `descricao/` junto. Não procure PDFs no Drive.
 
 ## Apartamento novo
 
