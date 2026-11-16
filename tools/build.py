@@ -266,7 +266,9 @@ T = {
   stats=[('{N}', 'apartamentos disponíveis'), ('{MIN}', 'aluguel a partir de'), ('2 dias', 'para pegar as chaves'), ('Pets', 'são bem-vindos')],
   filters=['Todos', 'Studio', '2 dormitórios', '3 dormitórios'], sort_label='Ordenar', sort_opts=['Maior preço', 'Menor preço'],
   amen_eyebrow='Lazer', amen_h='Lazer completo nos condomínios', amen_p='Piscina, academia, SPA e áreas de convivência. Tudo a poucos passos da porta do seu cliente.',
-  amen_tiles=[('red-1401-2', 'Piscina', 'RED Studio'), ('alpha-club-i41-3', 'Academia', 'Alpha Club'), ('spettacolo-42-4', 'SPA com hidromassagem', 'Spettacolo Patriani')],
+  # Leisure tiles: the first 3 whose apartment is still on the site (rented ones drop out).
+  amen_tiles=[('red-1401-2', 'Piscina', 'RED Studio'), ('alpha-club-i41-3', 'Academia', 'Alpha Club'), ('spettacolo-42-4', 'SPA com hidromassagem', 'Spettacolo Patriani'),
+              ('vida-plena-c65-4', 'Piscina', 'Vida Plena'), ('vida-plena-d98-4', 'Academia', 'Vida Plena'), ('vida-plena-d98-5', 'Playground', 'Vida Plena')],
   list_eyebrow='Disponíveis agora',
   list_h='Selecione a opção que atende ao seu cliente.',
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
@@ -323,7 +325,8 @@ T = {
   stats=[('{N}', 'apartments available'), ('{MIN}', 'rent from'), ('2 days', 'to get your keys'), ('Pets', 'are welcome')],
   filters=['All', 'Studio', '2 bedrooms', '3 bedrooms'], sort_label='Sort', sort_opts=['Highest price', 'Lowest price'],
   amen_eyebrow='Leisure', amen_h='Full leisure facilities in the buildings', amen_p='Pools, gyms, spa and shared spaces. All just steps from your client’s door.',
-  amen_tiles=[('red-1401-2', 'Pool', 'RED Studio'), ('alpha-club-i41-3', 'Gym', 'Alpha Club'), ('spettacolo-42-4', 'Spa with hot tub', 'Spettacolo Patriani')],
+  amen_tiles=[('red-1401-2', 'Pool', 'RED Studio'), ('alpha-club-i41-3', 'Gym', 'Alpha Club'), ('spettacolo-42-4', 'Spa with hot tub', 'Spettacolo Patriani'),
+              ('vida-plena-c65-4', 'Pool', 'Vida Plena'), ('vida-plena-d98-4', 'Gym', 'Vida Plena'), ('vida-plena-d98-5', 'Playground', 'Vida Plena')],
   list_eyebrow='Available now',
   list_h='Select the option that suits your client.',
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
@@ -598,7 +601,7 @@ def render(lang):
     stats = ''.join(f'<div class="stat"><strong>{a.format(**fmt)}</strong><span>{b}</span></div>' for a, b in t['stats'])
     fvals = ['all', '0', '2', '3']
     filters = ''.join(f'<button type="button" class="chip{" on" if v == "all" else ""}" data-f="{v}" aria-pressed="{"true" if v == "all" else "false"}">{lab}</button>' for v, lab in zip(fvals, t['filters']) if v == 'all' or any(str(p['beds']) == v for p in P))
-    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/g/{im}.webp" type="image/webp"><img src="{R}images/g/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in t['amen_tiles'])
+    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/g/{im}.webp" type="image/webp"><img src="{R}images/g/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in [x for x in t['amen_tiles'] if x[0].rsplit('-', 1)[0] in PID][:3])
 
     url = SITE + ('/' if lang == 'pt' else '/en/')
     pt_href = R + 'index.html' if lang == 'en' else '#topo'
