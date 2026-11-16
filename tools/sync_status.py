@@ -64,7 +64,8 @@ def drive_files(obj, out=None):
     out = [] if out is None else out
     if isinstance(obj, dict):
         if obj.get('id') and obj.get('parentId') and obj.get('createdTime'):
-            if not obj.get('trashed'):
+            # The Drive search can return the same file on two pages: keep it once.
+            if not obj.get('trashed') and all(f['id'] != obj['id'] for f in out):
                 out.append(obj)
         else:
             for v in obj.values():
@@ -172,7 +173,8 @@ def main():
                     # A new description PDF, or the same one edited: the text on the site is redone from it.
                     mod = found[chosen].get('modifiedTime', '')
                     before = old_media.get(i, {})
-                    if mod and before.get('desc_mod') and (chosen != before.get('desc') or mod != before.get('desc_mod')):
+                    # also when the folder had no PDF before ('gerado') and now has one
+                    if mod and (before.get('desc_mod') or before.get('desc') == 'gerado') and (chosen != before.get('desc') or mod != before.get('desc_mod')):
                         texts.append((i, chosen))
                     media[i]['desc_mod'] = mod
         photos = photos_sync.sync(files, IDS, folders)
