@@ -2,7 +2,7 @@
 Rode a partir da raiz do repositorio:  python3 tools/build.py
 """
 from urllib.parse import quote
-import datetime, json, os, re, html, subprocess
+import datetime, hashlib, json, os, re, html, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHOTOS = json.load(open(os.path.join(ROOT, 'tools', 'photos.json'))) if os.path.exists(os.path.join(ROOT, 'tools', 'photos.json')) else {}
 
@@ -65,9 +65,9 @@ P = [
   d='https://drive.google.com/file/d/1W3QlSmMlkzd-SnY9_mjDsCZN_WANdPRY/view?usp=sharing'),
  dict(id='esplanada-102', beds=3, name='Residencial Esplanada', rent=2890, condo=500.00, iptu=105.33,
   tag={'pt': '3 dormitórios', 'en': '3 bedrooms'},
-  meta={'pt': 'Apto. 102 · Bloco 2', 'en': 'Apt. 102 · Block 2'},
-  perks={'pt': ['Cozinha equipada, geladeira 440 L, cooktop e forno', 'Máquina lava e seca, ar-condicionado na sala', '1 vaga descoberta, condomínio clube'],
-         'en': ['Equipped kitchen, 440 L fridge, cooktop and oven', 'Washer-dryer, air conditioning in the living room', '1 uncovered parking space, club-style complex']},
+  meta={'pt': 'Apto. 102 · Bloco 2 · 60 m² · Votorantim', 'en': 'Apt. 102 · Block 2 · 60 m² · Votorantim'},
+  perks={'pt': ['A 10 minutos do Shopping Iguatemi', 'Cama box Queen, ar-condicionado na sala, máquina lava e seca', '1 vaga descoberta, condomínio com piscina e academia'],
+         'en': ['10 minutes from Shopping Iguatemi', 'Queen bed, air conditioning in the living room, washer-dryer', '1 uncovered parking space, building with pool and gym']},
   gal={'pt': ['Sala integrada com mesa de jantar', 'Cozinha com geladeira e micro-ondas', 'Dormitório com armário planejado'],
        'en': ['Open-plan living and dining room', 'Kitchen with fridge and microwave', 'Bedroom with built-in wardrobe']},
   f='https://drive.google.com/drive/folders/1A19Eb5ZPVLWmBcxqc6R4a2GPwvbjgVFB?usp=drive_link',
@@ -171,19 +171,21 @@ DET = {
     amen=['Club-style complex'])},
  'esplanada-102': {
   'pt': dict(head='3 dormitórios com cozinha completa',
-    intro='No Residencial Esplanada, Bloco 2. O único de 3 dormitórios da lista, com ar-condicionado na sala e lavanderia completa.',
-    groups=[('Ambientes', ['Dormitórios, cozinha e banheiro com móveis planejados', 'Sala com ar-condicionado de 12.000 BTUs', 'Smart TV, sofá e mesa com cadeiras']),
-            ('Cozinha', ['Fogão, cooktop, forno elétrico e coifa', 'Micro-ondas', 'Geladeira Frost Free Duplex de 440 L']),
-            ('Lavanderia', ['Área de serviço completa com máquina lava e seca']),
+    intro='No Residencial Esplanada, Bloco 2, em Votorantim, a 10 minutos do Shopping Iguatemi. 60 m², totalmente mobiliado, com móveis planejados, ar-condicionado na sala e lavanderia completa.',
+    groups=[('Dormitórios', ['Um com cama box Queen de molas ensacadas', 'Um com cama de solteiro', 'Terceiro dormitório para escritório ou hóspede', 'Móveis planejados']),
+            ('Sala', ['Ar-condicionado de 12.000 BTUs', 'Painel com Smart TV, sofá e mesa com cadeiras']),
+            ('Cozinha', ['Cozinha americana com móveis planejados', 'Cooktop, forno elétrico e coifa', 'Micro-ondas', 'Geladeira Frost Free Duplex de 440 L']),
+            ('Banheiro e lavanderia', ['Banheiro com móveis planejados', 'Área de serviço completa com máquina lava e seca']),
             ('Garagem', ['1 vaga descoberta'])],
-    amen=['Condomínio clube']),
+    amen=['Piscina adulto e infantil', 'Salão de festas', 'Salão de jogos', 'Academia', '3 quiosques com churrasqueira', 'Parque infantil', 'Conveniência', 'Bicicletário', 'Portaria 24h']),
   'en': dict(head='3 bedrooms with a fully equipped kitchen',
-    intro='At Residencial Esplanada, Block 2. The only 3-bedroom on our list, with air conditioning in the living room and a full laundry.',
-    groups=[('Living spaces', ['Built-in furniture in the bedrooms, kitchen and bathroom', 'Living room with 12,000 BTU air conditioning', 'Smart TV, sofa, table and chairs']),
-            ('Kitchen', ['Stove, cooktop, electric oven and range hood', 'Microwave', '440 L frost-free double-door fridge']),
-            ('Laundry', ['Full laundry area with washer-dryer']),
+    intro='At Residencial Esplanada, Block 2, in Votorantim, 10 minutes from Shopping Iguatemi. 60 m², fully furnished, with built-in furniture, air conditioning in the living room and a full laundry.',
+    groups=[('Bedrooms', ['One with a Queen bed with pocket springs', 'One with a single bed', 'Third bedroom for an office or guests', 'Built-in furniture']),
+            ('Living room', ['12,000 BTU air conditioning', 'TV panel with Smart TV, sofa, table and chairs']),
+            ('Kitchen', ['Open kitchen with built-in cabinets', 'Cooktop, electric oven and range hood', 'Microwave', '440 L frost-free double-door fridge']),
+            ('Bathroom and laundry', ['Bathroom with built-in furniture', 'Full laundry area with washer-dryer']),
             ('Parking', ['1 uncovered parking space'])],
-    amen=['Club-style complex'])},
+    amen=['Adult and children’s pools', 'Party room', 'Games room', 'Gym', '3 barbecue kiosks', 'Playground', 'Convenience store', 'Bike storage', '24-hour concierge'])},
  'alpha-club-i41': {
   'pt': dict(head='2 dormitórios com suíte e varanda gourmet',
     intro='No Alpha Club, no Campolim. Dois quartos com cama de casal e ventilador de teto. Não tem ar-condicionado. Uma vaga de garagem descoberta.',
@@ -274,6 +276,7 @@ T = {
   list_p='Valores completos: aluguel + condomínio + IPTU. Sem surpresa no contrato.',
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
+  hero_a_alt='Spettacolo Patriani: Cozinha com armários planejados e cooktop', hero_b_alt='Residencial Esplanada: Dormitório com armário planejado',
   visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_copy='Copiar descrição', exp_pdf='Descrição completa (PDF)', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Agendar visita" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
@@ -332,6 +335,7 @@ T = {
   list_p='Full costs: rent + condo fee + property tax (IPTU). No surprises in the contract.',
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
+  hero_a_alt='Spettacolo Patriani: Kitchen with built-in cabinets and cooktop', hero_b_alt='Residencial Esplanada: Bedroom with built-in wardrobe',
   visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_copy='Copy description', exp_pdf='Full description (PDF, Portuguese)', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "Book a viewing" on the apartment. WhatsApp opens with the message ready, including the apartment name.'),
@@ -417,6 +421,13 @@ def vpill(p, t, R=''):
     return f'<a class="media-pill" href="{p["v"]}" target="_blank" rel="noopener">{PLAY}{t["video_btn"]}</a>'
 
 
+def card_alts(p, lang, t):
+    """One caption per card photo that exists (images/g/<id>-N.jpg). The photo sync can change how many
+    there are; a photo without a caption in gal gets 'foto N de M' until the caption is written."""
+    n = sum(1 for i in range(1, 6) if os.path.exists(os.path.join(ROOT, 'images', 'g', f"{p['id']}-{i}.jpg")))
+    gal = p['gal'][lang]
+    return [gal[i] if i < len(gal) else t['photo_n'].format(i=i + 1, n=n) for i in range(n)]
+
 def render(lang):
     t = T[lang]
     R = '' if lang == 'pt' else '../'   # prefixo para arquivos
@@ -434,7 +445,7 @@ def render(lang):
         total = p['rent'] + p['condo'] + p['iptu']
         msg = wa(t['wa_unit'].format(name=p['name'], price=money(p['rent'], lang, cents=False)))
         perks = ''.join(f'<li>{x}</li>' for x in p['perks'][lang])
-        alts = p['gal'][lang]; n = len(alts)
+        alts = card_alts(p, lang, t); n = len(alts)
         slides = ''.join(
             f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
             f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
@@ -481,7 +492,7 @@ def render(lang):
                 for i, (w, h) in enumerate(ph))
             thumb_src = lambda i, pid=p['id']: f'{R}images/u/{pid}/t{i + 1:02d}.webp'
         else:
-            alts = p['gal'][lang]; n = len(alts)
+            alts = card_alts(p, lang, t); n = len(alts)
             slides = ''.join(
                 f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
                 f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
@@ -601,7 +612,7 @@ def render(lang):
     stats = ''.join(f'<div class="stat"><strong>{a.format(**fmt)}</strong><span>{b}</span></div>' for a, b in t['stats'])
     fvals = ['all', '0', '2', '3']
     filters = ''.join(f'<button type="button" class="chip{" on" if v == "all" else ""}" data-f="{v}" aria-pressed="{"true" if v == "all" else "false"}">{lab}</button>' for v, lab in zip(fvals, t['filters']) if v == 'all' or any(str(p['beds']) == v for p in P))
-    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/g/{im}.webp" type="image/webp"><img src="{R}images/g/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in [x for x in t['amen_tiles'] if x[0].rsplit('-', 1)[0] in PID][:3])
+    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/fixo/{im}.webp" type="image/webp"><img src="{R}images/fixo/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in [x for x in t['amen_tiles'] if x[0].rsplit('-', 1)[0] in PID][:3])
 
     url = SITE + ('/' if lang == 'pt' else '/en/')
     pt_href = R + 'index.html' if lang == 'en' else '#topo'
@@ -700,8 +711,8 @@ def render(lang):
   </div>
   <div class="hero-collage">
     <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
-    <picture class="hc-a"><source srcset="{R}images/g/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/g/spettacolo-42-3.jpg" alt="{PID_ALL['spettacolo-42']['name']}: {PID_ALL['spettacolo-42']['gal'][lang][2]}" width="760" height="570"></picture>
-    <picture class="hc-b"><source srcset="{R}images/g/esplanada-102-3.webp" type="image/webp"><img src="{R}images/g/esplanada-102-3.jpg" alt="{PID_ALL['esplanada-102']['name']}: {PID_ALL['esplanada-102']['gal'][lang][2]}" width="760" height="570"></picture>
+    <picture class="hc-a"><source srcset="{R}images/fixo/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/fixo/spettacolo-42-3.jpg" alt="{t['hero_a_alt']}" width="760" height="570"></picture>
+    <picture class="hc-b"><source srcset="{R}images/fixo/esplanada-102-3.webp" type="image/webp"><img src="{R}images/fixo/esplanada-102-3.jpg" alt="{t['hero_b_alt']}" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>
@@ -1171,6 +1182,7 @@ def make_pdfs():
         if len(imgs) == 4:
             imgs = imgs[:3]   # the grid takes 1, 2, 3 or 5 photos
         photos = ''.join(f'<img src="../{x}" alt="">' for x in imgs)
+        photos += '<!-- ' + ' '.join(hashlib.sha1(open(os.path.join(ROOT, x), 'rb').read()).hexdigest()[:12] for x in imgs) + ' -->'
         groups = ''.join(f'<div class="g"><h3>{e(g)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul></div>'
                          for g, items in d['groups'])
         costs = ''.join(f'<tr><td>{a}</td><td>{money(v, "pt")}</td></tr>' for a, v in

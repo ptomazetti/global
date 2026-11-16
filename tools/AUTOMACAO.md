@@ -1,4 +1,4 @@
-# Automação diária: status, preços, vídeos e descrições
+# Automação diária: status, preços, vídeos, fotos e descrições
 
 Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
 
@@ -16,7 +16,8 @@ Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
    `ALUGADO` ou `DISPONÍVEL` (também aceitar `DISPONIVEL`) seguido do nome da unidade.
    Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d`
 3. **Pastas do Google Drive** de cada apartamento, listadas em `tools/drive_folders.json`
-   (`video` = pasta do vídeo, `desc` = pasta onde fica o PDF de descrição). Ver "Vídeos e descrições".
+   (`video` = pasta do vídeo, `fotos` = pasta de fotos, `desc` = pasta onde fica o PDF de descrição).
+   Ver "Vídeos, fotos e descrições".
 
 ## Nomes aceitos no assunto -> ID
 
@@ -39,27 +40,54 @@ Para cada unidade, vale a ação mais recente: compare a data do e-mail mais rec
 unidade com a data de modificação da planilha. Se o e-mail for mais novo, vale o e-mail;
 senão vale a planilha.
 
-## Vídeos e descrições
+## Vídeos, fotos e descrições
 
-O site aponta para um arquivo específico do Drive. Quando alguém troca o vídeo na pasta,
-o arquivo novo tem outro ID, então a rotina procura o vídeo atual de cada pasta todo dia.
+Tudo o que muda nas pastas do Drive de um apartamento entra no site sozinho, na rotina do dia seguinte.
+As pastas de cada apartamento estão em `tools/drive_folders.json`: `video` (vídeo), `fotos` (fotos) e
+`desc` (onde fica o PDF de descrição).
 
-1. Com o conector do Google Drive, liste os vídeos de todas as pastas `video` de `tools/drive_folders.json`
-   numa busca só: `mimeType contains 'video/' and (parentId = '<pasta 1>' or parentId = '<pasta 2>' ...)`.
+1. Com o conector do Google Drive, faça uma busca só com todas as pastas de `tools/drive_folders.json`
+   (as três de cada apartamento):
+   `(mimeType contains 'video/' or mimeType contains 'image/' or mimeType = 'application/pdf') and (parentId = '<pasta 1>' or parentId = '<pasta 2>' ...)`,
+   com `pageSize` 200.
 2. Se a busca devolver `nextPageToken`, busque as outras páginas também.
-3. Grave em `/tmp/drive.json` uma lista JSON com um objeto por arquivo encontrado, com os campos
-   `id`, `parentId`, `createdTime` e `mimeType` copiados exatamente como vieram (um caractere errado
-   no `id` quebra o vídeo no site). Não inclua arquivos com `trashed: true`.
+3. Grave em `/tmp/drive.json` todos os arquivos encontrados, com os campos `id`, `parentId`, `title`,
+   `createdTime`, `modifiedTime` e `mimeType` copiados exatamente como vieram (um caractere errado no `id`
+   quebra o site). O mais simples é gravar a resposta da busca como veio. Não inclua arquivos com `trashed: true`.
 4. Passe `/tmp/drive.json` como terceiro argumento do script (ver "Aplicar").
 
-O script decide sozinho qual vídeo usar: um arquivo colocado na pasta depois da última conferência
-ganha; senão o atual continua enquanto existir; se o atual foi apagado, entra o mais recente da pasta.
-Pasta sem nenhum vídeo na lista não muda nada. Se a busca do Drive falhar, rode o script sem o
-terceiro argumento: status e preços são atualizados e os vídeos ficam como estão.
+O que o script faz com a lista:
 
-O PDF de descrição não vem mais do Drive: o site gera um PDF padrão para cada apartamento em
-`descricao/<id>.pdf` (textos, fotos e custos do site), refeito sozinho quando preço ou texto mudam.
-O commit leva a pasta `descricao/` junto. Não procure PDFs no Drive.
+- Vídeo: um arquivo colocado na pasta depois da última conferência ganha; senão o atual continua
+  enquanto existir; se o atual foi apagado, entra o mais recente da pasta.
+- Fotos: se alguma foto entrou, saiu, foi trocada ou mudou de nome na pasta, o script baixa a pasta
+  inteira e refaz a galeria e as fotos do cartão (`tools/photos_sync.py`). A ordem é a dos números no
+  início do nome do arquivo (1.jpg, 2.jpg ... 10.jpg). Fotos pequenas (menos de 1000 px) vão para o fim
+  da galeria e fotos repetidas saem. O cartão e o PDF usam as 5 primeiras da galeria. O script imprime
+  `FOTOS <ids>`.
+- Descrição: se entrou um PDF novo na pasta `desc` ou o PDF atual foi editado, o script imprime
+  `DESCRICAO <id> <id do arquivo no Drive>`.
+
+Pasta sem nenhum arquivo do tipo na lista não muda nada. Se a busca do Drive falhar, rode o script sem o
+terceiro argumento: status e preços são atualizados e vídeos, fotos e textos ficam como estão.
+
+Depois do script, antes do commit:
+
+- Para cada linha `DESCRICAO <id> <arquivo>`: leia esse PDF com o conector do Google Drive e refaça os
+  textos do apartamento em `tools/build.py` (`tag`, `meta` e `perks` na lista `P`; `head`, `intro`,
+  `groups` e `amen` em `DET`), em português e em inglês, no mesmo estilo dos outros. Use só o que está no
+  PDF e o que já estava no site e o PDF não contradiz. Não invente itens, metragem, vaga coberta ou
+  ar-condicionado. Preços sempre da planilha, mesmo que o PDF traga outro valor. Os links de fotos e vídeo
+  dentro do PDF não importam: o site usa as pastas de `tools/drive_folders.json`.
+- Para cada apartamento em `FOTOS`: abra as fotos do cartão (`images/g/<id>-1.jpg` a `-5.jpg`) e escreva
+  em `gal` uma legenda curta para cada uma, na mesma ordem, em português e em inglês, dizendo só o que se
+  vê na foto (ex.: "Sala com sofá e TV", "Piscina do condomínio").
+- Se houve uma das duas, rode `python3 -I tools/build.py` de novo. Se der erro, desfaça só as mudanças de
+  texto e legenda (`git checkout -- tools/build.py`), rode o build de novo e diga no resumo.
+
+O PDF de descrição que o site mostra é gerado pelo próprio site (`descricao/<id>.pdf`), com os textos,
+as fotos do cartão e os custos, e é refeito sozinho quando algum deles muda. O commit leva a pasta
+`descricao/` junto.
 
 ## Apartamento novo
 
@@ -80,7 +108,7 @@ Vale para uma linha "Disponível" da planilha cujo ID não está na lista `P` de
 5. Em `tools/build.py`, copie o último bloco da lista `P` e o último de `DET` e preencha com os dados do
    apartamento novo, em português e em inglês, no mesmo estilo dos outros. `gal` tem uma legenda para cada
    foto do cartão, na mesma ordem. `f` = link da pasta de fotos, `v` = link do vídeo, `d` = link do PDF.
-6. Inclua o ID em `tools/drive_folders.json` (pasta do vídeo e pasta onde fica o PDF) e na tabela
+6. Inclua o ID em `tools/drive_folders.json` (pasta do vídeo, pasta de fotos e pasta onde fica o PDF) e na tabela
    "Nomes aceitos no assunto" deste arquivo.
 7. Rode `python3 -I tools/build.py`. Se der erro, desfaça tudo com `git checkout -- . && git clean -fd images tools`
    e diga no resumo. Se passar, siga para "Aplicar": o script vai imprimir `CHANGED` por causa do preço novo,
@@ -99,8 +127,8 @@ Vale a última linha que o script imprimir:
 - `UNCHANGED`: não faça commit nem push.
 - `CHANGED` (mudou status ou preço): rode `git add -A && git commit` (mensagem curta dizendo quais
   unidades mudaram) e `git push origin main`. O GitHub Pages publica sozinho. Avise os corretores.
-- `MEDIA` (só trocou vídeo ou descrição): commit e push do mesmo jeito, com mensagem dizendo de quais
-  unidades. Não avise os corretores.
+- `MEDIA` (só trocou vídeo, fotos ou descrição): commit e push do mesmo jeito, com mensagem dizendo de
+  quais unidades. Não avise os corretores.
 
 Fora o que está descrito aqui, não altere mais nada no site. Não responda nem apague e-mails. Não edite a planilha nem o Drive.
 

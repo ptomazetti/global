@@ -26,6 +26,9 @@ A description folder with no PDF (when the listing has PDFs from other folders) 
   description links changed) or UNCHANGED, so the automation knows what to do.
 """
 import json, os, re, subprocess, sys, datetime
+sys.dont_write_bytecode = True
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import photos_sync
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILD = os.path.join(ROOT, 'tools', 'build.py')
@@ -111,6 +114,7 @@ def main():
     units = dict(old_units)
     prices = {i: dict(old_prices.get(i, {})) for i in IDS}
     media = {i: dict(old_media.get(i, {})) for i in IDS}
+    texts, photos = [], []
     for k, v in new.items():
         if k not in IDS:
             continue
@@ -142,12 +146,24 @@ def main():
                 cur = media[i].get(kind) or base.get(i, {}).get(kind)
                 chosen, seen = pick(list(found.values()), cur, media[i].get(kind + '_seen'))
                 media[i][kind], media[i][kind + '_seen'] = chosen, seen
+                if kind == 'desc':
+                    # A new description PDF, or the same one edited: the text on the site is redone from it.
+                    mod = found[chosen].get('modifiedTime', '')
+                    before = old_media.get(i, {})
+                    if mod and before.get('desc_mod') and (chosen != before.get('desc') or mod != before.get('desc_mod')):
+                        texts.append((i, chosen))
+                    media[i]['desc_mod'] = mod
+        photos = photos_sync.sync(files, IDS, folders)
     prices = {k: v for k, v in prices.items() if v}
     media = {k: v for k, v in media.items() if v}
     listing_changed = units != old_units or prices != old_prices
     links = lambda m: {k: (v.get('video'), v.get('desc')) for k, v in m.items()}
     media_changed = links(media) != links(old_media)
-    if not listing_changed and media == old_media:
+    for i, f in texts:
+        print('DESCRICAO', i, f)
+    if photos:
+        print('FOTOS', ' '.join(photos))
+    if not listing_changed and media == old_media and not photos:
         print('UNCHANGED')
         return
     today = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=3)).date()
@@ -164,7 +180,7 @@ def main():
     subprocess.run([sys.executable, '-I', BUILD], cwd=ROOT, check=True, stdout=subprocess.DEVNULL)
     if listing_changed:
         print('CHANGED', json.dumps(units, ensure_ascii=False))
-    elif media_changed:
+    elif media_changed or photos or texts:
         print('MEDIA', json.dumps(links(media), ensure_ascii=False))
     else:
         print('UNCHANGED')
