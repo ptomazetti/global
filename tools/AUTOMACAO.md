@@ -50,7 +50,10 @@ As pastas de cada apartamento estão em `tools/drive_folders.json`: `video` (ví
    (as três de cada apartamento):
    `(mimeType contains 'video/' or mimeType contains 'image/' or mimeType = 'application/pdf') and (parentId = '<pasta 1>' or parentId = '<pasta 2>' ...)`,
    com `pageSize` 200.
-2. Se a busca devolver `nextPageToken`, busque as outras páginas também.
+2. Se a busca devolver `nextPageToken`, busque as outras páginas também (passando o `pageToken`) e grave
+   todas as páginas no arquivo, como uma lista com uma resposta por página. Se o arquivo tiver só páginas com
+   `nextPageToken`, o script imprime `LISTA_INCOMPLETA` e não mexe em vídeos, fotos e descrições: busque as
+   páginas que faltaram e rode de novo.
 3. Grave em `/tmp/drive.json` todos os arquivos encontrados, com os campos `id`, `parentId`, `title`,
    `createdTime`, `modifiedTime` e `mimeType` copiados exatamente como vieram (um caractere errado no `id`
    quebra o site). O mais simples é gravar a resposta da busca como veio. Não inclua arquivos com `trashed: true`.
