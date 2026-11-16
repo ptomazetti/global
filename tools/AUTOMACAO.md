@@ -17,7 +17,7 @@ Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
    Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d`
 3. **Pastas do Google Drive** de cada apartamento, listadas em `tools/drive_folders.json`
    (`video` = pasta do vídeo, `fotos` = pasta de fotos, `desc` = pasta onde fica o PDF de descrição).
-   Ver "Vídeos, fotos e descrições".
+   Ver "Vídeos e descrições".
 
 ## Nomes aceitos no assunto -> ID
 
@@ -40,7 +40,7 @@ Para cada unidade, vale a ação mais recente: compare a data do e-mail mais rec
 unidade com a data de modificação da planilha. Se o e-mail for mais novo, vale o e-mail;
 senão vale a planilha.
 
-## Vídeos, fotos e descrições
+## Vídeos e descrições (inclui fotos)
 
 Tudo o que muda nas pastas do Drive de um apartamento entra no site sozinho, na rotina do dia seguinte.
 As pastas de cada apartamento estão em `tools/drive_folders.json`: `video` (vídeo), `fotos` (fotos) e
