@@ -7,7 +7,7 @@ For every apartment with a "fotos" folder in tools/drive_folders.json:
 - if that list (file id and modified time) is the same as in tools/photos_src.json, nothing happens;
 - otherwise the photos are downloaded, exact duplicates dropped, and the gallery and card
   photos are rebuilt with tools/photos.py:
-    gallery = sharp photos (longest side 1000 px or more) in folder order, then the small ones;
+    gallery = sharp photos (longest side 1200 px or more) in folder order, then the small ones;
     cards (the photos on the apartment card and in the description PDF) = the first 5 of the gallery.
 A folder with no photo in the listing is left alone, so a failed Drive search never empties a gallery.
 
@@ -17,7 +17,7 @@ import glob, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'tools', 'photos_src.json')
-SHARP = 1000
+SHARP = 1200   # Drive gives 1600 px for a phone photo; smaller means the file in the folder is small
 
 
 def order_key(f):
