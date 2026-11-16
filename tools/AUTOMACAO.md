@@ -65,7 +65,7 @@ O que o script faz com a lista:
   enquanto existir; se o atual foi apagado, entra o mais recente da pasta.
 - Fotos: se alguma foto entrou, saiu, foi trocada ou mudou de nome na pasta, o script baixa a pasta
   inteira e refaz a galeria e as fotos do cartão (`tools/photos_sync.py`). A ordem é a dos números no
-  início do nome do arquivo (1.jpg, 2.jpg ... 10.jpg). Fotos pequenas (menos de 1000 px) vão para o fim
+  início do nome do arquivo (1.jpg, 2.jpg ... 10.jpg). Fotos pequenas (menos de 1200 px) vão para o fim
   da galeria e fotos repetidas saem. O cartão e o PDF usam as 5 primeiras da galeria. O script imprime
   `FOTOS <ids>`.
 - Descrição: se entrou um PDF novo na pasta `desc` ou o PDF atual foi editado, o script imprime
