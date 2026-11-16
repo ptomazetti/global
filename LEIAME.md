@@ -23,10 +23,13 @@ O passo a passo que ela segue (e que serve para fazer à mão) está em `tools/A
 ## Textos em dois idiomas
 Cada texto tem a versão `pt` e `en`. Ao trocar um texto ou adicionar um apartamento, preencha os dois idiomas. A data em `ATUALIZADO` também tem as duas versões.
 
-## Trocar o vídeo ou o PDF de descrição
-Coloque o arquivo novo na mesma pasta do Drive do apartamento (pode apagar o antigo ou deixar).
-A rotina diária acha o arquivo novo e atualiza o site sozinha. As pastas de cada apartamento estão
-em `tools/drive_folders.json`. Detalhes em `tools/AUTOMACAO.md`.
+## Trocar vídeo, fotos ou descrição
+Mexa direto nas pastas do apartamento no Drive. A rotina diária (8h17) confere as pastas e atualiza o site sozinha:
+- vídeo: coloque o arquivo novo na pasta de vídeo (pode apagar o antigo ou deixar);
+- fotos: acrescente, tire ou troque na pasta de fotos. A ordem do site é a dos números no nome do arquivo
+  (1.jpg, 2.jpg...). As 5 primeiras viram a capa do cartão. Fotos pequenas vão para o fim;
+- descrição: coloque o PDF novo (ou edite o atual) na pasta do apartamento. A rotina refaz o texto do site a partir dele.
+As pastas de cada apartamento estão em `tools/drive_folders.json`. Detalhes em `tools/AUTOMACAO.md`.
 
 ## Vídeos dentro do site
 Coloque o arquivo em `videos/<id>.mp4` (ex.: `videos/vida-plena-c65.mp4`) e rode `python3 -I tools/build.py`.
