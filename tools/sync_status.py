@@ -75,6 +75,24 @@ def drive_files(obj, out=None):
     return out
 
 
+def listing_complete(obj):
+    """False when the Drive listing is only part of the search: every saved page still points to a next
+    page (nextPageToken) and none is the last one. Then folders would look emptier than they are, and
+    photos or videos that are still in the Drive would be taken off the site."""
+    pages = []
+    def walk(o):
+        if isinstance(o, dict):
+            if 'files' in o:
+                pages.append(o)
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    walk(obj)
+    return not pages or any(not p.get('nextPageToken') for p in pages)
+
+
 def pick(files, current, seen):
     """Return (chosen id, newest createdTime) following the rule in the module docstring."""
     files = sorted(files, key=lambda f: f['createdTime'])
@@ -125,8 +143,12 @@ def main():
         for f in ('rent', 'condo', 'iptu'):
             if f in v and money(v[f]) is not None:
                 prices[k][f] = money(v[f])
-    if len(sys.argv) > 3:
-        files = drive_files(json.load(open(sys.argv[3], encoding='utf-8')))
+    listing = json.load(open(sys.argv[3], encoding='utf-8')) if len(sys.argv) > 3 else None
+    if listing is not None and not listing_complete(listing):
+        print('LISTA_INCOMPLETA: a busca do Drive tem mais páginas (nextPageToken). Vídeos, fotos e descrições ficam como estão.')
+        listing = None
+    if listing is not None:
+        files = drive_files(listing)
         fp = os.path.join(ROOT, 'tools', 'drive_folders.json')
         folders = json.load(open(fp, encoding='utf-8')) if os.path.exists(fp) else {}
         base = current_links()
