@@ -92,6 +92,9 @@ O PDF de descrição que o site mostra é gerado pelo próprio site (`descricao/
 as fotos do cartão e os custos, e é refeito sozinho quando algum deles muda. O commit leva a pasta
 `descricao/` junto.
 
+O botão "Baixar fotos" baixa `baixar/<id>-fotos.zip`, com as fotos da galeria em JPG. O zip é refeito
+sozinho sempre que as fotos mudam (`tools/photos.py`). O commit leva a pasta `baixar/` junto.
+
 ## Apartamento novo
 
 Vale para uma linha "Disponível" da planilha cujo ID não está na lista `P` de `tools/build.py`.
