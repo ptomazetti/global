@@ -478,6 +478,13 @@ def render(lang):
     </article>''')
     CARDS = '\n\n'.join(cards)
 
+    def photos_btn(p):
+        # "Baixar fotos": zip of JPGs made by tools/photos.py; the Drive folder only while there is no zip
+        z = f'baixar/{p["id"]}-fotos.zip'
+        if os.path.exists(os.path.join(ROOT, z)):
+            return f'<a class="btn btn-outline" href="{R}{z}" download>{t["exp_dl"]}</a>'
+        return f'<a class="btn btn-outline" href="{p["f"]}" target="_blank" rel="noopener">{t["exp_dl"]}</a>'
+
     dialogs = []
     for p in P:
         d = DET[p['id']][lang]
@@ -544,7 +551,7 @@ def render(lang):
       <div class="detail-export">
         <h4>{t['exp_h']}</h4>
         <div class="export-btns">
-          <a class="btn btn-outline" href="{p['f']}" target="_blank" rel="noopener">{t['exp_dl']}</a>
+          {photos_btn(p)}
           <a class="btn btn-outline" href="https://drive.usercontent.google.com/download?id={p['v'].split('/d/')[1].split('/')[0]}&amp;export=download&amp;confirm=t" target="_blank" rel="noopener">{t['exp_vid']}</a>
           {pdf_btn}<button type="button" class="btn btn-outline copy-desc" data-ok="{t['exp_ok']}">{t['exp_copy']}</button>
         </div>
