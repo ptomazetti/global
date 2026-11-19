@@ -447,7 +447,7 @@ def render(lang):
         perks = ''.join(f'<li>{x}</li>' for x in p['perks'][lang])
         alts = card_alts(p, lang, t); n = len(alts)
         slides = ''.join(
-            f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
+            f'<picture class="slide">'
             f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
             for i, a in enumerate(alts))
         cards.append(f'''    <article class="card reveal" id="{p['id']}" data-beds="{p['beds']}" data-rent="{p['rent']}">
@@ -495,16 +495,16 @@ def render(lang):
             n = len(ph)
             alts = [t['photo_n'].format(i=i + 1, n=n) for i in range(n)]
             slides = ''.join(
-                f'<div class="slide"><img src="{R}images/u/{p["id"]}/{i + 1:02d}.webp" alt="{p["name"]}, {alts[i]}" loading="lazy" decoding="async" width="{w}" height="{h}"></div>'
+                f'<div class="slide"><img src="{R}images/u/{p["id"]}/{i + 1:02d}.jpg" alt="{p["name"]}, {alts[i]}" loading="lazy" decoding="async" width="{w}" height="{h}"></div>'
                 for i, (w, h) in enumerate(ph))
-            thumb_src = lambda i, pid=p['id']: f'{R}images/u/{pid}/t{i + 1:02d}.webp'
+            thumb_src = lambda i, pid=p['id']: f'{R}images/u/{pid}/t{i + 1:02d}.jpg'
         else:
             alts = card_alts(p, lang, t); n = len(alts)
             slides = ''.join(
-                f'<picture class="slide"><source srcset="{R}images/g/{p["id"]}-{i + 1}.webp" type="image/webp">'
+                f'<picture class="slide">'
                 f'<img src="{R}images/g/{p["id"]}-{i + 1}.jpg" alt="{p["name"]}: {a}" loading="lazy" decoding="async" width="760" height="570"></picture>'
                 for i, a in enumerate(alts))
-            thumb_src = lambda i, pid=p['id']: f'{R}images/g/{pid}-{i + 1}.webp'
+            thumb_src = lambda i, pid=p['id']: f'{R}images/g/{pid}-{i + 1}.jpg'
         groups = ''.join(f'<div class="dg"><h4>{g}</h4><ul class="checks">' + ''.join(f'<li>{CHECK}{x}</li>' for x in items) + '</ul></div>' for g, items in d['groups'])
         amen = ''.join(f'<li>{x}</li>' for x in d['amen'])
         exp_lines = [f"{p['name']} · {p['tag'][lang]}", d['head'], '', d['intro'], '']
@@ -562,7 +562,7 @@ def render(lang):
   </div>
 </dialog>''')
     DIALOGS = '\n'.join(dialogs)
-    menu_apts = ''.join(f'<li><button type="button" class="drawer-apt detail-open" data-dialog="d-{p["id"]}"><img src="{R}images/g/{p["id"]}-1.webp" alt="" width="64" height="48" loading="lazy"><span><strong>{p["name"]}</strong><small>{p["tag"][lang]} · {money(p["rent"], lang, cents=False)}</small></span></button></li>' for p in P)
+    menu_apts = ''.join(f'<li><button type="button" class="drawer-apt detail-open" data-dialog="d-{p["id"]}"><img src="{R}images/g/{p["id"]}-1.jpg" alt="" width="64" height="48" loading="lazy"><span><strong>{p["name"]}</strong><small>{p["tag"][lang]} · {money(p["rent"], lang, cents=False)}</small></span></button></li>' for p in P)
 
     dep_html = ''
     if DEPOIMENTOS:
@@ -619,7 +619,7 @@ def render(lang):
     stats = ''.join(f'<div class="stat"><strong>{a.format(**fmt)}</strong><span>{b}</span></div>' for a, b in t['stats'])
     fvals = ['all', '0', '2', '3']
     filters = ''.join(f'<button type="button" class="chip{" on" if v == "all" else ""}" data-f="{v}" aria-pressed="{"true" if v == "all" else "false"}">{lab}</button>' for v, lab in zip(fvals, t['filters']) if v == 'all' or any(str(p['beds']) == v for p in P))
-    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><source srcset="{R}images/fixo/{im}.webp" type="image/webp"><img src="{R}images/fixo/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in [x for x in t['amen_tiles'] if x[0].rsplit('-', 1)[0] in PID][:3])
+    amen_tiles = ''.join(f'<figure class="amen-tile reveal"><picture><img src="{R}images/fixo/{im}.jpg" alt="{cap} · {where}" loading="lazy" width="760" height="570"></picture><figcaption><strong>{cap}</strong><span>{where}</span></figcaption></figure>' for im, cap, where in [x for x in t['amen_tiles'] if x[0].rsplit('-', 1)[0] in PID][:3])
 
     url = SITE + ('/' if lang == 'pt' else '/en/')
     pt_href = R + 'index.html' if lang == 'en' else '#topo'
@@ -659,7 +659,7 @@ def render(lang):
 <link rel="alternate" hreflang="x-default" href="{SITE}/">
 <link rel="icon" type="image/png" sizes="48x48" href="{R}images/favicon-48.png">
 <link rel="apple-touch-icon" href="{R}images/apple-touch-icon.png">
-<link rel="preload" as="image" href="{R}images/hero-sala.webp" type="image/webp">
+<link rel="preload" as="image" href="{R}images/hero-sala.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap">
@@ -717,9 +717,9 @@ def render(lang):
     <ul class="proof-row">{proof}</ul>
   </div>
   <div class="hero-collage">
-    <picture class="hc-main"><source srcset="{R}images/hero-sala.webp" type="image/webp"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
-    <picture class="hc-a"><source srcset="{R}images/fixo/spettacolo-42-3.webp" type="image/webp"><img src="{R}images/fixo/spettacolo-42-3.jpg" alt="{t['hero_a_alt']}" width="760" height="570"></picture>
-    <picture class="hc-b"><source srcset="{R}images/fixo/esplanada-102-3.webp" type="image/webp"><img src="{R}images/fixo/esplanada-102-3.jpg" alt="{t['hero_b_alt']}" width="760" height="570"></picture>
+    <picture class="hc-main"><img src="{R}images/hero-sala.jpg" alt="{t['hero_alt']}" width="908" height="1210" fetchpriority="high"></picture>
+    <picture class="hc-a"><img src="{R}images/fixo/spettacolo-42-3.jpg" alt="{t['hero_a_alt']}" width="760" height="570"></picture>
+    <picture class="hc-b"><img src="{R}images/fixo/esplanada-102-3.jpg" alt="{t['hero_b_alt']}" width="760" height="570"></picture>
     <div class="hero-badge">
       <span class="hero-count">{N}</span>
       <div>
@@ -832,7 +832,7 @@ def render(lang):
 {dep_html}
 
 <section id="contato" class="cta-band">
-  <picture class="cta-bg"><source srcset="{R}images/cta-bg.webp" type="image/webp"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
+  <picture class="cta-bg"><img src="{R}images/cta-bg.jpg" alt="" loading="lazy" width="1600" height="840"></picture>
   <div class="wrap contact reveal">
     <h2>{lines(t['end_h'])}</h2>
     <p>{t['end_p']}</p>
