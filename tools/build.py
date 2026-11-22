@@ -16,7 +16,7 @@ CNPJ = '50.945.139/0001-86'
 # ela só permite chamar inscrever_corretor e cancelar_inscricao; a tabela não pode ser lida pelo site.
 SUPA_URL = 'https://bvwrnddfujpkukzwmioz.supabase.co'
 SUPA_KEY = 'sb_publishable_ueF08uhuQoVGlB1EKWZEww_FFaRQXYF'
-ATUALIZADO = {'pt': '15 de novembro de 2026', 'en': '15 November 2026'}  # mude sempre que um imovel entrar ou sair
+ATUALIZADO = {'pt': '22 de novembro de 2026', 'en': '22 November 2026'}  # mude sempre que um imovel entrar ou sair
 AIRBNB_URL = {'pt': 'https://www.airbnb.com.br/users/profile/1779247085187681939', 'en': 'https://www.airbnb.com/users/profile/1779247085187681939'}   # perfil Global Flats no Airbnb
 ATENDENTE = {}    # ex.: {'nome': 'Paula', 'foto': 'images/paula.jpg'}
 # Avaliações reais do perfil Global Flats no Airbnb (copiadas do perfil público).
