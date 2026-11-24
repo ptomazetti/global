@@ -14,7 +14,8 @@ Roda uma vez por dia. Lê três fontes e atualiza o site sozinha.
    ou "Locado" fica fora do site e não precisa de nada.
 2. **E-mails** recebidos em contato@globalestadia.com.br, de qualquer remetente, com assunto começando por
    `ALUGADO` ou `DISPONÍVEL` (também aceitar `DISPONIVEL`) seguido do nome da unidade.
-   Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d`
+   Busca no Gmail: `subject:(ALUGADO OR DISPONIVEL OR DISPONÍVEL) newer_than:3d -from:contato@globalestadia.com.br`
+   (o `-from` tira os avisos que a própria rotina envia aos corretores, que também têm "alugado" no assunto).
 3. **Pastas do Google Drive** de cada apartamento, listadas em `tools/drive_folders.json`
    (`video` = pasta do vídeo, `fotos` = pasta de fotos, `desc` = pasta onde fica o PDF de descrição).
    Ver "Vídeos e descrições".
