@@ -1027,9 +1027,12 @@ document.querySelectorAll('.share-btn').forEach(function (b) { b.addEventListene
     navigator.share({ title: name, text: text, url: url }).catch(function (e) { if (!e || e.name !== 'AbortError') openSheet(url, text, name); });
   } else openSheet(url, text, name);
 }); });
+var GONE = ["alpha-club-i41"];
 function openFromHash() {
   var id = location.hash.slice(1), d = id && document.getElementById('d-' + id);
   if (d && d.showModal && !d.open) { var c = document.getElementById(id); if (c) c.scrollIntoView(); d.showModal(); document.body.classList.add('modal-open'); }
+
+  else if (!d && GONE.indexOf(id) > -1) { var g = document.getElementById('grid'); if (g) g.scrollIntoView(); showToast("This apartment has been rented. See the available ones below."); }
 }
 window.addEventListener('hashchange', openFromHash);
 var vd = document.getElementById('vid');

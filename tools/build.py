@@ -120,6 +120,7 @@ for _p in P:
         _p['v'] = f"https://drive.google.com/file/d/{_MD[_p['id']]['video']}/view"
     # Description PDF: the site makes a standard one for every apartment (see make_pdfs below).
     _p['d'] = f"descricao/{_p['id']}.pdf"
+GONE = [p['id'] for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() == 'alugado']
 P = [p for p in P if str(STATUS.get(p['id'], 'Disponível')).strip().lower() != 'alugado']
 # Cards open in the order the sort menu shows first: highest rent first (ties keep the list order).
 P.sort(key=lambda p: -p['rent'])
@@ -277,7 +278,7 @@ T = {
   photos_of='Fotos do {name}', prev='Foto anterior', next='Próxima foto',
   per_month=' /mês', total_with='{v} no total, com condomínio e IPTU', condo='Condomínio', iptu='IPTU', total='Total mensal',
   hero_a_alt='Spettacolo Patriani: Cozinha com armários planejados e cooktop', hero_b_alt='Residencial Esplanada: Dormitório com armário planejado',
-  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_copy='Copiar descrição', exp_pdf='Descrição completa (PDF)', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
+  visit_this='Agendar visita', l_photos='Fotos', l_video='Vídeo', l_desc='Fotos e detalhes', l_desc_n='{n} fotos e detalhes', share='Compartilhar', share_ok='Link copiado', gone='Este apartamento já foi alugado. Veja abaixo os que estão disponíveis.', vid_alt='O vídeo não carregou? Abrir no Google Drive', photo_n='foto {i} de {n}', mail_subj='Quero agendar uma visita', mail_ok='E-mail copiado: ', share_h='Compartilhar este apartamento', share_copy='Copiar link', share_mail='E-mail', share_txt='{name} · {tag} · {rent}/mês. Veja fotos e detalhes:', all_photos='Todas as fotos', menu='Menu', menu_nav='Navegue', menu_apts='Apartamentos', fullscreen='Tela cheia', video_btn='Ver vídeo', d_costs='Custos mensais', d_rent='Aluguel', d_close='Fechar', d_amen='Condomínio', d_full='Descrição original', exp_h='Para anunciar no seu site', exp_dl='Baixar fotos', exp_vid='Baixar vídeo', exp_copy='Copiar descrição', exp_pdf='Descrição completa (PDF)', exp_ok='Descrição copiada', exp_note='Sujeito a disponibilidade. Confirme antes de anunciar.', d_note='Para agendar, envie em uma única mensagem: nome, RG e CRECI do corretor, primeiro nome do cliente, imóvel, dia e horário.',
   steps_h='Da visita às chaves em 3 passos',
   steps=[('Escolha e visite', 'Toque em "Agendar visita" no apartamento. A mensagem já vai pronta no WhatsApp, com o nome do imóvel.'),
          ('Disponibilize a garantia', 'Seguro fiança, caução de 3 aluguéis ou fiador. Veja a que mais se encaixa para o seu cliente.'),
@@ -336,7 +337,7 @@ T = {
   photos_of='Photos of {name}', prev='Previous photo', next='Next photo',
   per_month=' /month', total_with='{v} in total, incl. condo fee and IPTU tax', condo='Condo fee', iptu='IPTU tax', total='Total per month',
   hero_a_alt='Spettacolo Patriani: Kitchen with built-in cabinets and cooktop', hero_b_alt='Residencial Esplanada: Bedroom with built-in wardrobe',
-  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_copy='Copy description', exp_pdf='Full description (PDF, Portuguese)', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
+  visit_this='Book a viewing', l_photos='Photos', l_video='Video', l_desc='Photos and details', l_desc_n='{n} photos and details', share='Share', share_ok='Link copied', gone='This apartment has been rented. See the available ones below.', vid_alt='Video not loading? Open in Google Drive', photo_n='photo {i} of {n}', mail_subj='I would like to book a viewing', mail_ok='Email copied: ', share_h='Share this apartment', share_copy='Copy link', share_mail='Email', share_txt='{name} · {tag} · {rent}/month. See photos and details:', all_photos='All photos', menu='Menu', menu_nav='Browse', menu_apts='Apartments', fullscreen='Full screen', video_btn='Watch video', d_costs='Monthly costs', d_rent='Rent', d_close='Close', d_amen='Building', d_full='Original description (Portuguese)', exp_h='To list it on your website', exp_dl='Download photos', exp_vid='Download video', exp_copy='Copy description', exp_pdf='Full description (PDF, Portuguese)', exp_ok='Description copied', exp_note='Subject to availability. Please confirm before listing.', d_note='To book, send in one message: the agent’s name, ID (RG) and CRECI, the client’s first name, the apartment, and day and time.',
   steps_h='From viewing to keys in 3 steps',
   steps=[('Choose and visit', 'Tap "Book a viewing" on the apartment. WhatsApp opens with the message ready, including the apartment name.'),
          ('Provide the guarantee', 'Rent guarantee insurance (seguro fiança), a deposit of 3 months’ rent (caução) or a guarantor (fiador). See which one suits your client best.'),
@@ -949,9 +950,12 @@ document.querySelectorAll('.share-btn').forEach(function (b) {{ b.addEventListen
     navigator.share({{ title: name, text: text, url: url }}).catch(function (e) {{ if (!e || e.name !== 'AbortError') openSheet(url, text, name); }});
   }} else openSheet(url, text, name);
 }}); }});
+var GONE = {json.dumps(GONE)};
 function openFromHash() {{
   var id = location.hash.slice(1), d = id && document.getElementById('d-' + id);
   if (d && d.showModal && !d.open) {{ var c = document.getElementById(id); if (c) c.scrollIntoView(); d.showModal(); document.body.classList.add('modal-open'); }}
+
+  else if (!d && GONE.indexOf(id) > -1) {{ var g = document.getElementById('grid'); if (g) g.scrollIntoView(); showToast({json.dumps(t['gone'])}); }}
 }}
 window.addEventListener('hashchange', openFromHash);
 var vd = document.getElementById('vid');
