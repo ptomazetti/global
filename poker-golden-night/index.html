@@ -9,32 +9,37 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="29º Poker Golden Night">
 <meta property="og:description" content="Quinta-feira, 10/12, a partir das 19h30. Buffet do Empório 31 e bebidas. Inscrições até 08/12.">
-<meta name="theme-color" content="#0f5132">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230f5132'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23f2d58c'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23d41f26'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23fff'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#06120d; --felt:#0f5132; --felt2:#0a3a24; --card:rgba(5,20,13,.82); --line:rgba(217,178,95,.35);
-  --gold:#d9b25f; --gold2:#f2d58c; --text:#fbf8f1; --muted:#e2e7e2; --red:#c8312c; --paper:#fbf8f1; --ink:#1b1b1b;
+  --bg:#0b0b0d; --panel:#16161b; --panel2:#1e1e25; --line:#2c2c35;
+  --red:#d41f26; --red2:#ff3b3f; --redd:#8f1117; --gold:#e3b54f; --gold2:#ffd97a;
+  --text:#ffffff; --muted:#d9d9df; --paper:#ffffff; --ink:#141414;
   --ok:#bff0d0; --err:#ffd0c7;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{position:relative;min-height:100vh;margin:0;color:var(--text);font:19px/1.6 Inter,system-ui,sans-serif;
-  background:radial-gradient(ellipse 140% 900px at 50% 0%,#14663f 0%,var(--felt) 30%,var(--felt2) 65%,var(--bg) 100%) no-repeat,var(--bg)}
-body::before{content:"";position:absolute;min-height:100%;inset:0;pointer-events:none;opacity:.14;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+  background:
+    radial-gradient(ellipse 90% 520px at 50% -80px,rgba(212,31,38,.55),transparent 70%) no-repeat,
+    linear-gradient(180deg,#141017 0,var(--bg) 900px) no-repeat,var(--bg)}
 .wrap{position:relative;max-width:680px;margin:0 auto;padding:0 16px 56px}
 b,strong{font-weight:700}
+h1,h2,.mont{font-family:Montserrat,Inter,sans-serif}
 
 /* ---------- topo ---------- */
-header{position:relative;text-align:center;padding:36px 16px 34px;overflow:hidden}
-.hand{position:relative;height:170px;width:300px;max-width:100%;margin:0 auto 6px}
+header{position:relative;text-align:center;padding:30px 16px 36px;overflow:hidden}
+/* faixas diagonais vermelhas ao fundo */
+header::before{content:"";position:absolute;inset:-40% -20% auto;height:420px;z-index:-1;opacity:.18;
+  background:repeating-linear-gradient(115deg,transparent 0 46px,var(--red) 46px 52px)}
+.hand{position:relative;height:170px;width:300px;max-width:100%;margin:0 auto 4px}
 .pc{position:absolute;left:50%;bottom:0;width:86px;height:124px;margin-left:-43px;border-radius:9px;background:var(--paper);
-  color:var(--ink);box-shadow:0 8px 18px rgba(0,0,0,.45);transform-origin:50% 120%;font-family:"Playfair Display",serif;
+  color:var(--ink);box-shadow:0 8px 18px rgba(0,0,0,.55);transform-origin:50% 120%;font-family:Montserrat,sans-serif;
   transform:rotate(var(--rot));animation:deal .7s cubic-bezier(.2,.8,.2,1) both}
-.pc .i{position:absolute;top:6px;left:8px;font-weight:800;font-size:20px;line-height:.95;text-align:center}
+.pc .i{position:absolute;top:6px;left:8px;font-weight:900;font-size:19px;line-height:.95;text-align:center}
 .pc .i.b{top:auto;left:auto;bottom:6px;right:8px;transform:rotate(180deg)}
 .pc .m{position:absolute;inset:0;display:grid;place-items:center;font-size:40px}
 .pc:nth-child(1){--rot:-24deg;animation-delay:.05s}
@@ -44,114 +49,126 @@ header{position:relative;text-align:center;padding:36px 16px 34px;overflow:hidde
 .pc:nth-child(5){--rot:24deg;animation-delay:.45s}
 @keyframes deal{from{opacity:0;transform:translateY(-60px) rotate(0)}to{opacity:1;transform:rotate(var(--rot))}}
 
-.ed{display:inline-block;color:var(--gold2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:15px;
-  border:1px solid var(--line);padding:6px 14px;border-radius:999px;margin-top:10px}
-h1{font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(42px,12vw,64px);line-height:1.04;margin:12px 0 18px;
-   background:linear-gradient(180deg,#fff2c9,var(--gold2) 40%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-   filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
-.facts{display:inline-grid;gap:10px;text-align:left;font-size:20px;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
-.facts div{display:flex;gap:12px;align-items:baseline}
-.facts .ic{color:var(--gold2);width:22px;flex:none;text-align:center}
+.ed{display:inline-block;background:var(--red);color:#fff;font:800 15px/1 Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 16px;border-radius:6px;margin-top:12px;box-shadow:0 4px 14px rgba(212,31,38,.45)}
+h1{margin:14px 0 18px;line-height:.95;text-transform:uppercase}
+h1 .p{display:block;font-weight:900;font-size:clamp(50px,15vw,84px);letter-spacing:.02em;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.4)}
+h1 .g{display:block;font-weight:800;font-size:clamp(28px,8.4vw,46px);letter-spacing:.06em;
+  background-image:linear-gradient(180deg,#fff3c4,var(--gold2) 45%,var(--gold) 100%),linear-gradient(110deg,transparent 40%,rgba(255,255,255,.9) 50%,transparent 60%);
+  background-size:100% 100%,250% 100%;background-blend-mode:soft-light;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 5s ease-in-out 1.2s infinite}
+@keyframes shine{0%{background-position:0 0,150% 0}35%,100%{background-position:0 0,-150% 0}}
 
-/* ficha */
+.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.facts div{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:18px}
+.facts .ic{color:var(--red2);font-size:18px}
+
+/* relógio do torneio */
+.countdown{margin:20px auto 0;display:none;gap:10px;justify-content:center}
+.countdown.on{display:flex}
+.countdown .n{min-width:74px;padding:10px 10px 8px;border-radius:8px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--red);
+  font:800 30px/1 Montserrat,sans-serif;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.countdown .n small{display:block;font:600 13px/1 Inter,sans-serif;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+.cd-lbl{margin-top:20px;font:700 14px/1 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ficha (chip) */
 .chip{--c:var(--red);flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;
-  background:repeating-conic-gradient(var(--c) 0 30deg,#fff 30deg 45deg);box-shadow:0 3px 6px rgba(0,0,0,.45),inset 0 0 0 2px rgba(0,0,0,.25)}
+  background:repeating-conic-gradient(var(--c) 0 30deg,#fff 30deg 45deg);box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 0 0 2px rgba(0,0,0,.25)}
 .chip::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 2px rgba(255,255,255,.75)}
-.chip b{position:relative;color:#fff;font-size:14px}
+.chip b{position:relative;color:#fff;font:800 13px/1 Montserrat,sans-serif}
 .chip.k{--c:#1d1d1d}.chip.g{--c:#1f7a4d}.chip.b{--c:#1f4fa0}.chip.y{--c:#b98a22}
-.stack{display:flex;justify-content:center;gap:10px;margin-top:28px}
+.stack{display:flex;justify-content:center;gap:10px;margin-top:30px}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;margin-top:24px;
-  background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1e1604;font-weight:700;text-decoration:none;
-  padding:14px 30px;border-radius:999px;border:0;font-size:20px;font-family:inherit;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.btn:hover{filter:brightness(1.07)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:58px;margin-top:24px;
+  background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;font:800 19px/1.2 Montserrat,sans-serif;letter-spacing:.03em;text-transform:uppercase;
+  text-decoration:none;padding:14px 30px;border-radius:8px;border:0;cursor:pointer;box-shadow:0 6px 18px rgba(212,31,38,.4)}
+.btn:hover{filter:brightness(1.1)}
 .btn:disabled{opacity:.7;cursor:wait}
-.btn.ghost{background:transparent;color:var(--gold2);border:2px solid var(--gold);box-shadow:none;font-size:18px;min-height:52px;margin-top:14px}
-:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75);box-shadow:none;font-size:16px;min-height:52px;margin-top:14px}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
 
 /* ---------- seções ---------- */
-section{margin-top:34px}
-h2{display:flex;align-items:center;gap:12px;font-family:"Playfair Display",serif;font-weight:600;color:var(--gold2);font-size:29px;line-height:1.2;margin:0 0 14px}
-h2 .s{width:38px;height:38px;flex:none;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:21px;
-  font-family:Inter,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-h2 .s.r{color:var(--red)}
-.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
-.item{padding:14px 0;border-bottom:1px dashed var(--line)}
-.item:first-child{padding-top:0}
-.item:last-child{border-bottom:0;padding-bottom:0}
-.item .t{display:flex;justify-content:space-between;gap:12px;font-weight:700}
-.item .t span{white-space:nowrap;color:var(--gold2)}
-.item .d{color:var(--muted);margin-top:2px}
-.total{margin-top:16px;padding:16px 18px;border-radius:12px;background:linear-gradient(135deg,#8a6a1f,var(--gold));color:#1a1303;
-  display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:21px;gap:12px}
+section{margin-top:36px}
+h2{display:flex;align-items:center;gap:12px;font-weight:800;color:#fff;font-size:24px;line-height:1.2;margin:0 0 14px;text-transform:uppercase;letter-spacing:.04em}
+h2::before{content:"";width:6px;height:28px;border-radius:3px;background:var(--red);flex:none}
+h2 .s{margin-left:auto;color:var(--red2);font-size:22px}
+h2 .s.w{color:#fff}
+.card{position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:12px;padding:22px 20px;
+  box-shadow:0 10px 24px rgba(0,0,0,.35)}
+/* grade estilo lobby de torneio */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#0f0f13;border:1px solid var(--line);border-radius:10px;padding:14px}
+.tile .k{font:700 13px/1.2 Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tile .v{font:800 22px/1.25 Montserrat,sans-serif;margin-top:6px}
+.tile .d{font-size:16px;color:var(--muted);margin-top:4px;line-height:1.4}
+.tile.full{grid-column:1/-1}
+.total{position:relative;overflow:hidden;margin-top:14px;padding:16px 18px;border-radius:10px;background:linear-gradient(135deg,var(--redd),var(--red));color:#fff;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;font:800 21px/1.2 Montserrat,sans-serif}
 .total span{white-space:nowrap}
-@media (max-width:400px){.total{font-size:18px;padding:16px 14px}}
-.note{margin-top:14px;color:var(--muted)}
+.total::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);
+  transform:translateX(-120%);animation:sweep 4s ease-in-out 1s infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+.sub{font:700 15px/1 Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--gold2);margin:22px 0 10px}
 .bonus{display:flex;gap:16px;align-items:center;padding:12px 0}
 .bonus:first-child{padding-top:0}.bonus:last-child{padding-bottom:0}
+.bonus + .bonus{border-top:1px solid var(--line)}
 p{margin:0 0 12px}
 p:last-child{margin-bottom:0}
 .muted{color:var(--muted)}
-.divider{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.8em;margin:38px 0 0;font-size:16px}
-.divider .r{color:#e0625c}
+.divider{text-align:center;color:#fff;opacity:.6;letter-spacing:.8em;margin:40px 0 0;font-size:16px}
+.divider .r{color:var(--red2)}
 
 /* inscrição */
-.deadline{background:rgba(200,49,44,.18);border:1px solid rgba(255,140,130,.5);border-radius:12px;padding:14px 16px;margin-bottom:22px}
-.step{display:flex;gap:12px;align-items:center;font-weight:700;font-size:21px;margin:0 0 12px}
-.step .n{width:36px;height:36px;flex:none;border-radius:50%;background:var(--gold);color:#1e1604;display:grid;place-items:center;font-size:18px}
-.ticket{background:var(--paper);color:var(--ink);border-radius:14px;padding:18px}
+.deadline{display:flex;gap:12px;align-items:center;background:rgba(212,31,38,.15);border:1px solid rgba(255,80,80,.55);border-radius:10px;padding:14px 16px;margin-bottom:22px}
+.deadline .dot{width:12px;height:12px;border-radius:50%;background:var(--red2);flex:none;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.step{display:flex;gap:12px;align-items:center;font:800 20px/1.25 Montserrat,sans-serif;margin:0 0 12px}
+.step .n{width:36px;height:36px;flex:none;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:17px}
+.ticket{background:var(--paper);color:var(--ink);border-radius:12px;padding:18px;border-left:6px solid var(--red)}
 .ticket .lbl{color:#4a4a4a;font-weight:600;font-size:16px}
-.ticket .key{font:700 28px/1.2 Inter,sans-serif;letter-spacing:.02em;margin:4px 0 2px}
+.ticket .key{font:800 28px/1.2 Montserrat,sans-serif;letter-spacing:.01em;margin:4px 0 2px}
 .ticket .val{font-size:18px}
-.ticket .btn{width:100%;margin-top:14px;font-size:19px}
+.ticket .btn{width:100%;margin-top:14px;font-size:18px}
 form{margin-top:30px}
 label{display:block;font-weight:600;margin:20px 0 8px}
-input,textarea{width:100%;padding:16px;border-radius:12px;border:2px solid var(--line);background:rgba(0,0,0,.4);color:var(--text);font:inherit;font-size:19px;min-height:58px}
-input::placeholder,textarea::placeholder{color:#a9b3ab}
-input:focus,textarea:focus{outline:3px solid var(--gold);border-color:transparent}
-.opt{display:flex;gap:14px;align-items:center;font-weight:500;margin:10px 0;padding:14px 16px;min-height:58px;border:2px solid var(--line);border-radius:12px;cursor:pointer;background:rgba(0,0,0,.25)}
-.opt input{width:26px;height:26px;min-height:0;flex:none;margin:0;accent-color:var(--gold)}
-.opt:has(input:checked){border-color:var(--gold);background:rgba(217,178,95,.16)}
-form .btn{width:100%;margin-top:26px;font-size:21px;min-height:62px}
-.msg{margin-top:16px;padding:18px;border-radius:12px;display:none;font-size:19px}
-.msg.err{display:block;background:rgba(120,30,20,.85);color:var(--err)}
-.done{display:none;text-align:center;padding:26px 18px;border-radius:14px;background:rgba(15,81,50,.9);border:2px solid var(--gold);margin-top:24px}
-.done .big{font-family:"Playfair Display",serif;font-size:30px;color:var(--gold2);margin:8px 0}
+input,textarea{width:100%;padding:16px;border-radius:10px;border:2px solid var(--line);background:#0c0c10;color:var(--text);font:inherit;font-size:19px;min-height:58px}
+input::placeholder,textarea::placeholder{color:#9a9aa5}
+input:focus,textarea:focus{outline:3px solid var(--red2);border-color:transparent}
+.opt{display:flex;gap:14px;align-items:center;font-weight:500;margin:10px 0;padding:14px 16px;min-height:58px;border:2px solid var(--line);border-radius:10px;cursor:pointer;background:#0c0c10}
+.opt input{width:26px;height:26px;min-height:0;flex:none;margin:0;accent-color:var(--red)}
+.opt:has(input:checked){border-color:var(--red2);background:rgba(212,31,38,.14)}
+form .btn{width:100%;margin-top:26px;font-size:20px;min-height:62px}
+.msg{margin-top:16px;padding:18px;border-radius:10px;display:none;font-size:19px}
+.msg.err{display:block;background:rgba(120,20,20,.85);color:var(--err)}
+.done{display:none;text-align:center;padding:26px 18px;border-radius:12px;background:linear-gradient(180deg,#2a0d10,#16161b);border:2px solid var(--red);margin-top:24px}
+.done .big{font:900 30px/1.15 Montserrat,sans-serif;text-transform:uppercase;color:#fff;margin:8px 0 12px}
+.done .big span{color:var(--gold2)}
 a{color:var(--gold2)}
-footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
+footer{text-align:center;color:var(--muted);font-size:15px;margin-top:20px;font-family:Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.12em}
 
 @media (min-width:760px){
-  header{padding-top:56px}
-  .hand{transform:scale(1.15);margin-bottom:24px}
+  header{padding-top:50px}
+  .hand{transform:scale(1.15);margin-bottom:20px}
 }
+@media (max-width:400px){.total{font-size:18px;padding:16px 14px}.tile .v{font-size:20px}}
+
 /* ---------- animações ---------- */
-/* brilho dourado passando no título */
-h1{background-size:100% 100%,250% 100%;
-   background-image:linear-gradient(180deg,#fff2c9,var(--gold2) 40%,var(--gold) 100%),
-                    linear-gradient(110deg,transparent 40%,rgba(255,255,255,.85) 50%,transparent 60%);
-   background-blend-mode:soft-light;animation:shine 5s ease-in-out 1.2s infinite}
-@keyframes shine{0%{background-position:0 0,150% 0}35%,100%{background-position:0 0,-150% 0}}
-/* cartas flutuando de leve depois de distribuídas */
 .hand{animation:float 4s ease-in-out 1.4s infinite}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 .pc:nth-child(5){animation:deal .7s cubic-bezier(.2,.8,.2,1) .45s both,glow 3s ease-in-out 1.6s infinite}
-@keyframes glow{0%,100%{box-shadow:0 8px 18px rgba(0,0,0,.45)}50%{box-shadow:0 8px 18px rgba(0,0,0,.45),0 0 22px rgba(242,213,140,.75)}}
-/* botão principal pulsando */
+@keyframes glow{0%,100%{box-shadow:0 8px 18px rgba(0,0,0,.55)}50%{box-shadow:0 8px 18px rgba(0,0,0,.55),0 0 24px rgba(255,59,63,.8)}}
 header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 0 rgba(242,213,140,.55)}60%{box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 14px rgba(242,213,140,0)}}
-/* contagem regressiva */
-.countdown{margin:18px auto 0;display:none;gap:10px;justify-content:center}
-.countdown.on{display:flex}
-.countdown .n{min-width:64px;padding:8px 10px;border-radius:12px;background:var(--paper);color:var(--ink);font-weight:800;font-size:28px;line-height:1;
-  box-shadow:0 4px 10px rgba(0,0,0,.35)}
-.countdown .n small{display:block;font-size:13px;font-weight:600;color:#555;margin-top:4px}
-/* seções aparecendo ao rolar */
+@keyframes pulse{0%,100%{box-shadow:0 6px 18px rgba(212,31,38,.4),0 0 0 0 rgba(255,59,63,.6)}60%{box-shadow:0 6px 18px rgba(212,31,38,.4),0 0 0 14px rgba(255,59,63,0)}}
 .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .js .reveal.in{opacity:1;transform:none}
-/* fichas girando ao aparecer */
 .js .bonus .chip{transform:rotateY(180deg) scale(.6);transition:transform .9s cubic-bezier(.3,1.6,.5,1)}
 .js .in .bonus .chip{transform:none}
 .js .in .bonus:nth-child(2) .chip{transition-delay:.25s}
+.js .tile{opacity:0;transform:scale(.94);transition:opacity .5s,transform .5s}
+.js .in .tile{opacity:1;transform:none}
+.js .in .tile:nth-child(2){transition-delay:.08s}.js .in .tile:nth-child(3){transition-delay:.16s}
+.js .in .tile:nth-child(4){transition-delay:.24s}.js .in .tile:nth-child(5){transition-delay:.32s}
 .stack .chip{cursor:pointer;transition:transform .3s}
 .js .stack .chip{transform:translateY(-40px);opacity:0;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .4s}
 .js .stack.in .chip{transform:none;opacity:1}
@@ -159,23 +176,17 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 .stack .chip:nth-child(4){transition-delay:.24s}.stack .chip:nth-child(5){transition-delay:.32s}
 .stack .chip.spin{animation:spin .8s ease}
 @keyframes spin{to{rotate:1turn}}
-/* reflexo no total */
-.total{position:relative;overflow:hidden}
-.total::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);
-  transform:translateX(-120%);animation:sweep 4s ease-in-out 1s infinite}
-@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
-/* chuva de naipes e fichas na confirmação */
 .rain{position:fixed;top:-60px;z-index:50;pointer-events:none;font-size:30px;animation:fall linear forwards}
 .rain.chip{width:34px;height:34px}
 .rain.chip::before{inset:5px}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 .done.show{animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
 @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
-#copy.okay{background:linear-gradient(180deg,#bff0d0,#7fd1a1)}
+#copy.okay{background:linear-gradient(180deg,#3fbf74,#1f8f4f)}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .js .reveal,.js .bonus .chip,.js .stack .chip{opacity:1;transform:none}
+  .js .reveal,.js .bonus .chip,.js .stack .chip,.js .tile{opacity:1;transform:none}
   html{scroll-behavior:auto}
 }
 </style>
@@ -190,12 +201,13 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
     <div class="pc"><div class="i">A<br>♠</div><div class="m">♠</div><div class="i b">A<br>♠</div></div>
   </div>
   <div class="ed">29ª edição</div>
-  <h1>Poker<br>Golden Night</h1>
+  <h1><span class="p">Poker</span><span class="g">Golden Night</span></h1>
   <div class="facts">
-    <div><span class="ic">♠</span><span><b>Quinta-feira, 10 de dezembro</b></span></div>
-    <div><span class="ic">♥</span><span>A partir das <b>19h30</b></span></div>
-    <div><span class="ic">♦</span><span>Centro de Convivência, Sorocaba</span></div>
+    <div><span class="ic">♠</span><b>Quinta, 10/12</b></div>
+    <div><span class="ic">♥</span>A partir das <b>19h30</b></div>
+    <div><span class="ic">♦</span>Sorocaba/SP</div>
   </div>
+  <div class="cd-lbl" id="cd-lbl" hidden>O torneio começa em</div>
   <div class="countdown" id="countdown" aria-live="off"></div>
   <div><a class="btn" href="#inscricao">Quero me inscrever</a></div>
   <div><button type="button" class="btn ghost" id="agenda">Salvar na minha agenda</button></div>
@@ -204,38 +216,31 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 <div class="wrap">
 
 <section>
-  <h2><span class="s">♠</span>O que está incluso</h2>
-  <div class="card" data-suit="♠">
-    <p>Buffet do <b>Empório 31</b> e bebidas: chope, vinho, cerveja sem álcool, água, refrigerantes e sucos.</p>
-    <p class="muted">Também teremos cash game.</p>
-  </div>
-</section>
-
-<section>
-  <h2><span class="s r">♥</span>Valores</h2>
-  <div class="card" data-suit="♥">
-    <div class="item"><div class="t">Buffet <span>R$ 130,00</span></div></div>
-    <div class="item"><div class="t">Buy-in <span>R$ 80,00</span></div><div class="d">6.000 fichas</div></div>
+  <h2>Torneio<span class="s w">♠</span></h2>
+  <div class="card">
+    <div class="grid">
+      <div class="tile"><div class="k">Início</div><div class="v">19h30</div><div class="d">Quinta, 10/12</div></div>
+      <div class="tile"><div class="k">Buy-in</div><div class="v">R$ 80</div><div class="d">6.000 fichas</div></div>
+      <div class="tile"><div class="k">Rebuy</div><div class="v">R$ 80</div><div class="d">Até 2, de 6.000 fichas, até o 8º nível</div></div>
+      <div class="tile"><div class="k">Add-on</div><div class="v">R$ 100</div><div class="d">10.000 fichas, antes do 9º nível</div></div>
+      <div class="tile full"><div class="k">Buffet e bebidas</div><div class="v">R$ 130</div><div class="d">Buffet do Empório 31, chope, vinho, cerveja sem álcool, água, refrigerantes e sucos</div></div>
+    </div>
     <div class="total"><span>Inscrição pelo Pix</span><span>R$ 210,00</span></div>
-  </div>
-  <div class="card" style="margin-top:14px">
-    <p style="color:var(--gold2);font-weight:700">Pagos no dia do evento</p>
-    <div class="item"><div class="t">Rebuy <span>R$ 80,00 cada</span></div><div class="d">Até 2 recompras de 6.000 fichas, até o 8º nível</div></div>
-    <div class="item"><div class="t">Add-on <span>R$ 100,00</span></div><div class="d">10.000 fichas, antes do 9º nível</div></div>
+    <p class="muted" style="margin-top:14px">Buffet e buy-in são pagos no Pix da inscrição. Rebuy e add-on são pagos no dia do evento. Também teremos cash game.</p>
   </div>
 </section>
 
 <section>
-  <h2><span class="s r">♦</span>Fichas bônus</h2>
-  <div class="card" data-suit="♦">
+  <h2>Fichas bônus<span class="s">♦</span></h2>
+  <div class="card">
     <div class="bonus"><div class="chip"><b>+1k</b></div><div>Inscrição e Pix até <b>07/12</b>: ganhe <b>1.000 fichas</b> a mais.</div></div>
     <div class="bonus"><div class="chip b"><b>+1k</b></div><div>Chegue e retire sua posição até as <b>19h20</b>: ganhe mais <b>1.000 fichas</b>.</div></div>
   </div>
 </section>
 
 <section>
-  <h2><span class="s">♣</span>Local</h2>
-  <div class="card" data-suit="♣">
+  <h2>Local<span class="s w">♣</span></h2>
+  <div class="card">
     <p><b>Centro de Convivência</b><br>Rua Francisco Rolêdo Sanches, 1000<br>Alto da Boa Vista, Sorocaba/SP</p>
     <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Rua+Francisco+Rol%C3%AAdo+Sanches+1000+Alto+da+Boa+Vista+Sorocaba+SP" target="_blank" rel="noopener">Ver no mapa</a>
   </div>
@@ -244,9 +249,9 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 <div class="divider">♠ <span class="r">♥</span> <span class="r">♦</span> ♣</div>
 
 <section id="inscricao">
-  <h2><span class="s">A</span>Inscrição</h2>
+  <h2>Inscrição<span class="s">♥</span></h2>
   <div class="card">
-    <div class="deadline">Inscrições até <b>terça-feira, 08/12</b>.</div>
+    <div class="deadline"><span class="dot"></span><span>Inscrições até <b>terça-feira, 08/12</b>.</span></div>
 
     <div class="step"><span class="n">1</span>Faça o Pix de R$ 210,00</div>
     <div class="ticket">
@@ -280,8 +285,8 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
     </form>
 
     <div class="done" id="done" role="status" tabindex="-1">
-      <div style="font-size:34px">♠ ♥ ♦ ♣</div>
-      <div class="big">Você está na mesa!</div>
+      <div style="font-size:34px">♠ <span style="color:var(--red2)">♥ ♦</span> ♣</div>
+      <div class="big">Você está <span>na mesa!</span></div>
       <p>Recebemos sua inscrição. Se ainda não fez o Pix, faça até <b>08/12</b>.</p>
       <p>Até quinta-feira, dia 10!</p>
     </div>
@@ -320,7 +325,7 @@ const EVENTO = Date.UTC(2026, 11, 10, 22, 30);
 const cd = document.getElementById("countdown");
 function tick() {
   const ms = EVENTO - Date.now();
-  if (ms <= 0) { cd.classList.remove("on"); return; }
+  if (ms <= 0) { cd.classList.remove("on"); document.getElementById("cd-lbl").hidden = true; return; }
   const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
   cd.innerHTML = "";
   [[d, d === 1 ? "dia" : "dias"], [h, h === 1 ? "hora" : "horas"], [m, "min"]].forEach(([n, t]) => {
@@ -328,7 +333,7 @@ function tick() {
     box.textContent = n; const s = document.createElement("small"); s.textContent = t; box.appendChild(s);
     cd.appendChild(box);
   });
-  cd.classList.add("on");
+  cd.classList.add("on"); document.getElementById("cd-lbl").hidden = false;
 }
 tick(); setInterval(tick, 30000);
 
@@ -343,7 +348,7 @@ function chuva() {
     } else {
       const s = naipes[i % 4];
       el.className = "rain"; el.textContent = s;
-      el.style.color = (s === "♥" || s === "♦") ? "#e0473f" : "#fbf8f1";
+      el.style.color = (s === "♥" || s === "♦") ? "#ff3b3f" : "#ffffff";
     }
     el.style.left = Math.random() * 100 + "vw";
     el.style.animationDuration = 2.2 + Math.random() * 2 + "s";
