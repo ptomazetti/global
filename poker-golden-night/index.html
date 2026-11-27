@@ -84,7 +84,8 @@ h2 .s.r{color:var(--red)}
 .item .d{color:var(--muted);margin-top:2px}
 .total{margin-top:16px;padding:16px 18px;border-radius:12px;background:linear-gradient(135deg,#8a6a1f,var(--gold));color:#1a1303;
   display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:21px;gap:12px}
-.total span:last-child{white-space:nowrap}
+.total span{white-space:nowrap}
+@media (max-width:400px){.total{font-size:18px;padding:16px 14px}}
 .note{margin-top:14px;color:var(--muted)}
 .bonus{display:flex;gap:16px;align-items:center;padding:12px 0}
 .bonus:first-child{padding-top:0}.bonus:last-child{padding-bottom:0}
@@ -123,7 +124,60 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
   header{padding-top:56px}
   .hand{transform:scale(1.15);margin-bottom:24px}
 }
-@media (prefers-reduced-motion:reduce){.pc{animation:none}html{scroll-behavior:auto}}
+/* ---------- animações ---------- */
+/* brilho dourado passando no título */
+h1{background-size:100% 100%,250% 100%;
+   background-image:linear-gradient(180deg,#fff2c9,var(--gold2) 40%,var(--gold) 100%),
+                    linear-gradient(110deg,transparent 40%,rgba(255,255,255,.85) 50%,transparent 60%);
+   background-blend-mode:soft-light;animation:shine 5s ease-in-out 1.2s infinite}
+@keyframes shine{0%{background-position:0 0,150% 0}35%,100%{background-position:0 0,-150% 0}}
+/* cartas flutuando de leve depois de distribuídas */
+.hand{animation:float 4s ease-in-out 1.4s infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.pc:nth-child(5){animation:deal .7s cubic-bezier(.2,.8,.2,1) .45s both,glow 3s ease-in-out 1.6s infinite}
+@keyframes glow{0%,100%{box-shadow:0 8px 18px rgba(0,0,0,.45)}50%{box-shadow:0 8px 18px rgba(0,0,0,.45),0 0 22px rgba(242,213,140,.75)}}
+/* botão principal pulsando */
+header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 0 rgba(242,213,140,.55)}60%{box-shadow:0 6px 16px rgba(0,0,0,.35),0 0 0 14px rgba(242,213,140,0)}}
+/* contagem regressiva */
+.countdown{margin:18px auto 0;display:none;gap:10px;justify-content:center}
+.countdown.on{display:flex}
+.countdown .n{min-width:64px;padding:8px 10px;border-radius:12px;background:var(--paper);color:var(--ink);font-weight:800;font-size:28px;line-height:1;
+  box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.countdown .n small{display:block;font-size:13px;font-weight:600;color:#555;margin-top:4px}
+/* seções aparecendo ao rolar */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+/* fichas girando ao aparecer */
+.js .bonus .chip{transform:rotateY(180deg) scale(.6);transition:transform .9s cubic-bezier(.3,1.6,.5,1)}
+.js .in .bonus .chip{transform:none}
+.js .in .bonus:nth-child(2) .chip{transition-delay:.25s}
+.stack .chip{cursor:pointer;transition:transform .3s}
+.js .stack .chip{transform:translateY(-40px);opacity:0;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .4s}
+.js .stack.in .chip{transform:none;opacity:1}
+.stack .chip:nth-child(2){transition-delay:.08s}.stack .chip:nth-child(3){transition-delay:.16s}
+.stack .chip:nth-child(4){transition-delay:.24s}.stack .chip:nth-child(5){transition-delay:.32s}
+.stack .chip.spin{animation:spin .8s ease}
+@keyframes spin{to{rotate:1turn}}
+/* reflexo no total */
+.total{position:relative;overflow:hidden}
+.total::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);
+  transform:translateX(-120%);animation:sweep 4s ease-in-out 1s infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+/* chuva de naipes e fichas na confirmação */
+.rain{position:fixed;top:-60px;z-index:50;pointer-events:none;font-size:30px;animation:fall linear forwards}
+.rain.chip{width:34px;height:34px}
+.rain.chip::before{inset:5px}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.done.show{animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+#copy.okay{background:linear-gradient(180deg,#bff0d0,#7fd1a1)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal,.js .bonus .chip,.js .stack .chip{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
@@ -142,6 +196,7 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
     <div><span class="ic">♥</span><span>A partir das <b>19h30</b></span></div>
     <div><span class="ic">♦</span><span>Centro de Convivência, Sorocaba</span></div>
   </div>
+  <div class="countdown" id="countdown" aria-live="off"></div>
   <div><a class="btn" href="#inscricao">Quero me inscrever</a></div>
   <div><button type="button" class="btn ghost" id="agenda">Salvar na minha agenda</button></div>
 </header>
@@ -241,9 +296,74 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
 
 <script>
 const DESTINO = "flatomazetti@yahoo.com.br";
+const calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Salvar na agenda (arquivo .ics, abre no calendário do celular ou computador)
+// Seções aparecem ao rolar a página
+document.documentElement.classList.add("js");
+document.querySelectorAll(".wrap > section, .stack").forEach(el => el.classList.add("reveal"));
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), {threshold: 0.12, rootMargin: "0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+}
+
+// Fichas do rodapé giram ao tocar
+document.querySelectorAll(".stack .chip").forEach(c => c.addEventListener("click", () => {
+  c.classList.remove("spin"); void c.offsetWidth; c.classList.add("spin");
+}));
+
+// Contagem regressiva até o evento (19h30 de Brasília = 22h30 UTC)
+const EVENTO = Date.UTC(2026, 11, 10, 22, 30);
+const cd = document.getElementById("countdown");
+function tick() {
+  const ms = EVENTO - Date.now();
+  if (ms <= 0) { cd.classList.remove("on"); return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
+  cd.innerHTML = "";
+  [[d, d === 1 ? "dia" : "dias"], [h, h === 1 ? "hora" : "horas"], [m, "min"]].forEach(([n, t]) => {
+    const box = document.createElement("div"); box.className = "n";
+    box.textContent = n; const s = document.createElement("small"); s.textContent = t; box.appendChild(s);
+    cd.appendChild(box);
+  });
+  cd.classList.add("on");
+}
+tick(); setInterval(tick, 30000);
+
+// Chuva de naipes e fichas
+function chuva() {
+  if (calmo) return;
+  const naipes = ["♠", "♥", "♦", "♣"], cores = ["", "k", "g", "b", "y"];
+  for (let i = 0; i < 36; i++) {
+    const el = document.createElement("div");
+    if (i % 3 === 0) {
+      el.className = "rain chip " + cores[i % cores.length];
+    } else {
+      const s = naipes[i % 4];
+      el.className = "rain"; el.textContent = s;
+      el.style.color = (s === "♥" || s === "♦") ? "#e0473f" : "#fbf8f1";
+    }
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = 2.2 + Math.random() * 2 + "s";
+    el.style.animationDelay = Math.random() * .8 + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5500);
+  }
+}
+
+// Salvar na agenda: Android abre o Google Agenda, os outros baixam o arquivo .ics
 document.getElementById("agenda").addEventListener("click", () => {
+  if (/Android/i.test(navigator.userAgent)) {
+    const q = new URLSearchParams({
+      action: "TEMPLATE", text: "29º Poker Golden Night", dates: "20261210T223000Z/20261211T033000Z",
+      location: "Centro de Convivência, Rua Francisco Rolêdo Sanches, 1000, Alto da Boa Vista, Sorocaba/SP",
+      details: "Chegue até as 19h20 para ganhar 1.000 fichas de bônus."
+    });
+    window.open("https://calendar.google.com/calendar/render?" + q, "_blank", "noopener");
+    return;
+  }
   const ics = [
     "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Poker Golden Night//PT","BEGIN:VEVENT",
     "UID:29-poker-golden-night-2026@convite",
@@ -260,6 +380,7 @@ document.getElementById("agenda").addEventListener("click", () => {
   a.href = URL.createObjectURL(new Blob([ics], {type: "text/calendar;charset=utf-8"}));
   a.download = "poker-golden-night.ics";
   document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 10000);
 });
 
 // Formata o WhatsApp enquanto digita: (15) 99999-9999
@@ -277,8 +398,15 @@ copyBtn.addEventListener("click", async () => {
   const key = document.getElementById("pixkey").dataset.key;
   let ok = false;
   try { await navigator.clipboard.writeText(key); ok = true; } catch {}
+  if (!ok) { // celulares antigos
+    const t = document.createElement("textarea"); t.value = key; t.setAttribute("readonly", "");
+    t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select();
+    try { ok = document.execCommand("copy"); } catch {}
+    t.remove();
+  }
   copyBtn.textContent = ok ? "Chave copiada ✓" : "Copie o número acima";
-  setTimeout(() => copyBtn.textContent = "Copiar chave Pix", 3000);
+  copyBtn.classList.toggle("okay", ok);
+  setTimeout(() => { copyBtn.textContent = "Copiar chave Pix"; copyBtn.classList.remove("okay"); }, 3000);
 });
 
 document.getElementById("rsvp").addEventListener("submit", async (e) => {
@@ -307,12 +435,16 @@ document.getElementById("rsvp").addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(data)
     });
-    if (!r.ok) throw new Error();
+    const j = await r.json().catch(() => ({}));
+    // O FormSubmit responde 200 mesmo quando não entrega (ex.: e-mail ainda não ativado)
+    if (!r.ok || String(j.success) !== "true") throw new Error(j.message || "falha");
     form.style.display = "none";
     const done = document.getElementById("done");
     done.style.display = "block";
-    done.focus();
+    done.classList.add("show");
+    done.focus({preventScroll: true});
     done.scrollIntoView({behavior: "smooth", block: "center"});
+    chuva();
   } catch {
     msg.textContent = "Não foi possível enviar. Verifique a internet e toque em Enviar de novo.";
     msg.className = "msg err";
