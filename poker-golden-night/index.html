@@ -286,7 +286,8 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
       <button type="button" class="btn" id="copy"><svg class="lic" aria-hidden="true"><use href="#i-copy"/></svg> <span>Copiar chave Pix</span></button>
     </div>
 
-    <form id="rsvp" novalidate>
+    <form id="rsvp" name="inscricao" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="inscricao">
       <div class="step"><span class="n">2</span>Preencha seus dados</div>
 
       <label for="nome">Seu nome completo</label>
@@ -302,9 +303,9 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
       </div>
 
       <label for="obs">Algum recado? (não é obrigatório)</label>
-      <textarea id="obs" name="Observações" rows="3" placeholder="Ex.: Pix feito por outra pessoa"></textarea>
+      <textarea id="obs" name="Recado" rows="3" placeholder="Ex.: Pix feito por outra pessoa"></textarea>
 
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <p style="display:none"><label>Não preencha: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <button class="btn" type="submit" id="send"><svg class="lic" aria-hidden="true"><use href="#i-send"/></svg> <span>Enviar inscrição</span></button>
       <div class="msg" id="msg" role="alert"></div>
     </form>
@@ -325,7 +326,6 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 </div>
 
 <script>
-const DESTINO = "flatomazetti@yahoo.com.br";
 const calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Seções aparecem ao rolar a página
@@ -457,18 +457,15 @@ document.getElementById("rsvp").addEventListener("submit", async (e) => {
     return;
   }
 
-  data._subject = "Inscrição Poker Golden Night: " + data.Nome;
-  data._template = "table";
   btn.disabled = true; btn.querySelector("span").textContent = "Enviando...";
   try {
-    const r = await fetch("https://formsubmit.co/ajax/" + DESTINO, {
+    // Netlify Forms: a inscrição fica guardada no painel do Netlify e é enviada por e-mail
+    const r = await fetch("/", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(data)
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString()
     });
-    const j = await r.json().catch(() => ({}));
-    // O FormSubmit responde 200 mesmo quando não entrega (ex.: e-mail ainda não ativado)
-    if (!r.ok || String(j.success) !== "true") throw new Error(j.message || "falha");
+    if (!r.ok) throw new Error("falha " + r.status);
     form.style.display = "none";
     const done = document.getElementById("done");
     done.style.display = "block";
