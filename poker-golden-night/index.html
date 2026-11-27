@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>29º Poker Golden Night</title>
 <meta name="description" content="Quinta-feira, 10 de dezembro, a partir das 19h30. Centro de Convivência, Sorocaba/SP.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="29º Poker Golden Night">
+<meta property="og:description" content="Quinta-feira, 10/12, a partir das 19h30. Buffet do Empório 31 e bebidas. Inscrições até 08/12.">
+<meta name="theme-color" content="#0f5132">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230f5132'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23f2d58c'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -137,6 +143,7 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
     <div><span class="ic">♦</span><span>Centro de Convivência, Sorocaba</span></div>
   </div>
   <div><a class="btn" href="#inscricao">Quero me inscrever</a></div>
+  <div><button type="button" class="btn ghost" id="agenda">Salvar na minha agenda</button></div>
 </header>
 
 <div class="wrap">
@@ -198,10 +205,10 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
       <div class="step"><span class="n">2</span>Preencha seus dados</div>
 
       <label for="nome">Seu nome completo</label>
-      <input id="nome" name="Nome" required autocomplete="name">
+      <input id="nome" name="Nome" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
 
       <label for="whats">Seu WhatsApp</label>
-      <input id="whats" name="WhatsApp" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(15) 99999-9999">
+      <input id="whats" name="WhatsApp" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(15) 99999-9999" maxlength="15" enterkeyhint="next">
 
       <label id="pixq">Você já fez o Pix?</label>
       <div role="radiogroup" aria-labelledby="pixq">
@@ -234,6 +241,36 @@ footer{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
 
 <script>
 const DESTINO = "flatomazetti@yahoo.com.br";
+
+// Salvar na agenda (arquivo .ics, abre no calendário do celular ou computador)
+document.getElementById("agenda").addEventListener("click", () => {
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Poker Golden Night//PT","BEGIN:VEVENT",
+    "UID:29-poker-golden-night-2026@convite",
+    "DTSTAMP:20261127T000000Z",
+    "DTSTART:20261210T223000Z",
+    "DTEND:20261211T033000Z",
+    "SUMMARY:29º Poker Golden Night",
+    "LOCATION:Centro de Convivência\\, Rua Francisco Rolêdo Sanches\\, 1000\\, Alto da Boa Vista\\, Sorocaba/SP",
+    "DESCRIPTION:Chegue até as 19h20 para ganhar 1.000 fichas de bônus.",
+    "BEGIN:VALARM","TRIGGER:-PT3H","ACTION:DISPLAY","DESCRIPTION:Poker Golden Night hoje","END:VALARM",
+    "END:VEVENT","END:VCALENDAR"
+  ].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], {type: "text/calendar;charset=utf-8"}));
+  a.download = "poker-golden-night.ics";
+  document.body.appendChild(a); a.click(); a.remove();
+});
+
+// Formata o WhatsApp enquanto digita: (15) 99999-9999
+const whats = document.getElementById("whats");
+whats.addEventListener("input", () => {
+  const d = whats.value.replace(/\D/g, "").slice(0, 11);
+  let v = d;
+  if (d.length > 2) v = "(" + d.slice(0, 2) + ") " + d.slice(2);
+  if (d.length > 7) v = "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4);
+  whats.value = v;
+});
 
 const copyBtn = document.getElementById("copy");
 copyBtn.addEventListener("click", async () => {
