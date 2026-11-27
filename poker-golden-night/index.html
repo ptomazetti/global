@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>29º Poker Golden Night</title>
+<meta name="description" content="Quinta, 10 de dezembro, a partir das 19h30. Centro de Convivência, Sorocaba/SP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06120d; --felt:#0f5132; --felt2:#0a3a24; --card:rgba(6,24,16,.72); --line:rgba(217,178,95,.28);
+  --gold:#d9b25f; --gold2:#f2d58c; --text:#f3efe6; --muted:#c3cbc3; --red:#c8312c; --paper:#fbf8f1; --ink:#1b1b1b;
+  --ok:#7fd1a1; --err:#ff9b8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font:16px/1.55 Inter,system-ui,sans-serif;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%,#14663f 0%,var(--felt) 35%,var(--felt2) 75%,var(--bg) 100%) fixed,
+    var(--bg);
+}
+/* textura de feltro */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.wrap{position:relative;max-width:640px;margin:0 auto;padding:0 16px 56px}
+
+/* ---------- topo ---------- */
+header{position:relative;text-align:center;padding:40px 16px 34px;overflow:hidden}
+.hand{position:relative;height:170px;width:300px;max-width:100%;margin:0 auto 6px}
+.pc{position:absolute;left:50%;bottom:0;width:86px;height:124px;margin-left:-43px;border-radius:9px;background:var(--paper);
+  color:var(--ink);box-shadow:0 8px 18px rgba(0,0,0,.45);transform-origin:50% 120%;font-family:"Playfair Display",serif;
+  animation:deal .7s cubic-bezier(.2,.8,.2,1) both}
+.pc .i{position:absolute;top:6px;left:8px;font-weight:800;font-size:20px;line-height:.95;text-align:center}
+.pc .i.b{top:auto;left:auto;bottom:6px;right:8px;transform:rotate(180deg)}
+.pc .m{position:absolute;inset:0;display:grid;place-items:center;font-size:40px}
+.pc.r{color:var(--red)}
+.pc:nth-child(1){--rot:-24deg;animation-delay:.05s}
+.pc:nth-child(2){--rot:-12deg;animation-delay:.15s}
+.pc:nth-child(3){--rot:0deg;animation-delay:.25s}
+.pc:nth-child(4){--rot:12deg;animation-delay:.35s}
+.pc:nth-child(5){--rot:24deg;animation-delay:.45s}
+.pc{transform:rotate(var(--rot))}
+@keyframes deal{from{opacity:0;transform:translateY(-60px) rotate(0)}to{opacity:1;transform:rotate(var(--rot))}}
+
+.ed{display:inline-block;color:var(--gold);font-weight:700;letter-spacing:.25em;text-transform:uppercase;font-size:12px;
+  border:1px solid var(--line);padding:5px 12px;border-radius:999px;margin-top:10px}
+h1{font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(38px,11vw,60px);line-height:1.02;margin:12px 0 14px;
+   background:linear-gradient(180deg,#fff2c9,var(--gold2) 40%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+   filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
+.when{font-size:20px;font-weight:600}
+.where{color:var(--muted);margin-top:4px}
+
+/* ficha (chip) */
+.chip{--c:var(--red);flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:repeating-conic-gradient(var(--c) 0 30deg,#fff 30deg 45deg);box-shadow:0 3px 6px rgba(0,0,0,.45),inset 0 0 0 2px rgba(0,0,0,.25)}
+.chip::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 2px rgba(255,255,255,.75)}
+.chip b{position:relative;color:#fff;font-size:13px;font-weight:700}
+.chip.k{--c:#1d1d1d}.chip.g{--c:#1f7a4d}.chip.b{--c:#1f4fa0}.chip.y{--c:#b98a22}
+.stack{display:flex;justify-content:center;gap:10px;margin-top:22px}
+
+.btn{display:inline-block;margin-top:24px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#241a05;font-weight:700;text-decoration:none;
+  padding:14px 28px;border-radius:999px;border:0;font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.btn:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.7;cursor:wait}
+
+/* ---------- seções ---------- */
+section{margin-top:30px}
+h2{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:600;color:var(--gold2);font-size:25px;margin:0 0 12px}
+h2 .s{width:34px;height:34px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:19px;
+  box-shadow:0 2px 6px rgba(0,0,0,.4)}
+h2 .s.r{color:var(--red)}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;backdrop-filter:blur(2px)}
+.card[data-suit]::before,.card[data-suit]::after{content:attr(data-suit);position:absolute;font-size:16px;color:var(--gold);opacity:.55}
+.card[data-suit]::before{top:8px;left:10px}
+.card[data-suit]::after{bottom:8px;right:10px;transform:rotate(180deg)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.row b{font-weight:600;white-space:nowrap}
+.row span{color:var(--muted);text-align:right}
+.total{margin-top:14px;padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,#7a5b17,var(--gold));color:#1e1604;
+  display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:18px}
+.bonus{display:flex;gap:14px;align-items:center;padding:10px 0}
+p{margin:0 0 10px}
+.muted{color:var(--muted)}
+.divider{text-align:center;color:var(--gold);opacity:.6;letter-spacing:.8em;margin:34px 0 0;font-size:14px}
+.divider .r{color:#e0625c}
+
+/* bilhete Pix */
+.ticket{margin-top:12px;background:var(--paper);color:var(--ink);border-radius:12px;padding:16px;position:relative}
+.ticket small{display:block;color:#6b6b6b;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+.pix{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.pix code{font:700 22px/1 Inter,monospace;letter-spacing:.04em}
+.small{font-size:14px;padding:9px 16px;margin:0}
+label{display:block;font-weight:500;margin:16px 0 6px}
+input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--text);font:inherit}
+input:focus,textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+.radios label{display:flex;gap:10px;align-items:center;font-weight:400;margin:8px 0;cursor:pointer}
+.radios input{width:auto;accent-color:var(--gold)}
+form .btn{width:100%;margin-top:22px}
+.msg{margin-top:14px;padding:14px;border-radius:10px;display:none}
+.msg.ok{display:block;background:rgba(23,58,41,.9);color:var(--ok)}
+.msg.err{display:block;background:rgba(58,29,23,.9);color:var(--err)}
+a{color:var(--gold2)}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px}
+@media (prefers-reduced-motion:reduce){.pc{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hand" aria-hidden="true">
+    <div class="pc"><div class="i">10<br>♠</div><div class="m">♠</div><div class="i b">10<br>♠</div></div>
+    <div class="pc"><div class="i">J<br>♠</div><div class="m">♠</div><div class="i b">J<br>♠</div></div>
+    <div class="pc"><div class="i">Q<br>♠</div><div class="m">♠</div><div class="i b">Q<br>♠</div></div>
+    <div class="pc"><div class="i">K<br>♠</div><div class="m">♠</div><div class="i b">K<br>♠</div></div>
+    <div class="pc"><div class="i">A<br>♠</div><div class="m">♠</div><div class="i b">A<br>♠</div></div>
+  </div>
+  <div class="ed">29ª edição</div>
+  <h1>Poker<br>Golden Night</h1>
+  <div class="when">Quinta, 10 de dezembro, a partir das 19h30</div>
+  <div class="where">Centro de Convivência, Alto da Boa Vista, Sorocaba/SP</div>
+  <a class="btn" href="#inscricao">Confirmar presença</a>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2><span class="s">♠</span>O que está incluso</h2>
+  <div class="card" data-suit="♠">
+    <p>Buffet do Empório 31 e bebidas: chope, vinho, cerveja sem álcool, água, refrigerantes e sucos.</p>
+    <p class="muted" style="margin:0">Também teremos cash game.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="s r">♥</span>Valores</h2>
+  <div class="card" data-suit="♥">
+    <div class="row"><b>Buffet</b><span>R$ 130,00</span></div>
+    <div class="row"><b>Buy-in</b><span>R$ 80,00 por 6.000 fichas</span></div>
+    <div class="total"><span>Inscrição (Pix)</span><span>R$ 210,00</span></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <p style="font-weight:600;color:var(--gold2)">Pagos no dia do evento</p>
+    <div class="row"><b>Rebuy</b><span>Até 2 recompras de 6.000 fichas, R$ 80,00 cada, até o 8º nível</span></div>
+    <div class="row"><b>Add-on</b><span>R$ 100,00 por 10.000 fichas, antes do 9º nível</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="s r">♦</span>Fichas bônus</h2>
+  <div class="card" data-suit="♦">
+    <div class="bonus"><div class="chip"><b>+1k</b></div><div>Inscrição e pagamento até <b>07/12</b>: ganhe 1.000 fichas adicionais.</div></div>
+    <div class="bonus"><div class="chip b"><b>+1k</b></div><div>Chegue e retire sua posição até as <b>19h20</b>: ganhe mais 1.000 fichas.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="s">♣</span>Local</h2>
+  <div class="card" data-suit="♣">
+    <p><b>Centro de Convivência</b><br>R. Francisco Rolêdo Sanches, 1000<br>Alto da Boa Vista, Sorocaba/SP</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Francisco+Rol%C3%AAdo+Sanches+1000+Alto+da+Boa+Vista+Sorocaba+SP" target="_blank" rel="noopener">Abrir no mapa</a>
+  </div>
+</section>
+
+<div class="divider">♠ <span class="r">♥</span> <span class="r">♦</span> ♣</div>
+
+<section id="inscricao">
+  <h2><span class="s">A</span>Inscrição</h2>
+  <div class="card">
+    <p>Inscrições até <b>08/12/2026</b>. Faça o Pix de <b>R$ 210,00</b> e preencha o formulário abaixo.</p>
+    <div class="ticket">
+      <small>Chave Pix (celular)</small>
+      <div class="pix">
+        <code id="pixkey" data-key="15997470301">(15) 99747-0301</code>
+        <button type="button" class="btn small" id="copy">Copiar</button>
+      </div>
+    </div>
+
+    <form id="rsvp">
+      <label for="nome">Nome completo</label>
+      <input id="nome" name="Nome" required autocomplete="name">
+
+      <label for="whats">WhatsApp</label>
+      <input id="whats" name="WhatsApp" type="tel" required autocomplete="tel" placeholder="(15) 9xxxx-xxxx">
+
+      <label>Já fez o Pix de R$ 210,00?</label>
+      <div class="radios">
+        <label><input type="radio" name="Pix" value="Sim, já paguei" required> Sim, já paguei</label>
+        <label><input type="radio" name="Pix" value="Ainda não, vou pagar até 08/12"> Ainda não, vou pagar até 08/12</label>
+      </div>
+
+      <label for="obs">Observações (opcional)</label>
+      <textarea id="obs" name="Observações" rows="3" placeholder="Ex.: Pix feito em nome de outra pessoa"></textarea>
+
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit" id="send">Estou dentro! Enviar inscrição</button>
+      <div class="msg" id="msg" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<div class="stack" aria-hidden="true">
+  <div class="chip"></div><div class="chip k"></div><div class="chip g"></div><div class="chip b"></div><div class="chip y"></div>
+</div>
+<footer>29º Poker Golden Night</footer>
+</div>
+
+<script>
+// Troque pelo e-mail que vai receber as inscrições
+const DESTINO = "flatomazetti@yahoo.com.br";
+
+document.getElementById("copy").addEventListener("click", async (e) => {
+  const key = document.getElementById("pixkey").dataset.key;
+  try { await navigator.clipboard.writeText(key); e.target.textContent = "Copiada"; }
+  catch { e.target.textContent = "Copie manualmente"; }
+  setTimeout(() => e.target.textContent = "Copiar", 2500);
+});
+
+document.getElementById("rsvp").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target, msg = document.getElementById("msg"), btn = document.getElementById("send");
+  const data = Object.fromEntries(new FormData(form));
+  data._subject = "Inscrição Poker Golden Night: " + data.Nome;
+  data._template = "table";
+  btn.disabled = true; btn.textContent = "Enviando...";
+  msg.className = "msg";
+  try {
+    const r = await fetch("https://formsubmit.co/ajax/" + DESTINO, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error();
+    form.reset();
+    msg.textContent = "Inscrição enviada. Seu lugar na mesa está garantido assim que o Pix for confirmado. Até dia 10!";
+    msg.className = "msg ok";
+  } catch {
+    msg.textContent = "Não foi possível enviar. Tente de novo ou fale com o organizador pelo WhatsApp.";
+    msg.className = "msg err";
+  }
+  btn.disabled = false; btn.textContent = "Estou dentro! Enviar inscrição";
+});
+</script>
+</body>
+</html>
