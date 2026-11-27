@@ -153,6 +153,18 @@ footer{text-align:center;color:var(--muted);font-size:15px;margin-top:20px;font-
 }
 @media (max-width:400px){.total{font-size:18px;padding:16px 14px}.tile .v{font-size:20px}}
 
+.ico{width:1em;height:1em;display:inline-block;vertical-align:-.12em;flex:none}
+.lic{width:1.1em;height:1.1em;flex:none;display:inline-block}
+.btn span{white-space:nowrap}
+form .btn,.ticket .btn{padding:14px 16px}
+.pc .i .ico{display:block;width:16px;height:16px;margin:2px auto 0}
+.pc .m .ico{width:44px;height:44px}
+.facts .ic{display:grid;place-items:center}
+.ico.r{color:var(--red2)}
+.divider{display:flex;justify-content:center;gap:22px;letter-spacing:0}
+.divider .ico{width:18px;height:18px}
+.suits{display:flex;justify-content:center;gap:14px;font-size:30px;color:#fff}
+.rain .ico{width:30px;height:30px}
 /* ---------- animações ---------- */
 .hand{animation:float 4s ease-in-out 1.4s infinite}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -6px}}
@@ -192,31 +204,44 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5C9.2 5.4 2.8 9 2.8 14a4.7 4.7 0 0 0 8 3.3c-.3 2-1.1 3.6-2.4 5.2h7.2c-1.3-1.6-2.1-3.2-2.4-5.2a4.7 4.7 0 0 0 8-3.3c0-5-6.4-8.6-9.2-12.5Z"/></symbol>
+  <symbol id="he" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.6S3.4 16.3 1.6 11C.3 7.2 2.6 3.2 6.6 3.2c2.3 0 3.9 1.3 5.4 3.2 1.5-1.9 3.1-3.2 5.4-3.2 4 0 6.3 4 5 7.8-1.8 5.3-10.4 10.6-10.4 10.6Z"/></symbol>
+  <symbol id="di" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.2 20.6 12 12 22.8 3.4 12Z"/></symbol>
+  <symbol id="cl" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="6.6" r="4.6"/><circle cx="6.4" cy="13.4" r="4.6"/><circle cx="17.6" cy="13.4" r="4.6"/><path d="M10.6 12h2.8c.2 3.6 1.2 6.6 3.2 10.5H7.4c2-3.9 3-6.9 3.2-10.5Z"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/><path d="M8 14.5h.01M12 14.5h.01M16 14.5h.01M8 18h.01M12 18h.01"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12.5" height="12.5" rx="2"/><path d="M5 15H4.5A2 2 0 0 1 2.5 13V4.5a2 2 0 0 1 2-2H13a2 2 0 0 1 2 2V5"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></g></symbol>
+</svg>
 <header>
   <div class="hand" aria-hidden="true">
-    <div class="pc"><div class="i">10<br>♠</div><div class="m">♠</div><div class="i b">10<br>♠</div></div>
-    <div class="pc"><div class="i">J<br>♠</div><div class="m">♠</div><div class="i b">J<br>♠</div></div>
-    <div class="pc"><div class="i">Q<br>♠</div><div class="m">♠</div><div class="i b">Q<br>♠</div></div>
-    <div class="pc"><div class="i">K<br>♠</div><div class="m">♠</div><div class="i b">K<br>♠</div></div>
-    <div class="pc"><div class="i">A<br>♠</div><div class="m">♠</div><div class="i b">A<br>♠</div></div>
+    <div class="pc"><div class="i">10<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="m"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="i b">10<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div></div>
+    <div class="pc"><div class="i">J<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="m"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="i b">J<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div></div>
+    <div class="pc"><div class="i">Q<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="m"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="i b">Q<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div></div>
+    <div class="pc"><div class="i">K<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="m"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="i b">K<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div></div>
+    <div class="pc"><div class="i">A<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="m"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div><div class="i b">A<br><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></div></div>
   </div>
   <div class="ed">29ª edição</div>
   <h1><span class="p">Poker</span><span class="g">Golden Night</span></h1>
   <div class="facts">
-    <div><span class="ic">♠</span><b>Quinta, 10/12</b></div>
-    <div><span class="ic">♥</span>A partir das <b>19h30</b></div>
-    <div><span class="ic">♦</span>Sorocaba/SP</div>
+    <div><span class="ic"><svg class="lic" aria-hidden="true"><use href="#i-cal"/></svg></span><b>Quinta, 10/12</b></div>
+    <div><span class="ic"><svg class="lic" aria-hidden="true"><use href="#i-clock"/></svg></span>A partir das <b>19h30</b></div>
+    <div><span class="ic"><svg class="lic" aria-hidden="true"><use href="#i-pin"/></svg></span>Sorocaba/SP</div>
   </div>
   <div class="cd-lbl" id="cd-lbl" hidden>O torneio começa em</div>
   <div class="countdown" id="countdown" aria-live="off"></div>
-  <div><a class="btn" href="#inscricao">Quero me inscrever</a></div>
-  <div><button type="button" class="btn ghost" id="agenda">Salvar na minha agenda</button></div>
+  <div><a class="btn" href="#inscricao">Quero me inscrever <svg class="lic" aria-hidden="true"><use href="#i-down"/></svg></a></div>
+  <div><button type="button" class="btn ghost" id="agenda"><svg class="lic" aria-hidden="true"><use href="#i-cal"/></svg> Salvar na minha agenda</button></div>
 </header>
 
 <div class="wrap">
 
 <section>
-  <h2>Torneio<span class="s w">♠</span></h2>
+  <h2>Torneio<span class="s w"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg></span></h2>
   <div class="card">
     <div class="grid">
       <div class="tile"><div class="k">Início</div><div class="v">19h30</div><div class="d">Quinta, 10/12</div></div>
@@ -231,7 +256,7 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 </section>
 
 <section>
-  <h2>Fichas bônus<span class="s">♦</span></h2>
+  <h2>Fichas bônus<span class="s"><svg class="ico" aria-hidden="true"><use href="#di"/></svg></span></h2>
   <div class="card">
     <div class="bonus"><div class="chip"><b>+1k</b></div><div>Inscrição e Pix até <b>07/12</b>: ganhe <b>1.000 fichas</b> a mais.</div></div>
     <div class="bonus"><div class="chip b"><b>+1k</b></div><div>Chegue e retire sua posição até as <b>19h20</b>: ganhe mais <b>1.000 fichas</b>.</div></div>
@@ -239,17 +264,17 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
 </section>
 
 <section>
-  <h2>Local<span class="s w">♣</span></h2>
+  <h2>Local<span class="s w"><svg class="ico" aria-hidden="true"><use href="#cl"/></svg></span></h2>
   <div class="card">
     <p><b>Centro de Convivência</b><br>Rua Francisco Rolêdo Sanches, 1000<br>Alto da Boa Vista, Sorocaba/SP</p>
-    <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Rua+Francisco+Rol%C3%AAdo+Sanches+1000+Alto+da+Boa+Vista+Sorocaba+SP" target="_blank" rel="noopener">Ver no mapa</a>
+    <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Rua+Francisco+Rol%C3%AAdo+Sanches+1000+Alto+da+Boa+Vista+Sorocaba+SP" target="_blank" rel="noopener"><svg class="lic" aria-hidden="true"><use href="#i-pin"/></svg> Ver no mapa</a>
   </div>
 </section>
 
-<div class="divider">♠ <span class="r">♥</span> <span class="r">♦</span> ♣</div>
+<div class="divider" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg><svg class="ico r" aria-hidden="true"><use href="#he"/></svg><svg class="ico r" aria-hidden="true"><use href="#di"/></svg><svg class="ico" aria-hidden="true"><use href="#cl"/></svg></div>
 
 <section id="inscricao">
-  <h2>Inscrição<span class="s">♥</span></h2>
+  <h2>Inscrição<span class="s"><svg class="ico" aria-hidden="true"><use href="#he"/></svg></span></h2>
   <div class="card">
     <div class="deadline"><span class="dot"></span><span>Inscrições até <b>terça-feira, 08/12</b>.</span></div>
 
@@ -258,7 +283,7 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
       <div class="lbl">Chave Pix (celular)</div>
       <div class="key" id="pixkey" data-key="15997470301">(15) 99747-0301</div>
       <div class="val">Valor: <b>R$ 210,00</b></div>
-      <button type="button" class="btn" id="copy">Copiar chave Pix</button>
+      <button type="button" class="btn" id="copy"><svg class="lic" aria-hidden="true"><use href="#i-copy"/></svg> <span>Copiar chave Pix</span></button>
     </div>
 
     <form id="rsvp" novalidate>
@@ -280,12 +305,12 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
       <textarea id="obs" name="Observações" rows="3" placeholder="Ex.: Pix feito por outra pessoa"></textarea>
 
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <button class="btn" type="submit" id="send">Enviar inscrição</button>
+      <button class="btn" type="submit" id="send"><svg class="lic" aria-hidden="true"><use href="#i-send"/></svg> <span>Enviar inscrição</span></button>
       <div class="msg" id="msg" role="alert"></div>
     </form>
 
     <div class="done" id="done" role="status" tabindex="-1">
-      <div style="font-size:34px">♠ <span style="color:var(--red2)">♥ ♦</span> ♣</div>
+      <div class="suits" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#sp"/></svg><svg class="ico r" aria-hidden="true"><use href="#he"/></svg><svg class="ico r" aria-hidden="true"><use href="#di"/></svg><svg class="ico" aria-hidden="true"><use href="#cl"/></svg></div>
       <div class="big">Você está <span>na mesa!</span></div>
       <p>Recebemos sua inscrição. Se ainda não fez o Pix, faça até <b>08/12</b>.</p>
       <p>Até quinta-feira, dia 10!</p>
@@ -340,15 +365,15 @@ tick(); setInterval(tick, 30000);
 // Chuva de naipes e fichas
 function chuva() {
   if (calmo) return;
-  const naipes = ["♠", "♥", "♦", "♣"], cores = ["", "k", "g", "b", "y"];
+  const naipes = ["sp", "he", "di", "cl"], cores = ["", "k", "g", "b", "y"];
   for (let i = 0; i < 36; i++) {
     const el = document.createElement("div");
     if (i % 3 === 0) {
       el.className = "rain chip " + cores[i % cores.length];
     } else {
       const s = naipes[i % 4];
-      el.className = "rain"; el.textContent = s;
-      el.style.color = (s === "♥" || s === "♦") ? "#ff3b3f" : "#ffffff";
+      el.className = "rain"; el.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#' + s + '"/></svg>';
+      el.style.color = (s === "he" || s === "di") ? "#ff3b3f" : "#ffffff";
     }
     el.style.left = Math.random() * 100 + "vw";
     el.style.animationDuration = 2.2 + Math.random() * 2 + "s";
@@ -399,6 +424,7 @@ whats.addEventListener("input", () => {
 });
 
 const copyBtn = document.getElementById("copy");
+const COPY_HTML = copyBtn.innerHTML;
 copyBtn.addEventListener("click", async () => {
   const key = document.getElementById("pixkey").dataset.key;
   let ok = false;
@@ -409,9 +435,9 @@ copyBtn.addEventListener("click", async () => {
     try { ok = document.execCommand("copy"); } catch {}
     t.remove();
   }
-  copyBtn.textContent = ok ? "Chave copiada ✓" : "Copie o número acima";
+  copyBtn.innerHTML = ok ? '<svg class="lic" aria-hidden="true"><use href="#i-check"/></svg> <span>Chave copiada</span>' : "<span>Copie o número acima</span>";
   copyBtn.classList.toggle("okay", ok);
-  setTimeout(() => { copyBtn.textContent = "Copiar chave Pix"; copyBtn.classList.remove("okay"); }, 3000);
+  setTimeout(() => { copyBtn.innerHTML = COPY_HTML; copyBtn.classList.remove("okay"); }, 3000);
 });
 
 document.getElementById("rsvp").addEventListener("submit", async (e) => {
@@ -433,7 +459,7 @@ document.getElementById("rsvp").addEventListener("submit", async (e) => {
 
   data._subject = "Inscrição Poker Golden Night: " + data.Nome;
   data._template = "table";
-  btn.disabled = true; btn.textContent = "Enviando...";
+  btn.disabled = true; btn.querySelector("span").textContent = "Enviando...";
   try {
     const r = await fetch("https://formsubmit.co/ajax/" + DESTINO, {
       method: "POST",
@@ -453,7 +479,7 @@ document.getElementById("rsvp").addEventListener("submit", async (e) => {
   } catch {
     msg.textContent = "Não foi possível enviar. Verifique a internet e toque em Enviar de novo.";
     msg.className = "msg err";
-    btn.disabled = false; btn.textContent = "Enviar inscrição";
+    btn.disabled = false; btn.querySelector("span").textContent = "Enviar inscrição";
   }
 });
 </script>
