@@ -152,6 +152,7 @@ footer{text-align:center;color:var(--muted);font-size:15px;margin-top:20px;font-
   .hand{transform:scale(1.15);margin-bottom:20px}
 }
 @media (max-width:400px){.total{font-size:18px;padding:16px 14px}.tile .v{font-size:20px}header .btn{padding:14px 20px;font-size:17px}header .btn.ghost{font-size:15px}}
+@media (max-width:340px){.total{font-size:16px;padding:14px 12px}.btn span{white-space:normal}}
 
 .ico{width:1em;height:1em;display:inline-block;vertical-align:-.12em;flex:none}
 .lic{width:1.1em;height:1.1em;flex:none;display:inline-block}
@@ -294,7 +295,7 @@ header .btn:not(.ghost){animation:pulse 2.4s ease-in-out 2s infinite}
       <input id="nome" name="Nome" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
 
       <label for="whats">Seu WhatsApp</label>
-      <input id="whats" name="WhatsApp" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(15) 99999-9999" maxlength="15" enterkeyhint="next">
+      <input id="whats" name="WhatsApp" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(15) 99999-9999" enterkeyhint="next">
 
       <label id="pixq">Você já fez o Pix?</label>
       <div role="radiogroup" aria-labelledby="pixq">
@@ -416,10 +417,17 @@ document.getElementById("agenda").addEventListener("click", () => {
 // Formata o WhatsApp enquanto digita: (15) 99999-9999
 const whats = document.getElementById("whats");
 whats.addEventListener("input", () => {
-  const d = whats.value.replace(/\D/g, "").slice(0, 11);
+  let d = whats.value.replace(/\D/g, "").slice(0, 13);
+  // número com código do país (+55) ou zero do DDD, comum no preenchimento automático
+  if (d.length >= 12 && d.startsWith("55")) d = d.slice(2);
+  if (d.length >= 11 && d.startsWith("0")) d = d.slice(1);
+  d = d.slice(0, 11);
   let v = d;
-  if (d.length > 2) v = "(" + d.slice(0, 2) + ") " + d.slice(2);
-  if (d.length > 7) v = "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4);
+  if (d.length > 2) {
+    const local = d.slice(2);
+    const cut = local.length > 8 ? 5 : 4;
+    v = "(" + d.slice(0, 2) + ") " + (local.length > 4 ? local.slice(0, cut) + "-" + local.slice(cut) : local);
+  }
   whats.value = v;
 });
 
